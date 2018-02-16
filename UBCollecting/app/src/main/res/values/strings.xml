@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">UB Collecting</string>
+    <string name="id_field">Person ID</string>
+    <string name="name_field">Full Name</string>
+    <string name="preferred_name_field">Preferred Name</string>
+    <string name="dob_field">Date of Birth</string>
+    <string name="role_field">Role</string>
+    <string name="photo_field">Photo</string>
+    <string name="photo_description_field">Photo Description</string>
+    <string name="questionnaire_description_field">Questionnaire Description</string>
+    <string name="submit_button_label">Submit</string>
 </resources>
