@@ -15,15 +15,91 @@ public class Person {
     public static final String KEY_PERSON_ID = "PersonId";
     public static final String KEY_PERSON_NAME = "PersonName";
     public static final String KEY_PERSON_OTHER_NAMES = "PersonOtherNames";
-    //  Need to appropriately configure types for DOB and Photo
     public static final String KEY_PERSON_DOB = "PersonDOB";
     public static final String KEY_PERSON_PHOTO = "PersonPhoto";
     public static final String KEY_PERSON_PHOTO_DESC = "PersonPhotoDesc";
     public static final String KEY_PERSON_ROLE = "PersonMainRole";
-    public static final String KEY_PERSON_INTO_QUES_DESC = "PersonIntroQuestnirDesc";
+    public static final String KEY_PERSON_INTRO_QUES_DESC = "PersonIntroQuestnirDesc";
 
+    //  Need to appropriately configure types for DOB and Photo
 
-    //Need to add all the getters and setters!!
+    public String id;
+    public String name;
+    public String otherNames;
+    public String dob;
+    public String photo;
+    public String photoDesc;
+    public String role;
+    public String questDesc;
+
+    public Person () {
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOtherNames() {
+        return otherNames;
+    }
+
+    public void setOtherNames(String otherNames) {
+        this.otherNames = otherNames;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoDesc() {
+        return photoDesc;
+    }
+
+    public void setPhotoDesc(String photoDesc) {
+        this.photoDesc = photoDesc;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getQuestDesc() {
+        return questDesc;
+    }
+
+    public void setQuestDesc(String questdesc) {
+        this.questDesc = questdesc;
+    }
+
 
 
 }
