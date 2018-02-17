@@ -2,7 +2,7 @@ package edu.buffalo.cse.ubcollecting;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import edu.buffalo.cse.ubcollecting.dbcode.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(getApplicationContext());
-        
+
     }
 }
