@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.buffalo.cse.ubcollecting.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="edu.buffalo.cse.ubcollecting.MainActivity">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/id_field"
         android:layout_margin="10px" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -84,3 +89,6 @@
         android:layout_height="wrap_content"
         android:text="@string/submit_button_label"/>
 </LinearLayout>
+
+    </ScrollView>
+
