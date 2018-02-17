@@ -12,6 +12,8 @@ import edu.buffalo.cse.ubcollecting.app.App;
 
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -34,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Creating The Tables
         db.execSQL(PersonTable.createTable());
+        db.execSQL(QuestionnaireTable.createTable());
 
     }
 
@@ -44,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Questionnaire.TABLE);
 
         // create new tables
         onCreate(db);
