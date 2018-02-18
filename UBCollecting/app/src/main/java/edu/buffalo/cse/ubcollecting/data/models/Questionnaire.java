@@ -11,7 +11,7 @@ public class Questionnaire  {
     // Table Names
     public static final String TABLE = "Questionnaire";
 
-    // Person Table - column names
+    // Questionnaire Table - column names
     public static final String KEY_QUES_ID = "QuestionnaireId";
     public static final String KEY_QUES_LABEL = "QuestionnaireLabel";
     public static final String KEY_QUES_NAME = "QuestionnaireName";
