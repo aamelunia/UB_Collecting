@@ -19,6 +19,22 @@ import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
+import edu.buffalo.cse.ubcollecting.data.models.Language;
+import edu.buffalo.cse.ubcollecting.data.tables.LanguageTable;
+import edu.buffalo.cse.ubcollecting.data.models.Role;
+import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
+import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
+import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
+import edu.buffalo.cse.ubcollecting.data.models.File;
+import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
+import edu.buffalo.cse.ubcollecting.data.models.Session;
+import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
+
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -42,6 +58,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Creating The Tables
         db.execSQL(PersonTable.createTable());
         db.execSQL(QuestionnaireTable.createTable());
+        db.execSQL(QuestionnaireTypeTable.createTable());
+        db.execSQL(LanguageTable.createTable());
+        db.execSQL(RoleTable.createTable());
+        db.execSQL(FieldTripTable.createTable());
+        db.execSQL(FileTable.createTable());
+        db.execSQL(SessionTable.createTable());
+        db.execSQL(QuestionnaireContentTable.createTable());
+
+
 
     }
 
@@ -53,6 +78,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Questionnaire.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireType.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Language.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Role.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FieldTrip.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + File.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContent.TABLE);
 
         // create new tables
         onCreate(db);
@@ -62,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+
 
     // Generalized and Abstracted out Select All Method for All Tables
 
