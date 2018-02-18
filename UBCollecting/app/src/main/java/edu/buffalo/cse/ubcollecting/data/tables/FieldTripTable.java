@@ -33,12 +33,13 @@ public class FieldTripTable {
         int fieldTripId;
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
         ContentValues values = new ContentValues();
         values.put(FieldTrip.KEY_FIELD_TRIP_ID, fieldTrip.getId());
         values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
         values.put(FieldTrip.KEY_FIELD_TRIP_START, fieldTrip.getStartDate());
         values.put(FieldTrip.KEY_FIELD_TRIP_END, fieldTrip.getEndDate());
-        
+
         fieldTripId = (int) db.insert(FieldTrip.TABLE,null,values);
 
         DatabaseManager.getInstance().closeDatabase();

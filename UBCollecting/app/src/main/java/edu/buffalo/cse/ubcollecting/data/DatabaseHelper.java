@@ -7,6 +7,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.database.Cursor;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.app.App;
 
@@ -56,6 +61,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    // Generalized and Abstracted out Select All Method for All Tables
+
+    public static List<StringBuffer> getAll (String tableName) {
+
+        List<StringBuffer> storage = new ArrayList<StringBuffer>();
+
+        String selectQuery = "SELECT  * FROM " + tableName;
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+               int totalFields = cursor.getColumnCount();
+               StringBuffer sb = new StringBuffer();
+
+                for (int i = 0; i < totalFields ; i++) {
+                    sb.append(cursor.getColumnName(i));
+                    sb.append(": ");
+                    sb.append(cursor.getString(i));
+                    sb.append(" ");
+                }
+
+                storage.add(sb);
+
+            } while (cursor.moveToNext());
+        }
+
+        DatabaseManager.getInstance().closeDatabase();
+
+        return storage;
     }
 
 }
