@@ -33,7 +33,10 @@ import edu.buffalo.cse.ubcollecting.data.models.File;
 import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
-
+import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
+import edu.buffalo.cse.ubcollecting.data.tables.SessionAnswerTable;
+import edu.buffalo.cse.ubcollecting.data.models.Answer;
+import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -64,9 +67,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(FieldTripTable.createTable());
         db.execSQL(FileTable.createTable());
         db.execSQL(SessionTable.createTable());
+        db.execSQL(SessionAnswerTable.createTable());
+        db.execSQL(AnswerTable.createTable());
         db.execSQL(QuestionnaireContentTable.createTable());
-
-
 
     }
 
@@ -84,7 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + FieldTrip.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + File.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswer.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContent.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Answer.TABLE);
 
         // create new tables
         onCreate(db);
