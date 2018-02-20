@@ -6,12 +6,6 @@ package edu.buffalo.cse.ubcollecting.data.models;
 
 public class QuestionnaireProperty  {
 
-    private static final String TAG = QuestionnaireProperty.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "QuestionnaireProperty";
-
-    // QuestionnaireProperty Table - column names
 
     //TODO
 
