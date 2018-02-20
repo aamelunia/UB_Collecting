@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.buffalo.cse.ubcollecting.MainActivity">
+    tools:context="edu.buffalo.cse.ubcollecting.PersonActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/id_field" />
+            android:text="@string/role_id_label" />
 
         <TextView
-            android:id="@+id/id_field"
+            android:id="@+id/role_id_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20px"
@@ -28,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/name_field" />
+            android:text="@string/role_name_label" />
 
         <EditText
-            android:id="@+id/name_field"
+            android:id="@+id/role_name_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -39,10 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/preferred_name_field" />
+            android:text="@string/role_intro_required_label" />
 
         <EditText
-            android:id="@+id/preferred_name_field"
+            android:id="@+id/role_intro_required_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -50,10 +50,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/dob_field" />
+            android:text="@string/role_photo_required_label" />
 
         <EditText
-            android:id="@+id/dob_field"
+            android:id="@+id/role_photo_required_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -61,48 +61,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/role_field" />
+            android:text="@string/role_on_client_label" />
 
         <EditText
-            android:id="@+id/role_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/photo_field" />
-
-        <EditText
-            android:id="@+id/photo_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/photo_description_field" />
-
-        <EditText
-            android:id="@+id/photo_description_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/questionnaire_description_field" />
-
-        <EditText
-            android:id="@+id/questionnakre_description_field"
+            android:id="@+id/role_on_client_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/role_submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submit_button_label" />

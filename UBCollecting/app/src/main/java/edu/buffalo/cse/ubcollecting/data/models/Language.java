@@ -14,7 +14,7 @@ public class Language  {
     // Role Table - column names
     public static final String KEY_LANG_ID = "LanguageId";
     public static final String KEY_LANG_NAME = "LanguageName";
-    public static final String KEY_LANG_DESC = "LanguageDesc";
+    public static final String KEY_LANG_DESC = "LanguageDescription";
     public static final String KEY_LANG_OTHER_NAMES = "LanguageOtherNames";
     public static final String KEY_LANG_TYPE_ID = "LanguageTypeId";
 
