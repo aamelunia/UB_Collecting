@@ -4,10 +4,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 public class QuestionnaireContentTable {
@@ -20,15 +21,18 @@ public class QuestionnaireContentTable {
 
     }
 
+
     public static String createTable(){
-        // PRIMARY KEY?. NEED TO ADD FOREIGN KEYS?!
         return "CREATE TABLE "
-                + QuestionnaireContent.TABLE + "(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + " TEXT PRIMARY KEY,"
-                + QuestionnaireContent.KEY_QUESTION_ID + " TEXT," + QuestionnaireContent.KEY_QUESTION_ORDER + " VARCHAR"
-                + ")";
+                + QuestionnaireContent.TABLE + "(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + ") REFERENCES " + Questionnaire.TABLE
+                + " (" + Questionnaire.KEY_ID + "), " + QuestionnaireContent.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + "), " + QuestionnaireContent.KEY_QUESTION_ORDER + " VARCHAR" + ")";
+
     }
 
-    public int addQuestionnaireContent(QuestionnaireContent quesContent) {
+    public static int addQuestionnaireContent(QuestionnaireContent quesContent) {
 
         int quesContentId;
 

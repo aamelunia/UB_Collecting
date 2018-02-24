@@ -13,28 +13,28 @@ public class QuestionOption  {
 
     // QuestionOption Table - column names
     public static final String KEY_QUESTION_ID = "QuestionId";
-    public static final String KEY_QUESTION_LANG_ID = "LangTypeName";
+    public static final String KEY_QUESTION_LANG_ID = "QuestionLangId";
     public static final String KEY_OPTION_TEXT = "OptionText";
 
 
 
-    public String questionId;
-    public String languageId;
+    public int questionId;
+    public int languageId;
     public String optionText;
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public String getLanguageId() {
+    public int getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(String languageId) {
+    public void setLanguageId(int languageId) {
         this.languageId = languageId;
     }
 

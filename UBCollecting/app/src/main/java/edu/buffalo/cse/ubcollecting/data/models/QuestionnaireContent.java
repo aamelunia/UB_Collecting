@@ -17,24 +17,24 @@ public class QuestionnaireContent  {
     public static final String KEY_QUESTION_ORDER = "QuestionOrder";
 
 
-    public String questionnaireId;
-    public String questionId;
+    public int questionnaireId;
+    public int questionId;
     public String questionOrder;
 
 
-    public String getQuestionnaireId() {
+    public int getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(String questionnaireId) {
+    public void setQuestionnaireId(int questionnaireId) {
         this.questionnaireId = questionnaireId;
     }
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 

@@ -12,7 +12,7 @@ public class QuestionnaireType  {
     public static final String TABLE = "QuestionnaireType";
 
     // QuestionnaireType Table - column names
-    public static final String KEY_QUESTIONNAIRE_TYPE_ID = "_id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_TYPE_NAME = "TypeName";
 
     public int id;
@@ -30,7 +30,7 @@ public class QuestionnaireType  {
         return name;
     }
 
-    public void setTypeName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

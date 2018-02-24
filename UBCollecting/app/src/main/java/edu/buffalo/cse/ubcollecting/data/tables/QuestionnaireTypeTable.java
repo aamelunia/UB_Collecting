@@ -4,7 +4,6 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
@@ -23,11 +22,11 @@ public class QuestionnaireTypeTable {
     public static String createTable(){
         //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + QuestionnaireType.TABLE + "(" + QuestionnaireType.KEY_QUESTIONNAIRE_TYPE_ID + " INTEGER PRIMARY KEY,"
+                + QuestionnaireType.TABLE + "(" + QuestionnaireType.KEY_ID + " INTEGER PRIMARY KEY,"
                 + QuestionnaireType.KEY_TYPE_NAME + " VARCHAR" + ")";
     }
 
-    public int addQuestionnaireType(QuestionnaireType quesType) {
+    public static int addQuestionnaireType(QuestionnaireType quesType) {
 
         int quesTypeId;
 

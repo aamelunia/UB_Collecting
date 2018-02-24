@@ -11,24 +11,24 @@ public class Language  {
     // Table Names
     public static final String TABLE = "Language";
 
-    // Role Table - column names
-    public static final String KEY_LANG_ID = "LanguageId";
+    // Language Table - column names
+    public static final String KEY_ID = "_id";
     public static final String KEY_LANG_NAME = "LanguageName";
     public static final String KEY_LANG_DESC = "LanguageDescription";
     public static final String KEY_LANG_OTHER_NAMES = "LanguageOtherNames";
     public static final String KEY_LANG_TYPE_ID = "LanguageTypeId";
 
-    public String id;
+    public int id;
     public String name;
     public String description;
     public String otherNames;
-    public String typeId;
+    public int typeId;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class Language  {
         this.otherNames = otherNames;
     }
 
-    public String getTypeId() {
+    public int getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(String typeId) {
+    public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
 

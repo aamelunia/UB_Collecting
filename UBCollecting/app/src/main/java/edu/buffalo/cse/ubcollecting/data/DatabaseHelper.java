@@ -85,7 +85,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(LanguageTypeTable.createTable());
         db.execSQL(RoleTable.createTable());
         db.execSQL(FieldTripTable.createTable());
-        db.execSQL(FieldTripSessionTable.createTable());
         db.execSQL(FileTable.createTable());
         db.execSQL(SessionTable.createTable());
         db.execSQL(SessionAnswerTable.createTable());
@@ -113,7 +112,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + LanguageType.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Role.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FieldTrip.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FieldTripSession.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + File.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SessionAnswer.TABLE);

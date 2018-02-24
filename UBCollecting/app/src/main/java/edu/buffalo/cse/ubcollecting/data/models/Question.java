@@ -12,19 +12,19 @@ public class Question  {
     public static final String TABLE = "Question";
 
     // Question (QuestionPool) Table - column names
-    public static final String KEY_QUESTION_ID = "QuestionId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_QUESTION_TYPE = "QuestionType";
 
 
 
-    public String id;
+    public int id;
     public String type;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

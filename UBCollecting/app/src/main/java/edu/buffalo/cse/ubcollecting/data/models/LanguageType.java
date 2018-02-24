@@ -12,18 +12,18 @@ public class LanguageType  {
     public static final String TABLE = "LanguageType";
 
     // LanguageType Table - column names
-    public static final String KEY_LANG_TYPE_ID = "LangTypeId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_LANG_TYPE_NAME = "LangTypeName";
 
 
-    public String id;
+    public int id;
     public String name;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

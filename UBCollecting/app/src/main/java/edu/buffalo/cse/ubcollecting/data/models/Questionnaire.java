@@ -12,7 +12,7 @@ public class Questionnaire  {
     public static final String TABLE = "Questionnaire";
 
     // Questionnaire Table - column names
-    public static final String KEY_QUES_ID = "_id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_QUES_LABEL = "QuestionnaireLabel";
     public static final String KEY_QUES_NAME = "QuestionnaireName";
     public static final String KEY_QUES_DESCRIPTION = "QuestionnaireDescription";

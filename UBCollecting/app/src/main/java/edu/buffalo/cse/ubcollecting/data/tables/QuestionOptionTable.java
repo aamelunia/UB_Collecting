@@ -8,7 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Language;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionOptionTable {
 
@@ -21,13 +25,15 @@ public class QuestionOptionTable {
     }
 
     public static String createTable(){
-    //  Foreign keys?! SHOULD THEY ALL BE TYPE VARCHAR?!
         return "CREATE TABLE "
-                + QuestionOption.TABLE + "(" + QuestionOption.KEY_QUESTION_ID + " VARCHAR," + QuestionOption.KEY_QUESTION_LANG_ID
-                + " VARCHAR," + QuestionOption.KEY_OPTION_TEXT + " VARCHAR"+ ")";
+                + QuestionOption.TABLE + "(" + QuestionOption.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + "), " + QuestionOption.KEY_QUESTION_LANG_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_LANG_ID + ") REFERENCES " + Language.TABLE
+                + " (" + Language.KEY_ID + "), " + QuestionOption.KEY_OPTION_TEXT + " VARCHAR"+ ")";
     }
 
-    public int addQuestionOption(QuestionOption questionOption) {
+    public static int addQuestionOption(QuestionOption questionOption) {
 
         int questionOptionId;
 
