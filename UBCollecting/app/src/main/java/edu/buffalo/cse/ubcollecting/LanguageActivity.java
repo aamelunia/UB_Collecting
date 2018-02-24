@@ -34,7 +34,7 @@ public class LanguageActivity extends AppCompatActivity {
         nameField = this.findViewById(R.id.language_name_field);
         otherNamesField = this.findViewById(R.id.language_other_names_field);
         descriptionField = this.findViewById(R.id.language_description_field);
-        typeIdField = this.findViewById(R.id.language_type_id_field);
+        typeIdField = this.findViewById(R.id.language_langtype_id_field);
         submitButton = this.findViewById(R.id.language_submit_button);
 
         languageTable = new LanguageTable();

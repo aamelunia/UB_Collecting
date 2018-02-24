@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="question_lang_version_id_label">Question ID</string>
+    <string name="question_lang_question_id_label">Question Language ID</string>
+    <string name="question_lang_version_text_label">Question Text</string>
+</resources>

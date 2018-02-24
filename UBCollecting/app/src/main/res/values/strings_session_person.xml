@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_person_id_label">Person ID</string>
+    <string name="session_person_session_id_label">Session ID</string>
+    <string name="session_person_role_id_label">Role ID</string>
+</resources>

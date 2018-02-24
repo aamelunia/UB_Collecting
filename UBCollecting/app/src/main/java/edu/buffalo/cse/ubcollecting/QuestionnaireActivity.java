@@ -44,11 +44,10 @@ public class QuestionnaireActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Questionnaire quiz = new Questionnaire();
-                quiz.setId(idField.getText().toString());
                 quiz.setLabel(labelField.getText().toString());
                 quiz.setName(nameField.getText().toString());
                 quiz.setDescription(descriptionField.getText().toString());
-                quiz.setType(typeField.getText().toString());
+                quiz.setTypeId(0);
 
                 questionnaireTable.addQuestionnaire(quiz);
             }

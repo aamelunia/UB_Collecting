@@ -24,7 +24,16 @@
         <activity android:name=".QuestionnaireContentActivity" />
         <activity android:name=".QuestionnaireTypeActivity" />
         <activity android:name=".RoleActivity" />
-        <activity android:name=".SessionActivity"></activity>
+        <activity android:name=".SessionActivity" />
+        <activity android:name=".AnswerActivity" />
+        <activity android:name=".LanguageTypeActivity" />
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".QuestionLangVersionActivity" />
+        <activity android:name=".QuestionOptionActivity" />
+        <activity android:name=".QuestionPropertyActivity" />
+        <activity android:name=".QuestionPropertyDefActivity" />
+        <activity android:name=".SessionAnswerActivity" />
+        <activity android:name=".SessionPersonActivity"></activity>
     </application>
 
 </manifest>
