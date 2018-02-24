@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
+
 
 public class QuestionnaireTable {
 
@@ -21,11 +23,13 @@ public class QuestionnaireTable {
     }
 
     public static String createTable(){
-        //  Added primary key below unlike in original script
+
         return "CREATE TABLE "
-                + Questionnaire.TABLE + "(" + Questionnaire.KEY_QUES_ID + " TEXT PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
+                + Questionnaire.TABLE + "(" + Questionnaire.KEY_QUES_ID + " INTEGER PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
                 + " VARCHAR," + Questionnaire.KEY_QUES_NAME + " VARCHAR," + Questionnaire.KEY_QUES_DESCRIPTION
-                + " VARCHAR," + Questionnaire.KEY_QUES_TYPE + " VARCHAR" + ")";
+                + " VARCHAR," + Questionnaire.KEY_QUES_TYPE_ID + " INTEGER," + " FOREIGN KEY(" + Questionnaire.KEY_QUES_TYPE_ID
+                + ") REFERENCES " + QuestionnaireType.TABLE + " (" + QuestionnaireType.KEY_QUESTIONNAIRE_TYPE_ID + ") " + ")";
+
     }
 
     public int addQuestionnaire(Questionnaire ques) {
@@ -34,11 +38,10 @@ public class QuestionnaireTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(Questionnaire.KEY_QUES_ID, ques.getId());
         values.put(Questionnaire.KEY_QUES_LABEL, ques.getLabel());
         values.put(Questionnaire.KEY_QUES_NAME, ques.getName());
         values.put(Questionnaire.KEY_QUES_DESCRIPTION, ques.getDescription());
-        values.put(Questionnaire.KEY_QUES_TYPE, ques.getType());
+        values.put(Questionnaire.KEY_QUES_TYPE_ID, ques.getTypeId());
 
         quesId = (int) db.insert(Questionnaire.TABLE,null,values);
 

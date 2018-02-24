@@ -12,23 +12,23 @@ public class Questionnaire  {
     public static final String TABLE = "Questionnaire";
 
     // Questionnaire Table - column names
-    public static final String KEY_QUES_ID = "QuestionnaireId";
+    public static final String KEY_QUES_ID = "_id";
     public static final String KEY_QUES_LABEL = "QuestionnaireLabel";
     public static final String KEY_QUES_NAME = "QuestionnaireName";
     public static final String KEY_QUES_DESCRIPTION = "QuestionnaireDescription";
-    public static final String KEY_QUES_TYPE = "QuestionnaireType";
+    public static final String KEY_QUES_TYPE_ID = "QuestionnaireTypeId";
 
-    public String id;
+    public int id;
     public String label;
     public String name;
     public String description;
-    public String type;
+    public int typeId;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -56,12 +56,12 @@ public class Questionnaire  {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public int getTypeId() {
+        return typeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
 }

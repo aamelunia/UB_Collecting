@@ -23,7 +23,8 @@ public class QuestionnaireTypeTable {
     public static String createTable(){
         //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + QuestionnaireType.TABLE + "(" + QuestionnaireType.KEY_TYPE_NAME + " VARCHAR PRIMARY KEY" + ")";
+                + QuestionnaireType.TABLE + "(" + QuestionnaireType.KEY_QUESTIONNAIRE_TYPE_ID + " INTEGER PRIMARY KEY,"
+                + QuestionnaireType.KEY_TYPE_NAME + " VARCHAR" + ")";
     }
 
     public int addQuestionnaireType(QuestionnaireType quesType) {
@@ -32,7 +33,7 @@ public class QuestionnaireTypeTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(QuestionnaireType.KEY_TYPE_NAME, quesType.getTypeName());
+        values.put(QuestionnaireType.KEY_TYPE_NAME, quesType.getName());
 
         quesTypeId = (int) db.insert(QuestionnaireType.TABLE,null,values);
 
