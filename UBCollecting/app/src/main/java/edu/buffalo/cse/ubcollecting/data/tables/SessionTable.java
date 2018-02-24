@@ -26,7 +26,7 @@ public class SessionTable {
                 + Session.TABLE + "(" + Session.KEY_SESSION_ID + " TEXT PRIMARY KEY," + Session.KEY_SESSION_LABEL
                 + " VARCHAR," + Session.KEY_SESSION_NAME + " VARCHAR," + Session.KEY_SESSION_START_TIME
                 + " DATETIME," + Session.KEY_SESSION_LOCATION + " VARCHAR," + Session.KEY_SESSION_DESC
-                + " VARCHAR"+ ")";
+                + " VARCHAR"+ Session.KEY_FIELD_TRIP_ID + " TEXT" + ")";
     }
 
     public int addSession(Session session) {
@@ -41,6 +41,8 @@ public class SessionTable {
         values.put(Session.KEY_SESSION_START_TIME, session.getStartTime());
         values.put(Session.KEY_SESSION_LOCATION, session.getLocation());
         values.put(Session.KEY_SESSION_DESC, session.getDescription());
+        values.put(Session.KEY_FIELD_TRIP_ID, session.getFieldTripId());
+
 
         sessionId = (int) db.insert(Session.TABLE,null,values);
 

@@ -18,6 +18,8 @@ public class Session {
     public static final String KEY_SESSION_START_TIME = "SessionStartTime";
     public static final String KEY_SESSION_LOCATION = "SessionLocation";
     public static final String KEY_SESSION_DESC = "SessionDesc";
+    public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
+
 
 
     //  Need to appropriately configure type for start time
@@ -27,6 +29,8 @@ public class Session {
     public String startTime;
     public String location;
     public String description;
+    public String fieldTripId;
+
 
     public String getId() {
         return id;
@@ -74,6 +78,14 @@ public class Session {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFieldTripId() {
+        return fieldTripId;
+    }
+
+    public void setFieldTripId(String fieldTripId) {
+        this.fieldTripId = fieldTripId;
     }
 
 

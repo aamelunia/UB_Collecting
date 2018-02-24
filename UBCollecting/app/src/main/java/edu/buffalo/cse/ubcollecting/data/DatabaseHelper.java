@@ -3,7 +3,6 @@ package edu.buffalo.cse.ubcollecting.data;
 /**
  * Created by Aamel Unia on 2/17/18.
  */
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -41,8 +40,6 @@ import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
-import edu.buffalo.cse.ubcollecting.data.models.FieldTripSession;
-import edu.buffalo.cse.ubcollecting.data.tables.FieldTripSessionTable;
 import edu.buffalo.cse.ubcollecting.data.models.File;
 import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
