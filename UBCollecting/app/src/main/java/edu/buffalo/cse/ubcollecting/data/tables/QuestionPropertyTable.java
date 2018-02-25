@@ -8,7 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionPropertyTable {
 
@@ -21,13 +25,14 @@ public class QuestionPropertyTable {
     }
 
     public static String createTable(){
-        //  Foreign keys?!
         return "CREATE TABLE "
-                + QuestionProperty.TABLE + "(" + QuestionProperty.KEY_QUESTION_ID + " TEXT," + QuestionProperty.KEY_QUESTION_PROPERTY_ID
-                + " TEXT," + QuestionProperty.KEY_QUESTION_PROPERTY_VALUE + " INTEGER"+ ")";
+                + QuestionProperty.TABLE + "(" + QuestionProperty.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionProperty.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE + " (" + Question.KEY_ID + "), "
+                + QuestionProperty.KEY_QUESTION_PROPERTY_ID + " INTEGER," + " FOREIGN KEY(" + QuestionProperty.KEY_QUESTION_PROPERTY_ID + ") REFERENCES "
+                + QuestionPropertyDef.TABLE + " (" + QuestionPropertyDef.KEY_ID + "), " + QuestionProperty.KEY_QUESTION_PROPERTY_VALUE + " INTEGER"+ ")";
     }
 
-    public int addQuestionProperty(QuestionProperty questionProperty) {
+    public static int addQuestionProperty(QuestionProperty questionProperty) {
 
         int questionPropertyId;
 

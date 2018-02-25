@@ -8,7 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Language;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionLangVersionTable {
 
@@ -21,13 +25,15 @@ public class QuestionLangVersionTable {
     }
 
     public static String createTable(){
-        //  Foreign keys?!
         return "CREATE TABLE "
-                + QuestionLangVersion.TABLE + "(" + QuestionLangVersion.KEY_QUESTION_ID + " TEXT," + QuestionLangVersion.KEY_QUESTION_LANG_ID
-                + " TEXT," + QuestionLangVersion.KEY_QUESTION_TEXT + " TEXT"+ ")";
+                + QuestionLangVersion.TABLE + "(" + QuestionLangVersion.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionLangVersion.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + "), " + QuestionLangVersion.KEY_QUESTION_LANG_ID + " INTEGER,"
+                + " FOREIGN KEY(" + QuestionLangVersion.KEY_QUESTION_LANG_ID + ") REFERENCES " + Language.TABLE
+                + " (" + Language.KEY_ID + "), " + QuestionLangVersion.KEY_QUESTION_TEXT + " VARCHAR" + ")";
     }
 
-    public int addQuestionLangVersion(QuestionLangVersion questionLangVersion) {
+    public static int addQuestionLangVersion(QuestionLangVersion questionLangVersion) {
 
         int questionLangVersionId;
 

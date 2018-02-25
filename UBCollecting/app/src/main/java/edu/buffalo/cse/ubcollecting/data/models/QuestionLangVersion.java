@@ -17,24 +17,23 @@ public class QuestionLangVersion  {
     public static final String KEY_QUESTION_TEXT = "QuestionText";
 
 
-    // WHY IS QUESTIONTEXT PART OF THIS CLASS?!
-    public String questionId;
-    public String languageId;
+    public int questionId;
+    public int languageId;
     public String questionText;
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public String getLanguageId() {
+    public int getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(String languageId) {
+    public void setLanguageId(int languageId) {
         this.languageId = languageId;
     }
 

@@ -12,18 +12,18 @@ public class QuestionPropertyDef  {
     public static final String TABLE = "QuestionPropertyDef";
 
     // QuestionPropertyDef Table - column names
-    public static final String KEY_PROPERTY_ID = "PropertyId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_PROPERTY_NAME = "PropertyName";
 
 
-    public String id;
+    public int id;
     public String name;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

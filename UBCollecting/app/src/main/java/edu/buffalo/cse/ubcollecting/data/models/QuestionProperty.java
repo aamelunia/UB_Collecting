@@ -18,23 +18,23 @@ public class QuestionProperty  {
 
 
 
-    public String questionId;
-    public String propertyId;
+    public int questionId;
+    public int propertyId;
     public int value;
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public String getPropertyId() {
+    public int getPropertyId() {
         return propertyId;
     }
 
-    public void setPropertyId(String propertyId) {
+    public void setPropertyId(int propertyId) {
         this.propertyId = propertyId;
     }
 
