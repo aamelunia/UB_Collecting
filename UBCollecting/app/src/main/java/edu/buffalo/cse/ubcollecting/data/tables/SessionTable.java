@@ -4,10 +4,12 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 public class SessionTable {
@@ -21,21 +23,20 @@ public class SessionTable {
     }
 
     public static String createTable(){
-        //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + Session.TABLE + "(" + Session.KEY_SESSION_ID + " TEXT PRIMARY KEY," + Session.KEY_SESSION_LABEL
+                + Session.TABLE + "(" + Session.KEY_ID + " INTEGER PRIMARY KEY," + Session.KEY_SESSION_LABEL
                 + " VARCHAR," + Session.KEY_SESSION_NAME + " VARCHAR," + Session.KEY_SESSION_START_TIME
                 + " DATETIME," + Session.KEY_SESSION_LOCATION + " VARCHAR," + Session.KEY_SESSION_DESC
-                + " VARCHAR"+ Session.KEY_FIELD_TRIP_ID + " TEXT" + ")";
+                + " VARCHAR"+ Session.KEY_FIELD_TRIP_ID + " INTEGER" + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
+                + ") REFERENCES " + FieldTrip.TABLE + " (" + FieldTrip.KEY_ID + ") "+ ")";
     }
 
-    public int addSession(Session session) {
+    public static int addSession(Session session) {
 
         int sessionId;
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(Session.KEY_SESSION_ID, session.getId());
         values.put(Session.KEY_SESSION_LABEL, session.getLabel());
         values.put(Session.KEY_SESSION_NAME, session.getName());
         values.put(Session.KEY_SESSION_START_TIME, session.getStartTime());

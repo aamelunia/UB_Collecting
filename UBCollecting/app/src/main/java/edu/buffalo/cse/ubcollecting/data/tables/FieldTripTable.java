@@ -4,7 +4,6 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
@@ -21,9 +20,8 @@ public class FieldTripTable {
     }
 
     public static String createTable(){
-        //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + FieldTrip.TABLE + "(" + FieldTrip.KEY_FIELD_TRIP_ID + " TEXT PRIMARY KEY," + FieldTrip.KEY_FIELD_TRIP_NAME
+                + FieldTrip.TABLE + "(" + FieldTrip.KEY_ID + " INTEGER PRIMARY KEY," + FieldTrip.KEY_FIELD_TRIP_NAME
                 + " VARCHAR," + FieldTrip.KEY_FIELD_TRIP_START+ " DATETIME," + FieldTrip.KEY_FIELD_TRIP_END
                 + " DATETIME" + ")";
     }
@@ -35,7 +33,6 @@ public class FieldTripTable {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(FieldTrip.KEY_FIELD_TRIP_ID, fieldTrip.getId());
         values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
         values.put(FieldTrip.KEY_FIELD_TRIP_START, fieldTrip.getStartDate());
         values.put(FieldTrip.KEY_FIELD_TRIP_END, fieldTrip.getEndDate());

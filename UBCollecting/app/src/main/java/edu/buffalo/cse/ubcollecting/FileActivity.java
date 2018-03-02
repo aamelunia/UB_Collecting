@@ -53,7 +53,7 @@ public class FileActivity extends AppCompatActivity {
                 file.setAnswerId(answerIdField.getText().toString());
                 file.setType(fileTypeField.getText().toString());
                 file.setPath(filePathField.getText().toString());
-                file.setCreator(fileCreatorField.getText().toString());
+                file.setCreatorId(fileCreatorField.getText().toString());
                 file.setStartTime(fileStartTimeField.getText().toString());
                 file.setEndTime(fileEndTimeField.getText().toString());
 

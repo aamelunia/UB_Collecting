@@ -12,22 +12,22 @@ public class FieldTrip  {
     public static final String TABLE = "FieldTrip";
 
     // FieldTrip Table - column names
-    public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_FIELD_TRIP_NAME = "FieldTripName";
     public static final String KEY_FIELD_TRIP_START = "FieldTripStartDate";
     public static final String KEY_FIELD_TRIP_END = "FieldTripEndDate";
 
     // Fix types for start/end dates?!
-    public String id;
+    public int id;
     public String name;
     public String startDate;
     public String endDate;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

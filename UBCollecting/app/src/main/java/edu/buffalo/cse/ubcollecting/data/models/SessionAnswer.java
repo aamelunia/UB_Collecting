@@ -17,44 +17,42 @@ public class SessionAnswer {
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_ANSWER_ID = "AnswerId";
 
-    public String sessionId;
-    public String questionnaireId;
-    public String questionId;
-    public String answerId;
+    public int sessionId;
+    public int questionnaireId;
+    public int questionId;
+    public int answerId;
 
-    public String getSessionId() {
+    public int getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }
 
-    public String getQuestionnaireId() {
+    public int getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(String questionnaireId) {
+    public void setQuestionnaireId(int questionnaireId) {
         this.questionnaireId = questionnaireId;
     }
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public String getAnswerId() {
+    public int getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(String answerId) {
+    public void setAnswerId(int answerId) {
         this.answerId = answerId;
     }
-
-
 
 
 }

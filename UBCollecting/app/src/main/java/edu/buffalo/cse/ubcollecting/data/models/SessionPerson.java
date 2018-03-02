@@ -13,38 +13,37 @@ public class SessionPerson {
 
     // SessionPerson Table - column names
     public static final String KEY_SESSION_ID = "SessionId";
-    public static final String KEY_SESSION_PERSON_ID = "SessionPersonId";
-    public static final String KEY_SESSION_PERSON_ROLE_ID = "SessionPersonRoleId";
+    public static final String KEY_PERSON_ID = "PersonId";
+    public static final String KEY_ROLE_ID = "RoleId";
 
 
-    public String sessionId;
-    public String personId;
-    public String roleId;
+    public int sessionId;
+    public int personId;
+    public int roleId;
 
-    public String getSessionId() {
+    public int getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }
 
-    public String getPersonId() {
+    public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
-
 
 
 

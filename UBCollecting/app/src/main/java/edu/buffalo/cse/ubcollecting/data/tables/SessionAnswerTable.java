@@ -8,6 +8,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Answer;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.Session;
 import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
 
 public class SessionAnswerTable {
@@ -21,14 +25,20 @@ public class SessionAnswerTable {
     }
 
     public static String createTable(){
-        //  Add primary key? How about all the foreign keys?!
+
         return "CREATE TABLE "
-                + SessionAnswer.TABLE + "(" + SessionAnswer.KEY_SESSION_ID + " TEXT," + SessionAnswer.KEY_QUESTIONNAIRE_ID
-                + " TEXT," + SessionAnswer.KEY_QUESTION_ID + " TEXT," + SessionAnswer.KEY_ANSWER_ID
-                + " TEXT" + ")";
+                + SessionAnswer.TABLE + "(" + SessionAnswer.KEY_SESSION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + SessionAnswer.KEY_SESSION_ID + ") REFERENCES " + Session.TABLE
+                + " (" + Session.KEY_ID + "), " + SessionAnswer.KEY_QUESTIONNAIRE_ID + " INTEGER,"
+                + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTIONNAIRE_ID + ") REFERENCES " + Questionnaire.TABLE
+                + " (" + Questionnaire.KEY_ID + "), " + SessionAnswer.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + "), " + SessionAnswer.KEY_ANSWER_ID + " INTEGER,"
+                + " FOREIGN KEY(" + SessionAnswer.KEY_ANSWER_ID + ") REFERENCES " + Answer.TABLE
+                + " (" + Answer.KEY_ID + ") " + ")";
     }
 
-    public int addSessionAnswer(SessionAnswer sessionAnswer) {
+    public static int addSessionAnswer(SessionAnswer sessionAnswer) {
 
         int sessionAnswerId;
 

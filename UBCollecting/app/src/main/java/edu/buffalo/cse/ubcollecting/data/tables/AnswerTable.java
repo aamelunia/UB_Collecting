@@ -4,11 +4,13 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Answer;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class AnswerTable {
 
@@ -21,20 +23,21 @@ public class AnswerTable {
     }
 
     public static String createTable(){
-        //  Add primary key? How about all the foreign keys?!
         return "CREATE TABLE "
-                + Answer.TABLE + "(" + Answer.KEY_ANSWER_ID+ " TEXT PRIMARY KEY," + Answer.KEY_QUESTIONNAIRE_ID
-                + " TEXT," + Answer.KEY_QUESTION_ID+ " TEXT," + Answer.KEY_ANSWER_LABEL
-                + " VARCHAR," + Answer.KEY_ANSWER_TEXT + " VARCHAR" + ")";
+                + Answer.TABLE + "(" + Answer.KEY_ID + " INTEGER PRIMARY KEY," + Answer.KEY_QUESTIONNAIRE_ID
+                + " INTEGER," + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
+                + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + "), " + Answer.KEY_QUESTION_ID + " INTEGER,"
+                + " FOREIGN KEY(" + Answer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + "), " + Answer.KEY_ANSWER_LABEL + " VARCHAR," + Answer.KEY_ANSWER_TEXT
+                + " VARCHAR" + ")";
     }
 
-    public int addAnswer(Answer answer) {
+    public static int addAnswer(Answer answer) {
 
         int answerId;
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(Answer.KEY_ANSWER_ID, answer.getId());
         values.put(Answer.KEY_QUESTIONNAIRE_ID, answer.getQuestionnaireId());
         values.put(Answer.KEY_QUESTION_ID, answer.getQuestionId());
         values.put(Answer.KEY_ANSWER_LABEL, answer.getLabel());

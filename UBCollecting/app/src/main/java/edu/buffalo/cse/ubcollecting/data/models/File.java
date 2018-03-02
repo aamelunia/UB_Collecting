@@ -11,33 +11,33 @@ public class File {
     // Table Names
     public static final String TABLE = "File";
 
-    // Session Table - column names
-    public static final String KEY_FILE_ID = "FileId";
+    // File Table - column names
+    public static final String KEY_ID = "_id";
     public static final String KEY_FILE_NAME = "FileName";
     public static final String KEY_FILE_ANSWER_ID = "FileAnswerId";
     public static final String KEY_FILE_TYPE = "FileType";
     public static final String KEY_FILE_PATH = "FilePath";
-    public static final String KEY_FILE_CREATOR = "FileCreator";
+    public static final String KEY_FILE_CREATOR_ID = "FileCreatorId";
     public static final String KEY_FILE_START = "FileStartTime";
     public static final String KEY_FILE_END = "FileEndTime";
 
     //  Need to appropriately configure type for start time and end time
 
-    public String id;
+    public int id;
     public String name;
-    public String answerId;
+    public int answerId;
     public String type;
     public String path;
-    public String creator;
+    public int creatorId;
     public String startTime;
     public String endTime;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,11 +49,11 @@ public class File {
         this.name = name;
     }
 
-    public String getAnswerId() {
+    public int getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(String answerId) {
+    public void setAnswerId(int answerId) {
         this.answerId = answerId;
     }
 
@@ -73,12 +73,12 @@ public class File {
         this.path = path;
     }
 
-    public String getCreator() {
-        return creator;
+    public int getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setCreatorId(int creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getStartTime() {

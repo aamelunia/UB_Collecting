@@ -12,23 +12,23 @@ public class Role  {
     public static final String TABLE = "Role";
 
     // Role Table - column names
-    public static final String KEY_ROLE_ID = "RoleId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_ROLE_NAME = "RoleName";
     public static final String KEY_ROLE_INTRO_REQUIRED = "RoleIntroRequired";
     public static final String KEY_ROLE_PHOTO_REQUIRED = "RolePhotoRequired";
     public static final String KEY_ROLE_ON_CLIENT = "RoleOnClient";
 
-    public String id;
+    public int id;
     public String name;
     public int introRequired;
     public int photoRequired;
     public int onClient;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

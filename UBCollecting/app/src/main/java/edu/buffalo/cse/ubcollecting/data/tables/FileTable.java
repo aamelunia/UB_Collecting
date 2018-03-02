@@ -4,11 +4,14 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.models.File;
+import edu.buffalo.cse.ubcollecting.data.models.Person;
+import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class FileTable {
 
@@ -21,27 +24,27 @@ public class FileTable {
     }
 
     public static String createTable(){
-        //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + File.TABLE + "(" + File.KEY_FILE_ID + " TEXT PRIMARY KEY," + File.KEY_FILE_NAME
-                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " TEXT," + File.KEY_FILE_TYPE
-                + " VARCHAR," + File.KEY_FILE_PATH + " VARCHAR," + File.KEY_FILE_CREATOR
-                + " TEXT," + File.KEY_FILE_START + " DATETIME," + File.KEY_FILE_END
-                + " DATETIME" + ")";
+                + File.TABLE + "(" + File.KEY_ID + " INTEGER PRIMARY KEY," + File.KEY_FILE_NAME
+                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " INTEGER," + " FOREIGN KEY(" + File.KEY_FILE_ANSWER_ID
+                + ") REFERENCES " + Answer.TABLE + " (" + Answer.KEY_ID + "), "+ File.KEY_FILE_TYPE
+                + " VARCHAR," + File.KEY_FILE_PATH + " VARCHAR," + File.KEY_FILE_CREATOR_ID
+                + " INTEGER,"+ " FOREIGN KEY(" + File.KEY_FILE_CREATOR_ID + ") REFERENCES "
+                + Person.TABLE + " (" + Person.KEY_ID + "), " + File.KEY_FILE_START
+                + " DATETIME," + File.KEY_FILE_END + " DATETIME" + ")";
     }
 
-    public int addFile(File file) {
+    public static int addFile(File file) {
 
         int fileId;
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(File.KEY_FILE_ID, file.getId());
         values.put(File.KEY_FILE_NAME, file.getName());
         values.put(File.KEY_FILE_ANSWER_ID, file.getAnswerId());
         values.put(File.KEY_FILE_TYPE, file.getType());
         values.put(File.KEY_FILE_PATH, file.getPath());
-        values.put(File.KEY_FILE_CREATOR, file.getCreator());
+        values.put(File.KEY_FILE_CREATOR_ID, file.getCreatorId());
         values.put(File.KEY_FILE_START, file.getStartTime());
         values.put(File.KEY_FILE_END, file.getEndTime());
 

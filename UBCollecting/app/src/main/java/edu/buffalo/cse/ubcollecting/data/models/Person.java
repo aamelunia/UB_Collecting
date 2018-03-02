@@ -12,35 +12,32 @@ public class Person {
     public static final String TABLE = "Person";
 
     // Person Table - column names
-    public static final String KEY_PERSON_ID = "PersonId";
+    public static final String KEY_ID = "_id";
     public static final String KEY_PERSON_NAME = "PersonName";
     public static final String KEY_PERSON_OTHER_NAMES = "PersonOtherNames";
     public static final String KEY_PERSON_DOB = "PersonDOB";
     public static final String KEY_PERSON_PHOTO = "PersonPhoto";
     public static final String KEY_PERSON_PHOTO_DESC = "PersonPhotoDesc";
-    public static final String KEY_PERSON_ROLE = "PersonMainRole";
+    public static final String KEY_PERSON_ROLE_ID = "PersonMainRoleId";
     public static final String KEY_PERSON_INTRO_QUES_DESC = "PersonIntroQuestnirDesc";
 
     //  Need to appropriately configure types for DOB and Photo
 
-    public String id;
+    public int id;
     public String name;
     public String otherNames;
     public String dob;
     public String photo;
     public String photoDesc;
-    public String role;
+    public int roleId;
     public String questDesc;
 
-    public Person () {
 
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,12 +81,12 @@ public class Person {
         this.photoDesc = photoDesc;
     }
 
-    public String getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getQuestDesc() {
