@@ -50,10 +50,11 @@
             android:layout_margin="10px"
             android:text="@string/person_role_label" />
 
-        <EditText
-            android:id="@+id/person_role_field"
+        <Spinner
+            android:id="@+id/person_role_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"/>
 
         <TextView
             android:layout_width="match_parent"

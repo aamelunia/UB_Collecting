@@ -7,6 +7,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
@@ -92,6 +94,35 @@ public class RoleTable {
 
         return role;
 
+    }
+
+    public static ArrayList<Role> getAllRoles() {
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + Role.TABLE, null);
+        ArrayList<Role> list = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                int id = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ID)));
+                String name = cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_NAME));
+                int introRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_INTRO_REQUIRED)));
+                int photoRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_PHOTO_REQUIRED)));
+                int onClientRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_ON_CLIENT)));
+
+                Role role = new Role();
+                role.setId(id);
+                role.setName(name);
+                role.setIntroRequired(introRequired);
+                role.setPhotoRequired(photoRequired);
+                role.setOnClient(onClientRequired);
+
+                list.add(role);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
 
 }

@@ -1,40 +1,78 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Person;
+import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
+import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 
 public class PersonActivity extends AppCompatActivity {
 
     private static final String TAG = PersonActivity.class.getSimpleName().toString();
+    private static final int REQUEST_CODE_ROLE = 0;
 
     private EditText nameField;
     private EditText preferredNameField;
     private EditText dobField;
-    private EditText roleField;
+    private Spinner roleSpinner;
     private EditText photoField;
     private EditText photoDescriptionField;
     private EditText questionnaireDescriptionField;
     private Button submitButton;
 
+    private int roleId;
+    private ArrayAdapter<String> roleAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         nameField = this.findViewById(R.id.person_name_field);
         preferredNameField = this.findViewById(R.id.person_preferred_name_field);
         dobField = this.findViewById(R.id.person_dob_field);
-        roleField = this.findViewById(R.id.person_role_field);
+        roleSpinner = this.findViewById(R.id.person_role_spinner);
+        List<String> roles = new ArrayList<>();
+        roles.add("");
+        roles.add("Create New Role");
+
+        roleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roles);
+        roleSpinner.setAdapter(roleAdapter);
+        roleSpinner.setSelected(false);
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String item = parent.getItemAtPosition(position).toString();
+
+                if (position == roleAdapter.getCount() - 1) {
+                    Intent i = RoleActivity.newIntent(PersonActivity.this);
+                    startActivityForResult(i, REQUEST_CODE_ROLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         photoField = this.findViewById(R.id.person_photo_field);
         photoDescriptionField = this.findViewById(R.id.person_photo_description_field);
         questionnaireDescriptionField = this.findViewById(R.id.person_questionnaire_description_field);
@@ -49,16 +87,30 @@ public class PersonActivity extends AppCompatActivity {
                 applicant.setDob(dobField.getText().toString());
                 applicant.setPhoto(photoField.getText().toString());
                 applicant.setPhotoDesc(photoDescriptionField.getText().toString());
-                applicant.setRoleId(0); // TODO
+                applicant.setRoleId(roleId); // TODO
                 applicant.setQuestDesc(questionnaireDescriptionField.getText().toString());
 
                 int id = PersonTable.addPerson(applicant);
 
                 applicant.setId(id);
                 Toast.makeText(PersonActivity.this,
-                               "Added " + applicant.getName() + " to database",
-                               Toast.LENGTH_SHORT).show();
+                        "Added " + applicant.getName() + " to database",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_CODE_ROLE) {
+            roleId = RoleActivity.getId(data);
+            roleAdapter.insert(RoleActivity.getName(data), 0);
+            roleSpinner.setAdapter(roleAdapter);
+        }
+    }
+
 }

@@ -22,38 +22,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/role_intro_required_label" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/role_intro_required_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/role_intro_required_label" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/role_photo_required_label" />
+            <CheckBox
+                android:id="@+id/role_intro_required_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/role_photo_required_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/role_on_client_label" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/role_on_client_field"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/role_photo_required_label" />
+
+            <CheckBox
+                android:id="@+id/role_photo_required_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/role_on_client_label" />
+
+            <CheckBox
+                android:id="@+id/role_on_client_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/role_submit_button"
