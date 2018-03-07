@@ -18,40 +18,34 @@ public class RoleActivity extends AppCompatActivity {
 
     private static final String TAG = RoleActivity.class.getSimpleName().toString();
 
-    private TextView idField;
     private EditText nameField;
     private EditText introRequiredField;
     private EditText photoRequiredField;
     private EditText onClientField;
     private Button submitButton;
 
-    private RoleTable roleTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role);
 
-        idField = this.findViewById(R.id.role_id_field);
-        idField.setText(UUID.randomUUID().toString());
         nameField = this.findViewById(R.id.role_name_field);
         introRequiredField = this.findViewById(R.id.role_intro_required_field);
         photoRequiredField = this.findViewById(R.id.role_photo_required_field);
         onClientField = this.findViewById(R.id.role_on_client_field);
 
-        roleTable = new RoleTable();
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Role role = new Role();
-                role.setId(idField.getText().toString());
                 role.setName(nameField.getText().toString());
                 role.setIntroRequired(Integer.valueOf(introRequiredField.getText().toString()));
                 role.setPhotoRequired(Integer.valueOf(photoRequiredField.getText().toString()));
                 role.setOnClient(Integer.valueOf(onClientField.getText().toString()));
 
-                roleTable.addRole(role);
+                int id = RoleTable.addRole(role);
+                role.setId(id);
             }
         });
     }

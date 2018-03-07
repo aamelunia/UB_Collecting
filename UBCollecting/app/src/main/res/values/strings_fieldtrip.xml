@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="fieldtrip_id_label">Field Trip ID</string>
     <string name="fieldtrip_name_label">Field Trip Name</string>
     <string name="fieldtrip_start_date_label">Field Trip Start Date</string>
     <string name="fieldtrip_end_date_label">Field Trip End Date</string>

@@ -15,37 +15,31 @@ public class SessionAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = SessionAnswerActivity.class.getSimpleName().toString();
 
-    private TextView idField;
-    private EditText questionnaireIdField;
-    private EditText questionIdField;
-    private EditText answerIdField;
+    private TextView questionnaireField;
+    private TextView questionField;
+    private TextView answerField;
     private Button submitButton;
-
-    private SessionAnswerTable sessionAnswerTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_answer);
 
-        idField = this.findViewById(R.id.session_answer_id_field);
-        questionnaireIdField = this.findViewById(R.id.session_answer_questionnaire_id_field);
-        questionIdField = this.findViewById(R.id.session_answer_question_id_field);
-        answerIdField = this.findViewById(R.id.session_answer_answer_id_field);
+        questionnaireField = this.findViewById(R.id.session_answer_questionnaire_field);
+        questionField = this.findViewById(R.id.session_answer_question_field);
+        answerField = this.findViewById(R.id.session_answer_answer_field);
         submitButton = this.findViewById(R.id.session_answer_submit_button);
-
-        sessionAnswerTable = new SessionAnswerTable();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionAnswer sessionAnswer = new SessionAnswer();
-                sessionAnswer.setSessionId(idField.getText().toString());
-                sessionAnswer.setQuestionnaireId(questionnaireIdField.getText().toString());
-                sessionAnswer.setQuestionId(questionIdField.getText().toString());
-                sessionAnswer.setAnswerId(answerIdField.getText().toString());
+                sessionAnswer.setSessionId(0); // TODO
+                sessionAnswer.setQuestionnaireId(0); // TODO
+                sessionAnswer.setQuestionId(0); // TODO
+                sessionAnswer.setAnswerId(0); // TODO
 
-                sessionAnswerTable.addSessionAnswer(sessionAnswer);
+                SessionAnswerTable.addSessionAnswer(sessionAnswer);
             }
         });
     }

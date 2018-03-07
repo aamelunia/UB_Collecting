@@ -14,34 +14,30 @@ public class SessionPersonActivity extends AppCompatActivity {
 
     private static final String TAG = SessionPersonActivity.class.getSimpleName().toString();
 
-    private TextView idField;
-    private EditText sessionIdField;
-    private EditText roleIdField;
+    private TextView personField;
+    private TextView sessionField;
+    private TextView roleField;
     private Button submitButton;
-
-    private SessionPersonTable sessionPersonTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_person);
 
-        idField = this.findViewById(R.id.session_person_id_field);
-        sessionIdField = this.findViewById(R.id.session_person_session_id_field);
-        roleIdField = this.findViewById(R.id.session_person_role_id_field);
+        personField = this.findViewById(R.id.session_person_name_field);
+        sessionField = this.findViewById(R.id.session_person_session_field);
+        roleField = this.findViewById(R.id.session_person_role_field);
         submitButton = this.findViewById(R.id.session_person_submit_button);
-
-        sessionPersonTable = new SessionPersonTable();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionPerson person = new SessionPerson();
-                person.setPersonId(idField.getText().toString());
-                person.setSessionId(sessionIdField.getText().toString());
-                person.setRoleId(roleIdField.getText().toString());
+                person.setPersonId(0); // TODO
+                person.setSessionId(0); // TODO
+                person.setRoleId(0); // TODO
 
-                sessionPersonTable.addSessionPerson(person);
+                SessionPersonTable.addSessionPerson(person);
             }
         });
     }

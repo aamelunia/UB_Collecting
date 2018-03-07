@@ -16,35 +16,31 @@ public class QuestionnaireContentActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionnaireContentActivity.class.getSimpleName().toString();
 
-    private TextView idField;
-    private EditText questionIdField;
+    private TextView questionnaireField;
+    private TextView questionField;
     private EditText orderField;
     private Button submitButton;
-
-    private QuestionnaireContentTable questionnaireContentTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire_content);
 
-        idField = this.findViewById(R.id.questionnaire_content_id_field);
-        idField.setText(UUID.randomUUID().toString());
-        questionIdField = this.findViewById(R.id.questionnaire_content_question_id_field);
+        questionnaireField = this.findViewById(R.id.questionnaire_content_questionnaire_field);
+        questionField = this.findViewById(R.id.questionnaire_content_question_field);
         orderField = this.findViewById(R.id.questionnaire_content_order_field);
         submitButton = this.findViewById(R.id.questionnaire_content_submit_button);
 
-        questionnaireContentTable = new QuestionnaireContentTable();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 QuestionnaireContent content = new QuestionnaireContent();
-                content.setQuestionnaireId(idField.getText().toString());
-                content.setQuestionId(questionIdField.getText().toString());
+                content.setQuestionnaireId(0); // TODO
+                content.setQuestionId(0); // TODO
                 content.setQuestionOrder(orderField.getText().toString());
 
-                questionnaireContentTable.addQuestionnaireContent(content);
+                QuestionnaireContentTable.addQuestionnaireContent(content);
             }
         });
     }

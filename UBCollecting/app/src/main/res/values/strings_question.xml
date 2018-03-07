@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="question_id_label">ID</string>
     <string name="question_type_label">Question Type</string>
 </resources>

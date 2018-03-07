@@ -16,9 +16,8 @@ public class FileActivity extends AppCompatActivity {
 
     private static final String TAG = FileActivity.class.getSimpleName().toString();
 
-    private TextView idField;
-    private EditText fileNameField;
-    private EditText answerIdField;
+    private TextView fileNameField;
+    private TextView answerNameField;
     private EditText fileTypeField;
     private EditText filePathField;
     private EditText fileCreatorField;
@@ -26,17 +25,13 @@ public class FileActivity extends AppCompatActivity {
     private EditText fileEndTimeField;
     private Button submitButton;
 
-    private FileTable fileTable;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
 
-        idField = this.findViewById(R.id.file_id_field);
-        idField.setText(UUID.randomUUID().toString());
         fileNameField = this.findViewById(R.id.file_name_field);
-        answerIdField = this.findViewById(R.id.file_answer_id_field);
+        answerNameField = this.findViewById(R.id.file_answer_name_field);
         fileTypeField = this.findViewById(R.id.file_type_field);
         filePathField = this.findViewById(R.id.file_path_field);
         fileCreatorField = this.findViewById(R.id.file_creator_field);
@@ -48,16 +43,17 @@ public class FileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 File file = new File();
-                file.setId(idField.getText().toString());
                 file.setName(fileNameField.getText().toString());
-                file.setAnswerId(answerIdField.getText().toString());
+                file.setAnswerId(0); // TODO
                 file.setType(fileTypeField.getText().toString());
                 file.setPath(filePathField.getText().toString());
-                file.setCreatorId(fileCreatorField.getText().toString());
+                file.setCreatorId(0); // TODO
                 file.setStartTime(fileStartTimeField.getText().toString());
                 file.setEndTime(fileEndTimeField.getText().toString());
 
-                fileTable.addFile(file);
+                int id = FileTable.addFile(file);
+
+                file.setId(id);
             }
         });
     }

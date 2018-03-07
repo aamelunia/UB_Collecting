@@ -32,9 +32,10 @@ public class QuestionnaireTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionnaireType questionnaireType = new QuestionnaireType();
-                questionnaireType.setTypeName(nameField.getText().toString());
+                questionnaireType.setName(nameField.getText().toString());
 
-                questionnaireTypeTable.addQuestionnaireType(questionnaireType);
+                int id = questionnaireTypeTable.addQuestionnaireType(questionnaireType);
+                questionnaireType.setId(id);
             }
         });
     }

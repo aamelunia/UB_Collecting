@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/question_lang_version_id_label" />
+            android:text="@string/question_lang_version_question_label" />
 
         <TextView
-            android:id="@+id/question_lang_version_id_field"
+            android:id="@+id/question_lang_version_question_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20px"
@@ -28,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/question_lang_question_id_label" />
+            android:text="@string/question_lang_label" />
 
         <EditText
-            android:id="@+id/question_lang_question_id_field"
+            android:id="@+id/question_lang_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

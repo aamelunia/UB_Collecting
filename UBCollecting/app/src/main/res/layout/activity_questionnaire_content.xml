@@ -15,25 +15,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/questionnaire_content_id_label" />
+            android:text="@string/questionnaire_content_questionnaire_label" />
 
         <TextView
-            android:id="@+id/questionnaire_content_id_field"
+            android:id="@+id/questionnaire_content_questionnaire_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
+            android:textSize="16pt"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/questionnaire_content_question_id_label" />
+            android:text="@string/questionnaire_content_question_label" />
 
-        <EditText
-            android:id="@+id/questionnaire_content_question_id_field"
+        <TextView
+            android:id="@+id/questionnaire_content_question_field"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="16pt"/>
 
         <TextView
             android:layout_width="match_parent"

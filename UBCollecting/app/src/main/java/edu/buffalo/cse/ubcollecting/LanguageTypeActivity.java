@@ -16,32 +16,25 @@ public class LanguageTypeActivity extends AppCompatActivity {
 
     private static final String TAG = LanguageTypeActivity.class.getSimpleName().toString();
 
-    private TextView idField;
     private EditText nameField;
     private Button submitButton;
-
-    private LanguageTypeTable languageTypeTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_type);
 
-        idField = this.findViewById(R.id.language_type_id_field);
-        idField.setText(UUID.randomUUID().toString());
         nameField = this.findViewById(R.id.language_type_name_field);
         submitButton = this.findViewById(R.id.language_type_submit_button);
-
-        languageTypeTable = new LanguageTypeTable();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LanguageType langType = new LanguageType();
-                langType.setId(idField.getText().toString());
                 langType.setName(nameField.getText().toString());
 
-                languageTypeTable.addLanguageType(langType);
+                int id = LanguageTypeTable.addLanguageType(langType);
+                langType.setId(id);
             }
         });
     }

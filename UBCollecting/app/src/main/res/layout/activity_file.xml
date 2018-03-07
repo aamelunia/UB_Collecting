@@ -15,36 +15,25 @@ tools:context="edu.buffalo.cse.ubcollecting.FileActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10px"
-        android:text="@string/file_id_label" />
-
-    <TextView
-        android:id="@+id/file_id_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20px"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10px"
         android:text="@string/file_name_label" />
 
-    <EditText
+    <TextView
         android:id="@+id/file_name_field"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="16pt"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10px"
-        android:text="@string/file_answer_id_label" />
+        android:text="@string/file_answer_label" />
 
-    <EditText
-        android:id="@+id/file_answer_id_field"
+    <TextView
+        android:id="@+id/file_answer_name_field"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="16pt"/>
 
     <TextView
         android:layout_width="match_parent"

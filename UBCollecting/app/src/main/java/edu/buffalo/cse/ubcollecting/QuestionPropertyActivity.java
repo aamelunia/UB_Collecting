@@ -14,33 +14,31 @@ public class QuestionPropertyActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionProperty.class.getSimpleName().toString();
 
-    private TextView idField;
-    private EditText questionIdField;
+    private TextView propertyField;
+    private TextView questionField;
     private EditText valueField;
     private Button submitButton;
 
-    private QuestionPropertyTable questionPropertyTable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_property);
 
-        idField = this.findViewById(R.id.question_property_id_field);
-        questionIdField = this.findViewById(R.id.question_property_qid_field);
+        propertyField = this.findViewById(R.id.question_property_field);
+        questionField = this.findViewById(R.id.question_property_question_field);
         valueField = this.findViewById(R.id.question_property_value_field);
         submitButton = this.findViewById(R.id.question_property_submit_button);
 
-        questionPropertyTable = new QuestionPropertyTable();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 QuestionProperty property = new QuestionProperty();
-                property.setPropertyId(idField.getText().toString());
-                property.setQuestionId(questionIdField.getText().toString());
-                property.setValue(0);
+                property.setPropertyId(0); // TODO
+                property.setQuestionId(0); // TODO
+                property.setValue(0); //TODO
 
-                questionPropertyTable.addQuestionProperty(property);
+                QuestionPropertyTable.addQuestionProperty(property);
             }
         });
     }

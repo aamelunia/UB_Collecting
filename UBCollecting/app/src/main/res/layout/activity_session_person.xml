@@ -15,36 +15,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/session_person_id_label" />
+            android:text="@string/session_person_name_label" />
 
         <TextView
-            android:id="@+id/session_person_id_field"
+            android:id="@+id/session_person_name_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/session_person_session_id_label" />
-
-        <EditText
-            android:id="@+id/session_person_session_id_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="16pt"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/session_person_role_id_label" />
+            android:text="@string/session_person_session_label" />
 
-        <EditText
-            android:id="@+id/session_person_role_id_field"
+        <TextView
+            android:id="@+id/session_person_session_field"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="16pt"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:text="@string/session_person_role_label" />
+
+        <TextView
+            android:id="@+id/session_person_role_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16pt"/>
 
         <Button
             android:id="@+id/session_person_submit_button"

@@ -16,19 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/language_id_label" />
-
-        <TextView
-            android:id="@+id/language_id_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
             android:text="@string/language_name_label" />
 
         <EditText
@@ -62,12 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10px"
-            android:text="@string/language_langtype_id_label" />
+            android:text="@string/language_langtype_label" />
 
-        <EditText
-            android:id="@+id/language_langtype_id_field"
+        <TextView
+            android:id="@+id/language_langtype_field"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="16pt"/>
 
         <Button
             android:id="@+id/language_submit_button"

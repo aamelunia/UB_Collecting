@@ -26,7 +26,7 @@ public class FieldTripTable {
                 + " DATETIME" + ")";
     }
 
-    public int addFieldTrip(FieldTrip fieldTrip) {
+    public static int addFieldTrip(FieldTrip fieldTrip) {
 
         int fieldTripId;
 
