@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Generalized and Abstracted out Select All Method for All Tables
 
-    public static List<StringBuffer> getAll (String tableName) {
+    public static List<StringBuffer> getAll(String tableName) {
 
         List<StringBuffer> storage = new ArrayList<StringBuffer>();
 
@@ -141,10 +141,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-               int totalFields = cursor.getColumnCount();
-               StringBuffer sb = new StringBuffer();
+                int totalFields = cursor.getColumnCount();
+                StringBuffer sb = new StringBuffer();
 
-                for (int i = 0; i < totalFields ; i++) {
+                for (int i = 0; i < totalFields; i++) {
                     sb.append(cursor.getColumnName(i));
                     sb.append(": ");
                     sb.append(cursor.getString(i));
@@ -159,6 +159,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseManager.getInstance().closeDatabase();
 
         return storage;
+    }
+
+    public static String findById(String tableName, int id) {
+
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+        String selectQuery = "SELECT  * FROM " + tableName + " WHERE _id = " + Integer.toString(id);
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        StringBuffer sb = new StringBuffer();
+
+        if (cursor.moveToFirst()) {
+
+            int totalFields = cursor.getColumnCount();
+
+            for (int i = 0; i < totalFields; i++) {
+                sb.append(cursor.getColumnName(i));
+                sb.append(": ");
+                sb.append(cursor.getString(i));
+                sb.append(" ");
+
+            }
+
+            DatabaseManager.getInstance().closeDatabase();
+
+        }
+
+        return sb.toString();
+
+
     }
 
 }
