@@ -156,6 +156,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
+
         DatabaseManager.getInstance().closeDatabase();
 
         return storage;

@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
+import android.database.Cursor;
+
 
 public class PersonTable {
 
@@ -49,6 +51,51 @@ public class PersonTable {
         DatabaseManager.getInstance().closeDatabase();
 
         return personId;
+
+    }
+
+    public static Person findById(int id){
+
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+        String[] projection = {
+                Person.KEY_ID,
+                Person.KEY_PERSON_NAME,
+                Person.KEY_PERSON_DOB,
+                Person.KEY_PERSON_OTHER_NAMES,
+                Person.KEY_PERSON_ROLE_ID,
+        };
+
+        String selection = Person.KEY_ID + " = ?";
+        String [] selectionArgs = { String.valueOf(id) };
+
+        Cursor cursor = db.query(
+                Person.TABLE,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+
+        Person person = new Person();
+        person.setId(Integer.parseInt(cursor.getString(0)));
+        person.setName(cursor.getString(1));
+        person.setDob(cursor.getString(2));
+        person.setOtherNames(cursor.getString(3));
+        person.setRoleId(Integer.parseInt(cursor.getString(4)));
+
+        cursor.close();
+
+        DatabaseManager.getInstance().closeDatabase();
+
+        return person;
 
     }
 

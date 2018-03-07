@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
@@ -44,6 +45,52 @@ public class RoleTable {
         DatabaseManager.getInstance().closeDatabase();
 
         return roleId;
+
+    }
+
+    public static Role findById(int id){
+
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+        String[] projection = {
+                Role.KEY_ID,
+                Role.KEY_ROLE_NAME,
+                Role.KEY_ROLE_INTRO_REQUIRED,
+                Role.KEY_ROLE_PHOTO_REQUIRED,
+                Role.KEY_ROLE_ON_CLIENT,
+        };
+
+        String selection = Role.KEY_ID + " = ?";
+        String [] selectionArgs = { String.valueOf(id) };
+
+        Cursor cursor = db.query(
+                Role.TABLE,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+
+        Role role = new Role();
+        role.setId(Integer.parseInt(cursor.getString(0)));
+        role.setName(cursor.getString(1));
+        role.setIntroRequired(Integer.parseInt(cursor.getString(2)));
+        role.setPhotoRequired(Integer.parseInt(cursor.getString(3)));
+        role.setOnClient(Integer.parseInt(cursor.getString(4)));
+
+        cursor.close();
+
+        DatabaseManager.getInstance().closeDatabase();
+
+
+        return role;
 
     }
 
