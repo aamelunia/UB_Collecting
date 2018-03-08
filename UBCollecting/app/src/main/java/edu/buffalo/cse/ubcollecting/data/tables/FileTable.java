@@ -26,12 +26,12 @@ public class FileTable {
     public static String createTable(){
         return "CREATE TABLE "
                 + File.TABLE + "(" + File.KEY_ID + " INTEGER PRIMARY KEY," + File.KEY_FILE_NAME
-                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " INTEGER," + " FOREIGN KEY(" + File.KEY_FILE_ANSWER_ID
-                + ") REFERENCES " + Answer.TABLE + " (" + Answer.KEY_ID + "), "+ File.KEY_FILE_TYPE
+                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " INTEGER," + File.KEY_FILE_TYPE
                 + " VARCHAR," + File.KEY_FILE_PATH + " VARCHAR," + File.KEY_FILE_CREATOR_ID
-                + " INTEGER,"+ " FOREIGN KEY(" + File.KEY_FILE_CREATOR_ID + ") REFERENCES "
-                + Person.TABLE + " (" + Person.KEY_ID + "), " + File.KEY_FILE_START
-                + " DATETIME," + File.KEY_FILE_END + " DATETIME" + ")";
+                + " INTEGER,"  + File.KEY_FILE_START + " DATETIME," + File.KEY_FILE_END + " DATETIME,"
+                + " FOREIGN KEY(" + File.KEY_FILE_ANSWER_ID + ") REFERENCES " + Answer.TABLE
+                + " (" + Answer.KEY_ID + ")," + " FOREIGN KEY(" + File.KEY_FILE_CREATOR_ID + ") REFERENCES "
+                + Person.TABLE + " (" + Person.KEY_ID + ")" + ")";
     }
 
     public static int addFile(File file) {

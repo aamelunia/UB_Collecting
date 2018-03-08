@@ -28,14 +28,17 @@ public class SessionAnswerTable {
 
         return "CREATE TABLE "
                 + SessionAnswer.TABLE + "(" + SessionAnswer.KEY_SESSION_ID + " INTEGER,"
-                + " FOREIGN KEY(" + SessionAnswer.KEY_SESSION_ID + ") REFERENCES " + Session.TABLE
-                + " (" + Session.KEY_ID + "), " + SessionAnswer.KEY_QUESTIONNAIRE_ID + " INTEGER,"
+                + SessionAnswer.KEY_QUESTIONNAIRE_ID + " INTEGER," + SessionAnswer.KEY_QUESTION_ID + " INTEGER,"
+                + SessionAnswer.KEY_ANSWER_ID + " INTEGER,"
                 + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTIONNAIRE_ID + ") REFERENCES " + Questionnaire.TABLE
-                + " (" + Questionnaire.KEY_ID + "), " + SessionAnswer.KEY_QUESTION_ID + " INTEGER,"
+                + " (" + Questionnaire.KEY_ID + "),"
                 + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + "), " + SessionAnswer.KEY_ANSWER_ID + " INTEGER,"
+                + " (" + Question.KEY_ID + "),"
                 + " FOREIGN KEY(" + SessionAnswer.KEY_ANSWER_ID + ") REFERENCES " + Answer.TABLE
-                + " (" + Answer.KEY_ID + ") " + ")";
+                + " (" + Answer.KEY_ID + "),"
+                + " FOREIGN KEY(" + SessionAnswer.KEY_SESSION_ID + ") REFERENCES " + Session.TABLE
+                + " (" + Session.KEY_ID + ")"
+                + ")";
     }
 
     public static int addSessionAnswer(SessionAnswer sessionAnswer) {

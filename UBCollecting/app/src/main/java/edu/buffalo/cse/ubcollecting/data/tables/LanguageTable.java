@@ -26,8 +26,8 @@ public class LanguageTable {
         return "CREATE TABLE "
                 + Language.TABLE + "(" + Language.KEY_ID + " INTEGER PRIMARY KEY," + Language.KEY_LANG_NAME
                 + " VARCHAR," + Language.KEY_LANG_DESC + " VARCHAR," + Language.KEY_LANG_OTHER_NAMES
-                + " VARCHAR," + Language.KEY_LANG_TYPE_ID + " INTEGER" + " FOREIGN KEY(" + Language.KEY_LANG_TYPE_ID
-                + ") REFERENCES " + LanguageType.TABLE + " (" + LanguageType.KEY_ID + ") " + ")";
+                + " VARCHAR," + Language.KEY_LANG_TYPE_ID + " INTEGER," + " FOREIGN KEY(" + Language.KEY_LANG_TYPE_ID
+                + ") REFERENCES " + LanguageType.TABLE + " (" + LanguageType.KEY_ID + ")" + ")";
     }
 
     public static int addLanguage(Language language) {

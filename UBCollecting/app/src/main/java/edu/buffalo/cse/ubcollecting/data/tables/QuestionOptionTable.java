@@ -27,10 +27,10 @@ public class QuestionOptionTable {
     public static String createTable(){
         return "CREATE TABLE "
                 + QuestionOption.TABLE + "(" + QuestionOption.KEY_QUESTION_ID + " INTEGER,"
-                + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + "), " + QuestionOption.KEY_QUESTION_LANG_ID + " INTEGER,"
+                + QuestionOption.KEY_QUESTION_LANG_ID + " INTEGER," + QuestionOption.KEY_OPTION_TEXT + " VARCHAR,"
                 + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_LANG_ID + ") REFERENCES " + Language.TABLE
-                + " (" + Language.KEY_ID + "), " + QuestionOption.KEY_OPTION_TEXT + " VARCHAR"+ ")";
+                + " (" + Language.KEY_ID + ")," + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
+                + " (" + Question.KEY_ID + ")"  + ")";
     }
 
     public static int addQuestionOption(QuestionOption questionOption) {

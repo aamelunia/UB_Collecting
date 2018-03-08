@@ -27,8 +27,8 @@ public class SessionTable {
                 + Session.TABLE + "(" + Session.KEY_ID + " INTEGER PRIMARY KEY," + Session.KEY_SESSION_LABEL
                 + " VARCHAR," + Session.KEY_SESSION_NAME + " VARCHAR," + Session.KEY_SESSION_START_TIME
                 + " DATETIME," + Session.KEY_SESSION_LOCATION + " VARCHAR," + Session.KEY_SESSION_DESC
-                + " VARCHAR"+ Session.KEY_FIELD_TRIP_ID + " INTEGER" + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
-                + ") REFERENCES " + FieldTrip.TABLE + " (" + FieldTrip.KEY_ID + ") "+ ")";
+                + " VARCHAR,"+ Session.KEY_FIELD_TRIP_ID + " INTEGER," + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
+                + ") REFERENCES " + FieldTrip.TABLE + " (" + FieldTrip.KEY_ID + ")" + ")";
     }
 
     public static int addSession(Session session) {

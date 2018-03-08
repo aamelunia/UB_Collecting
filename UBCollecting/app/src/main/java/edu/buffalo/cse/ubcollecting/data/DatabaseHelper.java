@@ -71,6 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        db.execSQL("PRAGMA foreign_keys=ON");
         //Creating The Tables
         db.execSQL(PersonTable.createTable());
         db.execSQL(QuestionTable.createTable());
@@ -130,67 +131,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Generalized and Abstracted out Select All Method for All Tables
 
-    public static List<StringBuffer> getAll(String tableName) {
-
-        List<StringBuffer> storage = new ArrayList<StringBuffer>();
-
-        String selectQuery = "SELECT  * FROM " + tableName;
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int totalFields = cursor.getColumnCount();
-                StringBuffer sb = new StringBuffer();
-
-                for (int i = 0; i < totalFields; i++) {
-                    sb.append(cursor.getColumnName(i));
-                    sb.append(": ");
-                    sb.append(cursor.getString(i));
-                    sb.append(" ");
-                }
-
-                storage.add(sb);
-
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return storage;
-    }
-
-    public static String findById(String tableName, int id) {
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        String selectQuery = "SELECT  * FROM " + tableName + " WHERE _id = " + Integer.toString(id);
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        StringBuffer sb = new StringBuffer();
-
-        if (cursor.moveToFirst()) {
-
-            int totalFields = cursor.getColumnCount();
-
-            for (int i = 0; i < totalFields; i++) {
-                sb.append(cursor.getColumnName(i));
-                sb.append(": ");
-                sb.append(cursor.getString(i));
-                sb.append(" ");
-
-            }
-
-            DatabaseManager.getInstance().closeDatabase();
-
-        }
-
-        return sb.toString();
-
-
-    }
+//    public static List<StringBuffer> getAll(String tableName) {
+//
+//        List<StringBuffer> storage = new ArrayList<StringBuffer>();
+//
+//        String selectQuery = "SELECT  * FROM " + tableName;
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                int totalFields = cursor.getColumnCount();
+//                StringBuffer sb = new StringBuffer();
+//
+//                for (int i = 0; i < totalFields; i++) {
+//                    sb.append(cursor.getColumnName(i));
+//                    sb.append(": ");
+//                    sb.append(cursor.getString(i));
+//                    sb.append(" ");
+//                }
+//
+//                storage.add(sb);
+//
+//            } while (cursor.moveToNext());
+//        }
+//
+//        cursor.close();
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return storage;
+//    }
+//
+//    public static String findById(String tableName, int id) {
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        String selectQuery = "SELECT  * FROM " + tableName + " WHERE _id = " + Integer.toString(id);
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        StringBuffer sb = new StringBuffer();
+//
+//        if (cursor.moveToFirst()) {
+//
+//            int totalFields = cursor.getColumnCount();
+//
+//            for (int i = 0; i < totalFields; i++) {
+//                sb.append(cursor.getColumnName(i));
+//                sb.append(": ");
+//                sb.append(cursor.getString(i));
+//                sb.append(" ");
+//
+//            }
+//
+//            DatabaseManager.getInstance().closeDatabase();
+//
+//        }
+//
+//        return sb.toString();
+//
+//
+//    }
 
 }

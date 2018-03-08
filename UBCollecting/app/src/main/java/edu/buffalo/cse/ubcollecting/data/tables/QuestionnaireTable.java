@@ -27,7 +27,7 @@ public class QuestionnaireTable {
                 + Questionnaire.TABLE + "(" + Questionnaire.KEY_ID + " INTEGER PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
                 + " VARCHAR," + Questionnaire.KEY_QUES_NAME + " VARCHAR," + Questionnaire.KEY_QUES_DESCRIPTION
                 + " VARCHAR," + Questionnaire.KEY_QUES_TYPE_ID + " INTEGER," + " FOREIGN KEY(" + Questionnaire.KEY_QUES_TYPE_ID
-                + ") REFERENCES " + QuestionnaireType.TABLE + " (" + QuestionnaireType.KEY_ID + ") " + ")";
+                + ") REFERENCES " + QuestionnaireType.TABLE + " (" + QuestionnaireType.KEY_ID + ")" + ")";
 
     }
 

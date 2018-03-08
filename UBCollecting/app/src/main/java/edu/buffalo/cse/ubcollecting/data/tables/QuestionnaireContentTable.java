@@ -25,10 +25,10 @@ public class QuestionnaireContentTable {
     public static String createTable(){
         return "CREATE TABLE "
                 + QuestionnaireContent.TABLE + "(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + " INTEGER,"
-                + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + ") REFERENCES " + Questionnaire.TABLE
-                + " (" + Questionnaire.KEY_ID + "), " + QuestionnaireContent.KEY_QUESTION_ID + " INTEGER,"
+                + QuestionnaireContent.KEY_QUESTION_ID + " INTEGER," + QuestionnaireContent.KEY_QUESTION_ORDER + " VARCHAR,"
                 + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + "), " + QuestionnaireContent.KEY_QUESTION_ORDER + " VARCHAR" + ")";
+                + " (" + Question.KEY_ID + ")," + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID
+                + ") REFERENCES " + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + ")" + ")";
 
     }
 

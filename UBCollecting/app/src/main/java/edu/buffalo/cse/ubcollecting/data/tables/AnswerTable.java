@@ -25,11 +25,11 @@ public class AnswerTable {
     public static String createTable(){
         return "CREATE TABLE "
                 + Answer.TABLE + "(" + Answer.KEY_ID + " INTEGER PRIMARY KEY," + Answer.KEY_QUESTIONNAIRE_ID
-                + " INTEGER," + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
-                + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + "), " + Answer.KEY_QUESTION_ID + " INTEGER,"
+                + " INTEGER," + Answer.KEY_QUESTION_ID + " INTEGER," + Answer.KEY_ANSWER_LABEL + " VARCHAR,"
+                + Answer.KEY_ANSWER_TEXT + " VARCHAR,"
                 + " FOREIGN KEY(" + Answer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + "), " + Answer.KEY_ANSWER_LABEL + " VARCHAR," + Answer.KEY_ANSWER_TEXT
-                + " VARCHAR" + ")";
+                + " (" + Question.KEY_ID + "), " + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
+                + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + ")" + ")";
     }
 
     public static int addAnswer(Answer answer) {

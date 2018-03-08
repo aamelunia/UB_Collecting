@@ -25,11 +25,12 @@ public class PersonTable {
     public static String createTable(){
 
         return "CREATE TABLE "
-                + Person.TABLE + "(" + Person.KEY_ID + " INTEGER PRIMARY KEY," + Person.KEY_PERSON_NAME
-                + " VARCHAR," + Person.KEY_PERSON_OTHER_NAMES + " VARCHAR," + Person.KEY_PERSON_DOB
-                + " DATETIME," + Person.KEY_PERSON_ROLE_ID + " INTEGER," + " FOREIGN KEY(" + Person.KEY_PERSON_ROLE_ID
-                + ") REFERENCES " + Role.TABLE + " (" + Role.KEY_ID + "), " + Person.KEY_PERSON_PHOTO + " BLOB,"
-                + Person.KEY_PERSON_PHOTO_DESC + " VARCHAR," + Person.KEY_PERSON_INTRO_QUES_DESC + " VARCHAR" + ")";
+                + Person.TABLE + "( " + Person.KEY_ID + " INTEGER PRIMARY KEY, " + Person.KEY_PERSON_NAME
+                + " VARCHAR, " + Person.KEY_PERSON_OTHER_NAMES + " VARCHAR, " + Person.KEY_PERSON_DOB
+                + " DATETIME, " + Person.KEY_PERSON_ROLE_ID + " INTEGER," + Person.KEY_PERSON_PHOTO + " BLOB, "
+                + Person.KEY_PERSON_PHOTO_DESC + " VARCHAR, " + Person.KEY_PERSON_INTRO_QUES_DESC + " VARCHAR,"
+                + " FOREIGN KEY (" + Person.KEY_PERSON_ROLE_ID + ") REFERENCES " + Role.TABLE + " (" + Role.KEY_ID + ")"
+                + ")";
     }
 
     public static int addPerson(Person person) {
