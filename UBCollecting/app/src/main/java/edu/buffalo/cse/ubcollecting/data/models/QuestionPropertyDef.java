@@ -8,22 +8,21 @@ public class QuestionPropertyDef  {
 
     private static final String TAG = QuestionPropertyDef.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "QuestionPropertyDef";
 
     // QuestionPropertyDef Table - column names
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_PROPERTY_NAME = "PropertyName";
 
 
-    public int id;
+    public String id;
     public String name;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

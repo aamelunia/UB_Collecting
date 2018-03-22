@@ -24,10 +24,10 @@ public class SessionTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Session.TABLE + "(" + Session.KEY_ID + " INTEGER PRIMARY KEY," + Session.KEY_SESSION_LABEL
+                + Session.TABLE + "(" + Session.KEY_ID + " TEXT PRIMARY KEY," + Session.KEY_SESSION_LABEL
                 + " VARCHAR," + Session.KEY_SESSION_NAME + " VARCHAR," + Session.KEY_SESSION_START_TIME
                 + " DATETIME," + Session.KEY_SESSION_LOCATION + " VARCHAR," + Session.KEY_SESSION_DESC
-                + " VARCHAR,"+ Session.KEY_FIELD_TRIP_ID + " INTEGER," + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
+                + " VARCHAR,"+ Session.KEY_FIELD_TRIP_ID + " TEXT," + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
                 + ") REFERENCES " + FieldTrip.TABLE + " (" + FieldTrip.KEY_ID + ")" + ")";
     }
 
@@ -37,6 +37,7 @@ public class SessionTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
+        values.put(Session.KEY_ID, session.getId());
         values.put(Session.KEY_SESSION_LABEL, session.getLabel());
         values.put(Session.KEY_SESSION_NAME, session.getName());
         values.put(Session.KEY_SESSION_START_TIME, session.getStartTime());

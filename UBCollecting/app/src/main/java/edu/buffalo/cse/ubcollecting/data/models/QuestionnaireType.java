@@ -12,17 +12,17 @@ public class QuestionnaireType  {
     public static final String TABLE = "QuestionnaireType";
 
     // QuestionnaireType Table - column names
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_TYPE_NAME = "TypeName";
 
-    public int id;
+    public String id;
     public String name;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

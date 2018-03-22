@@ -26,8 +26,9 @@ public class QuestionPropertyTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + QuestionProperty.TABLE + "(" + QuestionProperty.KEY_QUESTION_ID + " INTEGER,"
-                + QuestionProperty.KEY_QUESTION_PROPERTY_ID + " INTEGER," + QuestionProperty.KEY_QUESTION_PROPERTY_VALUE + " INTEGER,"
+                + QuestionProperty.TABLE + "(" + QuestionProperty.KEY_QUESTION_ID + " TEXT,"
+                + QuestionProperty.KEY_QUESTION_PROPERTY_ID + " TEXT," + QuestionProperty.KEY_QUESTION_PROPERTY_VALUE + " INTEGER,"
+                + "PRIMARY KEY("+ QuestionProperty.KEY_QUESTION_ID+", "+QuestionProperty.KEY_QUESTION_PROPERTY_ID+"),"
                 + " FOREIGN KEY(" + QuestionProperty.KEY_QUESTION_PROPERTY_ID + ") REFERENCES " + QuestionPropertyDef.TABLE
                 + " (" + QuestionPropertyDef.KEY_ID + ")," + " FOREIGN KEY(" + QuestionProperty.KEY_QUESTION_ID + ") REFERENCES "
                 + Question.TABLE + " (" + Question.KEY_ID + ")" + ")";

@@ -12,42 +12,41 @@ public class Answer {
     public static final String TABLE = "Answer";
 
     // Answer Table - column names
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_ANSWER_LABEL = "AnswerLabel";
     public static final String KEY_ANSWER_TEXT = "AnswerText";
 
 
-    public int id;
-    public int questionnaireId;
-    public int questionId;
+    public String id;
+    public String questionnaireId;
+    public String questionId;
     public String label;
     public String text;
 
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
-
-    public int getQuestionnaireId() {
+    public String getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(int questionnaireId) {
+    public void setQuestionnaireId(String questionnaireId) {
         this.questionnaireId = questionnaireId;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 
     public String getLabel() {
@@ -65,6 +64,9 @@ public class Answer {
     public void setText(String text) {
         this.text = text;
     }
+
+
+
 
 
 

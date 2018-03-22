@@ -8,7 +8,6 @@ public class QuestionnaireContent  {
 
     private static final String TAG = QuestionnaireContent.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "QuestionnaireContent";
 
     // QuestionnaireContent Table - column names
@@ -17,24 +16,24 @@ public class QuestionnaireContent  {
     public static final String KEY_QUESTION_ORDER = "QuestionOrder";
 
 
-    public int questionnaireId;
-    public int questionId;
+    public String questionnaireId;
+    public String questionId;
     public String questionOrder;
 
 
-    public int getQuestionnaireId() {
+    public String getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(int questionnaireId) {
+    public void setQuestionnaireId(String questionnaireId) {
         this.questionnaireId = questionnaireId;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
@@ -45,7 +44,6 @@ public class QuestionnaireContent  {
     public void setQuestionOrder(String questionOrder) {
         this.questionOrder = questionOrder;
     }
-
 
 
 

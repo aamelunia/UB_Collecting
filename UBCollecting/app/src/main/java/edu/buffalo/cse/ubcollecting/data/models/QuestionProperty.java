@@ -8,7 +8,6 @@ public class QuestionProperty  {
 
     private static final String TAG = QuestionProperty.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "QuestionProperty";
 
     // QuestionProperty Table - column names
@@ -18,23 +17,23 @@ public class QuestionProperty  {
 
 
 
-    public int questionId;
-    public int propertyId;
+    public String questionId;
+    public String propertyId;
     public int value;
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
-    public int getPropertyId() {
+    public String getPropertyId() {
         return propertyId;
     }
 
-    public void setPropertyId(int propertyId) {
+    public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
     }
 
@@ -45,6 +44,8 @@ public class QuestionProperty  {
     public void setValue(int value) {
         this.value = value;
     }
+
+
 
 
 

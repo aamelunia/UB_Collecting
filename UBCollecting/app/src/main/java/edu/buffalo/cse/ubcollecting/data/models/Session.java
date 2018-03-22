@@ -12,7 +12,7 @@ public class Session {
     public static final String TABLE = "Session";
 
     // Session Table - column names
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_SESSION_LABEL = "SessionLabel";
     public static final String KEY_SESSION_NAME = "SessionName";
     public static final String KEY_SESSION_START_TIME = "SessionStartTime";
@@ -23,20 +23,20 @@ public class Session {
 
 
     //  Need to appropriately configure type for start time
-    public int id;
+    public String id;
     public String label;
     public String name;
     public String startTime;
     public String location;
     public String description;
-    public int fieldTripId;
+    public String fieldTripId;
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,11 +80,11 @@ public class Session {
         this.description = description;
     }
 
-    public int getFieldTripId() {
+    public String getFieldTripId() {
         return fieldTripId;
     }
 
-    public void setFieldTripId(int fieldTripId) {
+    public void setFieldTripId(String fieldTripId) {
         this.fieldTripId = fieldTripId;
     }
 

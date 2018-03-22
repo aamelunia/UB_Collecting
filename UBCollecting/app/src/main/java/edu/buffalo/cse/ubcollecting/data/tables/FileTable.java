@@ -25,10 +25,10 @@ public class FileTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + File.TABLE + "(" + File.KEY_ID + " INTEGER PRIMARY KEY," + File.KEY_FILE_NAME
-                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " INTEGER," + File.KEY_FILE_TYPE
+                + File.TABLE + "(" + File.KEY_ID + " TEXT PRIMARY KEY," + File.KEY_FILE_NAME
+                + " VARCHAR," + File.KEY_FILE_ANSWER_ID + " TEXT," + File.KEY_FILE_TYPE
                 + " VARCHAR," + File.KEY_FILE_PATH + " VARCHAR," + File.KEY_FILE_CREATOR_ID
-                + " INTEGER,"  + File.KEY_FILE_START + " DATETIME," + File.KEY_FILE_END + " DATETIME,"
+                + " TEXT,"  + File.KEY_FILE_START + " DATETIME," + File.KEY_FILE_END + " DATETIME,"
                 + " FOREIGN KEY(" + File.KEY_FILE_ANSWER_ID + ") REFERENCES " + Answer.TABLE
                 + " (" + Answer.KEY_ID + ")," + " FOREIGN KEY(" + File.KEY_FILE_CREATOR_ID + ") REFERENCES "
                 + Person.TABLE + " (" + Person.KEY_ID + ")" + ")";
@@ -40,6 +40,7 @@ public class FileTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
+        values.put(File.KEY_ID, file.getId());
         values.put(File.KEY_FILE_NAME, file.getName());
         values.put(File.KEY_FILE_ANSWER_ID, file.getAnswerId());
         values.put(File.KEY_FILE_TYPE, file.getType());

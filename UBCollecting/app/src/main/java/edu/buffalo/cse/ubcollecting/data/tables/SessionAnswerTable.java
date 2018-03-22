@@ -27,9 +27,11 @@ public class SessionAnswerTable {
     public static String createTable(){
 
         return "CREATE TABLE "
-                + SessionAnswer.TABLE + "(" + SessionAnswer.KEY_SESSION_ID + " INTEGER,"
-                + SessionAnswer.KEY_QUESTIONNAIRE_ID + " INTEGER," + SessionAnswer.KEY_QUESTION_ID + " INTEGER,"
-                + SessionAnswer.KEY_ANSWER_ID + " INTEGER,"
+                + SessionAnswer.TABLE + "(" + SessionAnswer.KEY_SESSION_ID + " TEXT,"
+                + SessionAnswer.KEY_QUESTIONNAIRE_ID + " TEXT," + SessionAnswer.KEY_QUESTION_ID + " TEXT,"
+                + SessionAnswer.KEY_ANSWER_ID + " TEXT,"
+                + " PRIMARY KEY("+ SessionAnswer.KEY_SESSION_ID + ", " + SessionAnswer.KEY_QUESTIONNAIRE_ID +", "
+                + SessionAnswer.KEY_QUESTION_ID + ", " + SessionAnswer.KEY_ANSWER_ID + "),"
                 + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTIONNAIRE_ID + ") REFERENCES " + Questionnaire.TABLE
                 + " (" + Questionnaire.KEY_ID + "),"
                 + " FOREIGN KEY(" + SessionAnswer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE

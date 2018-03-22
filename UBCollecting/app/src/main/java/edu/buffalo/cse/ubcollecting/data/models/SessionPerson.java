@@ -8,7 +8,6 @@ public class SessionPerson {
 
     private static final String TAG = SessionPerson.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "SessionPerson";
 
     // SessionPerson Table - column names
@@ -17,33 +16,35 @@ public class SessionPerson {
     public static final String KEY_ROLE_ID = "RoleId";
 
 
-    public int sessionId;
-    public int personId;
-    public int roleId;
+    public String sessionId;
+    public String personId;
+    public String roleId;
 
-    public int getSessionId() {
+
+    public String getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(int sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
-    public int getPersonId() {
+    public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(String personId) {
         this.personId = personId;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
+
 
 
 

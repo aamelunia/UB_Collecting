@@ -12,7 +12,7 @@ public class File {
     public static final String TABLE = "File";
 
     // File Table - column names
-    public static final String KEY_ID = "_id";
+    public static final String KEY_ID = "id";
     public static final String KEY_FILE_NAME = "FileName";
     public static final String KEY_FILE_ANSWER_ID = "FileAnswerId";
     public static final String KEY_FILE_TYPE = "FileType";
@@ -23,21 +23,21 @@ public class File {
 
     //  Need to appropriately configure type for start time and end time
 
-    public int id;
+    public String id;
     public String name;
-    public int answerId;
+    public String answerId;
     public String type;
     public String path;
-    public int creatorId;
+    public String creatorId;
     public String startTime;
     public String endTime;
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,11 +49,11 @@ public class File {
         this.name = name;
     }
 
-    public int getAnswerId() {
+    public String getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(int answerId) {
+    public void setAnswerId(String answerId) {
         this.answerId = answerId;
     }
 
@@ -73,11 +73,11 @@ public class File {
         this.path = path;
     }
 
-    public int getCreatorId() {
+    public String getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(int creatorId) {
+    public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
     }
 

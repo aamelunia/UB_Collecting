@@ -21,7 +21,7 @@ public class FieldTripTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + FieldTrip.TABLE + "(" + FieldTrip.KEY_ID + " INTEGER PRIMARY KEY," + FieldTrip.KEY_FIELD_TRIP_NAME
+                + FieldTrip.TABLE + "(" + FieldTrip.KEY_ID + " TEXT PRIMARY KEY," + FieldTrip.KEY_FIELD_TRIP_NAME
                 + " VARCHAR," + FieldTrip.KEY_FIELD_TRIP_START+ " DATETIME," + FieldTrip.KEY_FIELD_TRIP_END
                 + " DATETIME" + ")";
     }
@@ -33,6 +33,7 @@ public class FieldTripTable {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(FieldTrip.KEY_ID, fieldTrip.getId());
         values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
         values.put(FieldTrip.KEY_FIELD_TRIP_START, fieldTrip.getStartDate());
         values.put(FieldTrip.KEY_FIELD_TRIP_END, fieldTrip.getEndDate());

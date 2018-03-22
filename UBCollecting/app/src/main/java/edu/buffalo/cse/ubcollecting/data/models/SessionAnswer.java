@@ -8,7 +8,6 @@ public class SessionAnswer {
 
     private static final String TAG = SessionAnswer.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "SessionAnswer";
 
     // SessionAnswer Table - column names
@@ -17,42 +16,45 @@ public class SessionAnswer {
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_ANSWER_ID = "AnswerId";
 
-    public int sessionId;
-    public int questionnaireId;
-    public int questionId;
-    public int answerId;
+    public String sessionId;
+    public String questionnaireId;
+    public String questionId;
+    public String answerId;
 
-    public int getSessionId() {
+
+    public String getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(int sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
-    public int getQuestionnaireId() {
+    public String getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(int questionnaireId) {
+    public void setQuestionnaireId(String questionnaireId) {
         this.questionnaireId = questionnaireId;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
-    public int getAnswerId() {
+    public String getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(int answerId) {
+    public void setAnswerId(String answerId) {
         this.answerId = answerId;
     }
+
+
 
 
 }

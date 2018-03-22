@@ -26,8 +26,9 @@ public class QuestionOptionTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + QuestionOption.TABLE + "(" + QuestionOption.KEY_QUESTION_ID + " INTEGER,"
-                + QuestionOption.KEY_QUESTION_LANG_ID + " INTEGER," + QuestionOption.KEY_OPTION_TEXT + " VARCHAR,"
+                + QuestionOption.TABLE + "(" + QuestionOption.KEY_QUESTION_ID + " TEXT,"
+                + QuestionOption.KEY_QUESTION_LANG_ID + " TEXT," + QuestionOption.KEY_OPTION_TEXT + " VARCHAR,"
+                + "PRIMARY KEY("+ QuestionOption.KEY_QUESTION_ID+", "+QuestionOption.KEY_QUESTION_LANG_ID+"),"
                 + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_LANG_ID + ") REFERENCES " + Language.TABLE
                 + " (" + Language.KEY_ID + ")," + " FOREIGN KEY(" + QuestionOption.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
                 + " (" + Question.KEY_ID + ")"  + ")";

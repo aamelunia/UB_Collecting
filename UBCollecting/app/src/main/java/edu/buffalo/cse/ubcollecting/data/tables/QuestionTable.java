@@ -20,9 +20,8 @@ public class QuestionTable {
     }
 
     public static String createTable(){
-        //  Added primary key unlike in original script
         return "CREATE TABLE "
-                + Question.TABLE + "(" + Question.KEY_ID + " INTEGER PRIMARY KEY," + Question.KEY_QUESTION_TYPE
+                + Question.TABLE + "(" + Question.KEY_ID + " TEXT PRIMARY KEY," + Question.KEY_QUESTION_TYPE
                 + " VARCHAR" + ")";
     }
 
@@ -33,6 +32,7 @@ public class QuestionTable {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(Question.KEY_ID, question.getId());
         values.put(Question.KEY_QUESTION_TYPE, question.getType());
 
         questionId = (int) db.insert(Question.TABLE,null,values);

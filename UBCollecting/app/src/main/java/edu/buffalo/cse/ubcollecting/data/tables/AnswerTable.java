@@ -24,11 +24,12 @@ public class AnswerTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Answer.TABLE + "(" + Answer.KEY_ID + " INTEGER PRIMARY KEY," + Answer.KEY_QUESTIONNAIRE_ID
-                + " INTEGER," + Answer.KEY_QUESTION_ID + " INTEGER," + Answer.KEY_ANSWER_LABEL + " VARCHAR,"
+                + Answer.TABLE + "(" + Answer.KEY_ID + " TEXT," + Answer.KEY_QUESTIONNAIRE_ID
+                + " TEXT," + Answer.KEY_QUESTION_ID + " TEXT," + Answer.KEY_ANSWER_LABEL + " VARCHAR,"
                 + Answer.KEY_ANSWER_TEXT + " VARCHAR,"
+                + " PRIMARY KEY("+ Answer.KEY_QUESTIONNAIRE_ID+", "+Answer.KEY_QUESTION_ID+", "+Answer.KEY_ID+"),"
                 + " FOREIGN KEY(" + Answer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + "), " + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
+                + " (" + Question.KEY_ID + ")," + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
                 + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + ")" + ")";
     }
 
@@ -38,6 +39,7 @@ public class AnswerTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
+        values.put(Answer.KEY_ID, answer.getId());
         values.put(Answer.KEY_QUESTIONNAIRE_ID, answer.getQuestionnaireId());
         values.put(Answer.KEY_QUESTION_ID, answer.getQuestionId());
         values.put(Answer.KEY_ANSWER_LABEL, answer.getLabel());

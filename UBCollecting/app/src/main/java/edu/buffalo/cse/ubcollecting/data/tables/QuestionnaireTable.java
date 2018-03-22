@@ -24,9 +24,9 @@ public class QuestionnaireTable {
     public static String createTable(){
 
         return "CREATE TABLE "
-                + Questionnaire.TABLE + "(" + Questionnaire.KEY_ID + " INTEGER PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
+                + Questionnaire.TABLE + "(" + Questionnaire.KEY_ID + " TEXT PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
                 + " VARCHAR," + Questionnaire.KEY_QUES_NAME + " VARCHAR," + Questionnaire.KEY_QUES_DESCRIPTION
-                + " VARCHAR," + Questionnaire.KEY_QUES_TYPE_ID + " INTEGER," + " FOREIGN KEY(" + Questionnaire.KEY_QUES_TYPE_ID
+                + " VARCHAR," + Questionnaire.KEY_QUES_TYPE_ID + " TEXT," + " FOREIGN KEY(" + Questionnaire.KEY_QUES_TYPE_ID
                 + ") REFERENCES " + QuestionnaireType.TABLE + " (" + QuestionnaireType.KEY_ID + ")" + ")";
 
     }
@@ -37,6 +37,7 @@ public class QuestionnaireTable {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
+        values.put(Questionnaire.KEY_ID, ques.getId());
         values.put(Questionnaire.KEY_QUES_LABEL, ques.getLabel());
         values.put(Questionnaire.KEY_QUES_NAME, ques.getName());
         values.put(Questionnaire.KEY_QUES_DESCRIPTION, ques.getDescription());

@@ -26,8 +26,9 @@ public class QuestionLangVersionTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + QuestionLangVersion.TABLE + "(" + QuestionLangVersion.KEY_QUESTION_ID + " INTEGER,"
-                + QuestionLangVersion.KEY_QUESTION_LANG_ID + " INTEGER," + QuestionLangVersion.KEY_QUESTION_TEXT + " VARCHAR,"
+                + QuestionLangVersion.TABLE + "(" + QuestionLangVersion.KEY_QUESTION_ID + " TEXT,"
+                + QuestionLangVersion.KEY_QUESTION_LANG_ID + " TEXT," + QuestionLangVersion.KEY_QUESTION_TEXT + " VARCHAR,"
+                + "PRIMARY KEY("+ QuestionLangVersion.KEY_QUESTION_ID+", "+QuestionLangVersion.KEY_QUESTION_LANG_ID+"),"
                 + " FOREIGN KEY(" + QuestionLangVersion.KEY_QUESTION_LANG_ID + ") REFERENCES " + Language.TABLE
                 + " (" + Language.KEY_ID + ")," + " FOREIGN KEY(" + QuestionLangVersion.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
                 + " (" + Question.KEY_ID + ")" + ")";

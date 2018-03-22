@@ -21,7 +21,7 @@ public class LanguageTypeTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + LanguageType.TABLE + "(" + LanguageType.KEY_ID + " INTEGER PRIMARY KEY," + LanguageType.KEY_LANG_TYPE_NAME
+                + LanguageType.TABLE + "(" + LanguageType.KEY_ID + " TEXT PRIMARY KEY," + LanguageType.KEY_LANG_TYPE_NAME
                 + " VARCHAR" + ")";
     }
 
@@ -32,6 +32,7 @@ public class LanguageTypeTable {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(LanguageType.KEY_ID, languageType.getId());
         values.put(LanguageType.KEY_LANG_TYPE_NAME, languageType.getName());
 
         languageTypeId = (int) db.insert(LanguageType.TABLE,null,values);

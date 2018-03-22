@@ -8,7 +8,6 @@ public class QuestionOption  {
 
     private static final String TAG = QuestionOption.class.getSimpleName().toString();
 
-    // Table Names
     public static final String TABLE = "QuestionOption";
 
     // QuestionOption Table - column names
@@ -18,23 +17,24 @@ public class QuestionOption  {
 
 
 
-    public int questionId;
-    public int languageId;
+    public String questionId;
+    public String languageId;
     public String optionText;
 
-    public int getQuestionId() {
+
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
-    public int getLanguageId() {
+    public String getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
+    public void setLanguageId(String languageId) {
         this.languageId = languageId;
     }
 

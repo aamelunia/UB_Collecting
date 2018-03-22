@@ -24,8 +24,9 @@ public class SessionPersonTable {
 
     public static String createTable(){
         return "CREATE TABLE "
-                + SessionPerson.TABLE + "(" + SessionPerson.KEY_SESSION_ID + " INTEGER,"
-                + SessionPerson.KEY_PERSON_ID + " INTEGER," + SessionPerson.KEY_ROLE_ID + " INTEGER,"
+                + SessionPerson.TABLE + "(" + SessionPerson.KEY_SESSION_ID + " TEXT,"
+                + SessionPerson.KEY_PERSON_ID + " TEXT," + SessionPerson.KEY_ROLE_ID + " TEXT,"
+                + "PRIMARY KEY("+ SessionPerson.KEY_SESSION_ID+", "+SessionPerson.KEY_PERSON_ID+"),"
                 + " FOREIGN KEY(" + SessionPerson.KEY_SESSION_ID + ") REFERENCES " + Session.TABLE
                 + " (" + Session.KEY_ID + "),"
                 + " FOREIGN KEY(" + SessionPerson.KEY_PERSON_ID + ") REFERENCES " + Person.TABLE
