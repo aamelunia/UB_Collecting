@@ -33,7 +33,7 @@ public class QuestionLangVersionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionLangVersion questionLangVersion = new QuestionLangVersion();
-                questionLangVersion.setLanguageId(0); // TODO
+                questionLangVersion.setQuestionLanguageId(0); // TODO
                 questionLangVersion.setQuestionId(0); // TODO
                 questionLangVersion.setQuestionText(questionTextField.getText().toString());
 

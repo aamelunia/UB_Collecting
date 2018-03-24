@@ -13,42 +13,48 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionnaireTable {
 
-    private Questionnaire questionnaire;
+    public static final String TABLE = "Questionnaire";
+
+    // Questionnaire Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_LABEL = "Label";
+    public static final String KEY_NAME = "Name";
+    public static final String KEY_DESCRIPTION = "Description";
+    public static final String KEY_TYPE_ID = "TypeId";
 
     public QuestionnaireTable () {
-
-        questionnaire = new Questionnaire();
 
     }
 
     public static String createTable(){
 
         return "CREATE TABLE "
-                + Questionnaire.TABLE + "(" + Questionnaire.KEY_ID + " TEXT PRIMARY KEY," + Questionnaire.KEY_QUES_LABEL
-                + " VARCHAR," + Questionnaire.KEY_QUES_NAME + " VARCHAR," + Questionnaire.KEY_QUES_DESCRIPTION
-                + " VARCHAR," + Questionnaire.KEY_QUES_TYPE_ID + " TEXT," + " FOREIGN KEY(" + Questionnaire.KEY_QUES_TYPE_ID
-                + ") REFERENCES " + QuestionnaireType.TABLE + " (" + QuestionnaireType.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL
+                + " VARCHAR," + KEY_NAME + " VARCHAR," + KEY_DESCRIPTION
+                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
+                + ") REFERENCES " + QuestionnaireTypeTable.TABLE + " (" + QuestionnaireTypeTable.KEY_ID + ")"
+                + ")";
 
     }
 
-    public static int addQuestionnaire(Questionnaire ques) {
-
-        int quesId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Questionnaire.KEY_ID, ques.getId());
-        values.put(Questionnaire.KEY_QUES_LABEL, ques.getLabel());
-        values.put(Questionnaire.KEY_QUES_NAME, ques.getName());
-        values.put(Questionnaire.KEY_QUES_DESCRIPTION, ques.getDescription());
-        values.put(Questionnaire.KEY_QUES_TYPE_ID, ques.getTypeId());
-
-        quesId = (int) db.insert(Questionnaire.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return quesId;
-
-    }
+//    public static int addQuestionnaire(Questionnaire ques) {
+//
+//        int quesId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(Questionnaire.KEY_ID, ques.getId());
+//        values.put(Questionnaire.KEY_LABEL, ques.getLabel());
+//        values.put(Questionnaire.KEY_NAME, ques.getName());
+//        values.put(Questionnaire.KEY_DESCRIPTION, ques.getDescription());
+//        values.put(Questionnaire.KEY_TYPE_ID, ques.getTypeId());
+//
+//        quesId = (int) db.insert(Questionnaire.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return quesId;
+//
+//    }
 
 }

@@ -4,17 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class SessionPerson {
+public class SessionPerson extends Model {
 
     private static final String TAG = SessionPerson.class.getSimpleName().toString();
-
-    public static final String TABLE = "SessionPerson";
-
-    // SessionPerson Table - column names
-    public static final String KEY_SESSION_ID = "SessionId";
-    public static final String KEY_PERSON_ID = "PersonId";
-    public static final String KEY_ROLE_ID = "RoleId";
-
 
     public String sessionId;
     public String personId;
@@ -44,8 +36,6 @@ public class SessionPerson {
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
-
-
 
 
 }

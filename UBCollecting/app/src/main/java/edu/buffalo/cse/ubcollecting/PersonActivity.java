@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Person;
-import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
-import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -88,7 +86,7 @@ public class PersonActivity extends AppCompatActivity {
                 applicant.setPhoto(photoField.getText().toString());
                 applicant.setPhotoDesc(photoDescriptionField.getText().toString());
                 applicant.setRoleId(roleId); // TODO
-                applicant.setQuestDesc(questionnaireDescriptionField.getText().toString());
+                applicant.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
 
                 int id = PersonTable.addPerson(applicant);
 

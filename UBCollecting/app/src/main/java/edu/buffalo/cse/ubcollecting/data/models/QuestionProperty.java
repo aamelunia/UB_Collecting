@@ -4,18 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class QuestionProperty  {
+public class QuestionProperty extends Model {
 
     private static final String TAG = QuestionProperty.class.getSimpleName().toString();
-
-    public static final String TABLE = "QuestionProperty";
-
-    // QuestionProperty Table - column names
-    public static final String KEY_QUESTION_ID = "QuestionId";
-    public static final String KEY_QUESTION_PROPERTY_ID = "QuestionPropertyId";
-    public static final String KEY_QUESTION_PROPERTY_VALUE = "QuestionPropertyValue";
-
-
 
     public String questionId;
     public String propertyId;
@@ -44,11 +35,6 @@ public class QuestionProperty  {
     public void setValue(int value) {
         this.value = value;
     }
-
-
-
-
-
 
 
 }

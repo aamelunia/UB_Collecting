@@ -4,18 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class FieldTrip  {
+public class FieldTrip extends Model {
 
     private static final String TAG = FieldTrip.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "FieldTrip";
-
-    // FieldTrip Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_FIELD_TRIP_NAME = "FieldTripName";
-    public static final String KEY_FIELD_TRIP_START = "FieldTripStartDate";
-    public static final String KEY_FIELD_TRIP_END = "FieldTripEndDate";
 
     // Fix types for start/end dates?!
     public String id;

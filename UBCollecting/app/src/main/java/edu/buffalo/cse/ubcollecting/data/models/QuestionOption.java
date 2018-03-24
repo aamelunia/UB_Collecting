@@ -4,21 +4,13 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class QuestionOption  {
+public class QuestionOption extends Model {
 
     private static final String TAG = QuestionOption.class.getSimpleName().toString();
 
-    public static final String TABLE = "QuestionOption";
-
-    // QuestionOption Table - column names
-    public static final String KEY_QUESTION_ID = "QuestionId";
-    public static final String KEY_QUESTION_LANG_ID = "QuestionLangId";
-    public static final String KEY_OPTION_TEXT = "OptionText";
-
-
 
     public String questionId;
-    public String languageId;
+    public String questionLanguageId;
     public String optionText;
 
 
@@ -30,12 +22,12 @@ public class QuestionOption  {
         this.questionId = questionId;
     }
 
-    public String getLanguageId() {
-        return languageId;
+    public String getQuestionLanguageId() {
+        return questionLanguageId;
     }
 
-    public void setLanguageId(String languageId) {
-        this.languageId = languageId;
+    public void setQuestionLanguageId(String questionLanguageId) {
+        this.questionLanguageId = questionLanguageId;
     }
 
     public String getOptionText() {
@@ -45,8 +37,6 @@ public class QuestionOption  {
     public void setOptionText(String optionText) {
         this.optionText = optionText;
     }
-
-
 
 
 }

@@ -11,36 +11,38 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionnaireTypeTable {
 
-    private QuestionnaireType questionnaireType;
+    // Table Name
+    public static final String TABLE = "QuestionnaireType";
+
+    // QuestionnaireType Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "Name";
 
     public QuestionnaireTypeTable () {
-
-        questionnaireType = new QuestionnaireType();
 
     }
 
     public static String createTable(){
         //  Added primary key below unlike in original script
         return "CREATE TABLE "
-                + QuestionnaireType.TABLE + "(" + QuestionnaireType.KEY_ID + " TEXT PRIMARY KEY,"
-                + QuestionnaireType.KEY_TYPE_NAME + " VARCHAR" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME + " VARCHAR" + ")";
     }
 
-    public static int addQuestionnaireType(QuestionnaireType quesType) {
-
-        int quesTypeId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(QuestionnaireType.KEY_ID, quesType.getId());
-        values.put(QuestionnaireType.KEY_TYPE_NAME, quesType.getName());
-
-        quesTypeId = (int) db.insert(QuestionnaireType.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return quesTypeId;
-
-    }
+//    public static int addQuestionnaireType(QuestionnaireType quesType) {
+//
+//        int quesTypeId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(QuestionnaireType.KEY_ID, quesType.getId());
+//        values.put(QuestionnaireType.KEY_NAME, quesType.getName());
+//
+//        quesTypeId = (int) db.insert(QuestionnaireType.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return quesTypeId;
+//
+//    }
 
 }

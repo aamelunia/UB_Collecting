@@ -11,36 +11,38 @@ import edu.buffalo.cse.ubcollecting.data.models.Question;
 
 public class QuestionTable {
 
-    private Question question;
+    // Table Name
+    public static final String TABLE = "Question";
+
+    // Question (QuestionPool) Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_TYPE = "Type";
 
     public QuestionTable () {
-
-        question = new Question();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Question.TABLE + "(" + Question.KEY_ID + " TEXT PRIMARY KEY," + Question.KEY_QUESTION_TYPE
-                + " VARCHAR" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_TYPE + " VARCHAR" + ")";
     }
 
-    public static int addQuestion(Question question) {
-
-        int questionId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(Question.KEY_ID, question.getId());
-        values.put(Question.KEY_QUESTION_TYPE, question.getType());
-
-        questionId = (int) db.insert(Question.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return questionId;
-
-    }
+//    public static int addQuestion(Question question) {
+//
+//        int questionId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(Question.KEY_ID, question.getId());
+//        values.put(Question.KEY_TYPE, question.getType());
+//
+//        questionId = (int) db.insert(Question.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return questionId;
+//
+//    }
 
 }

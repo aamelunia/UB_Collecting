@@ -14,43 +14,46 @@ import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 
 public class SessionPersonTable {
 
-    private SessionPerson sessionPerson;
+    public static final String TABLE = "SessionPerson";
+
+    // SessionPerson Table - column names
+    public static final String KEY_SESSION_ID = "SessionId";
+    public static final String KEY_PERSON_ID = "PersonId";
+    public static final String KEY_ROLE_ID = "RoleId";
 
     public SessionPersonTable () {
-
-        sessionPerson = new SessionPerson();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + SessionPerson.TABLE + "(" + SessionPerson.KEY_SESSION_ID + " TEXT,"
-                + SessionPerson.KEY_PERSON_ID + " TEXT," + SessionPerson.KEY_ROLE_ID + " TEXT,"
-                + "PRIMARY KEY("+ SessionPerson.KEY_SESSION_ID+", "+SessionPerson.KEY_PERSON_ID+"),"
-                + " FOREIGN KEY(" + SessionPerson.KEY_SESSION_ID + ") REFERENCES " + Session.TABLE
-                + " (" + Session.KEY_ID + "),"
-                + " FOREIGN KEY(" + SessionPerson.KEY_PERSON_ID + ") REFERENCES " + Person.TABLE
-                + " (" + Person.KEY_ID + "),"
-                + " FOREIGN KEY(" + SessionPerson.KEY_ROLE_ID + ") REFERENCES " + Role.TABLE
-                + " (" + Role.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
+                + KEY_PERSON_ID + " TEXT," + KEY_ROLE_ID + " TEXT,"
+                + "PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_PERSON_ID + "),"
+                + " FOREIGN KEY(" + KEY_SESSION_ID + ") REFERENCES " + SessionTable.TABLE
+                + " (" + SessionTable.KEY_ID + "),"
+                + " FOREIGN KEY(" + KEY_PERSON_ID + ") REFERENCES " + PersonTable.TABLE
+                + " (" + PersonTable.KEY_ID + "),"
+                + " FOREIGN KEY(" + KEY_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
+                + " (" + RoleTable.KEY_ID + ")" + ")";
     }
 
-    public static int addSessionPerson(SessionPerson sessionPerson) {
-
-        int sessionPersonId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(SessionPerson.KEY_SESSION_ID, sessionPerson.getSessionId());
-        values.put(SessionPerson.KEY_PERSON_ID, sessionPerson.getPersonId());
-        values.put(SessionPerson.KEY_ROLE_ID, sessionPerson.getRoleId());
-
-        sessionPersonId = (int) db.insert(SessionPerson.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return sessionPersonId;
-
-    }
+//    public static int addSessionPerson(SessionPerson sessionPerson) {
+//
+//        int sessionPersonId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(SessionPerson.KEY_SESSION_ID, sessionPerson.getSessionId());
+//        values.put(SessionPerson.KEY_PERSON_ID, sessionPerson.getPersonId());
+//        values.put(SessionPerson.KEY_ROLE_ID, sessionPerson.getRoleId());
+//
+//        sessionPersonId = (int) db.insert(SessionPerson.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return sessionPersonId;
+//
+//    }
 
 }

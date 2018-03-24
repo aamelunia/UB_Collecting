@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionOptionTable;
@@ -32,7 +31,7 @@ public class QuestionOptionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 QuestionOption option = new QuestionOption();
                 option.setQuestionId(0); // TODO
-                option.setLanguageId(0); // TODO
+                option.setQuestionLanguageId(0); // TODO
                 option.setOptionText(optionTextField.getText().toString());
 
                 QuestionOptionTable.addQuestionOption(option);

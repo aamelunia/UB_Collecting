@@ -8,50 +8,56 @@ import android.database.sqlite.SQLiteDatabase;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
-import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 public class SessionTable {
 
-    private Session session;
+    // Table Name
+    public static final String TABLE = "Session";
+
+    // Session Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_LABEL = "Label";
+    public static final String KEY_NAME = "Name";
+    public static final String KEY_START_TIME = "StartTime";
+    public static final String KEY_LOCATION = "Location";
+    public static final String KEY_DESCRIPTION = "Description";
+    public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
 
     public SessionTable () {
-
-        session = new Session();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Session.TABLE + "(" + Session.KEY_ID + " TEXT PRIMARY KEY," + Session.KEY_SESSION_LABEL
-                + " VARCHAR," + Session.KEY_SESSION_NAME + " VARCHAR," + Session.KEY_SESSION_START_TIME
-                + " DATETIME," + Session.KEY_SESSION_LOCATION + " VARCHAR," + Session.KEY_SESSION_DESC
-                + " VARCHAR,"+ Session.KEY_FIELD_TRIP_ID + " TEXT," + " FOREIGN KEY(" + Session.KEY_FIELD_TRIP_ID
-                + ") REFERENCES " + FieldTrip.TABLE + " (" + FieldTrip.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL
+                + " VARCHAR," + KEY_NAME + " VARCHAR," + KEY_START_TIME
+                + " DATETIME," + KEY_LOCATION + " VARCHAR," + KEY_DESCRIPTION
+                + " VARCHAR,"+ KEY_FIELD_TRIP_ID + " TEXT," + " FOREIGN KEY(" + KEY_FIELD_TRIP_ID
+                + ") REFERENCES " + FieldTripTable.TABLE + " (" + FieldTripTable.KEY_ID + ")" + ")";
     }
 
-    public static int addSession(Session session) {
-
-        int sessionId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Session.KEY_ID, session.getId());
-        values.put(Session.KEY_SESSION_LABEL, session.getLabel());
-        values.put(Session.KEY_SESSION_NAME, session.getName());
-        values.put(Session.KEY_SESSION_START_TIME, session.getStartTime());
-        values.put(Session.KEY_SESSION_LOCATION, session.getLocation());
-        values.put(Session.KEY_SESSION_DESC, session.getDescription());
-        values.put(Session.KEY_FIELD_TRIP_ID, session.getFieldTripId());
-
-
-        sessionId = (int) db.insert(Session.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return sessionId;
-
-    }
+//    public static int addSession(Session session) {
+//
+//        int sessionId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(Session.KEY_ID, session.getId());
+//        values.put(Session.KEY_LABEL, session.getLabel());
+//        values.put(Session.KEY_NAME, session.getName());
+//        values.put(Session.KEY_START_TIME, session.getStartTime());
+//        values.put(Session.KEY_LOCATION, session.getLocation());
+//        values.put(Session.KEY_DESCRIPTION, session.getDescription());
+//        values.put(Session.KEY_FIELD_TRIP_ID, session.getFieldTripId());
+//
+//
+//        sessionId = (int) db.insert(Session.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return sessionId;
+//
+//    }
 
 }

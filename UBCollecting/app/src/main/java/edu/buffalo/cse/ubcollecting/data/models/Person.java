@@ -4,22 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class Person {
+public class Person extends Model {
 
     private static final String TAG = Person.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "Person";
-
-    // Person Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_PERSON_NAME = "PersonName";
-    public static final String KEY_PERSON_OTHER_NAMES = "PersonOtherNames";
-    public static final String KEY_PERSON_DOB = "PersonDOB";
-    public static final String KEY_PERSON_PHOTO = "PersonPhoto";
-    public static final String KEY_PERSON_PHOTO_DESC = "PersonPhotoDesc";
-    public static final String KEY_PERSON_ROLE_ID = "PersonMainRoleId";
-    public static final String KEY_PERSON_INTRO_QUES_DESC = "PersonIntroQuestnirDesc";
 
     //  Need to appropriately configure types for DOB and Photo
     public String id;
@@ -28,8 +15,8 @@ public class Person {
     public String dob;
     public String photo;
     public String photoDesc;
-    public String roleId;
-    public String questDesc;
+    public String mainRoleId;
+    public String introQuestDesc;
 
 
     public String getId() {
@@ -80,20 +67,20 @@ public class Person {
         this.photoDesc = photoDesc;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getMainRoleId() {
+        return mainRoleId;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setMainRoleId(String roleId) {
+        this.mainRoleId = roleId;
     }
 
-    public String getQuestDesc() {
-        return questDesc;
+    public String getIntroQuestDesc() {
+        return introQuestDesc;
     }
 
-    public void setQuestDesc(String questdesc) {
-        this.questDesc = questdesc;
+    public void setIntroQuestDesc(String questdesc) {
+        this.introQuestDesc = questdesc;
     }
 
 

@@ -11,39 +11,44 @@ import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 public class FieldTripTable {
 
-    private FieldTrip fieldTrip;
+    // Table Name
+    public static final String TABLE = "FieldTrip";
+
+    // FieldTrip Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_FIELD_TRIP_NAME = "Name";
+    public static final String KEY_START_DATE = "StartDate";
+    public static final String KEY_END_DATE = "EndDate";
 
     public FieldTripTable () {
-
-        fieldTrip = new FieldTrip();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + FieldTrip.TABLE + "(" + FieldTrip.KEY_ID + " TEXT PRIMARY KEY," + FieldTrip.KEY_FIELD_TRIP_NAME
-                + " VARCHAR," + FieldTrip.KEY_FIELD_TRIP_START+ " DATETIME," + FieldTrip.KEY_FIELD_TRIP_END
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_FIELD_TRIP_NAME
+                + " VARCHAR," + KEY_START_DATE + " DATETIME," + KEY_END_DATE
                 + " DATETIME" + ")";
     }
 
-    public static int addFieldTrip(FieldTrip fieldTrip) {
-
-        int fieldTripId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(FieldTrip.KEY_ID, fieldTrip.getId());
-        values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
-        values.put(FieldTrip.KEY_FIELD_TRIP_START, fieldTrip.getStartDate());
-        values.put(FieldTrip.KEY_FIELD_TRIP_END, fieldTrip.getEndDate());
-
-        fieldTripId = (int) db.insert(FieldTrip.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return fieldTripId;
-
-    }
+//    public static int addFieldTrip(FieldTrip fieldTrip) {
+//
+//        int fieldTripId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(FieldTrip.KEY_ID, fieldTrip.getId());
+//        values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
+//        values.put(FieldTrip.KEY_START_DATE, fieldTrip.getStartDate());
+//        values.put(FieldTrip.KEY_END_DATE, fieldTrip.getEndDate());
+//
+//        fieldTripId = (int) db.insert(FieldTrip.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return fieldTripId;
+//
+//    }
 
 }

@@ -4,19 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class Role  {
+public class Role extends Model {
 
     private static final String TAG = Role.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "Role";
-
-    // Role Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_ROLE_NAME = "RoleName";
-    public static final String KEY_ROLE_INTRO_REQUIRED = "RoleIntroRequired";
-    public static final String KEY_ROLE_PHOTO_REQUIRED = "RolePhotoRequired";
-    public static final String KEY_ROLE_ON_CLIENT = "RoleOnClient";
 
     public String id;
     public String name;

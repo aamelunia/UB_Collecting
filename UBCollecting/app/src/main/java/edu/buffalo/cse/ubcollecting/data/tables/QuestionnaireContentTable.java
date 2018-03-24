@@ -13,43 +13,48 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 public class QuestionnaireContentTable {
 
-    private QuestionnaireContent questionnaireContent;
+    public static final String TABLE = "QuestionnaireContent";
+
+    // QuestionnaireContent Table - column names
+
+    public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
+    public static final String KEY_QUESTION_ID = "QuestionId";
+    public static final String KEY_QUESTION_ORDER = "QuestionOrder";
 
     public QuestionnaireContentTable () {
-
-        questionnaireContent = new QuestionnaireContent();
 
     }
 
 
     public static String createTable(){
         return "CREATE TABLE "
-                + QuestionnaireContent.TABLE + "(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID + " TEXT,"
-                + QuestionnaireContent.KEY_QUESTION_ID + " TEXT," + QuestionnaireContent.KEY_QUESTION_ORDER + " VARCHAR,"
-                + "PRIMARY KEY("+ QuestionnaireContent.KEY_QUESTIONNAIRE_ID+", "+QuestionnaireContent.KEY_QUESTION_ID+"),"
-                + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + ")," + " FOREIGN KEY(" + QuestionnaireContent.KEY_QUESTIONNAIRE_ID
-                + ") REFERENCES " + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_QUESTIONNAIRE_ID + " TEXT,"
+                + KEY_QUESTION_ID + " TEXT," + KEY_QUESTION_ORDER + " VARCHAR,"
+                + "PRIMARY KEY(" + KEY_QUESTIONNAIRE_ID + ", " + KEY_QUESTION_ID + "),"
+                + " FOREIGN KEY(" + KEY_QUESTION_ID + ") REFERENCES " + QuestionTable.TABLE
+                + " (" + QuestionTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_QUESTIONNAIRE_ID
+                + ") REFERENCES " + QuestionnaireTable.TABLE + " (" + QuestionnaireTable.KEY_ID + ")"
+                + ")";
 
     }
 
-    public static int addQuestionnaireContent(QuestionnaireContent quesContent) {
-
-        int quesContentId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(QuestionnaireContent.KEY_QUESTIONNAIRE_ID, quesContent.getQuestionnaireId());
-        values.put(QuestionnaireContent.KEY_QUESTION_ID, quesContent.getQuestionId());
-        values.put(QuestionnaireContent.KEY_QUESTION_ORDER, quesContent.getQuestionOrder());
-
-
-        quesContentId = (int) db.insert(QuestionnaireContent.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return quesContentId;
-
-    }
+//    public static int addQuestionnaireContent(QuestionnaireContent quesContent) {
+//
+//        int quesContentId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(QuestionnaireContent.KEY_QUESTIONNAIRE_ID, quesContent.getQuestionnaireId());
+//        values.put(QuestionnaireContent.KEY_QUESTION_ID, quesContent.getQuestionId());
+//        values.put(QuestionnaireContent.KEY_QUESTION_ORDER, quesContent.getQuestionOrder());
+//
+//
+//        quesContentId = (int) db.insert(QuestionnaireContent.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return quesContentId;
+//
+//    }
 
 }

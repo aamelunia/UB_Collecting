@@ -1,57 +1,36 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.data.models.Answer;
+
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+public class AnswerTable extends Table <Answer> {
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
-import edu.buffalo.cse.ubcollecting.data.models.Answer;
-import edu.buffalo.cse.ubcollecting.data.models.Question;
-import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
-
-public class AnswerTable {
-
-    private Answer answer;
+    // Answer Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
+    public static final String KEY_QUESTION_ID = "QuestionId";
+    public static final String KEY_LABEL = "Label";
+    public static final String KEY_TEXT = "Text";
 
     public AnswerTable () {
 
-        answer = new Answer();
+        TABLE = "Answer";
+        tableColumns = AnswerTable.class.getDeclaredFields();
 
     }
 
-    public static String createTable(){
+    public String createTable(){
         return "CREATE TABLE "
-                + Answer.TABLE + "(" + Answer.KEY_ID + " TEXT," + Answer.KEY_QUESTIONNAIRE_ID
-                + " TEXT," + Answer.KEY_QUESTION_ID + " TEXT," + Answer.KEY_ANSWER_LABEL + " VARCHAR,"
-                + Answer.KEY_ANSWER_TEXT + " VARCHAR,"
-                + " PRIMARY KEY("+ Answer.KEY_QUESTIONNAIRE_ID+", "+Answer.KEY_QUESTION_ID+", "+Answer.KEY_ID+"),"
-                + " FOREIGN KEY(" + Answer.KEY_QUESTION_ID + ") REFERENCES " + Question.TABLE
-                + " (" + Question.KEY_ID + ")," + " FOREIGN KEY(" + Answer.KEY_QUESTIONNAIRE_ID + ") REFERENCES "
-                + Questionnaire.TABLE + " (" + Questionnaire.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT," + KEY_QUESTIONNAIRE_ID
+                + " TEXT," + KEY_QUESTION_ID + " TEXT," + KEY_LABEL + " VARCHAR,"
+                + KEY_TEXT + " VARCHAR,"
+                + " PRIMARY KEY(" + KEY_QUESTIONNAIRE_ID+", " + KEY_QUESTION_ID+", " + KEY_ID + "),"
+                + " FOREIGN KEY(" + KEY_QUESTION_ID + ") REFERENCES " + QuestionTable.TABLE
+                + " (" + QuestionTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_QUESTIONNAIRE_ID + ") REFERENCES "
+                + QuestionnaireTable.TABLE + " (" + QuestionnaireTable.KEY_ID + ")" + ")";
     }
 
-    public static int addAnswer(Answer answer) {
-
-        int answerId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Answer.KEY_ID, answer.getId());
-        values.put(Answer.KEY_QUESTIONNAIRE_ID, answer.getQuestionnaireId());
-        values.put(Answer.KEY_QUESTION_ID, answer.getQuestionId());
-        values.put(Answer.KEY_ANSWER_LABEL, answer.getLabel());
-        values.put(Answer.KEY_ANSWER_TEXT, answer.getText());
-
-
-        answerId = (int) db.insert(Answer.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return answerId;
-
-    }
 
 }

@@ -4,19 +4,10 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class Language  {
+public class Language extends Model {
 
     private static final String TAG = Language.class.getSimpleName().toString();
 
-    // Table Names
-    public static final String TABLE = "Language";
-
-    // Language Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_LANG_NAME = "LanguageName";
-    public static final String KEY_LANG_DESC = "LanguageDescription";
-    public static final String KEY_LANG_OTHER_NAMES = "LanguageOtherNames";
-    public static final String KEY_LANG_TYPE_ID = "LanguageTypeId";
 
     public String id;
     public String name;

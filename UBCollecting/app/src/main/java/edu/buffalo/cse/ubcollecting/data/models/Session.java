@@ -4,23 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class Session {
+public class Session extends Model {
 
     private static final String TAG = Session.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "Session";
-
-    // Session Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_SESSION_LABEL = "SessionLabel";
-    public static final String KEY_SESSION_NAME = "SessionName";
-    public static final String KEY_SESSION_START_TIME = "SessionStartTime";
-    public static final String KEY_SESSION_LOCATION = "SessionLocation";
-    public static final String KEY_SESSION_DESC = "SessionDesc";
-    public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
-
-
 
     //  Need to appropriately configure type for start time
     public String id;
@@ -87,7 +73,6 @@ public class Session {
     public void setFieldTripId(String fieldTripId) {
         this.fieldTripId = fieldTripId;
     }
-
 
 
 }

@@ -4,52 +4,55 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import java.util.ArrayList;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 public class RoleTable {
 
-    private Role role;
+    // Table Name
+    public static final String TABLE = "Role";
+
+    // Role Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "Name";
+    public static final String KEY_INTRO_REQUIRED = "IntroRequired";
+    public static final String KEY_PHOTO_REQUIRED = "PhotoRequired";
+    public static final String KEY_ON_CLIENT = "OnClient";
 
     public RoleTable () {
-
-        role = new Role();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Role.TABLE + "(" + Role.KEY_ID + " TEXT PRIMARY KEY," + Role.KEY_ROLE_NAME
-                + " VARCHAR," + Role.KEY_ROLE_INTRO_REQUIRED + " INTEGER," + Role.KEY_ROLE_PHOTO_REQUIRED
-                + " INTEGER," + Role.KEY_ROLE_ON_CLIENT + " INTEGER" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
+                + " VARCHAR," + KEY_INTRO_REQUIRED + " INTEGER," + KEY_PHOTO_REQUIRED
+                + " INTEGER," + KEY_ON_CLIENT + " INTEGER" + ")";
     }
 
-    public static int addRole(Role role) {
-
-        int roleId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(Role.KEY_ID, role.getId());
-        values.put(Role.KEY_ROLE_NAME,role.getName());
-        values.put(Role.KEY_ROLE_INTRO_REQUIRED,role.getIntroRequired());
-        values.put(Role.KEY_ROLE_PHOTO_REQUIRED,role.getPhotoRequired());
-        values.put(Role.KEY_ROLE_ON_CLIENT,role.getOnClient());
-
-
-        roleId = (int) db.insert(Role.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return roleId;
-
-    }
+//    public static int addRole(Role role) {
+//
+//        int roleId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(Role.KEY_ID, role.getId());
+//        values.put(Role.KEY_NAME,role.getName());
+//        values.put(Role.KEY_INTRO_REQUIRED,role.getIntroRequired());
+//        values.put(Role.KEY_PHOTO_REQUIRED,role.getPhotoRequired());
+//        values.put(Role.KEY_ON_CLIENT,role.getOnClient());
+//
+//
+//        roleId = (int) db.insert(Role.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return roleId;
+//
+//    }
 
 //    public static Role findById(int id){
 //
@@ -57,10 +60,10 @@ public class RoleTable {
 //
 //        String[] projection = {
 //                Role.KEY_ID,
-//                Role.KEY_ROLE_NAME,
-//                Role.KEY_ROLE_INTRO_REQUIRED,
-//                Role.KEY_ROLE_PHOTO_REQUIRED,
-//                Role.KEY_ROLE_ON_CLIENT,
+//                Role.KEY_NAME,
+//                Role.KEY_INTRO_REQUIRED,
+//                Role.KEY_PHOTO_REQUIRED,
+//                Role.KEY_ON_CLIENT,
 //        };
 //
 //        String selection = Role.KEY_ID + " = ?";
@@ -105,10 +108,10 @@ public class RoleTable {
 //        if (cursor.moveToFirst()) {
 //            while (!cursor.isAfterLast()) {
 //                int id = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ID)));
-//                String name = cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_NAME));
-//                int introRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_INTRO_REQUIRED)));
-//                int photoRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_PHOTO_REQUIRED)));
-//                int onClientRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ROLE_ON_CLIENT)));
+//                String name = cursor.getString(cursor.getColumnIndex(Role.KEY_NAME));
+//                int introRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_INTRO_REQUIRED)));
+//                int photoRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_PHOTO_REQUIRED)));
+//                int onClientRequired = Integer.valueOf(cursor.getString(cursor.getColumnIndex(Role.KEY_ON_CLIENT)));
 //
 //                Role role = new Role();
 //                role.setId(id);

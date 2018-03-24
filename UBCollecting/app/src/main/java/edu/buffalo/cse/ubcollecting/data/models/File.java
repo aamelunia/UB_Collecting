@@ -4,22 +4,9 @@ package edu.buffalo.cse.ubcollecting.data.models;
  * Created by aamel786 on 2/17/18.
  */
 
-public class File {
+public class File extends Model {
 
     private static final String TAG = File.class.getSimpleName().toString();
-
-    // Table Names
-    public static final String TABLE = "File";
-
-    // File Table - column names
-    public static final String KEY_ID = "id";
-    public static final String KEY_FILE_NAME = "FileName";
-    public static final String KEY_FILE_ANSWER_ID = "FileAnswerId";
-    public static final String KEY_FILE_TYPE = "FileType";
-    public static final String KEY_FILE_PATH = "FilePath";
-    public static final String KEY_FILE_CREATOR_ID = "FileCreatorId";
-    public static final String KEY_FILE_START = "FileStartTime";
-    public static final String KEY_FILE_END = "FileEndTime";
 
     //  Need to appropriately configure type for start time and end time
 

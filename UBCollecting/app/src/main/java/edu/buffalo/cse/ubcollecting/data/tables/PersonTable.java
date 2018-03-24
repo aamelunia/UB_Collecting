@@ -9,52 +9,60 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
-import android.database.Cursor;
 
 
 public class PersonTable {
 
-    private Person person;
+    // Table Name
+    public static final String TABLE = "Person";
+
+    // Person Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "Name";
+    public static final String KEY_OTHER_NAMES = "OtherNames";
+    public static final String KEY_DOB = "DOB";
+    public static final String KEY_PHOTO = "Photo";
+    public static final String KEY_PHOTO_DESC = "PhotoDesc";
+    public static final String KEY_MAIN_ROLE_ID = "MainRoleId";
+    public static final String KEY_INTRO_QUEST_DESC = "IntroQuestDesc";
 
     public PersonTable () {
-
-        person = new Person();
 
     }
 
     public static String createTable(){
 
         return "CREATE TABLE "
-                + Person.TABLE + "( " + Person.KEY_ID + " TEXT PRIMARY KEY, " + Person.KEY_PERSON_NAME
-                + " VARCHAR, " + Person.KEY_PERSON_OTHER_NAMES + " VARCHAR, " + Person.KEY_PERSON_DOB
-                + " DATETIME, " + Person.KEY_PERSON_ROLE_ID + " TEXT," + Person.KEY_PERSON_PHOTO + " BLOB, "
-                + Person.KEY_PERSON_PHOTO_DESC + " VARCHAR, " + Person.KEY_PERSON_INTRO_QUES_DESC + " VARCHAR,"
-                + " FOREIGN KEY (" + Person.KEY_PERSON_ROLE_ID + ") REFERENCES " + Role.TABLE + " (" + Role.KEY_ID + ")"
-                + ")";
+                + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME
+                + " VARCHAR, " + KEY_OTHER_NAMES + " VARCHAR, " + KEY_DOB
+                + " DATETIME, " + KEY_MAIN_ROLE_ID + " TEXT," + KEY_PHOTO + " BLOB, "
+                + KEY_PHOTO_DESC + " VARCHAR, " + KEY_INTRO_QUEST_DESC + " VARCHAR,"
+                + " FOREIGN KEY (" + KEY_MAIN_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
+                + " (" + RoleTable.KEY_ID + ")" + ")";
     }
 
-    public static int addPerson(Person person) {
-
-        int personId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Person.KEY_ID, person.getId());
-        values.put(Person.KEY_PERSON_NAME, person.getName());
-        values.put(Person.KEY_PERSON_OTHER_NAMES, person.getOtherNames());
-        values.put(Person.KEY_PERSON_DOB, person.getDob());
-        values.put(Person.KEY_PERSON_ROLE_ID, person.getRoleId());
-        values.put(Person.KEY_PERSON_PHOTO, person.getPhoto());
-        values.put(Person.KEY_PERSON_PHOTO_DESC, person.getPhotoDesc());
-        values.put(Person.KEY_PERSON_INTRO_QUES_DESC, person.getQuestDesc());
-
-        personId = (int) db.insert(Person.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return personId;
-
-    }
+//    public static int addPerson(Person person) {
+//
+//        int personId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(Person.KEY_ID, person.getId());
+//        values.put(Person.KEY_NAME, person.getName());
+//        values.put(Person.KEY_OTHER_NAMES, person.getOtherNames());
+//        values.put(Person.KEY_DOB, person.getDob());
+//        values.put(Person.KEY_MAIN_ROLE_ID, person.getRoleId());
+//        values.put(Person.KEY_PHOTO, person.getPhoto());
+//        values.put(Person.KEY_PHOTO_DESC, person.getPhotoDesc());
+//        values.put(Person.KEY_INTRO_QUEST_DESC, person.getIntroQuestDesc());
+//
+//        personId = (int) db.insert(Person.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return personId;
+//
+//    }
 
 //    public static Person findById(int id){
 //
@@ -62,10 +70,10 @@ public class PersonTable {
 //
 //        String[] projection = {
 //                Person.KEY_ID,
-//                Person.KEY_PERSON_NAME,
-//                Person.KEY_PERSON_DOB,
-//                Person.KEY_PERSON_OTHER_NAMES,
-//                Person.KEY_PERSON_ROLE_ID,
+//                Person.KEY_NAME,
+//                Person.KEY_DOB,
+//                Person.KEY_OTHER_NAMES,
+//                Person.KEY_MAIN_ROLE_ID,
 //        };
 //
 //        String selection = Person.KEY_ID + " = ?";

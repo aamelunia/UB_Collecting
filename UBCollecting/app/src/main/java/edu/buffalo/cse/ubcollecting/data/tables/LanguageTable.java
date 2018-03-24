@@ -9,46 +9,52 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
-import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class LanguageTable {
 
-    private Language language;
+    // Table Name
+    public static final String TABLE = "Language";
+
+    // Language Table - column names
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "Name";
+    public static final String KEY_DESCRIPTION = "Description";
+    public static final String KEY_OTHER_NAMES = "OtherNames";
+    public static final String KEY_TYPE_ID = "TypeId";
 
     public LanguageTable () {
-
-        language = new Language();
 
     }
 
     public static String createTable(){
         return "CREATE TABLE "
-                + Language.TABLE + "(" + Language.KEY_ID + " TEXT PRIMARY KEY," + Language.KEY_LANG_NAME
-                + " VARCHAR," + Language.KEY_LANG_DESC + " VARCHAR," + Language.KEY_LANG_OTHER_NAMES
-                + " VARCHAR," + Language.KEY_LANG_TYPE_ID + " TEXT," + " FOREIGN KEY(" + Language.KEY_LANG_TYPE_ID
-                + ") REFERENCES " + LanguageType.TABLE + " (" + LanguageType.KEY_ID + ")" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
+                + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
+                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
+                + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
+                + ")";
     }
 
-    public static int addLanguage(Language language) {
 
-        int langId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(Language.KEY_ID, language.getName());
-        values.put(Language.KEY_LANG_NAME, language.getName());
-        values.put(Language.KEY_LANG_DESC, language.getDescription());
-        values.put(Language.KEY_LANG_OTHER_NAMES, language.getOtherNames());
-        values.put(Language.KEY_LANG_TYPE_ID, language.getTypeId());
-
-        langId = (int) db.insert(Language.TABLE,null,values);
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return langId;
-
-    }
+//    public static int addLanguage(Language language) {
+//
+//        int langId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(Language.KEY_ID, language.getName());
+//        values.put(Language.KEY_NAME, language.getName());
+//        values.put(Language.KEY_DESCRIPTION, language.getDescription());
+//        values.put(Language.KEY_OTHER_NAMES, language.getOtherNames());
+//        values.put(Language.KEY_TYPE_ID, language.getTypeId());
+//
+//        langId = (int) db.insert(Language.TABLE,null,values);
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return langId;
+//
+//    }
 
 }
