@@ -63,6 +63,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "Collection";
 
+    public static final PersonTable PERSON_TABLE = new PersonTable();
+    public static final RoleTable ROLE_TABLE = new RoleTable();
+    public static final AnswerTable ANSWER_TABLE = new AnswerTable();
+
 
     public DatabaseHelper() {
         super(App.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("PRAGMA foreign_keys=ON");
         //Creating The Tables
-        db.execSQL(PersonTable.createTable());
+        db.execSQL(PERSON_TABLE.createTable());
         db.execSQL(QuestionTable.createTable());
         db.execSQL(QuestionOptionTable.createTable());
         db.execSQL(QuestionPropertyTable.createTable());
@@ -84,13 +88,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(QuestionnaireContentTable.createTable());
         db.execSQL(LanguageTable.createTable());
         db.execSQL(LanguageTypeTable.createTable());
-        db.execSQL(RoleTable.createTable());
+        db.execSQL(ROLE_TABLE.createTable());
         db.execSQL(FieldTripTable.createTable());
         db.execSQL(FileTable.createTable());
         db.execSQL(SessionTable.createTable());
         db.execSQL(SessionAnswerTable.createTable());
         db.execSQL(SessionPersonTable.createTable());
-        db.execSQL(AnswerTable.createTable());
+        db.execSQL(ANSWER_TABLE.createTable());
 
     }
 
@@ -100,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, String.format("SQLiteDatabase.onUpgrade(%d -> %d)", oldVersion, newVersion));
 
         // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PERSON_TABLE.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Question.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionOption.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionProperty.TABLE);
@@ -111,13 +115,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContent.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Language.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + LanguageType.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Role.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ROLE_TABLE.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FieldTrip.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + File.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SessionAnswer.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SessionPerson.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Answer.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ANSWER_TABLE.TABLE);
 
         // create new tables
         onCreate(db);

@@ -11,7 +11,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 
-public class PersonTable {
+public class PersonTable extends Table<Person> {
 
     // Table Name
     public static final String TABLE = "Person";
@@ -30,7 +30,8 @@ public class PersonTable {
 
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
 
         return "CREATE TABLE "
                 + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME

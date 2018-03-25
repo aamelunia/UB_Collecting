@@ -14,11 +14,13 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.util.UUID;
 
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
 import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 
 import static edu.buffalo.cse.ubcollecting.app.App.getContext;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
 
 public class RoleActivity extends AppCompatActivity {
 
@@ -53,8 +55,7 @@ public class RoleActivity extends AppCompatActivity {
                 role.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
                 role.setOnClient((onClientBox.isChecked()) ? 1 : 0);
 
-                int id = RoleTable.addRole(role);
-                role.setId(id);
+                ROLE_TABLE.addEntry(role);
                 setRoleCreatedResult(role);
                 Toast.makeText(getContext(), "Role created", Toast.LENGTH_SHORT).show();
             }
@@ -70,8 +71,8 @@ public class RoleActivity extends AppCompatActivity {
         return result.getStringExtra(EXTRA_ROLE_NAME);
     }
 
-    public static int getId(Intent result) {
-        return result.getIntExtra(EXTRA_ROLE_ID, -1);
+    public static String getId(Intent result) {
+        return result.getStringExtra(EXTRA_ROLE_ID);
     }
 
     private void setRoleCreatedResult(Role role) {

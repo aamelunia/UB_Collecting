@@ -16,8 +16,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
+
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class PersonActivity extends AppCompatActivity {
     private EditText questionnaireDescriptionField;
     private Button submitButton;
 
-    private int roleId;
+    private String roleId;
     private ArrayAdapter<String> roleAdapter;
 
     @Override
@@ -85,12 +88,11 @@ public class PersonActivity extends AppCompatActivity {
                 applicant.setDob(dobField.getText().toString());
                 applicant.setPhoto(photoField.getText().toString());
                 applicant.setPhotoDesc(photoDescriptionField.getText().toString());
-                applicant.setRoleId(roleId); // TODO
+                applicant.setMainRoleId(roleId); // TODO
                 applicant.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
 
-                int id = PersonTable.addPerson(applicant);
+                PERSON_TABLE.addEntry(applicant);
 
-                applicant.setId(id);
                 Toast.makeText(PersonActivity.this,
                         "Added " + applicant.getName() + " to database",
                         Toast.LENGTH_SHORT).show();

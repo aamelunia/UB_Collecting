@@ -27,7 +27,7 @@ public abstract class Table <E extends Model> {
     public abstract String createTable();
 
 
-    public long addEntry (Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public long addEntry (Model model) {
 
         long rowId;
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -37,9 +37,17 @@ public abstract class Table <E extends Model> {
 
         for (int i=0; i<tableColumns.length; i++){
 
+            try {
             String key = tableColumns[i].getName();
             Object value = getters.get(i).invoke(model,null);
             insertContent(values,key,value);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -48,7 +56,6 @@ public abstract class Table <E extends Model> {
         DatabaseManager.getInstance().closeDatabase();
 
         return rowId;
-
     }
 
     private void insertContent(ContentValues values, String key, Object value){

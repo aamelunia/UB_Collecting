@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
-public class RoleTable {
+public class RoleTable extends Table<Role> {
 
     // Table Name
     public static final String TABLE = "Role";
@@ -25,7 +25,8 @@ public class RoleTable {
 
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
                 + " VARCHAR," + KEY_INTRO_REQUIRED + " INTEGER," + KEY_PHOTO_REQUIRED

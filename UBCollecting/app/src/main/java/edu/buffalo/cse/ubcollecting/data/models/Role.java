@@ -8,7 +8,6 @@ public class Role extends Model {
 
     private static final String TAG = Role.class.getSimpleName().toString();
 
-    public String id;
     public String name;
     public int introRequired;
     public int photoRequired;
@@ -16,10 +15,6 @@ public class Role extends Model {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

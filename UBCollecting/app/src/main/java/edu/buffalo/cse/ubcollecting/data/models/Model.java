@@ -1,5 +1,10 @@
 package edu.buffalo.cse.ubcollecting.data.models;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -8,6 +13,12 @@ import java.util.ArrayList;
  */
 
 public abstract class Model {
+
+    final String id;
+
+    public Model() {
+        id = generateID();
+    }
 
     public ArrayList<Method> getGetters () {
 
@@ -23,4 +34,11 @@ public abstract class Model {
         return getters;
     }
 
+    public String generateID() {
+        String s = "";
+        while (s.length() < 5) {
+            s = "0" + s;
+        }
+        return "1"+ s + String.valueOf(System.currentTimeMillis());
+    }
 }

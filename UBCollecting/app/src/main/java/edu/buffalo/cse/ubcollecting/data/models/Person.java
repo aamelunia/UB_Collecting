@@ -9,7 +9,6 @@ public class Person extends Model {
     private static final String TAG = Person.class.getSimpleName().toString();
 
     //  Need to appropriately configure types for DOB and Photo
-    public String id;
     public String name;
     public String otherNames;
     public String dob;
@@ -21,10 +20,6 @@ public class Person extends Model {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
