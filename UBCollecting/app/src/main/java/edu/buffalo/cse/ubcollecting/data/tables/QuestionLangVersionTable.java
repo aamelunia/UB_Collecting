@@ -11,10 +11,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
-public class QuestionLangVersionTable {
-
-    // Table Name
-    public static final String TABLE = "QuestionLangVersion";
+public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
     // QuestionLangVersion Table - column names
     public static final String KEY_QUESTION_ID = "QuestionId";
@@ -23,10 +20,12 @@ public class QuestionLangVersionTable {
 
 
     public QuestionLangVersionTable () {
-
+        super();
+        TABLE = "QuestionLangVersion";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTION_ID + " TEXT,"
                 + KEY_QUESTION_LANG_ID + " TEXT," + KEY_QUESTION_TEXT + " VARCHAR,"

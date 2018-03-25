@@ -12,6 +12,8 @@ import java.util.UUID;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
+
 public class QuestionnaireContentActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionnaireContentActivity.class.getSimpleName().toString();
@@ -36,11 +38,11 @@ public class QuestionnaireContentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionnaireContent content = new QuestionnaireContent();
-                content.setQuestionnaireId(0); // TODO
-                content.setQuestionId(0); // TODO
+                content.setQuestionnaireId(""); // TODO
+                content.setQuestionId(""); // TODO
                 content.setQuestionOrder(orderField.getText().toString());
 
-                QuestionnaireContentTable.addQuestionnaireContent(content);
+                QUESTIONNAIRE_CONTENT_TABLE.addEntry(content);
             }
         });
     }

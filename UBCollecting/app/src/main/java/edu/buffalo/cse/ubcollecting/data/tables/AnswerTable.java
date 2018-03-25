@@ -15,10 +15,8 @@ public class AnswerTable extends Table <Answer> {
     public static final String KEY_TEXT = "Text";
 
     public AnswerTable () {
-
+        super();
         TABLE = "Answer";
-        tableColumns = AnswerTable.class.getDeclaredFields();
-
     }
 
     public String createTable(){

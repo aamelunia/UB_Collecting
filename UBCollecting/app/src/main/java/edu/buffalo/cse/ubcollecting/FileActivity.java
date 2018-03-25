@@ -12,6 +12,8 @@ import java.util.UUID;
 import edu.buffalo.cse.ubcollecting.data.models.File;
 import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FILE_TABLE;
+
 public class FileActivity extends AppCompatActivity {
 
     private static final String TAG = FileActivity.class.getSimpleName().toString();
@@ -44,16 +46,14 @@ public class FileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 File file = new File();
                 file.setName(fileNameField.getText().toString());
-                file.setAnswerId(0); // TODO
+                file.setAnswerId(""); // TODO
                 file.setType(fileTypeField.getText().toString());
                 file.setPath(filePathField.getText().toString());
-                file.setCreatorId(0); // TODO
+                file.setCreatorId(""); // TODO
                 file.setStartTime(fileStartTimeField.getText().toString());
                 file.setEndTime(fileEndTimeField.getText().toString());
 
-                int id = FileTable.addFile(file);
-
-                file.setId(id);
+                FILE_TABLE.addEntry(file);
             }
         });
     }

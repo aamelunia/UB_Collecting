@@ -10,7 +10,6 @@ public class File extends Model {
 
     //  Need to appropriately configure type for start time and end time
 
-    public String id;
     public String name;
     public String answerId;
     public String type;
@@ -22,10 +21,6 @@ public class File extends Model {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

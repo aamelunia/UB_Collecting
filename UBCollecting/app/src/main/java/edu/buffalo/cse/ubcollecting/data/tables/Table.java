@@ -20,12 +20,11 @@ public abstract class Table <E extends Model> {
     public static String TABLE;
     public static Field [] tableColumns;
 
-    public Table () {
-
+    public Table() {
+        tableColumns = this.getClass().getDeclaredFields();
     }
 
     public abstract String createTable();
-
 
     public long addEntry (Model model) {
 
@@ -58,7 +57,7 @@ public abstract class Table <E extends Model> {
         return rowId;
     }
 
-    private void insertContent(ContentValues values, String key, Object value){
+    private void insertContent(ContentValues values, String key, Object value) {
 
         if (value instanceof Integer){
             values.put(key,(Integer) value);

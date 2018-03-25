@@ -63,9 +63,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "Collection";
 
-    public static final PersonTable PERSON_TABLE = new PersonTable();
-    public static final RoleTable ROLE_TABLE = new RoleTable();
     public static final AnswerTable ANSWER_TABLE = new AnswerTable();
+    public static final FieldTripTable FIELD_TRIP_TABLE = new FieldTripTable();
+    public static final FileTable FILE_TABLE = new FileTable();
+    public static final LanguageTable LANGUAGE_TABLE = new LanguageTable();
+    public static final LanguageTypeTable LANGUAGE_TYPE_TABLE = new LanguageTypeTable();
+    public static final PersonTable PERSON_TABLE = new PersonTable();
+    public static final QuestionTable QUESTION_TABLE = new QuestionTable();
+    public static final QuestionLangVersionTable QUESTION_LANG_VERSION_TABLE = new QuestionLangVersionTable();
+    public static final QuestionnaireTable QUESTIONNAIRE_TABLE = new QuestionnaireTable();
+    public static final QuestionnaireContentTable QUESTIONNAIRE_CONTENT_TABLE = new QuestionnaireContentTable();
+    public static final QuestionnaireTypeTable QUESTIONNAIRE_TYPE_TABLE = new QuestionnaireTypeTable();
+    public static final QuestionOptionTable QUESTION_OPTION_TABLE = new QuestionOptionTable();
+    public static final QuestionPropertyTable QUESTION_PROPERTY_TABLE = new QuestionPropertyTable();
+    public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
+    public static final RoleTable ROLE_TABLE = new RoleTable();
 
 
     public DatabaseHelper() {
@@ -78,19 +90,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("PRAGMA foreign_keys=ON");
         //Creating The Tables
         db.execSQL(PERSON_TABLE.createTable());
-        db.execSQL(QuestionTable.createTable());
-        db.execSQL(QuestionOptionTable.createTable());
-        db.execSQL(QuestionPropertyTable.createTable());
+        db.execSQL(QUESTION_TABLE.createTable());
+        db.execSQL(QUESTION_OPTION_TABLE.createTable());
+        db.execSQL(QUESTION_PROPERTY_TABLE.createTable());
         db.execSQL(QuestionPropertyDefTable.createTable());
-        db.execSQL(QuestionLangVersionTable.createTable());
-        db.execSQL(QuestionnaireTable.createTable());
-        db.execSQL(QuestionnaireTypeTable.createTable());
-        db.execSQL(QuestionnaireContentTable.createTable());
-        db.execSQL(LanguageTable.createTable());
-        db.execSQL(LanguageTypeTable.createTable());
+        db.execSQL(QUESTION_LANG_VERSION_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_TYPE_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_CONTENT_TABLE.createTable());
+        db.execSQL(LANGUAGE_TABLE.createTable());
+        db.execSQL(LANGUAGE_TYPE_TABLE.createTable());
         db.execSQL(ROLE_TABLE.createTable());
-        db.execSQL(FieldTripTable.createTable());
-        db.execSQL(FileTable.createTable());
+        db.execSQL(FIELD_TRIP_TABLE.createTable());
+        db.execSQL(FILE_TABLE.createTable());
         db.execSQL(SessionTable.createTable());
         db.execSQL(SessionAnswerTable.createTable());
         db.execSQL(SessionPersonTable.createTable());
@@ -104,24 +116,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, String.format("SQLiteDatabase.onUpgrade(%d -> %d)", oldVersion, newVersion));
 
         // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + PERSON_TABLE.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Question.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionOption.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionProperty.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDef.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersion.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Questionnaire.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireType.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContent.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Language.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + LanguageType.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ROLE_TABLE.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FieldTrip.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + File.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionOptionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTypeTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContentTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LanguageTypeTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LanguageTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + RoleTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FieldTripTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FileTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SessionAnswer.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SessionPerson.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + ANSWER_TABLE.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + AnswerTable.TABLE);
 
         // create new tables
         onCreate(db);

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ANSWER_TABLE;
+
 public class AnswerActivity extends AppCompatActivity {
 
     private static final String TAG = AnswerActivity.class.getSimpleName().toString();
@@ -35,13 +37,12 @@ public class AnswerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Answer answer = new Answer();
-                answer.setQuestionnaireId(0); // TODO
-                answer.setQuestionId(0); // TODO
+                answer.setQuestionnaireId(""); // TODO
+                answer.setQuestionId(""); // TODO
                 answer.setLabel(answerLabelField.getText().toString());
                 answer.setText(answerTextField.getText().toString());
 
-                int id = AnswerTable.addAnswer(answer);
-                answer.setId(id);
+                ANSWER_TABLE.addEntry(answer);
             }
         });
     }

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_PROPERTY_TABLE;
+
 public class QuestionPropertyActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionProperty.class.getSimpleName().toString();
@@ -34,11 +36,11 @@ public class QuestionPropertyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionProperty property = new QuestionProperty();
-                property.setPropertyId(0); // TODO
-                property.setQuestionId(0); // TODO
+                property.setPropertyId(""); // TODO
+                property.setQuestionId(""); // TODO
                 property.setValue(0); //TODO
 
-                QuestionPropertyTable.addQuestionProperty(property);
+                QUESTION_PROPERTY_TABLE.addEntry(property);
             }
         });
     }

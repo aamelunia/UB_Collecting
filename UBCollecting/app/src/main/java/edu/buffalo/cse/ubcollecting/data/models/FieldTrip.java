@@ -9,17 +9,12 @@ public class FieldTrip extends Model {
     private static final String TAG = FieldTrip.class.getSimpleName().toString();
 
     // Fix types for start/end dates?!
-    public String id;
     public String name;
     public String startDate;
     public String endDate;
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -13,9 +13,6 @@ import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 public class PersonTable extends Table<Person> {
 
-    // Table Name
-    public static final String TABLE = "Person";
-
     // Person Table - column names
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "Name";
@@ -27,7 +24,8 @@ public class PersonTable extends Table<Person> {
     public static final String KEY_INTRO_QUEST_DESC = "IntroQuestDesc";
 
     public PersonTable () {
-
+        super();
+        TABLE = "Person";
     }
 
     @Override

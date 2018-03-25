@@ -9,10 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
-public class FieldTripTable {
-
-    // Table Name
-    public static final String TABLE = "FieldTrip";
+public class FieldTripTable extends Table<FieldTrip> {
 
     // FieldTrip Table - column names
     public static final String KEY_ID = "id";
@@ -21,10 +18,11 @@ public class FieldTripTable {
     public static final String KEY_END_DATE = "EndDate";
 
     public FieldTripTable () {
-
+        super();
+        TABLE = "FieldTrip";
     }
 
-    public static String createTable(){
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_FIELD_TRIP_NAME
                 + " VARCHAR," + KEY_START_DATE + " DATETIME," + KEY_END_DATE

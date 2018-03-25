@@ -9,14 +9,14 @@ import android.widget.EditText;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
+
 public class QuestionnaireTypeActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionnaireTypeActivity.class.getSimpleName().toString();
 
     private EditText nameField;
     private Button submitButton;
-
-    private QuestionnaireTypeTable questionnaireTypeTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +26,13 @@ public class QuestionnaireTypeActivity extends AppCompatActivity {
         nameField = this.findViewById(R.id.questionnaire_type_name_field);
         submitButton = this.findViewById(R.id.questionnaire_type_submit_button);
 
-        questionnaireTypeTable = new QuestionnaireTypeTable();
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 QuestionnaireType questionnaireType = new QuestionnaireType();
                 questionnaireType.setName(nameField.getText().toString());
 
-                int id = questionnaireTypeTable.addQuestionnaireType(questionnaireType);
-                questionnaireType.setId(id);
+                QUESTIONNAIRE_TYPE_TABLE.addEntry(questionnaireType);
             }
         });
     }

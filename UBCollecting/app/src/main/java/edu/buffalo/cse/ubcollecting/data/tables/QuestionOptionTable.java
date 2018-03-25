@@ -11,10 +11,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
 
-public class QuestionOptionTable {
-
-
-    public static final String TABLE = "QuestionOption";
+public class QuestionOptionTable extends Table<QuestionOption> {
 
     // QuestionOption Table - column names
     public static final String KEY_QUESTION_ID = "QuestionId";
@@ -22,10 +19,12 @@ public class QuestionOptionTable {
     public static final String KEY_OPTION_TEXT = "OptionText";
 
     public QuestionOptionTable () {
-
+        super();
+        TABLE = "QuestionOption";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTION_ID + " TEXT,"
                 + KEY_QUESTION_LANGUAGE_ID + " TEXT," + KEY_OPTION_TEXT + " VARCHAR,"

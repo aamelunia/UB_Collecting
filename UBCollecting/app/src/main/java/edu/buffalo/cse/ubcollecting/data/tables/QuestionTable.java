@@ -9,20 +9,19 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 
-public class QuestionTable {
-
-    // Table Name
-    public static final String TABLE = "Question";
+public class QuestionTable extends Table<Question> {
 
     // Question (QuestionPool) Table - column names
     public static final String KEY_ID = "id";
     public static final String KEY_TYPE = "Type";
 
     public QuestionTable () {
-
+        super();
+        TABLE = "Question";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_TYPE + " VARCHAR" + ")";
     }

@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,10 +12,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.models.File;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 
-public class FileTable {
-
-    // Table Name
-    public static final String TABLE = "File";
+public class FileTable extends Table<File> {
 
     // File Table - column names
     public static final String KEY_ID = "id";
@@ -26,18 +24,18 @@ public class FileTable {
     public static final String KEY_START_TIME = "StartTime";
     public static final String KEY_END_TIME = "EndTime";
 
-
-    public FileTable () {
-
-
+    public FileTable() {
+        super();
+        TABLE = "File";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
                 + " VARCHAR," + KEY_ANSWER_ID + " TEXT," + KEY_TYPE
                 + " VARCHAR," + KEY_PATH + " VARCHAR," + KEY_CREATOR_ID
-                + " TEXT,"  + KEY_START_TIME + " DATETIME," + KEY_END_TIME + " DATETIME,"
+                + " TEXT," + KEY_START_TIME + " DATETIME," + KEY_END_TIME + " DATETIME,"
                 + " FOREIGN KEY(" + KEY_ANSWER_ID + ") REFERENCES " + AnswerTable.TABLE
                 + " (" + AnswerTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_CREATOR_ID + ") REFERENCES "
                 + PersonTable.TABLE + " (" + PersonTable.KEY_ID + ")" + ")";

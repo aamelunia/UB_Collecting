@@ -12,6 +12,8 @@ import java.util.UUID;
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 import edu.buffalo.cse.ubcollecting.data.tables.LanguageTypeTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TYPE_TABLE;
+
 public class LanguageTypeActivity extends AppCompatActivity {
 
     private static final String TAG = LanguageTypeActivity.class.getSimpleName().toString();
@@ -33,8 +35,7 @@ public class LanguageTypeActivity extends AppCompatActivity {
                 LanguageType langType = new LanguageType();
                 langType.setName(nameField.getText().toString());
 
-                int id = LanguageTypeTable.addLanguageType(langType);
-                langType.setId(id);
+                LANGUAGE_TYPE_TABLE.addEntry(langType);
             }
         });
     }

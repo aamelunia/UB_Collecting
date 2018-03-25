@@ -11,22 +11,20 @@ import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
-public class QuestionnaireContentTable {
-
-    public static final String TABLE = "QuestionnaireContent";
+public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
 
     // QuestionnaireContent Table - column names
-
     public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_QUESTION_ORDER = "QuestionOrder";
 
     public QuestionnaireContentTable () {
-
+        super();
+        TABLE = "QuestionnaireContent";
     }
 
-
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTIONNAIRE_ID + " TEXT,"
                 + KEY_QUESTION_ID + " TEXT," + KEY_QUESTION_ORDER + " VARCHAR,"

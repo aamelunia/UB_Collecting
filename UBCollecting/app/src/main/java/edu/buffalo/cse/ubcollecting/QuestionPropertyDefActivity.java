@@ -10,6 +10,8 @@ import android.widget.TextView;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyDefTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_PROPERTY_DEF_TABLE;
+
 public class QuestionPropertyDefActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionPropertyDefActivity.class.getSimpleName().toString();
@@ -32,9 +34,8 @@ public class QuestionPropertyDefActivity extends AppCompatActivity {
                 QuestionPropertyDef propertyDef = new QuestionPropertyDef();
                 propertyDef.setName(nameField.getText().toString());
 
-                int id = QuestionPropertyDefTable.addQuestionPropertyDef(propertyDef);
+                QUESTION_PROPERTY_DEF_TABLE.addEntry(propertyDef);
 
-                propertyDef.setId(id);
             }
         });
     }

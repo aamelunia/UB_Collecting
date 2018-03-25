@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionOptionTable;
+
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_OPTION_TABLE;
 
 public class QuestionOptionActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionOptionActivity.class.getSimpleName().toString();
 
-    private EditText langField;
+    private TextView langField;
     private EditText optionTextField;
     private Button submitButton;
 
@@ -30,11 +33,11 @@ public class QuestionOptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionOption option = new QuestionOption();
-                option.setQuestionId(0); // TODO
-                option.setQuestionLanguageId(0); // TODO
+                option.setQuestionId(""); // TODO
+                option.setQuestionLanguageId(""); // TODO
                 option.setOptionText(optionTextField.getText().toString());
 
-                QuestionOptionTable.addQuestionOption(option);
+                QUESTION_OPTION_TABLE.addEntry(option);
             }
         });
     }

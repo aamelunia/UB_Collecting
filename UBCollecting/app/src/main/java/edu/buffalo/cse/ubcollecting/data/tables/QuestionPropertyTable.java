@@ -11,9 +11,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
-public class QuestionPropertyTable {
-
-    public static final String TABLE = "QuestionProperty";
+public class QuestionPropertyTable extends Table<QuestionProperty> {
 
     // QuestionProperty Table - column names
     public static final String KEY_QUESTION_ID = "QuestionId";
@@ -21,10 +19,12 @@ public class QuestionPropertyTable {
     public static final String KEY_VALUE = "Value";
 
     public QuestionPropertyTable () {
-
+        super();
+        TABLE = "QuestionProperty";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTION_ID + " TEXT,"
                 + KEY_PROPERTY_ID + " TEXT," + KEY_VALUE + " INTEGER,"

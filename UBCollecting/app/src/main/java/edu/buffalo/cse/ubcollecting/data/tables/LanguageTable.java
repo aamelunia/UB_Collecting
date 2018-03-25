@@ -10,10 +10,7 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
-public class LanguageTable {
-
-    // Table Name
-    public static final String TABLE = "Language";
+public class LanguageTable extends Table<Language> {
 
     // Language Table - column names
     public static final String KEY_ID = "id";
@@ -23,10 +20,12 @@ public class LanguageTable {
     public static final String KEY_TYPE_ID = "TypeId";
 
     public LanguageTable () {
-
+        super();
+        TABLE = "Language";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
                 + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES

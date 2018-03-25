@@ -10,6 +10,8 @@ import android.widget.TextView;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
+
 public class QuestionLangVersionActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionLangVersionActivity.class.getSimpleName().toString();
@@ -33,11 +35,11 @@ public class QuestionLangVersionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuestionLangVersion questionLangVersion = new QuestionLangVersion();
-                questionLangVersion.setQuestionLanguageId(0); // TODO
-                questionLangVersion.setQuestionId(0); // TODO
+                questionLangVersion.setQuestionLanguageId(""); // TODO
+                questionLangVersion.setQuestionId(""); // TODO
                 questionLangVersion.setQuestionText(questionTextField.getText().toString());
 
-                QuestionLangVersionTable.addQuestionLangVersion(questionLangVersion);
+                QUESTION_LANG_VERSION_TABLE.addEntry(questionLangVersion);
             }
         });
     }

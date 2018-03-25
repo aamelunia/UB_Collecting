@@ -13,6 +13,8 @@ import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
 import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FIELD_TRIP_TABLE;
+
 public class FieldTripActivity extends AppCompatActivity {
 
     private static final String TAG = FieldTripActivity.class.getSimpleName().toString();
@@ -40,8 +42,7 @@ public class FieldTripActivity extends AppCompatActivity {
                 trip.setStartDate(startDateField.getText().toString());
                 trip.setEndDate(endDateField.getText().toString());
 
-                int id = FieldTripTable.addFieldTrip(trip);
-                trip.setId(id);
+                FIELD_TRIP_TABLE.addEntry(trip);
             }
         });
     }

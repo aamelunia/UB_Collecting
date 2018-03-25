@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,9 +12,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 
-public class QuestionnaireTable {
-
-    public static final String TABLE = "Questionnaire";
+public class QuestionnaireTable extends Table<Questionnaire> {
 
     // Questionnaire Table - column names
     public static final String KEY_ID = "id";
@@ -22,11 +21,13 @@ public class QuestionnaireTable {
     public static final String KEY_DESCRIPTION = "Description";
     public static final String KEY_TYPE_ID = "TypeId";
 
-    public QuestionnaireTable () {
-
+    public QuestionnaireTable() {
+        super();
+        TABLE = "Questionnaire";
     }
 
-    public static String createTable(){
+    @Override
+    public String createTable() {
 
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL

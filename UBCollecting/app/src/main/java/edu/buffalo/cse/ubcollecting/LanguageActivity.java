@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.tables.LanguageTable;
+
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 
 public class LanguageActivity extends AppCompatActivity {
 
@@ -16,7 +19,7 @@ public class LanguageActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText otherNamesField;
     private EditText descriptionField;
-    private EditText typeField;
+    private TextView typeField;
     private Button submitButton;
 
     @Override
@@ -37,11 +40,9 @@ public class LanguageActivity extends AppCompatActivity {
                 lang.setName(nameField.getText().toString());
                 lang.setOtherNames(otherNamesField.getText().toString());
                 lang.setDescription(descriptionField.getText().toString());
-                lang.setTypeId(0); // TODO
+                lang.setTypeId(""); // TODO
 
-                int id = LanguageTable.addLanguage(lang);
-
-                lang.setId(id);
+                LANGUAGE_TABLE.addEntry(lang);
             }
         });
     }

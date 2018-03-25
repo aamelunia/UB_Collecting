@@ -12,6 +12,8 @@ import java.util.UUID;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionTable;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_TABLE;
+
 public class QuestionActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionActivity.class.getSimpleName().toString();
@@ -33,8 +35,7 @@ public class QuestionActivity extends AppCompatActivity {
                 Question question = new Question();
                 question.setType(questionTypeField.getText().toString());
 
-                int id = QuestionTable.addQuestion(question);
-                question.setId(id);
+                QUESTION_TABLE.addEntry(question);
             }
         });
     }

@@ -8,22 +8,13 @@ public class Answer extends Model {
 
     private static final String TAG = Answer.class.getSimpleName().toString();
 
-    public String id;
     public String questionnaireId;
     public String questionId;
     public String label;
     public String text;
 
-    public Answer(){
-
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getQuestionnaireId() {
