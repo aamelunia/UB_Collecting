@@ -6,50 +6,23 @@ package edu.buffalo.cse.ubcollecting.data;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.database.Cursor;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.app.App;
-
-import edu.buffalo.cse.ubcollecting.data.models.Person;
-import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
-import edu.buffalo.cse.ubcollecting.data.models.Question;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionOptionTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyDefTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
-import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
-import edu.buffalo.cse.ubcollecting.data.models.Language;
-import edu.buffalo.cse.ubcollecting.data.tables.LanguageTable;
-import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
-import edu.buffalo.cse.ubcollecting.data.tables.LanguageTypeTable;
-import edu.buffalo.cse.ubcollecting.data.models.Role;
-import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
-import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
-import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
-import edu.buffalo.cse.ubcollecting.data.models.File;
-import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
-import edu.buffalo.cse.ubcollecting.data.models.Session;
-import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
-import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
-import edu.buffalo.cse.ubcollecting.data.tables.SessionAnswerTable;
-import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
-import edu.buffalo.cse.ubcollecting.data.tables.SessionPersonTable;
-import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
+import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
+import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
+import edu.buffalo.cse.ubcollecting.data.tables.LanguageTable;
+import edu.buffalo.cse.ubcollecting.data.tables.LanguageTypeTable;
+import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionOptionTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyDefTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
+import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -76,8 +49,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final QuestionnaireTypeTable QUESTIONNAIRE_TYPE_TABLE = new QuestionnaireTypeTable();
     public static final QuestionOptionTable QUESTION_OPTION_TABLE = new QuestionOptionTable();
     public static final QuestionPropertyTable QUESTION_PROPERTY_TABLE = new QuestionPropertyTable();
-    public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
     public static final RoleTable ROLE_TABLE = new RoleTable();
+    public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
+
 
 
     public DatabaseHelper() {
@@ -86,15 +60,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("DB HELPER:","CALLED!");
 
         db.execSQL("PRAGMA foreign_keys=ON");
         //Creating The Tables
         db.execSQL(PERSON_TABLE.createTable());
+        Log.i("DB HELPER:","CALLED 2!");
+
         db.execSQL(QUESTION_TABLE.createTable());
+        Log.i("DB HELPER:","CALLED 3!");
+
         db.execSQL(QUESTION_OPTION_TABLE.createTable());
+        Log.i("DB HELPER:","CALLED 4 !");
+
         db.execSQL(QUESTION_PROPERTY_TABLE.createTable());
-        db.execSQL(QuestionPropertyDefTable.createTable());
+        Log.i("DB HELPER:","CALLED 5!");
+
+//        db.execSQL(QuestionPropertyDefTable.createTable());
         db.execSQL(QUESTION_LANG_VERSION_TABLE.createTable());
+        Log.i("DB HELPER:","CALLED 6!");
+
         db.execSQL(QUESTIONNAIRE_TABLE.createTable());
         db.execSQL(QUESTIONNAIRE_TYPE_TABLE.createTable());
         db.execSQL(QUESTIONNAIRE_CONTENT_TABLE.createTable());
@@ -103,9 +88,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ROLE_TABLE.createTable());
         db.execSQL(FIELD_TRIP_TABLE.createTable());
         db.execSQL(FILE_TABLE.createTable());
-        db.execSQL(SessionTable.createTable());
-        db.execSQL(SessionAnswerTable.createTable());
-        db.execSQL(SessionPersonTable.createTable());
+//        db.execSQL(SessionTable.createTable());
+//        db.execSQL(SessionAnswerTable.createTable());
+//        db.execSQL(SessionPersonTable.createTable());
         db.execSQL(ANSWER_TABLE.createTable());
 
     }
@@ -120,7 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionOptionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
+//        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTypeTable.TABLE);
@@ -130,9 +115,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + RoleTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FieldTripTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FileTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Session.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswer.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SessionPerson.TABLE);
+//        db.execSQL("DROP TABLE IF EXISTS " + SessionTable.TABLE);
+//        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswerTable.TABLE);
+//        db.execSQL("DROP TABLE IF EXISTS " + SessionPersonTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + AnswerTable.TABLE);
 
         // create new tables

@@ -4,15 +4,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
-import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.models.File;
-import edu.buffalo.cse.ubcollecting.data.models.Person;
 
 public class FileTable extends Table<File> {
+
+    public static final String TABLE = "File";
 
     // File Table - column names
     public static final String KEY_ID = "id";
@@ -26,7 +22,6 @@ public class FileTable extends Table<File> {
 
     public FileTable() {
         super();
-        TABLE = "File";
     }
 
     @Override
@@ -39,6 +34,11 @@ public class FileTable extends Table<File> {
                 + " FOREIGN KEY(" + KEY_ANSWER_ID + ") REFERENCES " + AnswerTable.TABLE
                 + " (" + AnswerTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_CREATOR_ID + ") REFERENCES "
                 + PersonTable.TABLE + " (" + PersonTable.KEY_ID + ")" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addFile(File file) {

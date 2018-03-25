@@ -3,13 +3,13 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 
 public class QuestionTable extends Table<Question> {
+
+    public static final String TABLE = "Question";
 
     // Question (QuestionPool) Table - column names
     public static final String KEY_ID = "id";
@@ -17,13 +17,18 @@ public class QuestionTable extends Table<Question> {
 
     public QuestionTable () {
         super();
-        TABLE = "Question";
     }
 
     @Override
     public String createTable(){
+        Log.i("QuestionTable",TABLE);
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_TYPE + " VARCHAR" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addQuestion(Question question) {

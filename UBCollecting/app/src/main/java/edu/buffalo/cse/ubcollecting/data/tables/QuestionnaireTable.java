@@ -4,15 +4,12 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 
 public class QuestionnaireTable extends Table<Questionnaire> {
+
+    public static final String TABLE = "Questionnaire";
 
     // Questionnaire Table - column names
     public static final String KEY_ID = "id";
@@ -23,7 +20,6 @@ public class QuestionnaireTable extends Table<Questionnaire> {
 
     public QuestionnaireTable() {
         super();
-        TABLE = "Questionnaire";
     }
 
     @Override
@@ -36,6 +32,11 @@ public class QuestionnaireTable extends Table<Questionnaire> {
                 + ") REFERENCES " + QuestionnaireTypeTable.TABLE + " (" + QuestionnaireTypeTable.KEY_ID + ")"
                 + ")";
 
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addQuestionnaire(Questionnaire ques) {

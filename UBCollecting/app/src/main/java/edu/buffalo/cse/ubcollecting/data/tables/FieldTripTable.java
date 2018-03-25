@@ -3,13 +3,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 public class FieldTripTable extends Table<FieldTrip> {
+
+    public static final String TABLE = "FieldTrip";
 
     // FieldTrip Table - column names
     public static final String KEY_ID = "id";
@@ -19,7 +17,6 @@ public class FieldTripTable extends Table<FieldTrip> {
 
     public FieldTripTable () {
         super();
-        TABLE = "FieldTrip";
     }
 
     public String createTable(){
@@ -27,6 +24,11 @@ public class FieldTripTable extends Table<FieldTrip> {
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_FIELD_TRIP_NAME
                 + " VARCHAR," + KEY_START_DATE + " DATETIME," + KEY_END_DATE
                 + " DATETIME" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addFieldTrip(FieldTrip fieldTrip) {

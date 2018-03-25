@@ -3,15 +3,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
-import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
-import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
 public class QuestionPropertyTable extends Table<QuestionProperty> {
+
+    public static final String TABLE = "QuestionProperty";
 
     // QuestionProperty Table - column names
     public static final String KEY_QUESTION_ID = "QuestionId";
@@ -20,7 +16,6 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
 
     public QuestionPropertyTable () {
         super();
-        TABLE = "QuestionProperty";
     }
 
     @Override
@@ -34,6 +29,10 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
                 + QuestionTable.TABLE + " (" + QuestionTable.KEY_ID + ")" + ")";
     }
 
+    @Override
+    public String getTableName(){
+        return TABLE;
+    }
 //    public static int addQuestionProperty(QuestionProperty questionProperty) {
 //
 //        int questionPropertyId;

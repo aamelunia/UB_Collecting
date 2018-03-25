@@ -1,18 +1,11 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
+
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
-import edu.buffalo.cse.ubcollecting.data.models.Person;
-import edu.buffalo.cse.ubcollecting.data.models.Role;
-import edu.buffalo.cse.ubcollecting.data.models.Session;
-import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
-
-public class SessionPersonTable {
+public class SessionPersonTable extends Table<SessionPerson> {
 
     public static final String TABLE = "SessionPerson";
 
@@ -22,10 +15,10 @@ public class SessionPersonTable {
     public static final String KEY_ROLE_ID = "RoleId";
 
     public SessionPersonTable () {
-
+        super();
     }
 
-    public static String createTable(){
+    public  String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
                 + KEY_PERSON_ID + " TEXT," + KEY_ROLE_ID + " TEXT,"
@@ -36,6 +29,11 @@ public class SessionPersonTable {
                 + " (" + PersonTable.KEY_ID + "),"
                 + " FOREIGN KEY(" + KEY_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
                 + " (" + RoleTable.KEY_ID + ")" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addSessionPerson(SessionPerson sessionPerson) {

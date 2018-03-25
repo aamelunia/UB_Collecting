@@ -1,9 +1,11 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
+
 /**
  * Created by aamel786 on 2/17/18.
  */
-public class SessionAnswerTable {
+public class SessionAnswerTable extends Table<SessionAnswer> {
 
     public static final String TABLE = "SessionAnswer";
 
@@ -14,10 +16,10 @@ public class SessionAnswerTable {
     public static final String KEY_ANSWER_ID = "AnswerId";
 
     public SessionAnswerTable () {
-
+        super();
     }
 
-    public static String createTable(){
+    public String createTable(){
 
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
@@ -34,6 +36,11 @@ public class SessionAnswerTable {
                 + " FOREIGN KEY(" + KEY_SESSION_ID + ") REFERENCES " + SessionTable.TABLE
                 + " (" + SessionTable.KEY_ID + ")"
                 + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addSessionAnswer(SessionAnswer sessionAnswer) {

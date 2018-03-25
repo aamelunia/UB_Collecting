@@ -3,15 +3,15 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import android.util.Log;
+
 import edu.buffalo.cse.ubcollecting.data.models.Person;
-import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 
 public class PersonTable extends Table<Person> {
+
+    public static final String TABLE = "Person";
 
     // Person Table - column names
     public static final String KEY_ID = "id";
@@ -25,12 +25,11 @@ public class PersonTable extends Table<Person> {
 
     public PersonTable () {
         super();
-        TABLE = "Person";
     }
 
     @Override
     public String createTable(){
-
+        Log.i("PERSON TABLE:",TABLE);
         return "CREATE TABLE "
                 + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME
                 + " VARCHAR, " + KEY_OTHER_NAMES + " VARCHAR, " + KEY_DOB
@@ -38,6 +37,11 @@ public class PersonTable extends Table<Person> {
                 + KEY_PHOTO_DESC + " VARCHAR, " + KEY_INTRO_QUEST_DESC + " VARCHAR,"
                 + " FOREIGN KEY (" + KEY_MAIN_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
                 + " (" + RoleTable.KEY_ID + ")" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 //    public static int addPerson(Person person) {

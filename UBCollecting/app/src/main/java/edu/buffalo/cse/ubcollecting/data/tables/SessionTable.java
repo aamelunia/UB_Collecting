@@ -3,14 +3,10 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
-import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
-public class SessionTable {
+public class SessionTable extends Table<Session> {
 
     // Table Name
     public static final String TABLE = "Session";
@@ -25,10 +21,10 @@ public class SessionTable {
     public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
 
     public SessionTable () {
-
+        super();
     }
 
-    public static String createTable(){
+    public String createTable(){
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL
                 + " VARCHAR," + KEY_NAME + " VARCHAR," + KEY_START_TIME
@@ -37,6 +33,10 @@ public class SessionTable {
                 + ") REFERENCES " + FieldTripTable.TABLE + " (" + FieldTripTable.KEY_ID + ")" + ")";
     }
 
+    @Override
+    public String getTableName(){
+        return TABLE;
+    }
 //    public static int addSession(Session session) {
 //
 //        int sessionId;

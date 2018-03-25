@@ -7,6 +7,8 @@ import edu.buffalo.cse.ubcollecting.data.models.Answer;
  */
 public class AnswerTable extends Table <Answer> {
 
+    public static final String TABLE = "Answer";
+
     // Answer Table - column names
     public static final String KEY_ID = "id";
     public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
@@ -16,7 +18,6 @@ public class AnswerTable extends Table <Answer> {
 
     public AnswerTable () {
         super();
-        TABLE = "Answer";
     }
 
     public String createTable(){
@@ -28,6 +29,11 @@ public class AnswerTable extends Table <Answer> {
                 + " FOREIGN KEY(" + KEY_QUESTION_ID + ") REFERENCES " + QuestionTable.TABLE
                 + " (" + QuestionTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_QUESTIONNAIRE_ID + ") REFERENCES "
                 + QuestionnaireTable.TABLE + " (" + QuestionnaireTable.KEY_ID + ")" + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 

@@ -3,14 +3,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
-import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
 public class LanguageTable extends Table<Language> {
+
+    public static final String TABLE = "Language";
 
     // Language Table - column names
     public static final String KEY_ID = "id";
@@ -21,7 +18,6 @@ public class LanguageTable extends Table<Language> {
 
     public LanguageTable () {
         super();
-        TABLE = "Language";
     }
 
     @Override
@@ -32,6 +28,11 @@ public class LanguageTable extends Table<Language> {
                 + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
                 + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
                 + ")";
+    }
+
+    @Override
+    public String getTableName(){
+        return TABLE;
     }
 
 

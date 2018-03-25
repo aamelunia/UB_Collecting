@@ -17,14 +17,16 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table <E extends Model> {
 
-    public static String TABLE;
-    public static Field [] tableColumns;
+    public ArrayList <String> tableColumns;
 
     public Table() {
-        tableColumns = this.getClass().getDeclaredFields();
+        tableColumns = this.getAllColumnNames();
     }
 
     public abstract String createTable();
+
+    public abstract String getTableName ();
+
 
     public long addEntry (Model model) {
 
@@ -34,10 +36,10 @@ public abstract class Table <E extends Model> {
 
         ArrayList<Method> getters = model.getGetters();
 
-        for (int i=0; i<tableColumns.length; i++){
+        for (int i=0; i<tableColumns.size(); i++){
 
             try {
-            String key = tableColumns[i].getName();
+            String key = tableColumns.get(i);
             Object value = getters.get(i).invoke(model,null);
             insertContent(values,key,value);
             } catch (IllegalAccessException e) {
@@ -50,7 +52,7 @@ public abstract class Table <E extends Model> {
 
         }
 
-        rowId = db.insert(TABLE,null,values);
+        rowId = db.insert(this.getTableName(),null,values);
 
         DatabaseManager.getInstance().closeDatabase();
 
@@ -66,6 +68,27 @@ public abstract class Table <E extends Model> {
             values.put(key,(String) value);
         }
 
+    }
+
+    private ArrayList<String> getAllColumnNames () {
+
+        Field [] allFields = this.getClass().getDeclaredFields();
+        ArrayList <String> allColumnNames = new ArrayList<>();
+
+        for (int i = 0; i < allFields.length; i++){
+
+            if(allFields[i].getName().startsWith("KEY")) {
+                try {
+                    Field field = allFields[i];
+                    allColumnNames.add((String) field.get(this));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        return allColumnNames;
     }
 
 
