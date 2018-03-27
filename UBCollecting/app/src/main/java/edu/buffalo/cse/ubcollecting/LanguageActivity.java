@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.Language;
-import edu.buffalo.cse.ubcollecting.data.tables.LanguageTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 
@@ -42,7 +41,7 @@ public class LanguageActivity extends AppCompatActivity {
                 lang.setDescription(descriptionField.getText().toString());
                 lang.setTypeId(""); // TODO
 
-                LANGUAGE_TABLE.addEntry(lang);
+                LANGUAGE_TABLE.insert(lang);
             }
         });
     }

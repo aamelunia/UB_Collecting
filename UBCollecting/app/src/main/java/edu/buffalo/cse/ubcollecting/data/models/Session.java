@@ -9,7 +9,6 @@ public class Session extends Model {
     private static final String TAG = Session.class.getSimpleName().toString();
 
     //  Need to appropriately configure type for start time
-    public String id;
     public String label;
     public String name;
     public String startTime;

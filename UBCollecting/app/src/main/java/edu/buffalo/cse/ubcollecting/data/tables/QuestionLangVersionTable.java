@@ -35,23 +35,5 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
         return TABLE;
     }
 
-//    public static int addQuestionLangVersion(QuestionLangVersion questionLangVersion) {
-//
-//        int questionLangVersionId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(QuestionLangVersion.KEY_QUESTION_ID, questionLangVersion.getQuestionId());
-//        values.put(QuestionLangVersion.KEY_QUESTION_LANGUAGE_ID, questionLangVersion.getQuestionLanguageId());
-//        values.put(QuestionLangVersion.KEY_QUESTION_TEXT, questionLangVersion.getQuestionText());
-//
-//        questionLangVersionId = (int) db.insert(QuestionLangVersion.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return questionLangVersionId;
-//
-//    }
 
 }

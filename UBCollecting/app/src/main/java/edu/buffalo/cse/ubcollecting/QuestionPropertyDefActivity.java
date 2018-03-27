@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyDefTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_PROPERTY_DEF_TABLE;
 
@@ -34,7 +32,7 @@ public class QuestionPropertyDefActivity extends AppCompatActivity {
                 QuestionPropertyDef propertyDef = new QuestionPropertyDef();
                 propertyDef.setName(nameField.getText().toString());
 
-                QUESTION_PROPERTY_DEF_TABLE.addEntry(propertyDef);
+                QUESTION_PROPERTY_DEF_TABLE.insert(propertyDef);
 
             }
         });

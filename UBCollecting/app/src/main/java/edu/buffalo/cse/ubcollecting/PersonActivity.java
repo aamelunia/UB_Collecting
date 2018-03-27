@@ -16,9 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
-import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 
@@ -91,7 +89,7 @@ public class PersonActivity extends AppCompatActivity {
                 applicant.setMainRoleId(roleId); // TODO
                 applicant.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
 
-                PERSON_TABLE.addEntry(applicant);
+                PERSON_TABLE.insert(applicant);
 
                 Toast.makeText(PersonActivity.this,
                         "Added " + applicant.getName() + " to database",

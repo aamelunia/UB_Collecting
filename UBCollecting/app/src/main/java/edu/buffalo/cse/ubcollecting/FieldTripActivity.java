@@ -5,13 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.UUID;
 
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
-import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
-import edu.buffalo.cse.ubcollecting.data.tables.PersonTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FIELD_TRIP_TABLE;
 
@@ -42,7 +37,7 @@ public class FieldTripActivity extends AppCompatActivity {
                 trip.setStartDate(startDateField.getText().toString());
                 trip.setEndDate(endDateField.getText().toString());
 
-                FIELD_TRIP_TABLE.addEntry(trip);
+                FIELD_TRIP_TABLE.insert(trip);
             }
         });
     }

@@ -7,10 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.UUID;
-
 import edu.buffalo.cse.ubcollecting.data.models.File;
-import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FILE_TABLE;
 
@@ -53,7 +50,7 @@ public class FileActivity extends AppCompatActivity {
                 file.setStartTime(fileStartTimeField.getText().toString());
                 file.setEndTime(fileEndTimeField.getText().toString());
 
-                FILE_TABLE.addEntry(file);
+                FILE_TABLE.insert(file);
             }
         });
     }

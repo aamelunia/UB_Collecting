@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.Answer;
-import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ANSWER_TABLE;
 
@@ -42,7 +41,7 @@ public class AnswerActivity extends AppCompatActivity {
                 answer.setLabel(answerLabelField.getText().toString());
                 answer.setText(answerTextField.getText().toString());
 
-                ANSWER_TABLE.addEntry(answer);
+                ANSWER_TABLE.insert(answer);
             }
         });
     }

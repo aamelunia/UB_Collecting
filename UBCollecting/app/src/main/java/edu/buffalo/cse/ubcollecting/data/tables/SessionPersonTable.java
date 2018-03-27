@@ -36,22 +36,4 @@ public class SessionPersonTable extends Table<SessionPerson> {
         return TABLE;
     }
 
-//    public static int addSessionPerson(SessionPerson sessionPerson) {
-//
-//        int sessionPersonId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(SessionPerson.KEY_SESSION_ID, sessionPerson.getSessionId());
-//        values.put(SessionPerson.KEY_PERSON_ID, sessionPerson.getPersonId());
-//        values.put(SessionPerson.KEY_ROLE_ID, sessionPerson.getRoleId());
-//
-//        sessionPersonId = (int) db.insert(SessionPerson.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return sessionPersonId;
-//
-//    }
-
 }

@@ -39,24 +39,5 @@ public class QuestionnaireTable extends Table<Questionnaire> {
         return TABLE;
     }
 
-//    public static int addQuestionnaire(Questionnaire ques) {
-//
-//        int quesId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(Questionnaire.KEY_ID, ques.getId());
-//        values.put(Questionnaire.KEY_LABEL, ques.getLabel());
-//        values.put(Questionnaire.KEY_NAME, ques.getName());
-//        values.put(Questionnaire.KEY_DESCRIPTION, ques.getDescription());
-//        values.put(Questionnaire.KEY_TYPE_ID, ques.getTypeId());
-//
-//        quesId = (int) db.insert(Questionnaire.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return quesId;
-//
-//    }
 
 }

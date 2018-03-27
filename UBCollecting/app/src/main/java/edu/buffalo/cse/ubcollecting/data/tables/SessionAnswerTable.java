@@ -43,24 +43,4 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
         return TABLE;
     }
 
-//    public static int addSessionAnswer(SessionAnswer sessionAnswer) {
-//
-//        int sessionAnswerId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(SessionAnswer.KEY_SESSION_ID, sessionAnswer.getSessionId());
-//        values.put(SessionAnswer.KEY_QUESTIONNAIRE_ID, sessionAnswer.getQuestionnaireId());
-//        values.put(SessionAnswer.KEY_QUESTION_ID, sessionAnswer.getQuestionId());
-//        values.put(SessionAnswer.KEY_ANSWER_ID, sessionAnswer.getAnswerId());
-//
-//
-//        sessionAnswerId = (int) db.insert(SessionAnswer.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return sessionAnswerId;
-//
-//    }
-
 }

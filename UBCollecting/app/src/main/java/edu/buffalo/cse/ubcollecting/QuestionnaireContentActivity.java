@@ -7,10 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.UUID;
-
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 
@@ -42,7 +39,7 @@ public class QuestionnaireContentActivity extends AppCompatActivity {
                 content.setQuestionId(""); // TODO
                 content.setQuestionOrder(orderField.getText().toString());
 
-                QUESTIONNAIRE_CONTENT_TABLE.addEntry(content);
+                QUESTIONNAIRE_CONTENT_TABLE.insert(content);
             }
         });
     }

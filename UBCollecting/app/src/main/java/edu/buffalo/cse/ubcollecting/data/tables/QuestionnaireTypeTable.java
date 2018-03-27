@@ -29,21 +29,5 @@ public class QuestionnaireTypeTable extends Table<QuestionnaireType> {
         return TABLE;
     }
 
-//    public static int addQuestionnaireType(QuestionnaireType quesType) {
-//
-//        int quesTypeId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(QuestionnaireType.KEY_ID, quesType.getId());
-//        values.put(QuestionnaireType.KEY_NAME, quesType.getName());
-//
-//        quesTypeId = (int) db.insert(QuestionnaireType.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return quesTypeId;
-//
-//    }
 
 }

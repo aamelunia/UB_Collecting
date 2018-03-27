@@ -34,23 +34,4 @@ public class QuestionOptionTable extends Table<QuestionOption> {
         return TABLE;
     }
 
-//    public static int addQuestionOption(QuestionOption questionOption) {
-//
-//        int questionOptionId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(QuestionOption.KEY_QUESTION_ID, questionOption.getQuestionId());
-//        values.put(QuestionOption.KEY_QUESTION_LANGUAGE_ID, questionOption.getQuestionLanguageId());
-//        values.put(QuestionOption.KEY_OPTION_TEXT, questionOption.getOptionText());
-//
-//        questionOptionId = (int) db.insert(QuestionOption.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return questionOptionId;
-//
-//    }
-
 }

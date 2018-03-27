@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionOptionTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_OPTION_TABLE;
 
@@ -37,7 +36,7 @@ public class QuestionOptionActivity extends AppCompatActivity {
                 option.setQuestionLanguageId(""); // TODO
                 option.setOptionText(optionTextField.getText().toString());
 
-                QUESTION_OPTION_TABLE.addEntry(option);
+                QUESTION_OPTION_TABLE.insert(option);
             }
         });
     }

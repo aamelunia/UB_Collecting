@@ -31,22 +31,4 @@ public class QuestionTable extends Table<Question> {
         return TABLE;
     }
 
-//    public static int addQuestion(Question question) {
-//
-//        int questionId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(Question.KEY_ID, question.getId());
-//        values.put(Question.KEY_TYPE, question.getType());
-//
-//        questionId = (int) db.insert(Question.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return questionId;
-//
-//    }
-
 }

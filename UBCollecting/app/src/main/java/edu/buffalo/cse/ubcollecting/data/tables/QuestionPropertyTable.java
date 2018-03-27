@@ -33,23 +33,5 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
     public String getTableName(){
         return TABLE;
     }
-//    public static int addQuestionProperty(QuestionProperty questionProperty) {
-//
-//        int questionPropertyId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(QuestionProperty.KEY_QUESTION_ID, questionProperty.getQuestionId());
-//        values.put(QuestionProperty.KEY_PROPERTY_ID, questionProperty.getPropertyId());
-//        values.put(QuestionProperty.KEY_VALUE, questionProperty.getValue());
-//
-//        questionPropertyId = (int) db.insert(QuestionProperty.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return questionPropertyId;
-//
-//    }
 
 }

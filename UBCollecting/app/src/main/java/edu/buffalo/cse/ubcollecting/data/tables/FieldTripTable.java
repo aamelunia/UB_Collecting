@@ -31,24 +31,5 @@ public class FieldTripTable extends Table<FieldTrip> {
         return TABLE;
     }
 
-//    public static int addFieldTrip(FieldTrip fieldTrip) {
-//
-//        int fieldTripId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(FieldTrip.KEY_ID, fieldTrip.getId());
-//        values.put(FieldTrip.KEY_FIELD_TRIP_NAME, fieldTrip.getName());
-//        values.put(FieldTrip.KEY_START_DATE, fieldTrip.getStartDate());
-//        values.put(FieldTrip.KEY_END_DATE, fieldTrip.getEndDate());
-//
-//        fieldTripId = (int) db.insert(FieldTrip.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return fieldTripId;
-//
-//    }
 
 }

@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.UUID;
 
 import edu.buffalo.cse.ubcollecting.data.models.Question;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_TABLE;
 
@@ -35,7 +31,7 @@ public class QuestionActivity extends AppCompatActivity {
                 Question question = new Question();
                 question.setType(questionTypeField.getText().toString());
 
-                QUESTION_TABLE.addEntry(question);
+                QUESTION_TABLE.insert(question);
             }
         });
     }

@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
@@ -39,7 +38,7 @@ public class QuestionLangVersionActivity extends AppCompatActivity {
                 questionLangVersion.setQuestionId(""); // TODO
                 questionLangVersion.setQuestionText(questionTextField.getText().toString());
 
-                QUESTION_LANG_VERSION_TABLE.addEntry(questionLangVersion);
+                QUESTION_LANG_VERSION_TABLE.insert(questionLangVersion);
             }
         });
     }

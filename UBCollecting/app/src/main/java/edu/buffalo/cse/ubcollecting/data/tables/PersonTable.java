@@ -44,29 +44,6 @@ public class PersonTable extends Table<Person> {
         return TABLE;
     }
 
-//    public static int addPerson(Person person) {
-//
-//        int personId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(Person.KEY_ID, person.getId());
-//        values.put(Person.KEY_NAME, person.getName());
-//        values.put(Person.KEY_OTHER_NAMES, person.getOtherNames());
-//        values.put(Person.KEY_DOB, person.getDob());
-//        values.put(Person.KEY_MAIN_ROLE_ID, person.getRoleId());
-//        values.put(Person.KEY_PHOTO, person.getPhoto());
-//        values.put(Person.KEY_PHOTO_DESC, person.getPhotoDesc());
-//        values.put(Person.KEY_INTRO_QUEST_DESC, person.getIntroQuestDesc());
-//
-//        personId = (int) db.insert(Person.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return personId;
-//
-//    }
-
 //    public static Person findById(int id){
 //
 //        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();

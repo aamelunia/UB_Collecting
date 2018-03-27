@@ -36,28 +36,6 @@ public class RoleTable extends Table<Role> {
         return TABLE;
     }
 
-//    public static int addRole(Role role) {
-//
-//        int roleId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(Role.KEY_ID, role.getId());
-//        values.put(Role.KEY_NAME,role.getName());
-//        values.put(Role.KEY_INTRO_REQUIRED,role.getIntroRequired());
-//        values.put(Role.KEY_PHOTO_REQUIRED,role.getPhotoRequired());
-//        values.put(Role.KEY_ON_CLIENT,role.getOnClient());
-//
-//
-//        roleId = (int) db.insert(Role.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return roleId;
-//
-//    }
-
 //    public static Role findById(int id){
 //
 //        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();

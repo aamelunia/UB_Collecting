@@ -36,25 +36,4 @@ public class LanguageTable extends Table<Language> {
     }
 
 
-//    public static int addLanguage(Language language) {
-//
-//        int langId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(Language.KEY_ID, language.getName());
-//        values.put(Language.KEY_NAME, language.getName());
-//        values.put(Language.KEY_DESCRIPTION, language.getDescription());
-//        values.put(Language.KEY_OTHER_NAMES, language.getOtherNames());
-//        values.put(Language.KEY_TYPE_ID, language.getTypeId());
-//
-//        langId = (int) db.insert(Language.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return langId;
-//
-//    }
-
 }

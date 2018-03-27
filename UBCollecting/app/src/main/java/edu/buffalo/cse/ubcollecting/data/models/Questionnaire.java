@@ -17,6 +17,10 @@ public class Questionnaire extends Model {
         return id;
     }
 
+    public void setId(String id){
+        this.id = id;
+    }
+
     public String getLabel() {
         return label;
     }

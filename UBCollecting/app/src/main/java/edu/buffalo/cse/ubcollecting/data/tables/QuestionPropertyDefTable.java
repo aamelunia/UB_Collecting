@@ -29,22 +29,4 @@ public class QuestionPropertyDefTable extends Table<QuestionPropertyDef> {
         return TABLE;
     }
 
-//    public static int addQuestionPropertyDef(QuestionPropertyDef questionPropertyDef) {
-//
-//        int questionPropertyDefId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(QuestionPropertyDef.KEY_ID, questionPropertyDef.getId());
-//        values.put(QuestionPropertyDef.KEY_NAME, questionPropertyDef.getName());
-//
-//        questionPropertyDefId = (int) db.insert(QuestionPropertyDef.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return questionPropertyDefId;
-//
-//    }
-
 }

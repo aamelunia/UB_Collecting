@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data;
 /**
  * Created by Aamel Unia on 2/17/18.
  */
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -23,6 +24,9 @@ import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
 import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
+import edu.buffalo.cse.ubcollecting.data.tables.SessionAnswerTable;
+import edu.buffalo.cse.ubcollecting.data.tables.SessionPersonTable;
+import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -51,6 +55,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final QuestionPropertyTable QUESTION_PROPERTY_TABLE = new QuestionPropertyTable();
     public static final RoleTable ROLE_TABLE = new RoleTable();
     public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
+    public static final SessionTable SESSION_TABLE = new SessionTable();
+    public static final SessionAnswerTable SESSION_ANSWER_TABLE = new SessionAnswerTable();
+    public static final SessionPersonTable SESSION_PERSON_TABLE = new SessionPersonTable();
 
 
 
@@ -60,26 +67,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i("DB HELPER:","CALLED!");
 
         db.execSQL("PRAGMA foreign_keys=ON");
         //Creating The Tables
         db.execSQL(PERSON_TABLE.createTable());
-        Log.i("DB HELPER:","CALLED 2!");
-
         db.execSQL(QUESTION_TABLE.createTable());
-        Log.i("DB HELPER:","CALLED 3!");
-
         db.execSQL(QUESTION_OPTION_TABLE.createTable());
-        Log.i("DB HELPER:","CALLED 4 !");
-
         db.execSQL(QUESTION_PROPERTY_TABLE.createTable());
-        Log.i("DB HELPER:","CALLED 5!");
-
-//        db.execSQL(QuestionPropertyDefTable.createTable());
+        db.execSQL(QUESTION_PROPERTY_DEF_TABLE.createTable());
         db.execSQL(QUESTION_LANG_VERSION_TABLE.createTable());
-        Log.i("DB HELPER:","CALLED 6!");
-
         db.execSQL(QUESTIONNAIRE_TABLE.createTable());
         db.execSQL(QUESTIONNAIRE_TYPE_TABLE.createTable());
         db.execSQL(QUESTIONNAIRE_CONTENT_TABLE.createTable());
@@ -88,9 +84,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ROLE_TABLE.createTable());
         db.execSQL(FIELD_TRIP_TABLE.createTable());
         db.execSQL(FILE_TABLE.createTable());
-//        db.execSQL(SessionTable.createTable());
-//        db.execSQL(SessionAnswerTable.createTable());
-//        db.execSQL(SessionPersonTable.createTable());
+        db.execSQL(SESSION_TABLE.createTable());
+        db.execSQL(SESSION_ANSWER_TABLE.createTable());
+        db.execSQL(SESSION_PERSON_TABLE.createTable());
         db.execSQL(ANSWER_TABLE.createTable());
 
     }
@@ -105,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionOptionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyTable.TABLE);
-//        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersionTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTypeTable.TABLE);
@@ -115,9 +111,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + RoleTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FieldTripTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FileTable.TABLE);
-//        db.execSQL("DROP TABLE IF EXISTS " + SessionTable.TABLE);
-//        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswerTable.TABLE);
-//        db.execSQL("DROP TABLE IF EXISTS " + SessionPersonTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswerTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionPersonTable.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + AnswerTable.TABLE);
 
         // create new tables
@@ -129,42 +125,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-
-    // Generalized and Abstracted out Select All Method for All Tables
-
-//    public static List<StringBuffer> getAll(String tableName) {
-//
-//        List<StringBuffer> storage = new ArrayList<StringBuffer>();
-//
-//        String selectQuery = "SELECT  * FROM " + tableName;
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                int totalFields = cursor.getColumnCount();
-//                StringBuffer sb = new StringBuffer();
-//
-//                for (int i = 0; i < totalFields; i++) {
-//                    sb.append(cursor.getColumnName(i));
-//                    sb.append(": ");
-//                    sb.append(cursor.getString(i));
-//                    sb.append(" ");
-//                }
-//
-//                storage.add(sb);
-//
-//            } while (cursor.moveToNext());
-//        }
-//
-//        cursor.close();
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return storage;
-//    }
-//
 //    public static String findById(String tableName, int id) {
 //
 //        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();

@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionPropertyTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_PROPERTY_TABLE;
 
@@ -40,7 +39,7 @@ public class QuestionPropertyActivity extends AppCompatActivity {
                 property.setQuestionId(""); // TODO
                 property.setValue(0); //TODO
 
-                QUESTION_PROPERTY_TABLE.addEntry(property);
+                QUESTION_PROPERTY_TABLE.insert(property);
             }
         });
     }

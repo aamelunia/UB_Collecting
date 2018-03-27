@@ -37,27 +37,5 @@ public class SessionTable extends Table<Session> {
     public String getTableName(){
         return TABLE;
     }
-//    public static int addSession(Session session) {
-//
-//        int sessionId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(Session.KEY_ID, session.getId());
-//        values.put(Session.KEY_LABEL, session.getLabel());
-//        values.put(Session.KEY_NAME, session.getName());
-//        values.put(Session.KEY_START_TIME, session.getStartTime());
-//        values.put(Session.KEY_LOCATION, session.getLocation());
-//        values.put(Session.KEY_DESCRIPTION, session.getDescription());
-//        values.put(Session.KEY_FIELD_TRIP_ID, session.getFieldTripId());
-//
-//
-//        sessionId = (int) db.insert(Session.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return sessionId;
-//
-//    }
 
 }

@@ -5,12 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.UUID;
 
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 
@@ -44,7 +40,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 quiz.setDescription(descriptionField.getText().toString());
                 quiz.setTypeId(""); // TODO
 
-                QUESTIONNAIRE_TABLE.addEntry(quiz);
+                QUESTIONNAIRE_TABLE.insert(quiz);
             }
         });
     }

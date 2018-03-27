@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireTypeTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 
@@ -32,7 +31,7 @@ public class QuestionnaireTypeActivity extends AppCompatActivity {
                 QuestionnaireType questionnaireType = new QuestionnaireType();
                 questionnaireType.setName(nameField.getText().toString());
 
-                QUESTIONNAIRE_TYPE_TABLE.addEntry(questionnaireType);
+                QUESTIONNAIRE_TYPE_TABLE.insert(questionnaireType);
             }
         });
     }

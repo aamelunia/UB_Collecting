@@ -41,27 +41,5 @@ public class FileTable extends Table<File> {
         return TABLE;
     }
 
-//    public static int addFile(File file) {
-//
-//        int fileId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(File.KEY_ID, file.getId());
-//        values.put(File.KEY_NAME, file.getName());
-//        values.put(File.KEY_ANSWER_ID, file.getAnswerId());
-//        values.put(File.KEY_TYPE, file.getType());
-//        values.put(File.KEY_PATH, file.getPath());
-//        values.put(File.KEY_CREATOR_ID, file.getCreatorId());
-//        values.put(File.KEY_START_TIME, file.getStartTime());
-//        values.put(File.KEY_END_TIME, file.getEndTime());
-//
-//        fileId = (int) db.insert(File.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return fileId;
-//
-//    }
 
 }

@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.UUID;
 
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
-import edu.buffalo.cse.ubcollecting.data.tables.LanguageTypeTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TYPE_TABLE;
 
@@ -35,7 +31,7 @@ public class LanguageTypeActivity extends AppCompatActivity {
                 LanguageType langType = new LanguageType();
                 langType.setName(nameField.getText().toString());
 
-                LANGUAGE_TYPE_TABLE.addEntry(langType);
+                LANGUAGE_TYPE_TABLE.insert(langType);
             }
         });
     }

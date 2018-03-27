@@ -5,6 +5,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.lang.reflect.Field;
@@ -19,6 +20,8 @@ public abstract class Table <E extends Model> {
 
     public ArrayList <String> tableColumns;
 
+    private static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
+
     public Table() {
         tableColumns = this.getAllColumnNames();
     }
@@ -28,7 +31,7 @@ public abstract class Table <E extends Model> {
     public abstract String getTableName ();
 
 
-    public long addEntry (Model model) {
+    public long insert(Model model) {
 
         long rowId;
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -66,6 +69,73 @@ public abstract class Table <E extends Model> {
         }
         else if (value instanceof String){
             values.put(key,(String) value);
+        }
+
+    }
+
+    public ArrayList<E> getAll() {
+
+        ArrayList<E> tuples = new ArrayList<>();
+
+        try {
+
+            Class theClass = Class.forName(MODEL_PATH + this.getTableName());
+
+            String selectQuery = "SELECT  * FROM " + this.getTableName();
+            SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            ArrayList<Method> setters = ((E) theClass.newInstance()).getSetters();
+
+            if (cursor.moveToFirst()) {
+                do {
+                    E model = (E) theClass.newInstance();
+
+                    for (int i=0; i<tableColumns.size(); i++){
+                            String key = tableColumns.get(i);
+                            Method method = setters.get(i);
+                            insertIntoObject(cursor,model,key,method);
+                    }
+                    tuples.add(model);
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+
+            DatabaseManager.getInstance().closeDatabase();
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return tuples;
+
+    }
+
+    private void insertIntoObject(Cursor cursor, E model, String key, Method method) {
+
+        try {
+            Class<?> ptype = method.getParameterTypes()[0];
+
+            if (Integer.TYPE.equals(ptype)){
+                int value = cursor.getInt(cursor.getColumnIndex(key));
+                method.invoke(model,value);
+            }
+            else {
+                String value = cursor.getString(cursor.getColumnIndex(key));
+                method.invoke(model,value);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
 
     }
