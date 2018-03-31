@@ -10,13 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".PersonActivity" />
         <activity android:name=".FieldTripActivity" />
         <activity android:name=".FileActivity" />
         <activity android:name=".LanguageActivity" />
@@ -33,7 +27,13 @@
         <activity android:name=".QuestionPropertyActivity" />
         <activity android:name=".QuestionPropertyDefActivity" />
         <activity android:name=".SessionAnswerActivity" />
-        <activity android:name=".SessionPersonActivity"></activity>
+        <activity android:name=".SessionPersonActivity" />
+        <activity android:name=".TableListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

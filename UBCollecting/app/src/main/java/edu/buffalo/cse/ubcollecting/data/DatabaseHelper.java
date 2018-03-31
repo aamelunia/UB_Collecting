@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import edu.buffalo.cse.ubcollecting.app.App;
 import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
@@ -27,6 +31,7 @@ import edu.buffalo.cse.ubcollecting.data.tables.RoleTable;
 import edu.buffalo.cse.ubcollecting.data.tables.SessionAnswerTable;
 import edu.buffalo.cse.ubcollecting.data.tables.SessionPersonTable;
 import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
+import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -58,6 +63,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final SessionAnswerTable SESSION_ANSWER_TABLE = new SessionAnswerTable();
     public static final SessionPersonTable SESSION_PERSON_TABLE = new SessionPersonTable();
     public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
+
+    public static final List<Table<?>> TABLES = Arrays.asList(
+            ANSWER_TABLE,
+            FIELD_TRIP_TABLE,
+            FILE_TABLE,
+            LANGUAGE_TABLE,
+            LANGUAGE_TYPE_TABLE,
+            PERSON_TABLE,
+            QUESTION_TABLE,
+            QUESTION_LANG_VERSION_TABLE,
+            QUESTIONNAIRE_TABLE,
+            QUESTIONNAIRE_CONTENT_TABLE,
+            QUESTION_OPTION_TABLE,
+            QUESTION_PROPERTY_TABLE,
+            ROLE_TABLE,
+            SESSION_TABLE,
+            SESSION_ANSWER_TABLE,
+            SESSION_PERSON_TABLE,
+            QUESTION_PROPERTY_DEF_TABLE
+    );
 
 
     public DatabaseHelper() {
