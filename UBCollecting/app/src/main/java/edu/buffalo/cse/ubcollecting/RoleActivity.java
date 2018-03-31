@@ -27,6 +27,18 @@ public class RoleActivity extends AppCompatActivity {
     private CheckBox onClientBox;
     private Button submitButton;
 
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, RoleActivity.class);
+        return i;
+    }
+
+    public static String getName(Intent result) {
+        return result.getStringExtra(EXTRA_ROLE_NAME);
+    }
+
+    public static String getId(Intent result) {
+        return result.getStringExtra(EXTRA_ROLE_ID);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +69,6 @@ public class RoleActivity extends AppCompatActivity {
                 Toast.makeText(getContext(), "Role created", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public static Intent newIntent(Context packageContext) {
-        Intent i = new Intent(packageContext, RoleActivity.class);
-        return i;
-    }
-
-    public static String getName(Intent result) {
-        return result.getStringExtra(EXTRA_ROLE_NAME);
-    }
-
-    public static String getId(Intent result) {
-        return result.getStringExtra(EXTRA_ROLE_ID);
     }
 
     private void setRoleCreatedResult(Role role) {

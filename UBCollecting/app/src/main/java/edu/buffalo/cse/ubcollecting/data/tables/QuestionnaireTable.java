@@ -35,7 +35,7 @@ public class QuestionnaireTable extends MainTable<Questionnaire> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

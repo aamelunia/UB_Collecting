@@ -15,17 +15,17 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_ANSWER_ID = "AnswerId";
 
-    public SessionAnswerTable () {
+    public SessionAnswerTable() {
         super();
     }
 
-    public String createTable(){
+    public String createTable() {
 
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
                 + KEY_QUESTIONNAIRE_ID + " TEXT," + KEY_QUESTION_ID + " TEXT,"
                 + KEY_ANSWER_ID + " TEXT,"
-                + " PRIMARY KEY("+ KEY_SESSION_ID + ", " + KEY_QUESTIONNAIRE_ID +", "
+                + " PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_QUESTIONNAIRE_ID + ", "
                 + KEY_QUESTION_ID + ", " + KEY_ANSWER_ID + "),"
                 + " FOREIGN KEY(" + KEY_QUESTIONNAIRE_ID + ") REFERENCES " + QuestionnaireTable.TABLE
                 + " (" + QuestionnaireTable.KEY_ID + "),"
@@ -39,7 +39,7 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

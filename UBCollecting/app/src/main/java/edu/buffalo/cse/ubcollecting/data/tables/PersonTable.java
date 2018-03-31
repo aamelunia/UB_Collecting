@@ -23,13 +23,13 @@ public class PersonTable extends MainTable<Person> {
     public static final String KEY_MAIN_ROLE_ID = "MainRoleId";
     public static final String KEY_INTRO_QUEST_DESC = "IntroQuestDesc";
 
-    public PersonTable () {
+    public PersonTable() {
         super();
     }
 
     @Override
-    public String createTable(){
-        Log.i("PERSON TABLE:",TABLE);
+    public String createTable() {
+        Log.i("PERSON TABLE:", TABLE);
         return "CREATE TABLE "
                 + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME
                 + " VARCHAR, " + KEY_OTHER_NAMES + " VARCHAR, " + KEY_DOB
@@ -40,7 +40,7 @@ public class PersonTable extends MainTable<Person> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

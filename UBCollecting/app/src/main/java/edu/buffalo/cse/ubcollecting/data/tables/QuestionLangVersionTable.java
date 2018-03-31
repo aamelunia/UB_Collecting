@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
 public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
@@ -15,12 +16,12 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     public static final String KEY_QUESTION_TEXT = "QuestionText";
 
 
-    public QuestionLangVersionTable () {
+    public QuestionLangVersionTable() {
         super();
     }
 
     @Override
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTION_ID + " TEXT,"
                 + KEY_QUESTION_LANG_ID + " TEXT," + KEY_QUESTION_TEXT + " VARCHAR,"
@@ -31,7 +32,7 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

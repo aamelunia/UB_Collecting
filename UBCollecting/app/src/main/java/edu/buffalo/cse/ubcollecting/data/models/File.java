@@ -23,7 +23,7 @@ public class File extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -82,7 +82,6 @@ public class File extends Model {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-
 
 
 }

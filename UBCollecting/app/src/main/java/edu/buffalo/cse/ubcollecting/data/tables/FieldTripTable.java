@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 public class FieldTripTable extends MainTable<FieldTrip> {
@@ -15,11 +16,11 @@ public class FieldTripTable extends MainTable<FieldTrip> {
     public static final String KEY_START_DATE = "StartDate";
     public static final String KEY_END_DATE = "EndDate";
 
-    public FieldTripTable () {
+    public FieldTripTable() {
         super();
     }
 
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_FIELD_TRIP_NAME
                 + " VARCHAR," + KEY_START_DATE + " DATETIME," + KEY_END_DATE
@@ -27,7 +28,7 @@ public class FieldTripTable extends MainTable<FieldTrip> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

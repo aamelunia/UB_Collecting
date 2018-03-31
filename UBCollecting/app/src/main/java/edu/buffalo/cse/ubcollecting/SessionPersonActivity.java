@@ -1,14 +1,12 @@
 package edu.buffalo.cse.ubcollecting;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
-import edu.buffalo.cse.ubcollecting.data.tables.SessionPersonTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.SESSION_PERSON_TABLE;
 

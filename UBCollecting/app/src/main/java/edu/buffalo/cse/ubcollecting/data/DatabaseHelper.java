@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,15 +35,6 @@ import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = DatabaseHelper.class.getSimpleName().toString();
-
-
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
-
-    // Database Name
-    private static final String DATABASE_NAME = "Collection";
-
     public static final AnswerTable ANSWER_TABLE = new AnswerTable();
     public static final FieldTripTable FIELD_TRIP_TABLE = new FieldTripTable();
     public static final FileTable FILE_TABLE = new FileTable();
@@ -63,7 +53,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final SessionAnswerTable SESSION_ANSWER_TABLE = new SessionAnswerTable();
     public static final SessionPersonTable SESSION_PERSON_TABLE = new SessionPersonTable();
     public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
-
     public static final List<Table<?>> TABLES = Arrays.asList(
             ANSWER_TABLE,
             FIELD_TRIP_TABLE,
@@ -83,6 +72,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SESSION_PERSON_TABLE,
             QUESTION_PROPERTY_DEF_TABLE
     );
+    private static final String TAG = DatabaseHelper.class.getSimpleName().toString();
+    // Database Version
+    private static final int DATABASE_VERSION = 1;
+    // Database Name
+    private static final String DATABASE_NAME = "Collection";
 
 
     public DatabaseHelper() {

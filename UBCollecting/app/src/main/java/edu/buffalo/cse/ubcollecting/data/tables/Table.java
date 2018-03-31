@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
-public abstract class Table <E extends Model> {
+public abstract class Table<E extends Model> {
 
 //    STILL HAVE TO TO DO TABLE COLUMNS AND GETTERS/SETTERS SORTING TO BE SAFE
 
@@ -24,7 +24,7 @@ public abstract class Table <E extends Model> {
 
     public final String TAG = this.getClass().getSimpleName();
 
-    public ArrayList <String> tableColumns;
+    public ArrayList<String> tableColumns;
 
     public Table() {
         tableColumns = this.getAllColumnNames();
@@ -32,7 +32,7 @@ public abstract class Table <E extends Model> {
 
     public abstract String createTable();
 
-    public abstract String getTableName ();
+    public abstract String getTableName();
 
     public long insert(Model model) {
 
@@ -43,12 +43,12 @@ public abstract class Table <E extends Model> {
 
         ArrayList<Method> getters = model.getGetters();
 
-        for (int i=0; i<tableColumns.size(); i++){
+        for (int i = 0; i < tableColumns.size(); i++) {
 
             try {
-            String key = tableColumns.get(i);
-            Object value = getters.get(i).invoke(model,null);
-            insertContent(values,key,value);
+                String key = tableColumns.get(i);
+                Object value = getters.get(i).invoke(model, null);
+                insertContent(values, key, value);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (IllegalArgumentException e) {
@@ -59,7 +59,7 @@ public abstract class Table <E extends Model> {
 
         }
 
-        rowId = db.insert(this.getTableName(),null,values);
+        rowId = db.insert(this.getTableName(), null, values);
 
         DatabaseManager.getInstance().closeDatabase();
 
@@ -68,11 +68,10 @@ public abstract class Table <E extends Model> {
 
     protected void insertContent(ContentValues values, String key, Object value) {
 
-        if (value instanceof Integer){
-            values.put(key,(Integer) value);
-        }
-        else if (value instanceof String){
-            values.put(key,(String) value);
+        if (value instanceof Integer) {
+            values.put(key, (Integer) value);
+        } else if (value instanceof String) {
+            values.put(key, (String) value);
         }
 
     }
@@ -95,10 +94,10 @@ public abstract class Table <E extends Model> {
                 do {
                     E model = (E) theClass.newInstance();
 
-                    for (int i=0; i<tableColumns.size(); i++){
-                            String key = tableColumns.get(i);
-                            Method method = setters.get(i);
-                            insertIntoObject(cursor,model,key,method);
+                    for (int i = 0; i < tableColumns.size(); i++) {
+                        String key = tableColumns.get(i);
+                        Method method = setters.get(i);
+                        insertIntoObject(cursor, model, key, method);
                     }
                     tuples.add(model);
                 } while (cursor.moveToNext());
@@ -112,8 +111,7 @@ public abstract class Table <E extends Model> {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -121,18 +119,17 @@ public abstract class Table <E extends Model> {
 
     }
 
-     protected void insertIntoObject(Cursor cursor, E model, String key, Method method) {
+    protected void insertIntoObject(Cursor cursor, E model, String key, Method method) {
 
         try {
             Class<?> ptype = method.getParameterTypes()[0];
 
-            if (Integer.TYPE.equals(ptype)){
+            if (Integer.TYPE.equals(ptype)) {
                 int value = cursor.getInt(cursor.getColumnIndex(key));
-                method.invoke(model,value);
-            }
-            else {
+                method.invoke(model, value);
+            } else {
                 String value = cursor.getString(cursor.getColumnIndex(key));
-                method.invoke(model,value);
+                method.invoke(model, value);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -144,14 +141,14 @@ public abstract class Table <E extends Model> {
 
     }
 
-    private ArrayList<String> getAllColumnNames () {
+    private ArrayList<String> getAllColumnNames() {
 
-        Field [] allFields = this.getClass().getDeclaredFields();
-        ArrayList <String> allColumnNames = new ArrayList<>();
+        Field[] allFields = this.getClass().getDeclaredFields();
+        ArrayList<String> allColumnNames = new ArrayList<>();
 
-        for (int i = 0; i < allFields.length; i++){
+        for (int i = 0; i < allFields.length; i++) {
 
-            if(allFields[i].getName().startsWith("KEY")) {
+            if (allFields[i].getName().startsWith("KEY")) {
                 try {
                     Field field = allFields[i];
                     allColumnNames.add((String) field.get(this));

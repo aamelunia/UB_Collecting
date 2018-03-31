@@ -14,7 +14,7 @@ public class LanguageType extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -25,7 +25,6 @@ public class LanguageType extends Model {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
 }

@@ -37,7 +37,7 @@ public class FileTable extends MainTable<File> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

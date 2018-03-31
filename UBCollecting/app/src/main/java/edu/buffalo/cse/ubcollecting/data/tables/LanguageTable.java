@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 
 public class LanguageTable extends MainTable<Language> {
@@ -16,12 +17,12 @@ public class LanguageTable extends MainTable<Language> {
     public static final String KEY_OTHER_NAMES = "OtherNames";
     public static final String KEY_TYPE_ID = "TypeId";
 
-    public LanguageTable () {
+    public LanguageTable() {
         super();
     }
 
     @Override
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
                 + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
@@ -31,7 +32,7 @@ public class LanguageTable extends MainTable<Language> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

@@ -17,7 +17,7 @@ public class Role extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,7 +52,6 @@ public class Role extends Model {
     public void setOnClient(int onClient) {
         this.onClient = onClient;
     }
-
 
 
 }

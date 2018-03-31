@@ -15,13 +15,13 @@ public abstract class Model {
         id = generateID();
     }
 
-    public ArrayList<Method> getGetters () {
+    public ArrayList<Method> getGetters() {
 
-        Method [] m = this.getClass().getDeclaredMethods();
-        ArrayList <Method> getters = new ArrayList<>();
+        Method[] m = this.getClass().getDeclaredMethods();
+        ArrayList<Method> getters = new ArrayList<>();
 
-        for (int i = 0; i < m.length; i++){
-            if(m[i].getName().startsWith("get")) {
+        for (int i = 0; i < m.length; i++) {
+            if (m[i].getName().startsWith("get")) {
                 getters.add(m[i]);
             }
         }
@@ -29,13 +29,13 @@ public abstract class Model {
         return getters;
     }
 
-    public ArrayList<Method> getSetters () {
+    public ArrayList<Method> getSetters() {
 
-        Method [] m = this.getClass().getDeclaredMethods();
-        ArrayList <Method> setters = new ArrayList<>();
+        Method[] m = this.getClass().getDeclaredMethods();
+        ArrayList<Method> setters = new ArrayList<>();
 
-        for (int i = 0; i < m.length; i++){
-            if(m[i].getName().startsWith("set")) {
+        for (int i = 0; i < m.length; i++) {
+            if (m[i].getName().startsWith("set")) {
                 setters.add(m[i]);
             }
         }
@@ -48,6 +48,6 @@ public abstract class Model {
         while (s.length() < 5) {
             s = "0" + s;
         }
-        return "1"+ s + String.valueOf(System.currentTimeMillis());
+        return "1" + s + String.valueOf(System.currentTimeMillis());
     }
 }

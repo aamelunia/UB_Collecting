@@ -1,9 +1,7 @@
 package edu.buffalo.cse.ubcollecting.data;
 
 /**
-
- File adapted from http://instinctcoder.com/android-studio-sqlite-database-multiple-tables-example/
-
+ * File adapted from http://instinctcoder.com/android-studio-sqlite-database-multiple-tables-example/
  */
 
 import android.database.sqlite.SQLiteDatabase;
@@ -12,10 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseManager {
 
-    private Integer mOpenCounter = 0;
-
     private static DatabaseManager instance;
     private static SQLiteOpenHelper mDatabaseHelper;
+    private Integer mOpenCounter = 0;
     private SQLiteDatabase mDatabase;
 
     public static synchronized void initializeInstance(SQLiteOpenHelper helper) {
@@ -35,8 +32,8 @@ public class DatabaseManager {
     }
 
     public synchronized SQLiteDatabase openDatabase() {
-        mOpenCounter+=1;
-        if(mOpenCounter == 1) {
+        mOpenCounter += 1;
+        if (mOpenCounter == 1) {
             // Opening new database
             mDatabase = mDatabaseHelper.getWritableDatabase();
         }
@@ -44,8 +41,8 @@ public class DatabaseManager {
     }
 
     public synchronized void closeDatabase() {
-        mOpenCounter-=1;
-        if(mOpenCounter == 0) {
+        mOpenCounter -= 1;
+        if (mOpenCounter == 0) {
             // Closing database
             mDatabase.close();
 

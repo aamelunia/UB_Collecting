@@ -20,21 +20,21 @@ public class SessionTable extends MainTable<Session> {
     public static final String KEY_DESCRIPTION = "Description";
     public static final String KEY_FIELD_TRIP_ID = "FieldTripId";
 
-    public SessionTable () {
+    public SessionTable() {
         super();
     }
 
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL
                 + " VARCHAR," + KEY_NAME + " VARCHAR," + KEY_START_TIME
                 + " DATETIME," + KEY_LOCATION + " VARCHAR," + KEY_DESCRIPTION
-                + " VARCHAR,"+ KEY_FIELD_TRIP_ID + " TEXT," + " FOREIGN KEY(" + KEY_FIELD_TRIP_ID
+                + " VARCHAR," + KEY_FIELD_TRIP_ID + " TEXT," + " FOREIGN KEY(" + KEY_FIELD_TRIP_ID
                 + ") REFERENCES " + FieldTripTable.TABLE + " (" + FieldTripTable.KEY_ID + ")" + ")";
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

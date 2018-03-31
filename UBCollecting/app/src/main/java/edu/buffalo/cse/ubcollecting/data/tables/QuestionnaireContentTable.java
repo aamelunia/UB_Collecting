@@ -3,6 +3,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
@@ -14,12 +15,12 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_QUESTION_ORDER = "QuestionOrder";
 
-    public QuestionnaireContentTable () {
+    public QuestionnaireContentTable() {
         super();
     }
 
     @Override
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_QUESTIONNAIRE_ID + " TEXT,"
                 + KEY_QUESTION_ID + " TEXT," + KEY_QUESTION_ORDER + " VARCHAR,"
@@ -32,7 +33,7 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

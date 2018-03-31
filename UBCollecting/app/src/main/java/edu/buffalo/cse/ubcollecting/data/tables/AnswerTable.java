@@ -5,7 +5,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Answer;
 /**
  * Created by aamel786 on 2/17/18.
  */
-public class AnswerTable extends MainTable <Answer> {
+public class AnswerTable extends MainTable<Answer> {
 
     public static final String TABLE = "Answer";
 
@@ -16,23 +16,23 @@ public class AnswerTable extends MainTable <Answer> {
     public static final String KEY_LABEL = "Label";
     public static final String KEY_TEXT = "Text";
 
-    public AnswerTable () {
+    public AnswerTable() {
         super();
     }
 
-    public String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT," + KEY_QUESTIONNAIRE_ID
                 + " TEXT," + KEY_QUESTION_ID + " TEXT," + KEY_LABEL + " VARCHAR,"
                 + KEY_TEXT + " VARCHAR,"
-                + " PRIMARY KEY(" + KEY_QUESTIONNAIRE_ID+", " + KEY_QUESTION_ID+", " + KEY_ID + "),"
+                + " PRIMARY KEY(" + KEY_QUESTIONNAIRE_ID + ", " + KEY_QUESTION_ID + ", " + KEY_ID + "),"
                 + " FOREIGN KEY(" + KEY_QUESTION_ID + ") REFERENCES " + QuestionTable.TABLE
                 + " (" + QuestionTable.KEY_ID + ")," + " FOREIGN KEY(" + KEY_QUESTIONNAIRE_ID + ") REFERENCES "
                 + QuestionnaireTable.TABLE + " (" + QuestionnaireTable.KEY_ID + ")" + ")";
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
 }

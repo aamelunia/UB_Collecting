@@ -14,7 +14,7 @@ public class Question extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -25,7 +25,6 @@ public class Question extends Model {
     public void setType(String type) {
         this.type = type;
     }
-
 
 
 }

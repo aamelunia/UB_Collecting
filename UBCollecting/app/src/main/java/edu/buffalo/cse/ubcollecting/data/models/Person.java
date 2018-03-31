@@ -22,7 +22,7 @@ public class Person extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -81,7 +81,6 @@ public class Person extends Model {
     public void setIntroQuestDesc(String questdesc) {
         this.introQuestDesc = questdesc;
     }
-
 
 
 }

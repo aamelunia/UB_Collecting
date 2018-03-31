@@ -18,7 +18,7 @@ public class Language extends Model {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,7 +53,6 @@ public class Language extends Model {
     public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
-
 
 
 }

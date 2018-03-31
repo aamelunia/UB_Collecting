@@ -15,7 +15,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
     public static final String KEY_PERSON_ID = "PersonId";
     public static final String KEY_ROLE_ID = "RoleId";
 
-    public SessionPersonTable () {
+    public SessionPersonTable() {
         super();
     }
 
