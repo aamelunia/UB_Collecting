@@ -5,7 +5,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Answer;
 /**
  * Created by aamel786 on 2/17/18.
  */
-public class AnswerTable extends Table <Answer> {
+public class AnswerTable extends MainTable <Answer> {
 
     public static final String TABLE = "Answer";
 

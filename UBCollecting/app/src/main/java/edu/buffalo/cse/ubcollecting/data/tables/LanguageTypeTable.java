@@ -5,7 +5,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
-public class LanguageTypeTable extends Table<LanguageType> {
+public class LanguageTypeTable extends MainTable<LanguageType> {
 
     public static final String TABLE = "LanguageType";
 
@@ -28,22 +28,5 @@ public class LanguageTypeTable extends Table<LanguageType> {
         return TABLE;
     }
 
-//    public static int addLanguageType(LanguageType languageType) {
-//
-//        int languageTypeId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(LanguageType.KEY_ID, languageType.getId());
-//        values.put(LanguageType.KEY_NAME, languageType.getName());
-//
-//        languageTypeId = (int) db.insert(LanguageType.TABLE,null,values);
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return languageTypeId;
-//
-//    }
 
 }

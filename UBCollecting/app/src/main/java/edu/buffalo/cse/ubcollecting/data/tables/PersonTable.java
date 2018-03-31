@@ -9,7 +9,7 @@ import android.util.Log;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 
 
-public class PersonTable extends Table<Person> {
+public class PersonTable extends MainTable<Person> {
 
     public static final String TABLE = "Person";
 

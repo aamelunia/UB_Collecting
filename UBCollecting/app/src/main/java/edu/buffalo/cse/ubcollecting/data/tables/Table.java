@@ -18,11 +18,10 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table <E extends Model> {
 
-    private static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
+    protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
 
     public final String TAG = this.getClass().getSimpleName();
 
-    public String TABLE;
     public ArrayList <String> tableColumns;
 
     public Table() {
@@ -118,7 +117,7 @@ public abstract class Table <E extends Model> {
 
     }
 
-    private void insertIntoObject(Cursor cursor, E model, String key, Method method) {
+     protected void insertIntoObject(Cursor cursor, E model, String key, Method method) {
 
         try {
             Class<?> ptype = method.getParameterTypes()[0];

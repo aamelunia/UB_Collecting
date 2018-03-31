@@ -5,7 +5,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
-public class QuestionnaireTypeTable extends Table<QuestionnaireType> {
+public class QuestionnaireTypeTable extends MainTable<QuestionnaireType> {
 
     public static final String TABLE = "QuestionnaireType";
 

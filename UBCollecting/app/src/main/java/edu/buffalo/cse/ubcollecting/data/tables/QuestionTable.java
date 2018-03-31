@@ -7,7 +7,7 @@ import android.util.Log;
 
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 
-public class QuestionTable extends Table<Question> {
+public class QuestionTable extends MainTable<Question> {
 
     public static final String TABLE = "Question";
 

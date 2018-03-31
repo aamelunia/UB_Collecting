@@ -5,7 +5,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 
-public class LanguageTable extends Table<Language> {
+public class LanguageTable extends MainTable<Language> {
 
     public static final String TABLE = "Language";
 

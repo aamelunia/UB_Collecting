@@ -6,7 +6,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
-public class SessionTable extends Table<Session> {
+public class SessionTable extends MainTable<Session> {
 
     // Table Name
     public static final String TABLE = "Session";

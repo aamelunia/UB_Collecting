@@ -5,7 +5,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
-public class QuestionPropertyDefTable extends Table<QuestionPropertyDef> {
+public class QuestionPropertyDefTable extends MainTable<QuestionPropertyDef> {
 
     public static final String TABLE = "QuestionPropertyDef";
 
