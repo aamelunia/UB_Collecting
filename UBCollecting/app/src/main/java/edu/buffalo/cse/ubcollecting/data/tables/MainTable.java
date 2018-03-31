@@ -41,6 +41,8 @@ public abstract class MainTable<E extends Model> extends Table<E> {
 
             ArrayList<Method> setters = model.getSetters();
 
+//            Collections.sort(setters, new MethodComparator());
+
             if (cursor.moveToFirst()) {
 
                 for (int i = 0; i < tableColumns.size(); i++) {
@@ -74,6 +76,8 @@ public abstract class MainTable<E extends Model> extends Table<E> {
         ContentValues updatedValues = new ContentValues();
 
         ArrayList<Method> getters = model.getGetters();
+
+//        Collections.sort(getters, new MethodComparator());
 
         String id = null;
 

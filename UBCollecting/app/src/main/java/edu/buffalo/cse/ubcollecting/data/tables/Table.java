@@ -28,6 +28,7 @@ public abstract class Table<E extends Model> {
 
     public Table() {
         tableColumns = this.getAllColumnNames();
+//        Collections.sort(tableColumns);
     }
 
     public abstract String createTable();
@@ -42,6 +43,8 @@ public abstract class Table<E extends Model> {
         ContentValues values = new ContentValues();
 
         ArrayList<Method> getters = model.getGetters();
+
+//        Collections.sort(getters, new MethodComparator());
 
         for (int i = 0; i < tableColumns.size(); i++) {
 
@@ -89,6 +92,8 @@ public abstract class Table<E extends Model> {
 
             Cursor cursor = db.rawQuery(selectQuery, null);
             ArrayList<Method> setters = ((E) theClass.newInstance()).getSetters();
+
+//            Collections.sort(setters, new MethodComparator());
 
             if (cursor.moveToFirst()) {
                 do {
