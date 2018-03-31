@@ -15,8 +15,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table<E extends Model> {
@@ -32,11 +34,7 @@ public abstract class Table<E extends Model> {
 
     public Table() {
         tableColumns = this.getAllColumnNames();
-<<<<<<< HEAD
-//        Collections.sort(tableColumns);
-=======
-
->>>>>>> b27ebc6... Connected tables to corresponding activities
+        Collections.sort(tableColumns);
     }
 
     public abstract String createTable();
@@ -52,7 +50,7 @@ public abstract class Table<E extends Model> {
 
         ArrayList<Method> getters = model.getGetters();
 
-//        Collections.sort(getters, new MethodComparator());
+        Collections.sort(getters, new MethodComparator());
 
         for (int i = 0; i < tableColumns.size(); i++) {
 
@@ -106,7 +104,7 @@ public abstract class Table<E extends Model> {
             Cursor cursor = db.rawQuery(selectQuery, null);
             ArrayList<Method> setters = ((E) theClass.newInstance()).getSetters();
 
-//            Collections.sort(setters, new MethodComparator());
+            Collections.sort(setters, new MethodComparator());
 
             if (cursor.moveToFirst()) {
                 do {

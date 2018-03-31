@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
+import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 /**
@@ -77,7 +79,7 @@ public abstract class MainTable<E extends Model> extends Table<E> {
 
         ArrayList<Method> getters = model.getGetters();
 
-//        Collections.sort(getters, new MethodComparator());
+        Collections.sort(getters, new MethodComparator());
 
         String id = null;
 
