@@ -18,9 +18,12 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table <E extends Model> {
 
-    public ArrayList <String> tableColumns;
-
     private static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
+
+    public final String TAG = this.getClass().getSimpleName();
+
+    public String TABLE;
+    public ArrayList <String> tableColumns;
 
     public Table() {
         tableColumns = this.getAllColumnNames();
@@ -30,9 +33,7 @@ public abstract class Table <E extends Model> {
 
     public abstract String getTableName ();
 
-
     public long insert(Model model) {
-
         long rowId;
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
@@ -160,6 +161,4 @@ public abstract class Table <E extends Model> {
 
         return allColumnNames;
     }
-
-
 }

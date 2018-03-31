@@ -40,6 +40,4 @@ public class FileTable extends Table<File> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

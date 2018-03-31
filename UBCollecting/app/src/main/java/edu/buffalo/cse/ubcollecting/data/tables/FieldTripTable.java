@@ -30,6 +30,4 @@ public class FieldTripTable extends Table<FieldTrip> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

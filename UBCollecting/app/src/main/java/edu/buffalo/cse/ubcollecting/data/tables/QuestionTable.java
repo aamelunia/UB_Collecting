@@ -30,5 +30,4 @@ public class QuestionTable extends Table<Question> {
     public String getTableName(){
         return TABLE;
     }
-
 }

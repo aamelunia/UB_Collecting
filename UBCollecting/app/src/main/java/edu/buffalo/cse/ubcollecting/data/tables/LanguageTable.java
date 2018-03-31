@@ -34,6 +34,4 @@ public class LanguageTable extends Table<Language> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

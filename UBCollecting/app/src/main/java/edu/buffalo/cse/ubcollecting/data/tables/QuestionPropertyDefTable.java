@@ -28,5 +28,4 @@ public class QuestionPropertyDefTable extends Table<QuestionPropertyDef> {
     public String getTableName(){
         return TABLE;
     }
-
 }

@@ -33,5 +33,4 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
     public String getTableName(){
         return TABLE;
     }
-
 }

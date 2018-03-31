@@ -54,11 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final QuestionOptionTable QUESTION_OPTION_TABLE = new QuestionOptionTable();
     public static final QuestionPropertyTable QUESTION_PROPERTY_TABLE = new QuestionPropertyTable();
     public static final RoleTable ROLE_TABLE = new RoleTable();
-    public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
     public static final SessionTable SESSION_TABLE = new SessionTable();
     public static final SessionAnswerTable SESSION_ANSWER_TABLE = new SessionAnswerTable();
     public static final SessionPersonTable SESSION_PERSON_TABLE = new SessionPersonTable();
-
+    public static final QuestionPropertyDefTable QUESTION_PROPERTY_DEF_TABLE = new QuestionPropertyDefTable();
 
 
     public DatabaseHelper() {
@@ -84,6 +83,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ROLE_TABLE.createTable());
         db.execSQL(FIELD_TRIP_TABLE.createTable());
         db.execSQL(FILE_TABLE.createTable());
+        db.execSQL(SESSION_TABLE.createTable());
+        db.execSQL(SESSION_ANSWER_TABLE.createTable());
+        db.execSQL(SESSION_PERSON_TABLE.createTable());
         db.execSQL(SESSION_TABLE.createTable());
         db.execSQL(SESSION_ANSWER_TABLE.createTable());
         db.execSQL(SESSION_PERSON_TABLE.createTable());
@@ -124,35 +126,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
-
-//    public static String findById(String tableName, int id) {
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        String selectQuery = "SELECT  * FROM " + tableName + " WHERE _id = " + Integer.toString(id);
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        StringBuffer sb = new StringBuffer();
-//
-//        if (cursor.moveToFirst()) {
-//
-//            int totalFields = cursor.getColumnCount();
-//
-//            for (int i = 0; i < totalFields; i++) {
-//                sb.append(cursor.getColumnName(i));
-//                sb.append(": ");
-//                sb.append(cursor.getString(i));
-//                sb.append(" ");
-//
-//            }
-//
-//            DatabaseManager.getInstance().closeDatabase();
-//
-//        }
-//
-//        return sb.toString();
-//
-//
-//    }
-
 }

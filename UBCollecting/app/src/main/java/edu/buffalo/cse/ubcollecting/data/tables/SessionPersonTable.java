@@ -5,6 +5,7 @@ import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 /**
  * Created by aamel786 on 2/17/18.
  */
+
 public class SessionPersonTable extends Table<SessionPerson> {
 
     public static final String TABLE = "SessionPerson";
@@ -18,7 +19,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
         super();
     }
 
-    public  String createTable(){
+    public String createTable() {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
                 + KEY_PERSON_ID + " TEXT," + KEY_ROLE_ID + " TEXT,"
@@ -32,8 +33,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
     }
 
     @Override
-    public String getTableName(){
+    public String getTableName() {
         return TABLE;
     }
-
 }

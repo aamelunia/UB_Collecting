@@ -35,6 +35,4 @@ public class AnswerTable extends Table <Answer> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

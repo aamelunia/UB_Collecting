@@ -42,5 +42,4 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
     public String getTableName(){
         return TABLE;
     }
-
 }

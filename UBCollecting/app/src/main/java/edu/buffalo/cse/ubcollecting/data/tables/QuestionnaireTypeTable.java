@@ -28,6 +28,4 @@ public class QuestionnaireTypeTable extends Table<QuestionnaireType> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

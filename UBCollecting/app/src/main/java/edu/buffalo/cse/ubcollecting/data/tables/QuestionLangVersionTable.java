@@ -34,6 +34,4 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }

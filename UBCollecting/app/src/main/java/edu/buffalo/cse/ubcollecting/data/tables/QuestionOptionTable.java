@@ -33,5 +33,4 @@ public class QuestionOptionTable extends Table<QuestionOption> {
     public String getTableName(){
         return TABLE;
     }
-
 }

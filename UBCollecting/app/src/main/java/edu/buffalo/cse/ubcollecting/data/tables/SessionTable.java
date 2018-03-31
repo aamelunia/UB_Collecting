@@ -37,5 +37,4 @@ public class SessionTable extends Table<Session> {
     public String getTableName(){
         return TABLE;
     }
-
 }

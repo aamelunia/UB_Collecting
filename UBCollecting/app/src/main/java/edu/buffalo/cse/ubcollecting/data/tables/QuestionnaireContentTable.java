@@ -35,6 +35,4 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     public String getTableName(){
         return TABLE;
     }
-
-
 }
