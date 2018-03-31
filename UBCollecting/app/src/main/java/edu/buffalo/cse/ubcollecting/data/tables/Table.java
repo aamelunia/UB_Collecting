@@ -175,7 +175,7 @@ public abstract class Table<E extends Model> {
             if (allFields[i].getName().startsWith("KEY")) {
                 try {
                     Field field = allFields[i];
-                    allColumnNames.add((String) field.get(this));
+                    allColumnNames.add(((String) field.get(this)).toLowerCase());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
