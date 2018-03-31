@@ -22,7 +22,7 @@ import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table<E extends Model> {
-    
+
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
 
     public final String TAG = this.getClass().getSimpleName();
