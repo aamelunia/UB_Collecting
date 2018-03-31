@@ -18,6 +18,8 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table <E extends Model> {
 
+//    STILL HAVE TO TO DO TABLE COLUMNS AND GETTERS/SETTERS SORTING TO BE SAFE
+
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
 
     public final String TAG = this.getClass().getSimpleName();
@@ -33,7 +35,9 @@ public abstract class Table <E extends Model> {
     public abstract String getTableName ();
 
     public long insert(Model model) {
+
         long rowId;
+
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
 
@@ -62,7 +66,7 @@ public abstract class Table <E extends Model> {
         return rowId;
     }
 
-    private void insertContent(ContentValues values, String key, Object value) {
+    protected void insertContent(ContentValues values, String key, Object value) {
 
         if (value instanceof Integer){
             values.put(key,(Integer) value);
