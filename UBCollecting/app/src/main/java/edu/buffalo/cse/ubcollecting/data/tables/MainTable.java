@@ -19,8 +19,6 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class MainTable<E extends Model> extends Table<E> {
 
-    //    STILL HAVE TO TO DO TABLE COLUMNS AND GETTERS/SETTERS SORTING TO BE SAFE
-
     public MainTable() {
 
     }
@@ -43,7 +41,7 @@ public abstract class MainTable<E extends Model> extends Table<E> {
 
             ArrayList<Method> setters = model.getSetters();
 
-//            Collections.sort(setters, new MethodComparator());
+            Collections.sort(setters, new MethodComparator());
 
             if (cursor.moveToFirst()) {
 

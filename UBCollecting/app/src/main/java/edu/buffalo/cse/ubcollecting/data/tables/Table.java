@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -23,9 +22,7 @@ import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table<E extends Model> {
-
-//    STILL HAVE TO TO DO TABLE COLUMNS AND GETTERS/SETTERS SORTING TO BE SAFE
-
+    
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
 
     public final String TAG = this.getClass().getSimpleName();
@@ -36,9 +33,6 @@ public abstract class Table<E extends Model> {
     public Table() {
         tableColumns = this.getAllColumnNames();
         Collections.sort(tableColumns);
-        for (int i = 0; i<tableColumns.size(); i++){
-            Log.i("Table Columns: ",tableColumns.get(i));
-        }
     }
 
     public abstract String createTable();
@@ -55,10 +49,6 @@ public abstract class Table<E extends Model> {
         ArrayList<Method> getters = model.getGetters();
 
         Collections.sort(getters, new MethodComparator());
-
-        for (int i = 0; i<getters.size(); i++){
-            Log.i("Getter Methods: ",getters.get(i).getName());
-        }
 
         for (int i = 0; i < tableColumns.size(); i++) {
 
