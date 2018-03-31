@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.QuestionnaireTypeActivity;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 
 public class QuestionnaireTypeTable extends MainTable<QuestionnaireType> {
@@ -16,6 +17,7 @@ public class QuestionnaireTypeTable extends MainTable<QuestionnaireType> {
 
     public QuestionnaireTypeTable() {
         super();
+        activityClass = QuestionnaireTypeActivity.class;
     }
 
     @Override

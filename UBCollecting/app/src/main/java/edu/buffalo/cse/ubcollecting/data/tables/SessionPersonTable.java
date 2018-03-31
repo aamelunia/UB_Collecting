@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.SessionPersonActivity;
 import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 
 /**
@@ -17,6 +18,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
 
     public SessionPersonTable() {
         super();
+        activityClass = SessionPersonActivity.class;
     }
 
     public String createTable() {

@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.AnswerActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Answer;
 
 /**
@@ -18,6 +19,7 @@ public class AnswerTable extends MainTable<Answer> {
 
     public AnswerTable() {
         super();
+        activityClass = AnswerActivity.class;
     }
 
     public String createTable() {

@@ -6,6 +6,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 
 import android.util.Log;
 
+import edu.buffalo.cse.ubcollecting.QuestionActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 
 public class QuestionTable extends MainTable<Question> {
@@ -18,6 +19,7 @@ public class QuestionTable extends MainTable<Question> {
 
     public QuestionTable() {
         super();
+        activityClass = QuestionActivity.class;
     }
 
     @Override

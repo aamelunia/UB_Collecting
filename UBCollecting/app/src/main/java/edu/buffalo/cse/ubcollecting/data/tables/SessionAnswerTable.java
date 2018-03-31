@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import edu.buffalo.cse.ubcollecting.SessionAnswerActivity;
 import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
 
 /**
@@ -17,6 +18,7 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
 
     public SessionAnswerTable() {
         super();
+        activityClass = SessionAnswerActivity.class;
     }
 
     public String createTable() {

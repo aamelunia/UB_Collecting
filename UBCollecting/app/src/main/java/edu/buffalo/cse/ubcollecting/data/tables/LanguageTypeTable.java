@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.LanguageTypeActivity;
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
 public class LanguageTypeTable extends MainTable<LanguageType> {
@@ -16,6 +17,7 @@ public class LanguageTypeTable extends MainTable<LanguageType> {
 
     public LanguageTypeTable() {
         super();
+        activityClass =  LanguageTypeActivity.class;
     }
 
     @Override

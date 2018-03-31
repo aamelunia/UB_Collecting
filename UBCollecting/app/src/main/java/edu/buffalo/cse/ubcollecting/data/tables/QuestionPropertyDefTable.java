@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.QuestionPropertyDefActivity;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
 public class QuestionPropertyDefTable extends MainTable<QuestionPropertyDef> {
@@ -17,6 +18,7 @@ public class QuestionPropertyDefTable extends MainTable<QuestionPropertyDef> {
 
     public QuestionPropertyDefTable() {
         super();
+        activityClass = QuestionPropertyDefActivity.class;
     }
 
     @Override

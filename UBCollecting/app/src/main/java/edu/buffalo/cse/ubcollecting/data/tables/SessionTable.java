@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.SessionActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 public class SessionTable extends MainTable<Session> {
@@ -22,6 +23,7 @@ public class SessionTable extends MainTable<Session> {
 
     public SessionTable() {
         super();
+        activityClass = SessionActivity.class;
     }
 
     public String createTable() {

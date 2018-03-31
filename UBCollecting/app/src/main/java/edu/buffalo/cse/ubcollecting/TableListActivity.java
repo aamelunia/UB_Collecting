@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,9 +53,17 @@ public class TableListActivity extends AppCompatActivity {
             deleteButton = view.findViewById(R.id.table_item_delete_button);
         }
 
-        public void bindTable(Table<?> table) {
-            this.table = table;
+        public void bindTable(Table<?> table1) {
+            this.table = table1;
             tableNameView.setText(table.getTableName());
+
+            insertButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = table.createActivityIntent(TableListActivity.this);
+                    startActivity(i);
+                }
+            });
         }
     }
 

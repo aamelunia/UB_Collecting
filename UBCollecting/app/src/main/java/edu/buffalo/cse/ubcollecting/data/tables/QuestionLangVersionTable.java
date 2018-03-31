@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.QuestionLangVersionActivity;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
 public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
@@ -18,6 +19,7 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
     public QuestionLangVersionTable() {
         super();
+        activityClass = QuestionLangVersionActivity.class;
     }
 
     @Override

@@ -6,6 +6,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 
 import android.util.Log;
 
+import edu.buffalo.cse.ubcollecting.RoleActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 public class RoleTable extends MainTable<Role> {
@@ -21,6 +22,7 @@ public class RoleTable extends MainTable<Role> {
 
     public RoleTable() {
         super();
+        activityClass = RoleActivity.class;
     }
 
     @Override

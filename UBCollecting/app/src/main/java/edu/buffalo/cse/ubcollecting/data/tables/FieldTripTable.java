@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.FieldTripActivity;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 public class FieldTripTable extends MainTable<FieldTrip> {
@@ -18,6 +19,7 @@ public class FieldTripTable extends MainTable<FieldTrip> {
 
     public FieldTripTable() {
         super();
+        activityClass = FieldTripActivity.class;
     }
 
     public String createTable() {

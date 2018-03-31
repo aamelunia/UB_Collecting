@@ -5,8 +5,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  */
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -25,10 +28,15 @@ public abstract class Table<E extends Model> {
     public final String TAG = this.getClass().getSimpleName();
 
     public ArrayList<String> tableColumns;
+    public Class<? extends AppCompatActivity> activityClass;
 
     public Table() {
         tableColumns = this.getAllColumnNames();
+<<<<<<< HEAD
 //        Collections.sort(tableColumns);
+=======
+
+>>>>>>> b27ebc6... Connected tables to corresponding activities
     }
 
     public abstract String createTable();
@@ -67,6 +75,11 @@ public abstract class Table<E extends Model> {
         DatabaseManager.getInstance().closeDatabase();
 
         return rowId;
+    }
+
+    public Intent createActivityIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, activityClass);
+        return i;
     }
 
     protected void insertContent(ContentValues values, String key, Object value) {

@@ -4,6 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import edu.buffalo.cse.ubcollecting.QuestionOptionActivity;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
 
 public class QuestionOptionTable extends Table<QuestionOption> {
@@ -17,6 +18,7 @@ public class QuestionOptionTable extends Table<QuestionOption> {
 
     public QuestionOptionTable() {
         super();
+        activityClass = QuestionOptionActivity.class;
     }
 
     @Override

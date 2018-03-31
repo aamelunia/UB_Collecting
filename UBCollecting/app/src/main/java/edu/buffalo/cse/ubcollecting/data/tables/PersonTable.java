@@ -6,6 +6,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 
 import android.util.Log;
 
+import edu.buffalo.cse.ubcollecting.PersonActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 
 
@@ -25,6 +26,7 @@ public class PersonTable extends MainTable<Person> {
 
     public PersonTable() {
         super();
+        activityClass = PersonActivity.class;
     }
 
     @Override
