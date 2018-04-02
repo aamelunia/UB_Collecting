@@ -12,6 +12,10 @@ public class QuestionProperty extends Model {
     public String propertyId;
     public int value;
 
+    public String getIdentifier() {
+        return Integer.toString(value);
+    }
+
     public String getQuestionId() {
         return questionId;
     }

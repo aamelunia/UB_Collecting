@@ -12,6 +12,10 @@ public class SessionPerson extends Model {
     public String personId;
     public String roleId;
 
+    public String getIdentifier() {
+        //TODO
+        return "SESSION PERSON";
+    }
 
     public String getSessionId() {
         return sessionId;

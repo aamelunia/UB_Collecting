@@ -12,6 +12,10 @@ public class QuestionnaireContent extends Model {
     public String questionId;
     public String questionOrder;
 
+    public String getIdentifier() {
+        //TODO
+        return "QUESTIONNAIRE CONTENT";
+    }
 
     public String getQuestionnaireId() {
         return questionnaireId;

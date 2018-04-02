@@ -13,6 +13,10 @@ public class SessionAnswer extends Model {
     public String questionId;
     public String answerId;
 
+    public String getIdentifier() {
+        //TODO
+        return "SESSION ANSWER";
+    }
 
     public String getSessionId() {
         return sessionId;

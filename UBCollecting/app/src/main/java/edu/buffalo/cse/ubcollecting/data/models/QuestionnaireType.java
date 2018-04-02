@@ -10,6 +10,10 @@ public class QuestionnaireType extends Model {
 
     public String name;
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }

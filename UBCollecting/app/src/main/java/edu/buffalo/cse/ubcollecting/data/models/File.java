@@ -19,6 +19,10 @@ public class File extends Model {
     public String endTime;
 
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }

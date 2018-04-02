@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,7 +22,7 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
-public abstract class Table<E extends Model> {
+public abstract class Table<E extends Model> implements Serializable {
 
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
 

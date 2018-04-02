@@ -13,6 +13,9 @@ public class QuestionOption extends Model {
     public String questionLanguageId;
     public String optionText;
 
+    public String getIdentifier() {
+        return optionText;
+    }
 
     public String getQuestionId() {
         return questionId;

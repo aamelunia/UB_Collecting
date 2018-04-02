@@ -12,6 +12,10 @@ public class QuestionLangVersion extends Model {
     public String questionLanguageId;
     public String questionText;
 
+    public String getIdentifier() {
+        //TODO
+        return "QUESTION LANG VERSION";
+    }
 
     public String getQuestionId() {
         return questionId;

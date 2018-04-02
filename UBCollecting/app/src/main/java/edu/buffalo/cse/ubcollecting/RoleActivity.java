@@ -63,10 +63,7 @@ public class RoleActivity extends AppCompatActivity {
 
                 ROLE_TABLE.insert(role);
                 setRoleCreatedResult(role);
-//                for (Role r: allRoles){
-//                    Log.i("WORKING: ",r.getId()+": "+r.getName());
-//                }
-                Toast.makeText(getContext(), "Role created", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

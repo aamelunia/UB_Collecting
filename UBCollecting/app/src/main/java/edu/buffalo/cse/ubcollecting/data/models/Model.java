@@ -15,6 +15,8 @@ public abstract class Model {
         id = generateID();
     }
 
+    public abstract String getIdentifier();
+
     public ArrayList<Method> getGetters() {
 
         Method[] m = this.getClass().getDeclaredMethods();

@@ -10,6 +10,10 @@ public class Question extends Model {
 
     public String type;
 
+    public String getIdentifier() {
+        return type;
+    }
+
     public String getId() {
         return id;
     }

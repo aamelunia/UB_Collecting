@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 public class TableListActivity extends AppCompatActivity {
@@ -61,6 +63,14 @@ public class TableListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent i = table.createActivityIntent(TableListActivity.this);
+                    startActivity(i);
+                }
+            });
+
+            viewButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = TableViewActivity.newIntent(TableListActivity.this, table);
                     startActivity(i);
                 }
             });

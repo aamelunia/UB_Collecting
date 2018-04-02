@@ -13,6 +13,10 @@ public class Role extends Model {
     public int photoRequired;
     public int onClient;
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }

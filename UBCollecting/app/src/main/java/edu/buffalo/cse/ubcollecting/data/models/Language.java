@@ -14,6 +14,10 @@ public class Language extends Model {
     public String otherNames;
     public String typeId;
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }

@@ -13,6 +13,10 @@ public class Answer extends Model {
     public String label;
     public String text;
 
+    public String getIdentifier() {
+        return label;
+    }
+
     public String getId() {
         return id;
     }

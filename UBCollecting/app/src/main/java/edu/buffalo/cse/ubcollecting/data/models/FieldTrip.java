@@ -13,6 +13,10 @@ public class FieldTrip extends Model {
     public String startDate;
     public String endDate;
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }

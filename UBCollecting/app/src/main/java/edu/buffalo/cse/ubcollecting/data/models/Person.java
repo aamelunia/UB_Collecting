@@ -18,6 +18,10 @@ public class Person extends Model {
     public String introQuestDesc;
 
 
+    public String getIdentifier() {
+        return name;
+    }
+
     public String getId() {
         return id;
     }
