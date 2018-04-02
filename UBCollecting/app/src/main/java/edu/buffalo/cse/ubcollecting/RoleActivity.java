@@ -3,23 +3,20 @@ package edu.buffalo.cse.ubcollecting;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import edu.buffalo.cse.ubcollecting.data.models.Role;
+import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
-import static edu.buffalo.cse.ubcollecting.app.App.getContext;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
 
-public class RoleActivity extends AppCompatActivity {
+public class RoleActivity extends EntryActivity<Role> {
 
     private static final String TAG = RoleActivity.class.getSimpleName().toString();
-    private static final String EXTRA_ROLE_NAME = "edu.buffalo.cse.ubcollecting.role_name";
-    private static final String EXTRA_ROLE_ID = "edu.buffalo.cse.ubcollecting.role_id";
 
     private EditText nameField;
     private CheckBox introRequiredBox;
@@ -32,12 +29,16 @@ public class RoleActivity extends AppCompatActivity {
         return i;
     }
 
-    public static String getName(Intent result) {
-        return result.getStringExtra(EXTRA_ROLE_NAME);
+    public void handleResultGet(int requestCode, Intent data) {
+        return;
     }
 
-    public static String getId(Intent result) {
-        return result.getStringExtra(EXTRA_ROLE_ID);
+    @Override
+    public void setUI(Role role) {
+        nameField.setText(role.getName());
+        introRequiredBox.setChecked(role.getIntroRequired() == 1);
+        photoRequiredBox.setChecked(role.getPhotoRequired() == 1);
+        onClientBox.setChecked(role.getOnClient() == 1);
     }
 
     @Override
@@ -50,7 +51,12 @@ public class RoleActivity extends AppCompatActivity {
         photoRequiredBox = this.findViewById(R.id.role_photo_required_box);
         onClientBox = this.findViewById(R.id.role_on_client_box);
         submitButton = this.findViewById(R.id.role_submit_button);
-//        ArrayList<Role> allRoles = ROLE_TABLE.getAll();
+
+        if (getIntent().extra) {
+            Role entry = this.getEntry(getIntent());
+            Log.i(TAG, entry.getName());
+            setUI(entry);
+        }
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,16 +68,9 @@ public class RoleActivity extends AppCompatActivity {
                 role.setOnClient((onClientBox.isChecked()) ? 1 : 0);
 
                 ROLE_TABLE.insert(role);
-                setRoleCreatedResult(role);
+                setEntryCreatedResult(role);
                 finish();
             }
         });
-    }
-
-    private void setRoleCreatedResult(Role role) {
-        Intent data = new Intent();
-        data.putExtra(EXTRA_ROLE_NAME, role.getName());
-        data.putExtra(EXTRA_ROLE_ID, role.getId());
-        setResult(RESULT_OK, data);
     }
 }

@@ -81,7 +81,10 @@ public class TableViewActivity extends AppCompatActivity {
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO
+                    Intent i = table.editActivityIntent(TableViewActivity.this, entry);
+                    startActivityForResult(i, EntryActivity.REQUEST_CODE_EDIT_ENTRY);
+                    entryAdapter.setEntryList(table.getAll());
+                    entryAdapter.notifyDataSetChanged();
                 }
             });
 

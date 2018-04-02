@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -25,6 +24,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 
 public abstract class Table<E extends Model> implements Serializable {
 
+    public static final int FLAG_EDIT_ENTRY = 1;
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
     private static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";
 
@@ -81,7 +81,7 @@ public abstract class Table<E extends Model> implements Serializable {
         return i;
     }
 
-    public Intent editActivityIntent(Context packageContext, E entry) {
+    public Intent editActivityIntent(Context packageContext, Model entry) {
         Intent i = new Intent(packageContext, activityClass);
         i.putExtra(EXTRA_MODEL, entry);
         return i;
@@ -105,7 +105,7 @@ public abstract class Table<E extends Model> implements Serializable {
 
             Class theClass = Class.forName(MODEL_PATH + this.getTableName());
 
-            Log.i("MODEL NAME:",theClass.getName());
+//            Log.i("MODEL NAME:",theClass.getName());
 
             String selectQuery = "SELECT  * FROM " + this.getTableName();
             SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
