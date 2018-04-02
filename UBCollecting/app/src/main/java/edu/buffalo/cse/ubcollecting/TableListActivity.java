@@ -41,7 +41,6 @@ public class TableListActivity extends AppCompatActivity {
         private TextView tableNameView;
         private ImageButton insertButton;
         private ImageButton viewButton;
-        private ImageButton deleteButton;
 
 
         public TableHolder(View view) {
@@ -50,7 +49,6 @@ public class TableListActivity extends AppCompatActivity {
             tableNameView = view.findViewById(R.id.table_item_name_view);
             insertButton = view.findViewById(R.id.table_item_insert_button);
             viewButton = view.findViewById(R.id.table_item_view_button);
-            deleteButton = view.findViewById(R.id.table_item_delete_button);
         }
 
         public void bindTable(Table<?> table1) {
