@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -69,20 +70,20 @@ public class TableViewActivity extends AppCompatActivity {
 
         private Model entry;
         private TextView entryNameView;
-        private Button editButton;
-        private Button deleteButton;
+        private ImageButton editButton;
+        private ImageButton deleteButton;
 
 
         public EntryHolder(View view) {
             super(view);
 
-            entryNameView = findViewById(R.id.entry_list_text_view);
-            editButton = findViewById(R.id.entry_list_edit_button);
-            deleteButton = findViewById(R.id.entry_list_delete_button);
+            entryNameView = view.findViewById(R.id.entry_list_text_view);
+            editButton = view.findViewById(R.id.entry_list_edit_button);
+            deleteButton = view.findViewById(R.id.entry_list_delete_button);
         }
 
         public void bindEntry(Model entry1) {
-            this.entry = entry1;
+            entry = entry1;
             entryNameView.setText(entry.getIdentifier());
 
             editButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +122,6 @@ public class TableViewActivity extends AppCompatActivity {
         public void onBindViewHolder(TableViewActivity.EntryHolder holder, int position) {
             Model entry = entryList.get(position);
             holder.bindEntry(entry);
-
         }
 
         @Override

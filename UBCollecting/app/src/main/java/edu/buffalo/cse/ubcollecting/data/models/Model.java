@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting.data.models;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * Created by aamel786 on 3/24/18.
  */
 
-public abstract class Model {
+public abstract class Model implements Serializable {
 
     public String id;
 

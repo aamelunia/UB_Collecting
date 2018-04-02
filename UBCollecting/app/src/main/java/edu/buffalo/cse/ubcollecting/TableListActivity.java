@@ -8,14 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
-import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 public class TableListActivity extends AppCompatActivity {
@@ -41,9 +39,9 @@ public class TableListActivity extends AppCompatActivity {
 
         private Table table;
         private TextView tableNameView;
-        private Button insertButton;
-        private Button viewButton;
-        private Button deleteButton;
+        private ImageButton insertButton;
+        private ImageButton viewButton;
+        private ImageButton deleteButton;
 
 
         public TableHolder(View view) {
@@ -62,7 +60,7 @@ public class TableListActivity extends AppCompatActivity {
             insertButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = table.createActivityIntent(TableListActivity.this);
+                    Intent i = table.insertActivityIntent(TableListActivity.this);
                     startActivity(i);
                 }
             });

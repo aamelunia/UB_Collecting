@@ -26,6 +26,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 public abstract class Table<E extends Model> implements Serializable {
 
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
+    private static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -75,8 +76,14 @@ public abstract class Table<E extends Model> implements Serializable {
         return rowId;
     }
 
-    public Intent createActivityIntent(Context packageContext) {
+    public Intent insertActivityIntent(Context packageContext) {
         Intent i = new Intent(packageContext, activityClass);
+        return i;
+    }
+
+    public Intent editActivityIntent(Context packageContext, E entry) {
+        Intent i = new Intent(packageContext, activityClass);
+        i.putExtra(EXTRA_MODEL, entry);
         return i;
     }
 
