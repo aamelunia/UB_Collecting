@@ -84,7 +84,7 @@ public class PersonActivity extends AppCompatActivity {
                 applicant.setName(nameField.getText().toString());
                 applicant.setOtherNames(preferredNameField.getText().toString());
                 applicant.setDob(dobField.getText().toString());
-                applicant.setPhoto(photoField.getText().toString());
+                applicant.setPhotoPath(photoField.getText().toString());
                 applicant.setPhotoDesc(photoDescriptionField.getText().toString());
                 applicant.setMainRoleId(roleId); // TODO
                 applicant.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());

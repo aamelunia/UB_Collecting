@@ -92,10 +92,30 @@ public abstract class Table<E extends Model> implements Serializable {
         if (value instanceof Integer) {
             values.put(key, (Integer) value);
         } else if (value instanceof String) {
-            values.put(key, (String) value);
+//            if (key.equals("Photo")){
+//                insertImage(values,key, value);
+//            }
+//            else{
+                values.put(key, (String) value);
+//            }
         }
 
     }
+
+//    protected void insertImage(ContentValues values, String key, Object value){
+//        try {
+//            FileInputStream fs = new FileInputStream((String) value);
+//            byte[] imgbyte = new byte[fs.available()];
+//            fs.read(imgbyte);
+//            values.put(key, imgbyte);
+//            fs.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
     public ArrayList<E> getAll() {
 
