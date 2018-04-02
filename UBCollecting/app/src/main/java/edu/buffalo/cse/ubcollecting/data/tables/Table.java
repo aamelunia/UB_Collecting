@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -33,7 +34,7 @@ public abstract class Table<E extends Model> implements Serializable {
 
     public Table() {
         tableColumns = this.getAllColumnNames();
-        Collections.sort(tableColumns);
+        Collections.sort(tableColumns, new ColumnComparator());
     }
 
     public abstract String createTable();
@@ -97,6 +98,8 @@ public abstract class Table<E extends Model> implements Serializable {
 
             Class theClass = Class.forName(MODEL_PATH + this.getTableName());
 
+            Log.i("MODEL NAME:",theClass.getName());
+
             String selectQuery = "SELECT  * FROM " + this.getTableName();
             SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
@@ -108,7 +111,6 @@ public abstract class Table<E extends Model> implements Serializable {
             if (cursor.moveToFirst()) {
                 do {
                     E model = (E) theClass.newInstance();
-
                     for (int i = 0; i < tableColumns.size(); i++) {
                         String key = tableColumns.get(i);
                         Method method = setters.get(i);
@@ -162,11 +164,10 @@ public abstract class Table<E extends Model> implements Serializable {
         ArrayList<String> allColumnNames = new ArrayList<>();
 
         for (int i = 0; i < allFields.length; i++) {
-
             if (allFields[i].getName().startsWith("KEY")) {
                 try {
                     Field field = allFields[i];
-                    allColumnNames.add(((String) field.get(this)).toLowerCase());
+                    allColumnNames.add((String) field.get(this));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
