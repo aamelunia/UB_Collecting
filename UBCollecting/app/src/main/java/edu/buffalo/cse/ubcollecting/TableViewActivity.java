@@ -2,31 +2,22 @@ package edu.buffalo.cse.ubcollecting;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
+import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 public class TableViewActivity extends AppCompatActivity {
@@ -35,7 +26,7 @@ public class TableViewActivity extends AppCompatActivity {
 
     private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.table";
 
-    private Table<? extends Model> table;
+    private MainTable<? extends Model> table;
     private RecyclerView entryRecyclerView;
     private EntryAdapter entryAdapter;
 
@@ -54,7 +45,7 @@ public class TableViewActivity extends AppCompatActivity {
         Serializable serializableExtra = getIntent().getSerializableExtra(EXTRA_TABLE);
 
         if (serializableExtra instanceof Table) {
-            table = (Table) serializableExtra;
+            table = (MainTable) serializableExtra;
         } else {
             Log.e(TAG, "Extra was not of type Table");
             finish();
@@ -62,6 +53,7 @@ public class TableViewActivity extends AppCompatActivity {
 
         entryRecyclerView = findViewById(R.id.entry_list_view);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         entryAdapter = new TableViewActivity.EntryAdapter(table.getAll());
         entryRecyclerView.setAdapter(entryAdapter);
     }
@@ -96,7 +88,9 @@ public class TableViewActivity extends AppCompatActivity {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO
+                    table.delete(entry.id);
+                    entryAdapter.setEntryList(table.getAll());
+                    entryAdapter.notifyDataSetChanged();
                 }
             });
         }
@@ -107,6 +101,10 @@ public class TableViewActivity extends AppCompatActivity {
         private List<? extends Model> entryList;
 
         public EntryAdapter(List<? extends Model> entryList) {
+            this.entryList = entryList;
+        }
+
+        public void setEntryList(List<? extends Model> entryList) {
             this.entryList = entryList;
         }
 
