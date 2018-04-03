@@ -64,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             QUESTION_LANG_VERSION_TABLE,
             QUESTIONNAIRE_TABLE,
             QUESTIONNAIRE_CONTENT_TABLE,
+            QUESTIONNAIRE_TYPE_TABLE,
             QUESTION_OPTION_TABLE,
             QUESTION_PROPERTY_TABLE,
             ROLE_TABLE,

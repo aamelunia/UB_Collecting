@@ -62,6 +62,11 @@
             android:layout_margin="10px"
             android:text="@string/person_photo_label" />
 
+        <ImageView
+            android:id="@+id/person_photo_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/person_photo_field"
             android:layout_width="match_parent"

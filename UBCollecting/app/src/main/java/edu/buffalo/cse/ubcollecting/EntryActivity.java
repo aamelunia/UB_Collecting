@@ -3,10 +3,13 @@ package edu.buffalo.cse.ubcollecting;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import java.io.Serializable;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
+import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
 
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
@@ -19,11 +22,11 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
     public final static int REQUEST_CODE_GET_ENTRY = 1;
 
-    E entry;
+    protected E entry;
 
     abstract void setUI(E entry);
 
-    public abstract void handleResultGet(int requestCode, Intent data);
+    abstract void handleResultGet(int requestCode, Intent data);
 
     abstract void setEntryByUI();
 
@@ -53,6 +56,42 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE_GET_ENTRY) {
             handleResultGet(requestCode, data);
+        }
+    }
+
+    class UpdateButtonOnClickListener implements View.OnClickListener {
+
+        MainTable<E> table;
+
+        public UpdateButtonOnClickListener(MainTable<E> table) {
+            this.table = table;
+        }
+
+        @Override
+        public void onClick(View view) {
+            setEntryByUI();
+            Log.i("UPDATE_BUTTON_LISTENER", entry.getIdentifier());
+            table.update(entry);
+            setEntryUpdatedResult(entry);
+            finish();
+        }
+    }
+
+    class SubmitButtonOnClickListener implements View.OnClickListener {
+
+        MainTable<E> table;
+
+        public SubmitButtonOnClickListener(MainTable<E> table) {
+            this.table = table;
+        }
+
+        @Override
+        public void onClick(View view) {
+            setEntryByUI();
+            Log.i("SUBMIT_BUTTON_LISTENER", entry.getIdentifier());
+            table.insert(entry);
+            setEntryCreatedResult(entry);
+            finish();
         }
     }
 }
