@@ -12,13 +12,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -28,6 +26,7 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
+import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
@@ -58,6 +57,16 @@ public class PersonActivity extends EntryActivity<Person> {
         preferredNameField.setText(entry.getOtherNames());
         dobField.setText(entry.getDob());
         retrieveImage();
+
+        int i = 0;
+        for (i = 0; i < roleAdapter.getCount(); i++) {
+            Role role = roleAdapter.getItem(i);
+            if (role.getId().equals(entry.getMainRoleId())){
+                break;
+            }
+        }
+        roleSpinner.setSelection(i);
+
         photoDescriptionField.setText(entry.getPhotoDesc());
         questionnaireDescriptionField.setText(entry.getIntroQuestDesc());
     }
@@ -104,20 +113,7 @@ public class PersonActivity extends EntryActivity<Person> {
         roleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roles);
         roleSpinner.setAdapter(roleAdapter);
         roleSpinner.setSelected(false);
-        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Role role = (Role) parent.getItemAtPosition(position);
-                TextView listView = (TextView) view.findViewById(android.R.id.text1);
-                listView.setText(role.getName());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        roleSpinner.setOnItemSelectedListener(new EntryOnItemSelectedListener<Role>());
 
         if ( ContextCompat.checkSelfPermission( this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions( this, new String[] {  Manifest.permission.CAMERA  }, REQUEST_IMAGE_CAPTURE );
@@ -142,27 +138,10 @@ public class PersonActivity extends EntryActivity<Person> {
         questionnaireDescriptionField = this.findViewById(R.id.person_questionnaire_description_field);
 
         updateButton = this.findViewById(R.id.person_update_button);
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setEntryByUI();
-                PERSON_TABLE.update(entry);
-                setEntryUpdatedResult(entry);
-                finish();
-            }
-        });
+        updateButton.setOnClickListener(new UpdateButtonOnClickListener(PERSON_TABLE));
 
         submitButton = this.findViewById(R.id.person_submit_button);
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setEntryByUI();
-                PERSON_TABLE.insert(entry);
-                setEntryCreatedResult(entry);
-                finish();
-            }
-        });
+        submitButton.setOnClickListener(new SubmitButtonOnClickListener(PERSON_TABLE));
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
             entry = getEntry(getIntent());
@@ -171,8 +150,9 @@ public class PersonActivity extends EntryActivity<Person> {
             submitButton.setVisibility(View.GONE);
         } else {
             entry = new Person();
+            updateButton.setVisibility(View.GONE);
+            submitButton.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override

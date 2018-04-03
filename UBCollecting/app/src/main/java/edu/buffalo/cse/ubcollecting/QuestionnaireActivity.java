@@ -10,9 +10,9 @@ import android.widget.Spinner;
 
 import java.util.List;
 
-import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
+import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
@@ -36,6 +36,14 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         nameField.setText(entry.getName());
         labelField.setText(entry.getLabel());
         descriptionField.setText(entry.getDescription());
+
+        int i = 0;
+        for (i = 0; i < typeAdapter.getCount(); i++) {
+            QuestionnaireType type = typeAdapter.getItem(i);
+            if (type.getId().equals(entry.getTypeId())){
+                break;
+            }
+        }
         typeSpinner.setSelection(0); //TODO
     }
 

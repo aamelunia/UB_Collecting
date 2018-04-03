@@ -3,8 +3,8 @@ package edu.buffalo.cse.ubcollecting;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import java.io.Serializable;
 
@@ -21,6 +21,9 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
     public final static int REQUEST_CODE_GET_ENTRY = 1;
+
+    private Button updateButton;
+    private Button submitButton;
 
     protected E entry;
 
@@ -72,7 +75,6 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            Log.i("UPDATE_BUTTON_LISTENER", entry.getIdentifier());
             table.update(entry);
             setEntryUpdatedResult(entry);
             finish();
@@ -90,7 +92,6 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            Log.i("SUBMIT_BUTTON_LISTENER", entry.getIdentifier());
             table.insert(entry);
             setEntryCreatedResult(entry);
             finish();
