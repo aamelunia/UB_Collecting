@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
+import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
+
 /**
  * Created by kevinrathbun on 4/2/18.
  */
@@ -16,7 +18,8 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
     public final static int REQUEST_CODE_GET_ENTRY = 1;
-    public final String EXTRA_MODEL = this.getClass().getCanonicalName() + ".result";
+
+    E entry;
 
     public abstract void setUI(E entry);
 

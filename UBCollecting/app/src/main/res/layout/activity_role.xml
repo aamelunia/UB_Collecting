@@ -74,6 +74,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/role_update_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/update_button_label" />
+
+        <Button
             android:id="@+id/role_submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

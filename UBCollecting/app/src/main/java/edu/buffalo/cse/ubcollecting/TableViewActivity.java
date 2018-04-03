@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import java.util.List;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
+
+import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_GET_ENTRY;
 
 public class TableViewActivity extends AppCompatActivity {
 
@@ -56,6 +59,18 @@ public class TableViewActivity extends AppCompatActivity {
 
         entryAdapter = new TableViewActivity.EntryAdapter(table.getAll());
         entryRecyclerView.setAdapter(entryAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_CODE_GET_ENTRY) {
+            entryAdapter.setEntryList(table.getAll());
+            entryAdapter.notifyDataSetChanged();
+        }
     }
 
     private class EntryHolder extends RecyclerView.ViewHolder {
@@ -130,4 +145,6 @@ public class TableViewActivity extends AppCompatActivity {
             return entryList.size();
         }
     }
+
+
 }

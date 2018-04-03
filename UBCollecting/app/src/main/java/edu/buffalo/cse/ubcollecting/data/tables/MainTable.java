@@ -20,7 +20,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 public abstract class MainTable<E extends Model> extends Table<E> {
 
     public MainTable() {
-
+        super();
     }
 
     public E findById(String id) {

@@ -22,6 +22,7 @@ public class RoleActivity extends EntryActivity<Role> {
     private CheckBox introRequiredBox;
     private CheckBox photoRequiredBox;
     private CheckBox onClientBox;
+    private Button updateButton;
     private Button submitButton;
 
     public static Intent newIntent(Context packageContext) {
@@ -50,27 +51,43 @@ public class RoleActivity extends EntryActivity<Role> {
         introRequiredBox = this.findViewById(R.id.role_intro_required_box);
         photoRequiredBox = this.findViewById(R.id.role_photo_required_box);
         onClientBox = this.findViewById(R.id.role_on_client_box);
-        submitButton = this.findViewById(R.id.role_submit_button);
+        updateButton = this.findViewById(R.id.role_update_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                entry.setName(nameField.getText().toString());
+                entry.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
+                entry.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
+                entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
+                ROLE_TABLE.update(entry);
+                finish();
+            }
+        });
 
-        if (getIntent().extra) {
-            Role entry = this.getEntry(getIntent());
-            Log.i(TAG, entry.getName());
-            setUI(entry);
-        }
+        submitButton = this.findViewById(R.id.role_submit_button);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Role role = new Role();
-                role.setName(nameField.getText().toString());
-                role.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
-                role.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
-                role.setOnClient((onClientBox.isChecked()) ? 1 : 0);
+                entry.setName(nameField.getText().toString());
+                entry.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
+                entry.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
+                entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
 
-                ROLE_TABLE.insert(role);
-                setEntryCreatedResult(role);
+                ROLE_TABLE.insert(entry);
+                setEntryCreatedResult(entry);
                 finish();
             }
         });
+
+        if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
+            entry = getEntry(getIntent());
+            Log.i(TAG, entry.getName());
+            setUI(entry);
+            updateButton.setVisibility(View.VISIBLE);
+            submitButton.setVisibility(View.GONE);
+        } else {
+            entry = new Role();
+        }
     }
 }

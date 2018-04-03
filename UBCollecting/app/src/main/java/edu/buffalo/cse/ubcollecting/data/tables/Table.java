@@ -26,7 +26,7 @@ public abstract class Table<E extends Model> implements Serializable {
 
     public static final int FLAG_EDIT_ENTRY = 1;
     protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
-    private static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";
+    public static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -84,6 +84,7 @@ public abstract class Table<E extends Model> implements Serializable {
     public Intent editActivityIntent(Context packageContext, Model entry) {
         Intent i = new Intent(packageContext, activityClass);
         i.putExtra(EXTRA_MODEL, entry);
+        i.setFlags(FLAG_EDIT_ENTRY);
         return i;
     }
 

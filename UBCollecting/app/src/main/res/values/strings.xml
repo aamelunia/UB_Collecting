@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="submit_button_label">Submit</string>
+    <string name="update_button_label">Update</string>
 </resources>

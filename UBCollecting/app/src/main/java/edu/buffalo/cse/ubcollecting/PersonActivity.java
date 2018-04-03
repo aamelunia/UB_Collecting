@@ -2,7 +2,6 @@ package edu.buffalo.cse.ubcollecting;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -21,6 +20,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
 public class PersonActivity extends EntryActivity<Person> {
 
@@ -53,7 +53,6 @@ public class PersonActivity extends EntryActivity<Person> {
         Serializable serializableObject = data.getSerializableExtra(EXTRA_MODEL);
         if (serializableObject instanceof Role) {
             Role role = (Role) serializableObject;
-            entry.setMainRoleId(role.getId());
             roleAdapter.insert(role, 0);
             roleSpinner.setAdapter(roleAdapter);
         }
@@ -80,7 +79,6 @@ public class PersonActivity extends EntryActivity<Person> {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 Role role = (Role) parent.getItemAtPosition(position);
-                Log.i(TAG, view.toString());
                 TextView listView = (TextView) view.findViewById(android.R.id.text1);
                 listView.setText(role.getName());
             }
