@@ -67,10 +67,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/person_photo_field"
+        <Button
+            android:id="@+id/person_photo_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Take Photo" />
 
         <TextView
             android:layout_width="match_parent"

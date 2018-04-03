@@ -4,13 +4,13 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 3/24/18.
  */
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -82,6 +82,7 @@ public abstract class Table<E extends Model> implements Serializable {
         return i;
     }
 
+    @SuppressLint("WrongConstant")
     public Intent editActivityIntent(Context packageContext, Model entry) {
         Intent i = new Intent(packageContext, activityClass);
         i.putExtra(EXTRA_MODEL, entry);
@@ -94,30 +95,12 @@ public abstract class Table<E extends Model> implements Serializable {
         if (value instanceof Integer) {
             values.put(key, (Integer) value);
         } else if (value instanceof String) {
-//            if (key.equals("Photo")){
-//                insertImage(values,key, value);
-//            }
-//            else{
-                values.put(key, (String) value);
-//            }
+            values.put(key, (String) value);
+        } else if (value instanceof byte[]){
+            values.put(key, (byte[]) value);
         }
 
     }
-
-//    protected void insertImage(ContentValues values, String key, Object value){
-//        try {
-//            FileInputStream fs = new FileInputStream((String) value);
-//            byte[] imgbyte = new byte[fs.available()];
-//            fs.read(imgbyte);
-//            values.put(key, imgbyte);
-//            fs.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 
     public ArrayList<E> getAll() {
 
@@ -126,8 +109,6 @@ public abstract class Table<E extends Model> implements Serializable {
         try {
 
             Class theClass = Class.forName(MODEL_PATH + this.getTableName());
-
-//            Log.i("MODEL NAME:",theClass.getName());
 
             String selectQuery = "SELECT  * FROM " + this.getTableName();
             SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -173,8 +154,12 @@ public abstract class Table<E extends Model> implements Serializable {
             if (Integer.TYPE.equals(ptype)) {
                 int value = cursor.getInt(cursor.getColumnIndex(key));
                 method.invoke(model, value);
-            } else {
+            } else if ("".getClass().equals(ptype)){
                 String value = cursor.getString(cursor.getColumnIndex(key));
+                method.invoke(model, value);
+            }
+            else {
+                byte [] value = cursor.getBlob(cursor.getColumnIndex(key));
                 method.invoke(model, value);
             }
         } catch (IllegalAccessException e) {
