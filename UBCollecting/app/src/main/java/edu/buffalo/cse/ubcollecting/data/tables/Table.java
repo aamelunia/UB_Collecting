@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -52,6 +53,11 @@ public abstract class Table<E extends Model> implements Serializable {
         ArrayList<Method> getters = model.getGetters();
 
         Collections.sort(getters, new MethodComparator());
+
+        for(int i=0; i<tableColumns.size(); i++){
+            Log.i("TABLE COLUMNS:",tableColumns.get(i));
+            Log.i("METHOD: ",getters.get(i).getName());
+        }
 
         for (int i = 0; i < tableColumns.size(); i++) {
 

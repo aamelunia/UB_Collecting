@@ -24,7 +24,7 @@ public abstract class Model implements Serializable {
         ArrayList<Method> getters = new ArrayList<>();
 
         for (int i = 0; i < m.length; i++) {
-            if (m[i].getName().startsWith("get")) {
+            if (m[i].getName().startsWith("get") && !m[i].getName().equals("getIdentifier")) {
                 getters.add(m[i]);
             }
         }
