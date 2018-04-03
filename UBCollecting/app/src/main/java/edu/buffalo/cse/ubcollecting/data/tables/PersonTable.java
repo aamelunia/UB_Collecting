@@ -36,13 +36,12 @@ public class PersonTable extends MainTable<Person> {
     }
 
     @Override
-//    CHANGED PHOTO TYPE TO VARCHAR INSTEAD OF BLOB, NOT SURE IF WILL WORK
     public String createTable() {
         Log.i("PERSON TABLE:", TABLE);
         return "CREATE TABLE "
                 + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME
                 + " VARCHAR, " + KEY_OTHER_NAMES + " VARCHAR, " + KEY_DOB
-                + " DATETIME, " + KEY_MAIN_ROLE_ID + " TEXT," + KEY_PHOTO + " VARCHAR, "
+                + " DATETIME, " + KEY_MAIN_ROLE_ID + " TEXT," + KEY_PHOTO + " BLOB, "
                 + KEY_PHOTO_DESC + " VARCHAR, " + KEY_INTRO_QUEST_DESC + " VARCHAR,"
                 + " FOREIGN KEY (" + KEY_MAIN_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
                 + " (" + RoleTable.KEY_ID + ")" + ")";

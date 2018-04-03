@@ -12,7 +12,7 @@ public class Person extends Model {
     public String name;
     public String otherNames;
     public String dob;
-    public String photo;
+    public byte [] photo;
     public String photoDesc;
     public String mainRoleId;
     public String introQuestDesc;
@@ -54,11 +54,11 @@ public class Person extends Model {
         this.dob = dob;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
