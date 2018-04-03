@@ -12,7 +12,7 @@ public class Person extends Model {
     public String name;
     public String otherNames;
     public String dob;
-    public String photoPath;
+    public String photo;
     public String photoDesc;
     public String mainRoleId;
     public String introQuestDesc;
@@ -54,12 +54,12 @@ public class Person extends Model {
         this.dob = dob;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getPhotoDesc() {

@@ -25,7 +25,7 @@ public class PersonTable extends MainTable<Person> {
     public static final String KEY_NAME = "Name";
     public static final String KEY_OTHER_NAMES = "OtherNames";
     public static final String KEY_DOB = "DOB";
-    public static final String KEY_PHOTO_PATH = "PhotoPath";
+    public static final String KEY_PHOTO = "Photo";
     public static final String KEY_PHOTO_DESC = "PhotoDesc";
     public static final String KEY_MAIN_ROLE_ID = "MainRoleId";
     public static final String KEY_INTRO_QUEST_DESC = "IntroQuestDesc";
@@ -42,7 +42,7 @@ public class PersonTable extends MainTable<Person> {
         return "CREATE TABLE "
                 + TABLE + "( " + KEY_ID + " TEXT PRIMARY KEY, " + KEY_NAME
                 + " VARCHAR, " + KEY_OTHER_NAMES + " VARCHAR, " + KEY_DOB
-                + " DATETIME, " + KEY_MAIN_ROLE_ID + " TEXT," + KEY_PHOTO_PATH + " VARCHAR, "
+                + " DATETIME, " + KEY_MAIN_ROLE_ID + " TEXT," + KEY_PHOTO + " VARCHAR, "
                 + KEY_PHOTO_DESC + " VARCHAR, " + KEY_INTRO_QUEST_DESC + " VARCHAR,"
                 + " FOREIGN KEY (" + KEY_MAIN_ROLE_ID + ") REFERENCES " + RoleTable.TABLE
                 + " (" + RoleTable.KEY_ID + ")" + ")";
