@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,8 +17,10 @@ import java.util.List;
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
+import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
 public class PersonActivity extends EntryActivity<Person> {
@@ -34,6 +35,7 @@ public class PersonActivity extends EntryActivity<Person> {
     private EditText photoField;
     private EditText photoDescriptionField;
     private EditText questionnaireDescriptionField;
+    private Button updateButton;
     private Button submitButton;
 
     private ArrayAdapter<Role> roleAdapter;
@@ -46,6 +48,19 @@ public class PersonActivity extends EntryActivity<Person> {
         photoField.setText(entry.getPhoto());
         photoDescriptionField.setText(entry.getPhotoDesc());
         questionnaireDescriptionField.setText(entry.getIntroQuestDesc());
+    }
+
+    @Override
+    public void setEntryByUI() {
+        Role role = (Role) roleSpinner.getSelectedItem();
+
+        entry.setName(nameField.getText().toString());
+        entry.setOtherNames(preferredNameField.getText().toString());
+        entry.setDob(dobField.getText().toString());
+        entry.setPhoto(photoField.getText().toString());
+        entry.setPhotoDesc(photoDescriptionField.getText().toString());
+        entry.setMainRoleId(role.getId());
+        entry.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
     }
 
     @Override
@@ -92,28 +107,37 @@ public class PersonActivity extends EntryActivity<Person> {
         photoField = this.findViewById(R.id.person_photo_field);
         photoDescriptionField = this.findViewById(R.id.person_photo_description_field);
         questionnaireDescriptionField = this.findViewById(R.id.person_questionnaire_description_field);
+
+        updateButton = this.findViewById(R.id.person_update_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setEntryByUI();
+                PERSON_TABLE.update(entry);
+                setEntryUpdatedResult(entry);
+                finish();
+            }
+        });
+
         submitButton = this.findViewById(R.id.person_submit_button);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Person applicant = new Person();
-                Role role = (Role) roleSpinner.getSelectedItem();
-
-                applicant.setName(nameField.getText().toString());
-                applicant.setOtherNames(preferredNameField.getText().toString());
-                applicant.setDob(dobField.getText().toString());
-                applicant.setPhoto(photoField.getText().toString());
-                applicant.setPhotoDesc(photoDescriptionField.getText().toString());
-                applicant.setMainRoleId(role.getId());
-                applicant.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
-
-                PERSON_TABLE.insert(applicant);
-
-                Toast.makeText(PersonActivity.this,
-                        "Added " + applicant.getName() + " to database",
-                        Toast.LENGTH_SHORT).show();
+                setEntryByUI();
+                PERSON_TABLE.insert(entry);
+                setEntryCreatedResult(entry);
+                finish();
             }
         });
+
+        if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
+            entry = getEntry(getIntent());
+            setUI(entry);
+            updateButton.setVisibility(View.VISIBLE);
+            submitButton.setVisibility(View.GONE);
+        } else {
+            entry = new Person();
+        }
     }
 }

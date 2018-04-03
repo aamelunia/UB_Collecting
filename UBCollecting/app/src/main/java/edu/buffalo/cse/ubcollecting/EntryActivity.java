@@ -21,9 +21,17 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     E entry;
 
-    public abstract void setUI(E entry);
+    abstract void setUI(E entry);
 
     public abstract void handleResultGet(int requestCode, Intent data);
+
+    abstract void setEntryByUI();
+
+    public void setEntryUpdatedResult(E entry) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_MODEL, entry);
+        setResult(RESULT_OK, data);
+    }
 
     public void setEntryCreatedResult(E entry) {
         Intent data = new Intent();

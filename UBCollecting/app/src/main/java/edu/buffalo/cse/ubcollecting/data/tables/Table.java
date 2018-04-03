@@ -54,11 +54,6 @@ public abstract class Table<E extends Model> implements Serializable {
 
         Collections.sort(getters, new MethodComparator());
 
-        for(int i=0; i<tableColumns.size(); i++){
-            Log.i("TABLE COLUMNS:",tableColumns.get(i));
-            Log.i("METHOD: ",getters.get(i).getName());
-        }
-
         for (int i = 0; i < tableColumns.size(); i++) {
 
             try {

@@ -13,6 +13,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
 public class RoleActivity extends EntryActivity<Role> {
 
@@ -43,6 +44,14 @@ public class RoleActivity extends EntryActivity<Role> {
     }
 
     @Override
+    public void setEntryByUI() {
+        entry.setName(nameField.getText().toString());
+        entry.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
+        entry.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
+        entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_role);
@@ -55,11 +64,9 @@ public class RoleActivity extends EntryActivity<Role> {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                entry.setName(nameField.getText().toString());
-                entry.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
-                entry.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
-                entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
+                setEntryByUI();
                 ROLE_TABLE.update(entry);
+                setEntryUpdatedResult(entry);
                 finish();
             }
         });
@@ -69,11 +76,7 @@ public class RoleActivity extends EntryActivity<Role> {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                entry.setName(nameField.getText().toString());
-                entry.setIntroRequired((introRequiredBox.isChecked()) ? 1 : 0);
-                entry.setPhotoRequired((photoRequiredBox.isChecked()) ? 1 : 0);
-                entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
-
+                setEntryByUI();
                 ROLE_TABLE.insert(entry);
                 setEntryCreatedResult(entry);
                 finish();
@@ -82,7 +85,6 @@ public class RoleActivity extends EntryActivity<Role> {
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
             entry = getEntry(getIntent());
-            Log.i(TAG, entry.getName());
             setUI(entry);
             updateButton.setVisibility(View.VISIBLE);
             submitButton.setVisibility(View.GONE);
