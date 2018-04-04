@@ -3,7 +3,6 @@ package edu.buffalo.cse.ubcollecting;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +12,6 @@ import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
-import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
 public class RoleActivity extends EntryActivity<Role> {
 

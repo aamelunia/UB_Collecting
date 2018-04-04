@@ -21,11 +21,9 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
     public final static int REQUEST_CODE_GET_ENTRY = 1;
-
+    protected E entry;
     private Button updateButton;
     private Button submitButton;
-
-    protected E entry;
 
     abstract void setUI(E entry);
 
@@ -53,7 +51,7 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != Activity.RESULT_OK) {
             return;

@@ -53,7 +53,7 @@ public class PersonTable extends MainTable<Person> {
     }
 
 
-    public Bitmap getImage(String url){
+    public Bitmap getImage(String url) {
 
         Bitmap bt = null;
         try {
@@ -61,7 +61,7 @@ public class PersonTable extends MainTable<Person> {
             byte[] imgbyte = new byte[fs.available()];
             fs.read(imgbyte);
             fs.close();
-            bt = BitmapFactory.decodeByteArray(imgbyte,0,imgbyte.length);
+            bt = BitmapFactory.decodeByteArray(imgbyte, 0, imgbyte.length);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -17,7 +17,7 @@ public class LanguageTypeTable extends MainTable<LanguageType> {
 
     public LanguageTypeTable() {
         super();
-        activityClass =  LanguageTypeActivity.class;
+        activityClass = LanguageTypeActivity.class;
     }
 
     @Override

@@ -53,4 +53,11 @@ public abstract class Model implements Serializable {
         }
         return "1" + s + String.valueOf(System.currentTimeMillis());
     }
+
+
+    //TODO
+    @Override
+    public String toString() {
+        return getIdentifier();
+    }
 }

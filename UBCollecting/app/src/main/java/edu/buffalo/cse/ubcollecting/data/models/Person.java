@@ -12,7 +12,7 @@ public class Person extends Model {
     public String name;
     public String otherNames;
     public String dob;
-    public byte [] photo;
+    public byte[] photo;
     public String photoDesc;
     public String mainRoleId;
     public String introQuestDesc;

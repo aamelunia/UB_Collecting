@@ -26,9 +26,8 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 public abstract class Table<E extends Model> implements Serializable {
 
     public static final int FLAG_EDIT_ENTRY = 1;
-    protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
     public static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";
-
+    protected static final String MODEL_PATH = "edu.buffalo.cse.ubcollecting.data.models.";
     public final String TAG = this.getClass().getSimpleName();
 
     public ArrayList<String> tableColumns;
@@ -96,7 +95,7 @@ public abstract class Table<E extends Model> implements Serializable {
             values.put(key, (Integer) value);
         } else if (value instanceof String) {
             values.put(key, (String) value);
-        } else if (value instanceof byte[]){
+        } else if (value instanceof byte[]) {
             values.put(key, (byte[]) value);
         }
 
@@ -154,12 +153,11 @@ public abstract class Table<E extends Model> implements Serializable {
             if (Integer.TYPE.equals(ptype)) {
                 int value = cursor.getInt(cursor.getColumnIndex(key));
                 method.invoke(model, value);
-            } else if ("".getClass().equals(ptype)){
+            } else if ("".getClass().equals(ptype)) {
                 String value = cursor.getString(cursor.getColumnIndex(key));
                 method.invoke(model, value);
-            }
-            else {
-                byte [] value = cursor.getBlob(cursor.getColumnIndex(key));
+            } else {
+                byte[] value = cursor.getBlob(cursor.getColumnIndex(key));
                 method.invoke(model, value);
             }
         } catch (IllegalAccessException e) {

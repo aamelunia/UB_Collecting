@@ -4,7 +4,6 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
-import edu.buffalo.cse.ubcollecting.PersonActivity;
 import edu.buffalo.cse.ubcollecting.QuestionnaireActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 

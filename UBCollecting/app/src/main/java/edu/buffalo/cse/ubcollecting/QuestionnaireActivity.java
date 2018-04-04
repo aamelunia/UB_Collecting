@@ -12,7 +12,6 @@ import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
-import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
@@ -40,7 +39,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         int i = 0;
         for (i = 0; i < typeAdapter.getCount(); i++) {
             QuestionnaireType type = typeAdapter.getItem(i);
-            if (type.getId().equals(entry.getTypeId())){
+            if (type.getId().equals(entry.getTypeId())) {
                 break;
             }
         }
@@ -72,8 +71,8 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
         List<QuestionnaireType> types = QUESTIONNAIRE_TYPE_TABLE.getAll();
         typeAdapter = new ArrayAdapter<>(this,
-                                         android.R.layout.simple_spinner_item,
-                                         types);
+                android.R.layout.simple_spinner_item,
+                types);
         typeSpinner.setAdapter(typeAdapter);
         typeSpinner.setSelected(false);
         typeSpinner.setOnItemSelectedListener(new EntryOnItemSelectedListener<QuestionnaireType>());

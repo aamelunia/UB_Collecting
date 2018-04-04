@@ -1,7 +1,6 @@
 package edu.buffalo.cse.ubcollecting.ui;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 
 /**

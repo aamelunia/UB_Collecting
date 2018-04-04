@@ -61,7 +61,7 @@ public class PersonActivity extends EntryActivity<Person> {
         int i = 0;
         for (i = 0; i < roleAdapter.getCount(); i++) {
             Role role = roleAdapter.getItem(i);
-            if (role.getId().equals(entry.getMainRoleId())){
+            if (role.getId().equals(entry.getMainRoleId())) {
                 break;
             }
         }
@@ -115,8 +115,8 @@ public class PersonActivity extends EntryActivity<Person> {
         roleSpinner.setSelected(false);
         roleSpinner.setOnItemSelectedListener(new EntryOnItemSelectedListener<Role>());
 
-        if ( ContextCompat.checkSelfPermission( this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
-            ActivityCompat.requestPermissions( this, new String[] {  Manifest.permission.CAMERA  }, REQUEST_IMAGE_CAPTURE );
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
         }
 
         photoView = this.findViewById(R.id.person_photo_view);
@@ -158,26 +158,26 @@ public class PersonActivity extends EntryActivity<Person> {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE ) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             photoView.setImageBitmap(imageBitmap);
         }
     }
 
-    private void addImage(){
+    private void addImage() {
         photoView.setDrawingCacheEnabled(true);
         photoView.buildDrawingCache();
         Bitmap bitmap = photoView.getDrawingCache();
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,bo);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bo);
         byte[] data = bo.toByteArray();
         entry.setPhoto(data);
     }
 
-    private void retrieveImage(){
-        byte [] image = entry.getPhoto();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image,0,image.length);
+    private void retrieveImage() {
+        byte[] image = entry.getPhoto();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         photoView.setImageBitmap(bitmap);
     }
 
