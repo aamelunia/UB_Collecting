@@ -16,7 +16,8 @@ public class Person extends Model {
     public String photoDesc;
     public String mainRoleId;
     public String introQuestDesc;
-
+    public String email;
+    public String password;
 
     public String getIdentifier() {
         return name;
@@ -86,5 +87,20 @@ public class Person extends Model {
         this.introQuestDesc = questdesc;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }
