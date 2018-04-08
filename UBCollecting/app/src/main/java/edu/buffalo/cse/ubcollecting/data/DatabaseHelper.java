@@ -108,8 +108,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SESSION_ANSWER_TABLE.createTable());
         db.execSQL(SESSION_PERSON_TABLE.createTable());
         db.execSQL(ANSWER_TABLE.createTable());
-
-        populateData();
     }
 
     @Override
@@ -146,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void populateData() {
+    public static void populateData() {
         Role admin = new Role();
         admin.setName("ADMIN");
         admin.setIntroRequired(0);

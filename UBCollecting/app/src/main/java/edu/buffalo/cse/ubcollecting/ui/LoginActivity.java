@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.buffalo.cse.ubcollecting.R;
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 
@@ -33,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        DatabaseManager.getInstance().openDatabase();
 
         emailField = findViewById(R.id.login_email_field);
         passwordField= findViewById(R.id.login_password_field);
@@ -77,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Log.i(TAG, "Number of users: "  + PERSON_TABLE.getAll().size());
         if(PERSON_TABLE.getAll().isEmpty()) {
             Intent i = PERSON_TABLE.insertActivityIntent(LoginActivity.this);
             startActivity(i);
