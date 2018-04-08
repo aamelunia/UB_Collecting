@@ -13,15 +13,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
-public class TableListActivity extends AppCompatActivity {
+public abstract class TableListActivity extends AppCompatActivity {
 
     public static final String TAG = TableListActivity.class.getSimpleName();
 
     private RecyclerView tableRecyclerView;
     private RecyclerView.Adapter tableAdapter;
+
+    protected abstract List<Table<? extends Model>> getTables();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class TableListActivity extends AppCompatActivity {
         tableRecyclerView = findViewById(R.id.table_recycler_view);
         tableRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        tableAdapter = new TableAdapter(DatabaseHelper.TABLES);
+        tableAdapter = new TableAdapter(getTables());
         tableRecyclerView.setAdapter(tableAdapter);
     }
 

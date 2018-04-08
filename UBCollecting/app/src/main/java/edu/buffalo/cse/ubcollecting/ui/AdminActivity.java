@@ -3,12 +3,19 @@ package edu.buffalo.cse.ubcollecting.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import edu.buffalo.cse.ubcollecting.R;
-import edu.buffalo.cse.ubcollecting.TableViewActivity;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AdminActivity extends AppCompatActivity {
+import edu.buffalo.cse.ubcollecting.TableListActivity;
+import edu.buffalo.cse.ubcollecting.data.models.Model;
+import edu.buffalo.cse.ubcollecting.data.tables.Table;
+
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_TABLE;
+
+public class AdminActivity extends TableListActivity {
 
     public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, AdminActivity.class);
@@ -16,8 +23,16 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     @Override
+    protected List<Table<? extends Model>> getTables() {
+        List<Table<? extends Model>> tables = new ArrayList<>();
+        tables.add(PERSON_TABLE);
+        tables.add(QUESTIONNAIRE_TABLE);
+        tables.add(QUESTION_TABLE);
+        return tables;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
     }
 }

@@ -29,6 +29,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
     private EditText descriptionField;
     private Spinner typeSpinner;
     private ArrayAdapter<QuestionnaireType> typeAdapter;
+    private Button addQuestionsButton;
     private Button updateButton;
     private Button submitButton;
 
@@ -80,12 +81,18 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         typeSpinner.setSelected(false);
         typeSpinner.setOnItemSelectedListener(new EntryOnItemSelectedListener<QuestionnaireType>());
 
-        updateButton = this.findViewById(R.id.questionnaire_update_button);
+        addQuestionsButton = findViewById(R.id.questionnaire_add_questions_button);
+        addQuestionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+
+        updateButton = this.findViewById(R.id.questionnaire_update_button);
         updateButton.setOnClickListener(new UpdateButtonOnClickListener(QUESTIONNAIRE_TABLE));
 
         submitButton = this.findViewById(R.id.questionnaire_submit_button);
-
         submitButton.setOnClickListener(new SubmitButtonOnClickListener(QUESTIONNAIRE_TABLE));
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {

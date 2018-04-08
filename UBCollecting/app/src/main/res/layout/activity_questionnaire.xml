@@ -56,6 +56,12 @@
             android:spinnerMode="dropdown" />
 
         <Button
+            android:id="@+id/questionnaire_add_questions_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/questionnaire_add_questions"/>
+
+        <Button
             android:id="@+id/questionnaire_update_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

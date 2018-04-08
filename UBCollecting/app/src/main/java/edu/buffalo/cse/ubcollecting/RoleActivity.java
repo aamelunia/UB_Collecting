@@ -29,8 +29,14 @@ public class RoleActivity extends EntryActivity<Role> {
         return i;
     }
 
+    @Override
     public void handleResultGet(int requestCode, Intent data) {
         return;
+    }
+
+    @Override
+    boolean validateEntry() {
+        return true;
     }
 
     @Override
