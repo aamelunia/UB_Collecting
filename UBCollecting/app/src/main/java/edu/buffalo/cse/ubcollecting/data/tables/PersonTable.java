@@ -7,8 +7,6 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-
 import edu.buffalo.cse.ubcollecting.PersonActivity;
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
@@ -58,9 +56,11 @@ public class PersonTable extends MainTable<Person> {
     /* Function that validates email and password of user and returns user's person id and role name
        upon validation  */
 
-    public ArrayList<String> validateUser(String email, String password){
+    public String[] validateUser(String email, String password){
 
-        ArrayList <String> output = new ArrayList<>();
+        password = Person.genHash(password);
+
+        String[] output = new String[2];
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
@@ -82,18 +82,19 @@ public class PersonTable extends MainTable<Person> {
                 null);
 
         if (cursor.moveToFirst()){
-            output.add(cursor.getString(cursor.getColumnIndex(KEY_ID)));
-            output.add(cursor.getString(cursor.getColumnIndex(KEY_MAIN_ROLE_ID)));
+            output[0] = cursor.getString(cursor.getColumnIndex(KEY_ID));
+            output[1] = cursor.getString(cursor.getColumnIndex(KEY_MAIN_ROLE_ID)) ;
+        } else {
+            return null;
         }
 
         cursor.close();
 
         DatabaseManager.getInstance().closeDatabase();
 
-        if (output.size() > 0 && output.get(1) != null && output.get(1).length() > 5){
-            Role role = DatabaseHelper.ROLE_TABLE.findById(output.get(1));
-            output.remove(1);
-            output.add(role.getName());
+        if (output.length > 0 && output[1] != null && output[1].length() > 5){
+            Role role = DatabaseHelper.ROLE_TABLE.findById(output[1]);
+            output[1] = role.getName();
         }
 
         return output;

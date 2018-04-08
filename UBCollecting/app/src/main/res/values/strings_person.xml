@@ -7,4 +7,6 @@
     <string name="person_photo_label">Photo</string>
     <string name="person_photo_description_label">Photo Description</string>
     <string name="person_questionnaire_description_label">Questionnaire Description</string>
+    <string name="person_email_label">Email</string>
+    <string name="person_password_label">Password</string>
 </resources>

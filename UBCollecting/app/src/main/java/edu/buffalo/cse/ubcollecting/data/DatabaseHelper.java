@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.app.App;
+import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
 import edu.buffalo.cse.ubcollecting.data.tables.FileTable;
@@ -108,6 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SESSION_PERSON_TABLE.createTable());
         db.execSQL(ANSWER_TABLE.createTable());
 
+        populateData();
     }
 
     @Override
@@ -142,5 +144,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public void populateData() {
+        Role admin = new Role();
+        admin.setName("ADMIN");
+        admin.setIntroRequired(0);
+        admin.setPhotoRequired(0);
+        admin.setOnClient(0);
+
+        ROLE_TABLE.insert(admin);
+
+        Role student = new Role();
+        admin.setName("STUDENT");
+        admin.setIntroRequired(1);
+        admin.setPhotoRequired(1);
+        admin.setOnClient(0);
+
+        ROLE_TABLE.insert(student);
     }
 }

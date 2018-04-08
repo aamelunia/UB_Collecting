@@ -46,6 +46,8 @@ public class PersonActivity extends EntryActivity<Person> {
     private Button photoButton;
     private EditText photoDescriptionField;
     private EditText questionnaireDescriptionField;
+    private EditText emailField;
+    private EditText passwordField;
     private Button updateButton;
     private Button submitButton;
 
@@ -69,6 +71,7 @@ public class PersonActivity extends EntryActivity<Person> {
 
         photoDescriptionField.setText(entry.getPhotoDesc());
         questionnaireDescriptionField.setText(entry.getIntroQuestDesc());
+        emailField.setText(entry.getEmail());
     }
 
     @Override
@@ -82,6 +85,8 @@ public class PersonActivity extends EntryActivity<Person> {
         entry.setPhotoDesc(photoDescriptionField.getText().toString());
         entry.setMainRoleId(role.getId());
         entry.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
+        entry.setEmail(emailField.getText().toString());
+        entry.setPassword(passwordField.getText().toString());
     }
 
     @Override
@@ -136,6 +141,8 @@ public class PersonActivity extends EntryActivity<Person> {
 
         photoDescriptionField = this.findViewById(R.id.person_photo_description_field);
         questionnaireDescriptionField = this.findViewById(R.id.person_questionnaire_description_field);
+        emailField = this.findViewById(R.id.person_email_field);
+        passwordField = this.findViewById(R.id.person_password_field);
 
         updateButton = this.findViewById(R.id.person_update_button);
         updateButton.setOnClickListener(new UpdateButtonOnClickListener(PERSON_TABLE));
@@ -148,6 +155,7 @@ public class PersonActivity extends EntryActivity<Person> {
             setUI(entry);
             updateButton.setVisibility(View.VISIBLE);
             submitButton.setVisibility(View.GONE);
+            passwordField.setVisibility(View.GONE);
         } else {
             entry = new Person();
             updateButton.setVisibility(View.GONE);

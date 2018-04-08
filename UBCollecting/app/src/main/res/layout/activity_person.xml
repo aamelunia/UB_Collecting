@@ -94,6 +94,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:text="@string/person_email_label" />
+
+        <EditText
+            android:id="@+id/person_email_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:text="@string/person_password_label" />
+
+        <EditText
+            android:id="@+id/person_password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+
         <Button
             android:id="@+id/person_update_button"
             android:layout_width="match_parent"

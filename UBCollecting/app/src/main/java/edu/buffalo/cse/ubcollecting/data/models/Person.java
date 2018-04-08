@@ -1,5 +1,11 @@
 package edu.buffalo.cse.ubcollecting.data.models;
 
+import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
+
 /**
  * Created by aamel786 on 2/17/18.
  */
@@ -100,7 +106,21 @@ public class Person extends Model {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = genHash(password);
     }
 
+    public static String genHash(String input){
+        try {
+            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+            byte[] sha1Hash = sha1.digest(input.getBytes()) ;
+            Formatter formatter = new Formatter() ;
+            for (byte b : sha1Hash) {
+                formatter.format(" \\%02 x", b) ;
+            }
+            return formatter.toString() ;
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "SHA-1 algorithm not found", e);
+            return null;
+        }
+    }
 }
