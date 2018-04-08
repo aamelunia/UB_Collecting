@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         entry.setTypeId(type.getId());
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,5 +98,24 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             updateButton.setVisibility(View.GONE);
             submitButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    protected boolean validateEntry(){
+        boolean valid = true;
+
+        if (nameField.getText().toString().trim().isEmpty()) {
+            nameField.setError("This field is required");
+            valid = false;
+        }
+        if (typeSpinner.getSelectedItem() == null){
+            nameField.setError("This field is required");
+            valid = false;
+        }
+
+        if (!valid){
+            Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
