@@ -154,10 +154,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ROLE_TABLE.insert(admin);
 
         Role student = new Role();
-        admin.setName("STUDENT");
-        admin.setIntroRequired(1);
-        admin.setPhotoRequired(1);
-        admin.setOnClient(0);
+        student.setName("STUDENT");
+        student.setIntroRequired(1);
+        student.setPhotoRequired(1);
+        student.setOnClient(0);
 
         ROLE_TABLE.insert(student);
     }
