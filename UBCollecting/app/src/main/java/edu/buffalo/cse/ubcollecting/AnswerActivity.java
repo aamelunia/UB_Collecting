@@ -45,4 +45,10 @@ public class AnswerActivity extends AppCompatActivity {
             }
         });
     }
+
+    protected boolean validateEntry(){
+
+        return true;
+
+    }
 }

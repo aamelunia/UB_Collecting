@@ -190,4 +190,10 @@ public class PersonActivity extends EntryActivity<Person> {
         photoView.setImageBitmap(bitmap);
     }
 
+    protected boolean validateEntry(){
+
+        return true;
+
+    }
+
 }
