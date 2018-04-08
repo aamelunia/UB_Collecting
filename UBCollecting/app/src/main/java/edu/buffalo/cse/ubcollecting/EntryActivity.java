@@ -31,6 +31,8 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     abstract void setEntryByUI();
 
+    abstract boolean validateEntry();
+
     public void setEntryUpdatedResult(E entry) {
         Intent data = new Intent();
         data.putExtra(EXTRA_MODEL, entry);
@@ -73,9 +75,11 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            table.update(entry);
-            setEntryUpdatedResult(entry);
-            finish();
+            if (validateEntry()) {
+                table.update(entry);
+                setEntryUpdatedResult(entry);
+                finish();
+            }
         }
     }
 
@@ -90,9 +94,11 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            table.insert(entry);
-            setEntryCreatedResult(entry);
-            finish();
+            if (validateEntry()) {
+                table.insert(entry);
+                setEntryCreatedResult(entry);
+                finish();
+            }
         }
     }
 }
