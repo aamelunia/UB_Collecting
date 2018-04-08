@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                     userInfoPreferences.edit().putString(USER_ROLE_KEY, role).apply();
 
                     Intent i;
-                    if(role.equals("ADMIN")) {
+                    if(role.equals("Admin")) {
                         i = AdminActivity.newIntent(LoginActivity.this);
                     } else {
                         i = UserActivity.newIntent(LoginActivity.this);

@@ -31,6 +31,7 @@ public class App extends Application {
         dbHelper = new DatabaseHelper();
         DatabaseManager.initializeInstance(dbHelper);
 
+
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY, Activity.MODE_PRIVATE);
         boolean isFirstRun = preferences.getBoolean(FIRST_RUN_KEY, true);
         if (isFirstRun) {

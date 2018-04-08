@@ -7,11 +7,15 @@ package edu.buffalo.cse.ubcollecting.data;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.util.Property;
 
 import java.util.Arrays;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.app.App;
+import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.AnswerTable;
 import edu.buffalo.cse.ubcollecting.data.tables.FieldTripTable;
@@ -146,19 +150,103 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static void populateData() {
         Role admin = new Role();
-        admin.setName("ADMIN");
+        admin.setName("Admin");
         admin.setIntroRequired(0);
         admin.setPhotoRequired(0);
         admin.setOnClient(0);
-
         ROLE_TABLE.insert(admin);
 
-        Role student = new Role();
-        student.setName("STUDENT");
-        student.setIntroRequired(1);
-        student.setPhotoRequired(1);
-        student.setOnClient(0);
+        Role consultant = new Role();
+        consultant.setName("Consultant");
+        consultant.setIntroRequired(1);
+        consultant.setPhotoRequired(1);
+        consultant.setOnClient(1);
+        ROLE_TABLE.insert(consultant);
 
-        ROLE_TABLE.insert(student);
+        Role interviewer = new Role();
+        interviewer.setName("Interviewer");
+        interviewer.setIntroRequired(0);
+        interviewer.setPhotoRequired(0);
+        interviewer.setOnClient(1);
+        ROLE_TABLE.insert(interviewer);
+
+
+        QuestionnaireType regType = new QuestionnaireType();
+        regType.setName("Regular");
+        QUESTIONNAIRE_TYPE_TABLE.insert(regType);
+
+        QuestionnaireType introType = new QuestionnaireType();
+        introType.setName("Introductory");
+        QUESTIONNAIRE_TYPE_TABLE.insert(introType);
+
+        QuestionnaireType sclType = new QuestionnaireType();
+        sclType.setName("Sociolinguistic");
+        QUESTIONNAIRE_TYPE_TABLE.insert(sclType);
+
+        QuestionnaireType emrType = new QuestionnaireType();
+        emrType.setName("Emergency");
+        QUESTIONNAIRE_TYPE_TABLE.insert(emrType);
+
+        QuestionnaireType testType = new QuestionnaireType();
+        testType.setName("Test");
+        QUESTIONNAIRE_TYPE_TABLE.insert(testType);
+
+
+        QuestionPropertyDef audProperty = new QuestionPropertyDef();
+        audProperty.setName("Audio");
+        QUESTION_PROPERTY_DEF_TABLE.insert(audProperty);
+
+        QuestionPropertyDef vidProperty = new QuestionPropertyDef();
+        vidProperty.setName("Video");
+        QUESTION_PROPERTY_DEF_TABLE.insert(vidProperty);
+
+        QuestionPropertyDef phtProperty = new QuestionPropertyDef();
+        phtProperty.setName("Photo");
+        QUESTION_PROPERTY_DEF_TABLE.insert(phtProperty);
+
+        QuestionPropertyDef fileProperty = new QuestionPropertyDef();
+        fileProperty.setName("File");
+        QUESTION_PROPERTY_DEF_TABLE.insert(fileProperty);
+
+        QuestionPropertyDef freeProperty = new QuestionPropertyDef();
+        freeProperty.setName("FreeText");
+        QUESTION_PROPERTY_DEF_TABLE.insert(freeProperty);
+
+        QuestionPropertyDef llProperty = new QuestionPropertyDef();
+        llProperty.setName("LangList");
+        QUESTION_PROPERTY_DEF_TABLE.insert(llProperty);
+
+        QuestionPropertyDef lleProperty = new QuestionPropertyDef();
+        lleProperty.setName("LangListEnd");
+        QUESTION_PROPERTY_DEF_TABLE.insert(lleProperty);
+
+        QuestionPropertyDef oneProperty = new QuestionPropertyDef();
+        oneProperty.setName("ChooseOne");
+        QUESTION_PROPERTY_DEF_TABLE.insert(oneProperty);
+
+        QuestionPropertyDef multProperty = new QuestionPropertyDef();
+        multProperty.setName("SelectMultiple");
+        QUESTION_PROPERTY_DEF_TABLE.insert(multProperty);
+
+        QuestionPropertyDef emgProperty = new QuestionPropertyDef();
+        emgProperty.setName("Emergency");
+        QUESTION_PROPERTY_DEF_TABLE.insert(emgProperty);
+
+        QuestionPropertyDef checkProperty = new QuestionPropertyDef();
+        checkProperty.setName("CheckList");
+        QUESTION_PROPERTY_DEF_TABLE.insert(checkProperty);
+
+        QuestionPropertyDef dateProperty = new QuestionPropertyDef();
+        dateProperty.setName("Date");
+        QUESTION_PROPERTY_DEF_TABLE.insert(dateProperty);
+
+
+        LanguageType lwc = new LanguageType();
+        lwc.setName("LWC");
+        LANGUAGE_TYPE_TABLE.insert(lwc);
+
+        LanguageType reg = new LanguageType();
+        reg.setName("Regional");
+        LANGUAGE_TYPE_TABLE.insert(reg);
     }
 }
