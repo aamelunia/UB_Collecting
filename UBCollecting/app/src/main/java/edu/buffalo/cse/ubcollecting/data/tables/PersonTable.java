@@ -58,8 +58,6 @@ public class PersonTable extends MainTable<Person> {
 
     public String[] validateUser(String email, String password){
 
-        password = Person.genHash(password);
-
         String[] output = new String[2];
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();

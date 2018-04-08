@@ -5,10 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 
 import edu.buffalo.cse.ubcollecting.R;
 
@@ -42,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
-                String[] info = PERSON_TABLE.validateUser(email,password);
+                String[] info = PERSON_TABLE.validateUser(email,genHash(password));
 
                 if (info == null) {
                     errorText.setVisibility(View.VISIBLE);
@@ -77,6 +82,21 @@ public class LoginActivity extends AppCompatActivity {
         if(PERSON_TABLE.getAll().isEmpty()) {
             Intent i = PERSON_TABLE.insertActivityIntent(LoginActivity.this);
             startActivity(i);
+        }
+    }
+
+    public static String genHash(String input){
+        try {
+            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+            byte[] sha1Hash = sha1.digest(input.getBytes()) ;
+            Formatter formatter = new Formatter() ;
+            for (byte b : sha1Hash) {
+                formatter.format("%02x", b) ;
+            }
+            return formatter.toString() ;
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "SHA-1 algorithm not found", e);
+            return null;
         }
     }
 }

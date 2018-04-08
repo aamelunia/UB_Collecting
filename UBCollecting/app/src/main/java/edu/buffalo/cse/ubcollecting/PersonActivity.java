@@ -30,6 +30,7 @@ import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
+import static edu.buffalo.cse.ubcollecting.ui.LoginActivity.genHash;
 
 public class PersonActivity extends EntryActivity<Person> {
 
@@ -86,7 +87,7 @@ public class PersonActivity extends EntryActivity<Person> {
         entry.setMainRoleId(role.getId());
         entry.setIntroQuestDesc(questionnaireDescriptionField.getText().toString());
         entry.setEmail(emailField.getText().toString());
-        entry.setPassword(passwordField.getText().toString());
+        entry.setPassword(genHash(passwordField.getText().toString()));
     }
 
     @Override
