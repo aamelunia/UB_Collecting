@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -22,11 +22,15 @@ import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
 
-public class TableViewActivity extends AppCompatActivity {
+/**
+ * Created by kevinrathbun on 4/10/18.
+ */
 
-    private static final String TAG = AppCompatActivity.class.getSimpleName();
+public class TableSelectActivity extends AppCompatActivity {
 
-    private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.view_table";
+    private static final String TAG = TableSelectActivity.class.getSimpleName();
+
+    private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.select_table";
 
     private MainTable<? extends Model> table;
     private RecyclerView entryRecyclerView;
@@ -53,10 +57,10 @@ public class TableViewActivity extends AppCompatActivity {
             finish();
         }
 
-        entryRecyclerView = findViewById(R.id.entry_list_view);
+        entryRecyclerView = findViewById(R.id.add_questions_recycler);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        entryAdapter = new TableViewActivity.EntryAdapter(table.getAll());
+        entryAdapter = new TableSelectActivity.EntryAdapter(table.getAll());
         entryRecyclerView.setAdapter(entryAdapter);
     }
 
@@ -75,43 +79,24 @@ public class TableViewActivity extends AppCompatActivity {
     private class EntryHolder extends RecyclerView.ViewHolder {
 
         private Model entry;
+        private CheckBox selectBox;
         private TextView entryNameView;
-        private ImageButton editButton;
-        private ImageButton deleteButton;
 
 
         public EntryHolder(View view) {
             super(view);
 
-            entryNameView = view.findViewById(R.id.entry_list_text_view);
-            editButton = view.findViewById(R.id.entry_list_edit_button);
-            deleteButton = view.findViewById(R.id.entry_list_delete_button);
+            selectBox = findViewById(R.id.entry_list_select_box);
+            entryNameView = findViewById(R.id.entry_list_select_text_view);
         }
 
         public void bindEntry(Model entry1) {
             entry = entry1;
             entryNameView.setText(entry.getIdentifier());
-
-            editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = table.editActivityIntent(TableViewActivity.this, entry);
-                    startActivityForResult(i, REQUEST_CODE_EDIT_ENTRY);
-                }
-            });
-
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    table.delete(entry.id);
-                    entryAdapter.setEntryList(table.getAll());
-                    entryAdapter.notifyDataSetChanged();
-                }
-            });
         }
     }
 
-    private class EntryAdapter extends RecyclerView.Adapter<TableViewActivity.EntryHolder> {
+    private class EntryAdapter extends RecyclerView.Adapter<TableSelectActivity.EntryHolder> {
 
         private List<? extends Model> entryList;
 
@@ -124,15 +109,15 @@ public class TableViewActivity extends AppCompatActivity {
         }
 
         @Override
-        public TableViewActivity.EntryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public TableSelectActivity.EntryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
-                    .inflate(R.layout.entry_list_item_view, parent, false);
-            return new TableViewActivity.EntryHolder(view);
+                    .inflate(R.layout.entry_list_item_select, parent, false);
+            return new TableSelectActivity.EntryHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(TableViewActivity.EntryHolder holder, int position) {
+        public void onBindViewHolder(TableSelectActivity.EntryHolder holder, int position) {
             Model entry = entryList.get(position);
             holder.bindEntry(entry);
         }
@@ -145,3 +130,4 @@ public class TableViewActivity extends AppCompatActivity {
 
 
 }
+

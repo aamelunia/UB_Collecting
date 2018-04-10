@@ -5,5 +5,6 @@
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
     <string name="login_button_label">Login</string>
+    <string name="done_button_label">Done</string>
     <string name="login_error">Incorrect Email or Password</string>
 </resources>

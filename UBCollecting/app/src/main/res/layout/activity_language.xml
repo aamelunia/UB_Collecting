@@ -45,12 +45,6 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/language_langtype_label" />
-
-        <TextView
             android:id="@+id/language_langtype_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -26,10 +26,9 @@ public class LanguageActivity extends EntryActivity<Language> {
 
     @Override
     public void setUI(Language language) {
-
         nameField.setText(language.getName());
-        nameField.setText(language.getOtherNames());
-        nameField.setText(language.getDescription());
+        otherNamesField.setText(language.getOtherNames());
+        descriptionField.setText(language.getDescription());
 
     }
 

@@ -11,9 +11,11 @@ import edu.buffalo.cse.ubcollecting.TableListActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
 
 public class AdminActivity extends TableListActivity {
 
@@ -26,7 +28,9 @@ public class AdminActivity extends TableListActivity {
     protected List<Table<? extends Model>> getTables() {
         List<Table<? extends Model>> tables = new ArrayList<>();
         tables.add(PERSON_TABLE);
+        tables.add(ROLE_TABLE);
         tables.add(QUESTIONNAIRE_TABLE);
+        tables.add(LANGUAGE_TABLE);
         tables.add(QUESTION_TABLE);
         return tables;
     }
