@@ -1,5 +1,6 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
@@ -35,11 +37,6 @@ public class RoleActivity extends EntryActivity<Role> {
     }
 
     @Override
-    boolean validateEntry() {
-        return true;
-    }
-
-    @Override
     public void setUI(Role role) {
         nameField.setText(role.getName());
         introRequiredBox.setChecked(role.getIntroRequired() == 1);
@@ -55,6 +52,7 @@ public class RoleActivity extends EntryActivity<Role> {
         entry.setOnClient((onClientBox.isChecked()) ? 1 : 0);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,28 +62,12 @@ public class RoleActivity extends EntryActivity<Role> {
         introRequiredBox = this.findViewById(R.id.role_intro_required_box);
         photoRequiredBox = this.findViewById(R.id.role_photo_required_box);
         onClientBox = this.findViewById(R.id.role_on_client_box);
+
         updateButton = this.findViewById(R.id.role_update_button);
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setEntryByUI();
-                ROLE_TABLE.update(entry);
-                setEntryUpdatedResult(entry);
-                finish();
-            }
-        });
+        updateButton.setOnClickListener(new UpdateButtonOnClickListener(ROLE_TABLE));
 
         submitButton = this.findViewById(R.id.role_submit_button);
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setEntryByUI();
-                ROLE_TABLE.insert(entry);
-                setEntryCreatedResult(entry);
-                finish();
-            }
-        });
+        submitButton.setOnClickListener(new SubmitButtonOnClickListener(ROLE_TABLE));
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
             entry = getEntry(getIntent());
@@ -96,4 +78,22 @@ public class RoleActivity extends EntryActivity<Role> {
             entry = new Role();
         }
     }
+
+    protected boolean validateEntry(){
+
+        boolean valid = true;
+
+        if (nameField.getText().toString().trim().isEmpty()) {
+            nameField.setError("This field is required");
+            valid = false;
+        }
+
+        if (!valid){
+            Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+
 }

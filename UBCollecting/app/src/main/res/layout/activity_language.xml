@@ -57,10 +57,18 @@
             android:textSize="16pt" />
 
         <Button
+            android:id="@+id/language_update_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_button_label"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/language_submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submit_button_label" />
+
     </LinearLayout>
 
 </ScrollView>
