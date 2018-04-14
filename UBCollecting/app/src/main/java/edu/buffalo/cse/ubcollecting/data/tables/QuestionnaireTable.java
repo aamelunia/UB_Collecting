@@ -14,7 +14,6 @@ public class QuestionnaireTable extends MainTable<Questionnaire> {
 
     // Questionnaire Table - column names
     public static final String KEY_ID = "id";
-    public static final String KEY_LABEL = "Label";
     public static final String KEY_NAME = "Name";
     public static final String KEY_DESCRIPTION = "Description";
     public static final String KEY_TYPE_ID = "TypeId";
@@ -28,8 +27,7 @@ public class QuestionnaireTable extends MainTable<Questionnaire> {
     public String createTable() {
 
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_LABEL
-                + " VARCHAR," + KEY_NAME + " VARCHAR," + KEY_DESCRIPTION
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME + " VARCHAR," + KEY_DESCRIPTION
                 + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
                 + ") REFERENCES " + QuestionnaireTypeTable.TABLE + " (" + QuestionnaireTypeTable.KEY_ID + ")"
                 + ")";

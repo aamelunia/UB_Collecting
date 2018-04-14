@@ -8,7 +8,6 @@ public class Questionnaire extends Model {
 
     private static final String TAG = Questionnaire.class.getSimpleName().toString();
 
-    public String label;
     public String name;
     public String description;
     public String typeId;
@@ -23,14 +22,6 @@ public class Questionnaire extends Model {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     public String getName() {

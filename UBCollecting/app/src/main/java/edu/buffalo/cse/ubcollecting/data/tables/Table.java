@@ -145,6 +145,59 @@ public abstract class Table<E extends Model> implements Serializable {
 
     }
 
+
+    public ArrayList<E> getAll(String selection, String[] selectionArgs) {
+
+        ArrayList<E> tuples = new ArrayList<>();
+
+        try {
+
+            Class theClass = Class.forName(MODEL_PATH + this.getTableName());
+
+            SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+            Cursor cursor = db.query(this.getTableName(),
+                    null,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null);
+
+            ArrayList<Method> setters = ((E) theClass.newInstance()).getSetters();
+
+            Collections.sort(setters, new MethodComparator());
+
+            if (cursor.moveToFirst()) {
+                do {
+                    E model = (E) theClass.newInstance();
+                    for (int i = 0; i < tableColumns.size(); i++) {
+                        String key = tableColumns.get(i);
+                        Method method = setters.get(i);
+                        insertIntoObject(cursor, model, key, method);
+                    }
+                    tuples.add(model);
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+
+            DatabaseManager.getInstance().closeDatabase();
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return tuples;
+
+    }
+
+
+
     protected void insertIntoObject(Cursor cursor, E model, String key, Method method) {
 
         try {

@@ -25,7 +25,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
     private static final String TAG = QuestionnaireActivity.class.getSimpleName().toString();
 
     private EditText nameField;
-    private EditText labelField;
     private EditText descriptionField;
     private Spinner typeSpinner;
     private ArrayAdapter<QuestionnaireType> typeAdapter;
@@ -36,7 +35,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
     void setUI(Questionnaire entry) {
         nameField.setText(entry.getName());
-        labelField.setText(entry.getLabel());
         descriptionField.setText(entry.getDescription());
 
         int i = 0;
@@ -56,7 +54,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
     void setEntryByUI() {
         QuestionnaireType type = (QuestionnaireType) typeSpinner.getSelectedItem();
 
-        entry.setLabel(labelField.getText().toString());
         entry.setName(nameField.getText().toString());
         entry.setDescription(descriptionField.getText().toString());
         entry.setTypeId(type.getId());
@@ -69,7 +66,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         setContentView(R.layout.activity_questionnaire);
 
         nameField = this.findViewById(R.id.questionnaire_name_field);
-        labelField = this.findViewById(R.id.questionnaire_label_field);
         descriptionField = this.findViewById(R.id.questionnaire_description_field);
         typeSpinner = this.findViewById(R.id.questionnaire_type_spinner);
 

@@ -4,8 +4,12 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import java.util.ArrayList;
+
 import edu.buffalo.cse.ubcollecting.LanguageActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
+import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
 public class LanguageTable extends MainTable<Language> {
 
@@ -37,4 +41,29 @@ public class LanguageTable extends MainTable<Language> {
     public String getTableName() {
         return TABLE;
     }
+
+
+    /* Function that returns the research languages stored in the databse (i.e. the languages that
+       questions can be written )*/
+
+    public static ArrayList<Language> getResearchLanguages(){
+
+        String selection = LanguageTypeTable.KEY_NAME + " = ?";
+
+        String[] selectionArgs = {"Research Language"};
+
+        ArrayList<LanguageType> languageTypes = DatabaseHelper.LANGUAGE_TYPE_TABLE.getAll(selection, selectionArgs);
+
+        String researchLanguageId = languageTypes.get(0).getId();
+
+        String selection1 = KEY_TYPE_ID + " = ?";
+
+        String [] selectionArgs1 = {researchLanguageId};
+
+        return DatabaseHelper.LANGUAGE_TABLE.getAll(selection1, selectionArgs1);
+
+    }
+
+
+
 }
