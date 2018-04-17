@@ -15,6 +15,7 @@ import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
+import edu.buffalo.cse.ubcollecting.ui.CreateQuestionActivity;
 
 public abstract class TableListActivity extends AppCompatActivity {
 
@@ -60,7 +61,14 @@ public abstract class TableListActivity extends AppCompatActivity {
             insertButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = table.insertActivityIntent(TableListActivity.this);
+                    Intent i = null;
+                    if (table.getTableName().equals("Question")){
+                        i = new Intent(TableListActivity.this, CreateQuestionActivity.class);
+                    }
+                    else {
+                        i = table.insertActivityIntent(TableListActivity.this);
+
+                    }
                     startActivity(i);
                 }
             });
