@@ -15,6 +15,7 @@ import java.util.List;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
+import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
@@ -81,7 +82,8 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         addQuestionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = AddQuestionsActivity.newIntent(QuestionnaireActivity.this, entry);
+                startActivity(i);
             }
         });
 

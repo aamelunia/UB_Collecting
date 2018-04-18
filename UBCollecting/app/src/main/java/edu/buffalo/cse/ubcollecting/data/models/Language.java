@@ -14,6 +14,7 @@ public class Language extends Model {
     public String otherNames;
     public String typeId;
 
+    @Override
     public String getIdentifier() {
         return name;
     }
@@ -58,5 +59,13 @@ public class Language extends Model {
         this.typeId = typeId;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Language) {
+            Language lang = (Language) obj;
+            return lang.getId().equals(getId());
+        }
+        return false;
+    }
 
 }

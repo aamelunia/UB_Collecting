@@ -16,14 +16,12 @@
             android:id="@+id/entry_list_select_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/entry_list_select_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/entry_list_select_box"
             android:padding="5dp"
             android:textSize="10pt" />
     </LinearLayout>

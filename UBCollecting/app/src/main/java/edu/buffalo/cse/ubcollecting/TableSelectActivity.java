@@ -6,14 +6,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
@@ -26,15 +32,21 @@ import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY
  * Created by kevinrathbun on 4/10/18.
  */
 
-public class TableSelectActivity extends AppCompatActivity {
+public abstract class TableSelectActivity<E> extends AppCompatActivity {
 
     private static final String TAG = TableSelectActivity.class.getSimpleName();
 
     private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.select_table";
 
     private MainTable<? extends Model> table;
+    private ArrayList<E> selections;
+
     private RecyclerView entryRecyclerView;
     private EntryAdapter entryAdapter;
+    private EditText searchText;
+    private ImageButton clearSearchButton;
+    private ImageButton searchButton;
+    private Button doneButton;
 
 
     public static Intent newIntent(Context packageContext, Table table) {
@@ -46,7 +58,7 @@ public class TableSelectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_view);
+        setContentView(R.layout.activity_table_select);
 
         Serializable serializableExtra = getIntent().getSerializableExtra(EXTRA_TABLE);
 
@@ -57,7 +69,57 @@ public class TableSelectActivity extends AppCompatActivity {
             finish();
         }
 
-        entryRecyclerView = findViewById(R.id.add_questions_recycler);
+        selections = new ArrayList<>();
+
+        searchText = findViewById(R.id.table_select_search_view);
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() != 0) {
+                    clearSearchButton.setVisibility(View.VISIBLE);
+                } else {
+                    clearSearchButton.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        clearSearchButton = findViewById(R.id.table_select_clear_button);
+        clearSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchText.setText("");
+                ArrayList<? extends Model> results = table.getAll();
+                entryAdapter.setEntryList(table.getAll());
+                entryAdapter.notifyDataSetChanged();
+            }
+        });
+
+        searchButton = findViewById(R.id.table_select_search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query = searchText.getText().toString();
+                ArrayList<? extends Model> selections = search(query, table.getAll());
+                entryAdapter.setEntryList(selections);
+                entryAdapter.notifyDataSetChanged();
+            }
+        });
+
+        doneButton = findViewById(R.id.table_select_done_button);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectionDone(selections);
+            }
+        });
+
+        entryRecyclerView = findViewById(R.id.table_select_recycler);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         entryAdapter = new TableSelectActivity.EntryAdapter(table.getAll());
@@ -76,9 +138,13 @@ public class TableSelectActivity extends AppCompatActivity {
         }
     }
 
+    public abstract ArrayList<? extends Model> search(String query, ArrayList<? extends Model> selections);
+
+    public abstract void onSelectionDone(ArrayList<E> selections);
+
     private class EntryHolder extends RecyclerView.ViewHolder {
 
-        private Model entry;
+        private E entry;
         private CheckBox selectBox;
         private TextView entryNameView;
 
@@ -88,11 +154,21 @@ public class TableSelectActivity extends AppCompatActivity {
 
             selectBox = findViewById(R.id.entry_list_select_box);
             entryNameView = findViewById(R.id.entry_list_select_text_view);
+
+            selectBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (selectBox.isChecked() && !selections.contains(entry)) {
+                        selections.add(entry);
+                    } else {
+                        selections.remove(entry);
+                    }
+                }
+            });
         }
 
         public void bindEntry(Model entry1) {
-            entry = entry1;
-            entryNameView.setText(entry.getIdentifier());
+            //TODO
         }
     }
 
@@ -127,7 +203,5 @@ public class TableSelectActivity extends AppCompatActivity {
             return entryList.size();
         }
     }
-
-
 }
 

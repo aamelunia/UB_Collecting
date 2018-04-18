@@ -42,7 +42,7 @@
         <activity android:name=".QuestionPropertyDefActivity" />
         <activity android:name=".SessionAnswerActivity" />
         <activity android:name=".SessionPersonActivity" />
-        <activity android:name=".TableListActivity"/>
+        <activity android:name=".TableSelectActivity"/>
         <activity android:name=".TableViewActivity"/>
         <activity android:name=".ui.LoginActivity">
             <intent-filter>

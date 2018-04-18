@@ -60,4 +60,5 @@ public abstract class Model implements Serializable {
     public String toString() {
         return getIdentifier();
     }
+
 }

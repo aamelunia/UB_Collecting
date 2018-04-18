@@ -41,5 +41,14 @@ public class QuestionLangVersion extends Model {
         this.questionText = questionText;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof QuestionLangVersion) {
+            QuestionLangVersion questionLang = (QuestionLangVersion) obj;
+            return questionLang.getQuestionId().equals(getQuestionId()) &&
+                    questionLang.getQuestionLanguageId().equals(getQuestionLanguageId());
+        }
 
+        return false;
+    }
 }
