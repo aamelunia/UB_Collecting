@@ -1,9 +1,10 @@
 package edu.buffalo.cse.ubcollecting.data.models;
 
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+
 /**
  * Created by aamel786 on 2/17/18.
  */
-
 public class Question extends Model {
 
     private static final String TAG = Question.class.getSimpleName().toString();
@@ -11,7 +12,7 @@ public class Question extends Model {
     public String type;
 
     public String getIdentifier() {
-        return type;
+        return DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getEnglishQuestion(this.getId());
     }
 
     public String getId() {
