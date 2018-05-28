@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private HashMap<Language,EditText> questionTexts;
     private Button submit;
     private Question question;
+    private TextView selectQuestionProperties;
+    private TextView selectQuestionLanguages;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
         questionPropertiesListView = findViewById(R.id.question_properties_list_view);
 
         questionLanguagesListView = findViewById(R.id.question_languages_list_view);
+
+        selectQuestionProperties = findViewById(R.id.select_question_properties);
+
+        selectQuestionLanguages = findViewById(R.id.select_question_languages);
 
         ArrayList<QuestionPropertyDef> quesPropDefs = DatabaseHelper.QUESTION_PROPERTY_DEF_TABLE.getAll();
 
@@ -78,27 +86,36 @@ public class CreateQuestionActivity extends AppCompatActivity {
         submit = findViewById(R.id.create_question_submit_button);
 
         submit.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
 
-                DatabaseHelper.QUESTION_TABLE.insert(question);
+                if (validateEntry()) {
 
-                for (QuestionPropertyDef quesPropDef: questionProperites){
-                    QuestionProperty quesProp = new QuestionProperty();
-                    quesProp.setQuestionId(question.getId());
-                    quesProp.setPropertyId(quesPropDef.getId());
-                    DatabaseHelper.QUESTION_PROPERTY_TABLE.insert(quesProp);
+                    DatabaseHelper.QUESTION_TABLE.insert(question);
+
+                    for (QuestionPropertyDef quesPropDef : questionProperites) {
+                        QuestionProperty quesProp = new QuestionProperty();
+                        quesProp.setQuestionId(question.getId());
+                        quesProp.setPropertyId(quesPropDef.getId());
+                        DatabaseHelper.QUESTION_PROPERTY_TABLE.insert(quesProp);
+                    }
+
+                    for (Language lang : questionTexts.keySet()) {
+                        if (lang.getName().equals("English")) {
+                            question.setDisplayText(questionTexts.get(lang).getText().toString());
+                            DatabaseHelper.QUESTION_TABLE.update(question);
+                        }
+                        QuestionLangVersion quesLang = new QuestionLangVersion();
+                        quesLang.setQuestionId(question.getId());
+                        quesLang.setQuestionLanguageId(lang.getId());
+                        quesLang.setQuestionText(questionTexts.get(lang).getText().toString());
+                        DatabaseHelper.QUESTION_LANG_VERSION_TABLE.insert(quesLang);
+                    }
+
+                    finish();
                 }
-
-                for (Language lang: questionTexts.keySet()){
-                    QuestionLangVersion quesLang = new QuestionLangVersion();
-                    quesLang.setQuestionId(question.getId());
-                    quesLang.setQuestionLanguageId(lang.getId());
-                    quesLang.setQuestionText(questionTexts.get(lang).getText().toString());
-                    DatabaseHelper.QUESTION_LANG_VERSION_TABLE.insert(quesLang);
-                }
-
-                finish();
             }
         });
 
@@ -186,6 +203,28 @@ public class CreateQuestionActivity extends AppCompatActivity {
             return convertView;
 
         }
+    }
+
+    protected boolean validateEntry() {
+
+        boolean valid = true;
+
+        if (questionProperites.isEmpty()) {
+            selectQuestionProperties.setError("You must select a question property");
+            valid = false;
+        }
+
+        if (questionTexts.isEmpty()) {
+            selectQuestionLanguages.setError("You must select at least one language for the question text");
+            valid = false;
+        }
+
+        if (!valid){
+            Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+
     }
 
 }

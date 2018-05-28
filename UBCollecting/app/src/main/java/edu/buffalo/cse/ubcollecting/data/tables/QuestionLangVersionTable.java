@@ -4,12 +4,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import edu.buffalo.cse.ubcollecting.QuestionLangVersionActivity;
-import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
-import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
 public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
@@ -47,29 +42,29 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
     /* Function that returns the english text of the question represented by the passed in quesId*/
 
-    public String getEnglishQuestion(String quesId) {
-
-        String englishId = DatabaseHelper.LANGUAGE_TABLE.getEnglishId();
-
-        String englishQuestion = null;
-
-        String selectQuery = "SELECT QuestionText FROM " + this.getTableName() + " WHERE QuestionId = " + quesId + " and QuestionLanguageId = " + englishId;
-
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-
-            englishQuestion = cursor.getString(0);
-
-        }
-
-        cursor.close();
-
-        DatabaseManager.getInstance().closeDatabase();
-
-        return englishQuestion;
-
-    }
+//    public String getEnglishQuestion(String quesId) {
+//
+//        String englishId = DatabaseHelper.LANGUAGE_TABLE.getEnglishId();
+//
+//        String englishQuestion = null;
+//
+//        String selectQuery = "SELECT QuestionText FROM " + this.getTableName() + " WHERE QuestionId = " + quesId + " and QuestionLanguageId = " + englishId;
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//
+//            englishQuestion = cursor.getString(0);
+//
+//        }
+//
+//        cursor.close();
+//
+//        DatabaseManager.getInstance().closeDatabase();
+//
+//        return englishQuestion;
+//
+//    }
 }

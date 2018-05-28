@@ -4,10 +4,8 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
-import android.util.Log;
-
-import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
+import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 
 public class QuestionTable extends MainTable<Question> {
 
@@ -16,6 +14,9 @@ public class QuestionTable extends MainTable<Question> {
     // Question (QuestionPool) Table - column names
     public static final String KEY_ID = "id";
     public static final String KEY_TYPE = "Type";
+    public static final String KEY_DISPLAY_TEXT = "DisplayText";
+
+
 
     public QuestionTable() {
         super();
@@ -24,9 +25,9 @@ public class QuestionTable extends MainTable<Question> {
 
     @Override
     public String createTable() {
-        Log.i("QuestionTable", TABLE);
+//        Log.i("QuestionTable", TABLE);
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_TYPE + " VARCHAR" + ")";
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY, " + KEY_TYPE + " VARCHAR, " + KEY_DISPLAY_TEXT + " VARCHAR" + ")";
     }
 
     @Override

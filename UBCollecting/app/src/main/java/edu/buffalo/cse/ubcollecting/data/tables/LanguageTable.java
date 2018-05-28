@@ -24,7 +24,7 @@ public class LanguageTable extends MainTable<Language> {
 
 
     //Store id of English language in table so only has to be queried for once
-    public String EnglishId = null;
+//    public String EnglishId = null;
 
 
     public LanguageTable() {
@@ -72,21 +72,21 @@ public class LanguageTable extends MainTable<Language> {
 
     /* Function that returns the id of English as stored in the Language Table */
 
-    public String getEnglishId(){
-
-        if(EnglishId == null){
-            String selection = LanguageTable.KEY_NAME + " = ?";
-
-            String[] selectionArgs = {"English"};
-
-            ArrayList<Language> English = DatabaseHelper.LANGUAGE_TABLE.getAll(selection, selectionArgs);
-
-            EnglishId = English.get(0).getId();
-        }
-
-        return EnglishId;
-
-    }
+//    public String getEnglishId(){
+//
+//        if(EnglishId == null){
+//            String selection = LanguageTable.KEY_NAME + " = ?";
+//
+//            String[] selectionArgs = {"English"};
+//
+//            ArrayList<Language> English = DatabaseHelper.LANGUAGE_TABLE.getAll(selection, selectionArgs);
+//
+//            EnglishId = English.get(0).getId();
+//        }
+//
+//        return EnglishId;
+//
+//    }
 
 
 

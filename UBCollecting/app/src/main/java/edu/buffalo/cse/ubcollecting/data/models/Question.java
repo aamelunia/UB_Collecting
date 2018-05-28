@@ -1,7 +1,5 @@
 package edu.buffalo.cse.ubcollecting.data.models;
 
-import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
-
 /**
  * Created by aamel786 on 2/17/18.
  */
@@ -11,8 +9,10 @@ public class Question extends Model {
 
     public String type;
 
+    public String displayText;
+
     public String getIdentifier() {
-        return DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getEnglishQuestion(this.getId());
+        return displayText;
     }
 
     public String getId() {
@@ -29,6 +29,14 @@ public class Question extends Model {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDisplayText() {
+        return displayText;
+    }
+
+    public void setDisplayText(String displayText) {
+        this.displayText = displayText;
     }
 
 
