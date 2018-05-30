@@ -12,6 +12,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
     public static final String TABLE = "SessionPerson";
 
     // SessionPerson Table - column names
+    public static final String KEY_ID = "id";
     public static final String KEY_SESSION_ID = "SessionId";
     public static final String KEY_PERSON_ID = "PersonId";
     public static final String KEY_ROLE_ID = "RoleId";
@@ -23,7 +24,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
 
     public String createTable() {
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
+                + TABLE + "(" + KEY_ID + " TEXT, " + KEY_SESSION_ID + " TEXT, "
                 + KEY_PERSON_ID + " TEXT," + KEY_ROLE_ID + " TEXT,"
                 + "PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_PERSON_ID + "),"
                 + " FOREIGN KEY(" + KEY_SESSION_ID + ") REFERENCES " + SessionTable.TABLE

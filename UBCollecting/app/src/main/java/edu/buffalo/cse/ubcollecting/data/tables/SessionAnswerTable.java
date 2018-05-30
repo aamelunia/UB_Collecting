@@ -11,6 +11,7 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
     public static final String TABLE = "SessionAnswer";
 
     // SessionAnswer Table - column names
+    public static final String KEY_ID = "id";
     public static final String KEY_SESSION_ID = "SessionId";
     public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
     public static final String KEY_QUESTION_ID = "QuestionId";
@@ -24,7 +25,7 @@ public class SessionAnswerTable extends Table<SessionAnswer> {
     public String createTable() {
 
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_SESSION_ID + " TEXT,"
+                + TABLE + "(" + KEY_ID + " TEXT, " + KEY_SESSION_ID + " TEXT, "
                 + KEY_QUESTIONNAIRE_ID + " TEXT," + KEY_QUESTION_ID + " TEXT,"
                 + KEY_ANSWER_ID + " TEXT,"
                 + " PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_QUESTIONNAIRE_ID + ", "

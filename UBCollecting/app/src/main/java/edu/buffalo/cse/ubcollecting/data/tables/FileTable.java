@@ -7,7 +7,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 import edu.buffalo.cse.ubcollecting.FileActivity;
 import edu.buffalo.cse.ubcollecting.data.models.File;
 
-public class FileTable extends MainTable<File> {
+public class FileTable extends Table<File> {
 
     public static final String TABLE = "File";
 

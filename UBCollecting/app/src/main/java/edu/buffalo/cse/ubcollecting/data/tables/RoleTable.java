@@ -9,7 +9,7 @@ import android.util.Log;
 import edu.buffalo.cse.ubcollecting.RoleActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
-public class RoleTable extends MainTable<Role> {
+public class RoleTable extends Table<Role> {
 
     public static final String TABLE = "Role";
 

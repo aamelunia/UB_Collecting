@@ -7,7 +7,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 
-public class QuestionTable extends MainTable<Question> {
+public class QuestionTable extends Table<Question> {
 
     public static final String TABLE = "Question";
 

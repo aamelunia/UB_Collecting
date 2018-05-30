@@ -14,7 +14,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 
-public class PersonTable extends MainTable<Person> {
+public class PersonTable extends Table<Person> {
 
     public static final String TABLE = "Person";
 

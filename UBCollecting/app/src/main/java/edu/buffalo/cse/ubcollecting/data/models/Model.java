@@ -16,6 +16,14 @@ public abstract class Model implements Serializable {
         id = generateID();
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public abstract String getIdentifier();
 
     public ArrayList<Method> getGetters() {

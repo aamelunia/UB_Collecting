@@ -12,6 +12,7 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     public static final String TABLE = "QuestionnaireContent";
 
     // QuestionnaireContent Table - column names
+    public static final String KEY_ID = "id";
     public static final String KEY_QUESTIONNAIRE_ID = "QuestionnaireId";
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_QUESTION_ORDER = "QuestionOrder";
@@ -24,7 +25,7 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     @Override
     public String createTable() {
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_QUESTIONNAIRE_ID + " TEXT,"
+                + TABLE + "(" + KEY_ID + " TEXT, " + KEY_QUESTIONNAIRE_ID + " TEXT, "
                 + KEY_QUESTION_ID + " TEXT," + KEY_QUESTION_ORDER + " VARCHAR,"
                 + "PRIMARY KEY(" + KEY_QUESTIONNAIRE_ID + ", " + KEY_QUESTION_ID + "),"
                 + " FOREIGN KEY(" + KEY_QUESTION_ID + ") REFERENCES " + QuestionTable.TABLE

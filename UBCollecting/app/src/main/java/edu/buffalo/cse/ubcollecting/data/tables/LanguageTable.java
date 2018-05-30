@@ -11,7 +11,7 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 
-public class LanguageTable extends MainTable<Language> {
+public class LanguageTable extends Table<Language> {
 
     public static final String TABLE = "Language";
 

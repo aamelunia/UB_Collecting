@@ -7,7 +7,7 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 import edu.buffalo.cse.ubcollecting.FieldTripActivity;
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
-public class FieldTripTable extends MainTable<FieldTrip> {
+public class FieldTripTable extends Table<FieldTrip> {
 
     public static final String TABLE = "FieldTrip";
 

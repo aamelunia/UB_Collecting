@@ -17,14 +17,6 @@ public class Answer extends Model {
         return label;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getQuestionnaireId() {
         return questionnaireId;
     }

@@ -12,6 +12,7 @@ public class QuestionOptionTable extends Table<QuestionOption> {
     public static final String TABLE = "QuestionOption";
 
     // QuestionOption Table - column names
+    public static final String KEY_ID = "id";
     public static final String KEY_QUESTION_ID = "QuestionId";
     public static final String KEY_QUESTION_LANGUAGE_ID = "QuestionLanguageId";
     public static final String KEY_OPTION_TEXT = "OptionText";
@@ -24,7 +25,7 @@ public class QuestionOptionTable extends Table<QuestionOption> {
     @Override
     public String createTable() {
         return "CREATE TABLE "
-                + TABLE + "(" + KEY_QUESTION_ID + " TEXT,"
+                + TABLE + "(" + KEY_ID + " TEXT, " + KEY_QUESTION_ID + " TEXT, "
                 + KEY_QUESTION_LANGUAGE_ID + " TEXT," + KEY_OPTION_TEXT + " VARCHAR,"
                 + "PRIMARY KEY(" + KEY_QUESTION_ID + ", " + KEY_QUESTION_LANGUAGE_ID + "),"
                 + " FOREIGN KEY(" + KEY_QUESTION_LANGUAGE_ID + ") REFERENCES " + LanguageTable.TABLE

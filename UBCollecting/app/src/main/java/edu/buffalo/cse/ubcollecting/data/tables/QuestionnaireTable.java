@@ -8,7 +8,7 @@ import edu.buffalo.cse.ubcollecting.QuestionnaireActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 
 
-public class QuestionnaireTable extends MainTable<Questionnaire> {
+public class QuestionnaireTable extends Table<Questionnaire> {
 
     public static final String TABLE = "Questionnaire";
 
