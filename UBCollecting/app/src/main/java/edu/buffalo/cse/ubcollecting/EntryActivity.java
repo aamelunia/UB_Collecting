@@ -9,7 +9,7 @@ import android.widget.Button;
 import java.io.Serializable;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
-import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
+import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
@@ -66,9 +66,9 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     class UpdateButtonOnClickListener implements View.OnClickListener {
 
-        MainTable<E> table;
+        Table<E> table;
 
-        public UpdateButtonOnClickListener(MainTable<E> table) {
+        public UpdateButtonOnClickListener(Table<E> table) {
             this.table = table;
         }
 
@@ -85,9 +85,9 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     class SubmitButtonOnClickListener implements View.OnClickListener {
 
-        MainTable<E> table;
+        Table<E> table;
 
-        public SubmitButtonOnClickListener(MainTable<E> table) {
+        public SubmitButtonOnClickListener(Table<E> table) {
             this.table = table;
         }
 

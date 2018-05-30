@@ -37,6 +37,15 @@ public abstract class Model implements Serializable {
             }
         }
 
+        m = this.getClass().getMethods();
+
+        for (int i = 0; i < m.length; i++) {
+            if (m[i].getName().equals("getId")) {
+                getters.add(m[i]);
+                break;
+            }
+        }
+
         return getters;
     }
 
@@ -48,6 +57,15 @@ public abstract class Model implements Serializable {
         for (int i = 0; i < m.length; i++) {
             if (m[i].getName().startsWith("set")) {
                 setters.add(m[i]);
+            }
+        }
+
+        m = this.getClass().getMethods();
+
+        for (int i = 0; i < m.length; i++) {
+            if (m[i].getName().equals("setId")) {
+                setters.add(m[i]);
+                break;
             }
         }
 

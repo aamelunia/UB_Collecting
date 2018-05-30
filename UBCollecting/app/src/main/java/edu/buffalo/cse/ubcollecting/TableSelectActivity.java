@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
-import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
@@ -38,7 +37,7 @@ public abstract class TableSelectActivity<E> extends AppCompatActivity {
 
     private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.select_table";
 
-    private MainTable<? extends Model> table;
+    private Table<? extends Model> table;
     private ArrayList<E> selections;
 
     private RecyclerView entryRecyclerView;
@@ -63,7 +62,7 @@ public abstract class TableSelectActivity<E> extends AppCompatActivity {
         Serializable serializableExtra = getIntent().getSerializableExtra(EXTRA_TABLE);
 
         if (serializableExtra instanceof Table) {
-            table = (MainTable) serializableExtra;
+            table = (Table) serializableExtra;
         } else {
             Log.e(TAG, "Extra was not of type Table");
             finish();

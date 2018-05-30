@@ -17,7 +17,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Model;
-import edu.buffalo.cse.ubcollecting.data.tables.MainTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
@@ -28,7 +27,7 @@ public class TableViewActivity extends AppCompatActivity {
 
     private static final String EXTRA_TABLE = "edu.buffalo.cse.ubcollecting.view_table";
 
-    private MainTable<? extends Model> table;
+    private Table<? extends Model> table;
     private RecyclerView entryRecyclerView;
     private EntryAdapter entryAdapter;
 
@@ -47,7 +46,7 @@ public class TableViewActivity extends AppCompatActivity {
         Serializable serializableExtra = getIntent().getSerializableExtra(EXTRA_TABLE);
 
         if (serializableExtra instanceof Table) {
-            table = (MainTable) serializableExtra;
+            table = (Table) serializableExtra;
         } else {
             Log.e(TAG, "Extra was not of type Table");
             finish();
