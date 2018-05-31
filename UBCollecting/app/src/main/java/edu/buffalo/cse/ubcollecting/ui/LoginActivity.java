@@ -21,16 +21,29 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
-
     public static final String USER_INFO_PREF_KEY = "edu.buffalo.cse.ubcollecting.user_info_pref_key";
     public static final String USER_ID_KEY = "edu.buffalo.cse.ubcollecting.user_id_key";
     public static final String USER_ROLE_KEY = "edu.buffalo.cse.ubcollecting.user_role_key";
-
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private EditText emailField;
     private EditText passwordField;
     private TextView errorText;
     private Button loginButton;
+
+    public static String genHash(String input) {
+        try {
+            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+            byte[] sha1Hash = sha1.digest(input.getBytes());
+            Formatter formatter = new Formatter();
+            for (byte b : sha1Hash) {
+                formatter.format("%02x", b);
+            }
+            return formatter.toString();
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "SHA-1 algorithm not found", e);
+            return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         emailField = findViewById(R.id.login_email_field);
-        passwordField= findViewById(R.id.login_password_field);
+        passwordField = findViewById(R.id.login_password_field);
         errorText = findViewById(R.id.login_error_text);
         loginButton = findViewById(R.id.login_login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
-                String[] info = PERSON_TABLE.validateUser(email,genHash(password));
+                String[] info = PERSON_TABLE.validateUser(email, genHash(password));
 
                 if (info == null) {
                     errorText.setVisibility(View.VISIBLE);
@@ -65,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     userInfoPreferences.edit().putString(USER_ROLE_KEY, role).apply();
 
                     Intent i;
-                    if(role.equals("Admin")) {
+                    if (role.equals("Admin")) {
                         i = AdminActivity.newIntent(LoginActivity.this);
                     } else {
                         i = UserActivity.newIntent(LoginActivity.this);
@@ -80,24 +93,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(PERSON_TABLE.getAll().isEmpty()) {
+        if (PERSON_TABLE.getAll().isEmpty()) {
             Intent i = PERSON_TABLE.insertActivityIntent(LoginActivity.this);
             startActivity(i);
-        }
-    }
-
-    public static String genHash(String input){
-        try {
-            MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-            byte[] sha1Hash = sha1.digest(input.getBytes()) ;
-            Formatter formatter = new Formatter() ;
-            for (byte b : sha1Hash) {
-                formatter.format("%02x", b) ;
-            }
-            return formatter.toString() ;
-        } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "SHA-1 algorithm not found", e);
-            return null;
         }
     }
 }

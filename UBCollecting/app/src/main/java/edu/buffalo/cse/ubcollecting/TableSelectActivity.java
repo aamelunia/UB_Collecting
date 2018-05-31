@@ -73,7 +73,8 @@ public abstract class TableSelectActivity<E> extends AppCompatActivity {
         searchText = findViewById(R.id.table_select_search_view);
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -85,7 +86,8 @@ public abstract class TableSelectActivity<E> extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
         clearSearchButton = findViewById(R.id.table_select_clear_button);

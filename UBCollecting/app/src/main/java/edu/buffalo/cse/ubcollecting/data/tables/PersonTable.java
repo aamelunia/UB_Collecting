@@ -56,7 +56,7 @@ public class PersonTable extends Table<Person> {
     /* Function that validates email and password of user and returns user's person id and role name
        upon validation  */
 
-    public String[] validateUser(String email, String password){
+    public String[] validateUser(String email, String password) {
 
         String[] output = new String[2];
 
@@ -79,9 +79,9 @@ public class PersonTable extends Table<Person> {
                 null,
                 null);
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             output[0] = cursor.getString(cursor.getColumnIndex(KEY_ID));
-            output[1] = cursor.getString(cursor.getColumnIndex(KEY_MAIN_ROLE_ID)) ;
+            output[1] = cursor.getString(cursor.getColumnIndex(KEY_MAIN_ROLE_ID));
         } else {
             return null;
         }
@@ -90,7 +90,7 @@ public class PersonTable extends Table<Person> {
 
         DatabaseManager.getInstance().closeDatabase();
 
-        if (output.length > 0 && output[1] != null && output[1].length() > 5){
+        if (output.length > 0 && output[1] != null && output[1].length() > 5) {
             Role role = DatabaseHelper.ROLE_TABLE.findById(output[1]);
             output[1] = role.getName();
         }

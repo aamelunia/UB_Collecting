@@ -20,7 +20,7 @@ public class LanguageActivity extends EntryActivity<Language> {
     private EditText nameField;
     private EditText otherNamesField;
     private EditText descriptionField;
-//    private TextView typeField;
+    //    private TextView typeField;
     private Button submitButton;
     private Button updateButton;
 
@@ -86,7 +86,7 @@ public class LanguageActivity extends EntryActivity<Language> {
             valid = false;
         }
 
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
             return false;
         }

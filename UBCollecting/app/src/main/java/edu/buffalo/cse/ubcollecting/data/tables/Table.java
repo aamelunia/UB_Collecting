@@ -23,7 +23,7 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 
-public abstract class Table <E extends Model> implements Serializable {
+public abstract class Table<E extends Model> implements Serializable {
 
     public static final int FLAG_EDIT_ENTRY = 1;
     public static final String EXTRA_MODEL = "edu.buffalo.cse.ubcollecting.data.tables.model_extra";

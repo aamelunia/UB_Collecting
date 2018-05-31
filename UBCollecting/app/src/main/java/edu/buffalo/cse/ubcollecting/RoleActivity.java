@@ -79,7 +79,7 @@ public class RoleActivity extends EntryActivity<Role> {
         }
     }
 
-    protected boolean validateEntry(){
+    protected boolean validateEntry() {
 
         boolean valid = true;
 
@@ -88,7 +88,7 @@ public class RoleActivity extends EntryActivity<Role> {
             valid = false;
         }
 
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
             return false;
         }

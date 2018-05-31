@@ -32,26 +32,7 @@ public class LanguageTable extends Table<Language> {
         activityClass = LanguageActivity.class;
     }
 
-    @Override
-    public String createTable() {
-        return "CREATE TABLE "
-                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
-                + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
-                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
-                + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
-                + ")";
-    }
-
-    @Override
-    public String getTableName() {
-        return TABLE;
-    }
-
-
-    /* Function that returns the research languages stored in the databse (i.e. the languages that
-       questions can be written )*/
-
-    public static ArrayList<Language> getResearchLanguages(){
+    public static ArrayList<Language> getResearchLanguages() {
 
         String selection = LanguageTypeTable.KEY_NAME + " = ?";
 
@@ -63,10 +44,29 @@ public class LanguageTable extends Table<Language> {
 
         String selection1 = KEY_TYPE_ID + " = ?";
 
-        String [] selectionArgs1 = {researchLanguageId};
+        String[] selectionArgs1 = {researchLanguageId};
 
         return DatabaseHelper.LANGUAGE_TABLE.getAll(selection1, selectionArgs1);
 
+    }
+
+    @Override
+    public String createTable() {
+        return "CREATE TABLE "
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
+                + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
+                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
+                + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
+                + ")";
+    }
+
+
+    /* Function that returns the research languages stored in the databse (i.e. the languages that
+       questions can be written )*/
+
+    @Override
+    public String getTableName() {
+        return TABLE;
     }
 
 
@@ -87,10 +87,6 @@ public class LanguageTable extends Table<Language> {
 //        return EnglishId;
 //
 //    }
-
-
-
-
 
 
 }
