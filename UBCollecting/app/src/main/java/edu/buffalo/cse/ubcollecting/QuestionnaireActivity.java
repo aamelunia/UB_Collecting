@@ -105,19 +105,19 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         }
     }
 
-    protected boolean validateEntry(){
+    protected boolean validateEntry() {
         boolean valid = true;
 
         if (nameField.getText().toString().trim().isEmpty()) {
             nameField.setError("This field is required");
             valid = false;
         }
-        if (typeSpinner.getSelectedItem() == null){
+        if (typeSpinner.getSelectedItem() == null) {
             nameField.setError("This field is required");
             valid = false;
         }
 
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
             return false;
         }

@@ -46,7 +46,7 @@ public class AnswerActivity extends AppCompatActivity {
         });
     }
 
-    protected boolean validateEntry(){
+    protected boolean validateEntry() {
 
         return true;
 

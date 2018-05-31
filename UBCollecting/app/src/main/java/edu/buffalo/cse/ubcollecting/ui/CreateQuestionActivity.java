@@ -39,7 +39,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private ListView questionLanguagesListView;
     private QuestionLanguageAdapter questionLanguageAdapter;
     private ArrayList<QuestionPropertyDef> questionProperites;
-    private HashMap<Language,EditText> questionTexts;
+    private HashMap<Language, EditText> questionTexts;
     private Button submit;
     private Question question;
     private TextView selectQuestionProperties;
@@ -122,7 +122,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     }
 
     private class QuestionPropertyAdapter extends ArrayAdapter<QuestionPropertyDef> {
-        public QuestionPropertyAdapter(Context context, ArrayList<QuestionPropertyDef> quesPropDefs){
+        public QuestionPropertyAdapter(Context context, ArrayList<QuestionPropertyDef> quesPropDefs) {
             super(context, 0, quesPropDefs);
         }
 
@@ -138,10 +138,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
             propertySelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    if (isChecked){
+                    if (isChecked) {
                         questionProperites.add(quesPropDef);
-                    }
-                    else {
+                    } else {
                         questionProperites.remove(quesPropDef);
                     }
                 }
@@ -157,7 +156,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     }
 
     private class QuestionLanguageAdapter extends ArrayAdapter<Language> {
-        public QuestionLanguageAdapter(Context context, ArrayList<Language> quesLanguages){
+        public QuestionLanguageAdapter(Context context, ArrayList<Language> quesLanguages) {
             super(context, 0, quesLanguages);
         }
 
@@ -181,13 +180,12 @@ public class CreateQuestionActivity extends AppCompatActivity {
             languageSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    if (isChecked){
-                        linearView.addView(questionText,params);
+                    if (isChecked) {
+                        linearView.addView(questionText, params);
 //                        listViewParams.height+=100;
 //                        questionLanguagesListView.setLayoutParams(listViewParams);
-                        questionTexts.put(language,questionText);
-                    }
-                    else{
+                        questionTexts.put(language, questionText);
+                    } else {
                         linearView.removeView(questionText);
 //                        listViewParams.height-=100;
 //                        questionLanguagesListView.setLayoutParams(listViewParams);
@@ -219,11 +217,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
             valid = false;
         }
 
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+            return false;
         }
-
-        return valid;
+        return true;
 
     }
 

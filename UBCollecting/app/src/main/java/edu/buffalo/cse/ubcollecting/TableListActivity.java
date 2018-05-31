@@ -62,10 +62,9 @@ public abstract class TableListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent i = null;
-                    if (table.getTableName().equals("Question")){
+                    if (table.getTableName().equals("Question")) {
                         i = new Intent(TableListActivity.this, CreateQuestionActivity.class);
-                    }
-                    else {
+                    } else {
                         i = table.insertActivityIntent(TableListActivity.this);
 
                     }

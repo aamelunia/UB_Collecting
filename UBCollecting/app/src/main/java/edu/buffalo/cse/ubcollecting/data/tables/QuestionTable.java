@@ -17,7 +17,6 @@ public class QuestionTable extends Table<Question> {
     public static final String KEY_DISPLAY_TEXT = "DisplayText";
 
 
-
     public QuestionTable() {
         super();
         activityClass = AddQuestionsActivity.class;

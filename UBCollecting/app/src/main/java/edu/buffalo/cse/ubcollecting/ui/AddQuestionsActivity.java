@@ -198,12 +198,12 @@ public class AddQuestionsActivity extends AppCompatActivity {
             this.entryList = entryList;
         }
 
-        public void setEntryList(List<QuestionLangVersion> entryList) {
-            this.entryList = entryList;
-        }
-
         public List<QuestionLangVersion> getEntryList() {
             return entryList;
+        }
+
+        public void setEntryList(List<QuestionLangVersion> entryList) {
+            this.entryList = entryList;
         }
 
         @Override

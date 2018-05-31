@@ -180,7 +180,7 @@ public class PersonActivity extends EntryActivity<Person> {
         photoView.setDrawingCacheEnabled(true);
         photoView.buildDrawingCache();
         Bitmap bitmap = photoView.getDrawingCache();
-        if (bitmap != null){
+        if (bitmap != null) {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, bo);
             byte[] data = bo.toByteArray();
@@ -191,29 +191,29 @@ public class PersonActivity extends EntryActivity<Person> {
 
     private void retrieveImage() {
         byte[] image = entry.getPhoto();
-        if (image != null){
+        if (image != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             photoView.setImageBitmap(bitmap);
         }
     }
 
 
-    protected boolean validateEntry(){
+    protected boolean validateEntry() {
         boolean valid = true;
 
         if (nameField.getText().toString().trim().isEmpty()) {
             nameField.setError("This field is required");
             valid = false;
         }
-        if (roleSpinner.getSelectedItem() == null){
+        if (roleSpinner.getSelectedItem() == null) {
             nameField.setError("This field is required");
             valid = false;
         }
 
-        if (roleSpinner.getSelectedItem() != null){
+        if (roleSpinner.getSelectedItem() != null) {
             Role role = (Role) roleSpinner.getSelectedItem();
 
-            if (role != null && (role.getName().equals("Interviewer") || role.getName().equals("Admin"))){
+            if (role != null && (role.getName().equals("Interviewer") || role.getName().equals("Admin"))) {
 
                 if (emailField.getText().toString().trim().isEmpty()) {
                     emailField.setError("This field is required");
@@ -227,39 +227,38 @@ public class PersonActivity extends EntryActivity<Person> {
 
             }
 
-            if (role.getPhotoRequired() == 1){
+            if (role.getPhotoRequired() == 1) {
 
-                if (photoView.getDrawingCache() == null){
+                if (photoView.getDrawingCache() == null) {
                     photoDescriptionField.setError("You must take a picture!");
                     valid = false;
                 }
             }
-            if (role.getIntroRequired() == 1){
+            if (role.getIntroRequired() == 1) {
 
             }
 
         }
 
-        if (!valid){
+        if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
-    private class RoleOnItemSelectedListener extends EntryOnItemSelectedListener<Role>{
+    private class RoleOnItemSelectedListener extends EntryOnItemSelectedListener<Role> {
 
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-            super.onItemSelected(parent,view,position,id);
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            super.onItemSelected(parent, view, position, id);
             Role role = (Role) roleSpinner.getSelectedItem();
-            if (role != null && (role.getName().equals("Interviewer") || role.getName().equals("Admin"))){
+            if (role != null && (role.getName().equals("Interviewer") || role.getName().equals("Admin"))) {
                 emailField.setVisibility(View.VISIBLE);
                 passwordField.setVisibility(View.VISIBLE);
                 findViewById(R.id.person_email_label).setVisibility(View.VISIBLE);
                 findViewById(R.id.person_password_label).setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 emailField.setVisibility(View.GONE);
                 passwordField.setVisibility(View.GONE);
                 findViewById(R.id.person_email_label).setVisibility(View.GONE);

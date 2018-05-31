@@ -89,65 +89,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(App.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        db.execSQL("PRAGMA foreign_keys=ON");
-        //Creating The Tables
-        db.execSQL(PERSON_TABLE.createTable());
-        db.execSQL(QUESTION_TABLE.createTable());
-        db.execSQL(QUESTION_OPTION_TABLE.createTable());
-        db.execSQL(QUESTION_PROPERTY_TABLE.createTable());
-        db.execSQL(QUESTION_PROPERTY_DEF_TABLE.createTable());
-        db.execSQL(QUESTION_LANG_VERSION_TABLE.createTable());
-        db.execSQL(QUESTIONNAIRE_TABLE.createTable());
-        db.execSQL(QUESTIONNAIRE_TYPE_TABLE.createTable());
-        db.execSQL(QUESTIONNAIRE_CONTENT_TABLE.createTable());
-        db.execSQL(LANGUAGE_TABLE.createTable());
-        db.execSQL(LANGUAGE_TYPE_TABLE.createTable());
-        db.execSQL(ROLE_TABLE.createTable());
-        db.execSQL(FIELD_TRIP_TABLE.createTable());
-        db.execSQL(FILE_TABLE.createTable());
-        db.execSQL(SESSION_TABLE.createTable());
-        db.execSQL(SESSION_ANSWER_TABLE.createTable());
-        db.execSQL(SESSION_PERSON_TABLE.createTable());
-        db.execSQL(ANSWER_TABLE.createTable());
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        Log.d(TAG, String.format("SQLiteDatabase.onUpgrade(%d -> %d)", oldVersion, newVersion));
-
-        // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + PersonTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionOptionTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersionTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTypeTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContentTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + LanguageTypeTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + LanguageTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + RoleTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FieldTripTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FileTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SessionTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswerTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SessionPersonTable.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + AnswerTable.TABLE);
-
-        // create new tables
-        onCreate(db);
-    }
-
-    @Override
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
-    }
-
     public static void populateData() {
         Role admin = new Role();
         admin.setName("Admin");
@@ -262,5 +203,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         french.setTypeId(researchLang.getId());
         LANGUAGE_TABLE.insert(french);
 
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+        db.execSQL("PRAGMA foreign_keys=ON");
+        //Creating The Tables
+        db.execSQL(PERSON_TABLE.createTable());
+        db.execSQL(QUESTION_TABLE.createTable());
+        db.execSQL(QUESTION_OPTION_TABLE.createTable());
+        db.execSQL(QUESTION_PROPERTY_TABLE.createTable());
+        db.execSQL(QUESTION_PROPERTY_DEF_TABLE.createTable());
+        db.execSQL(QUESTION_LANG_VERSION_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_TYPE_TABLE.createTable());
+        db.execSQL(QUESTIONNAIRE_CONTENT_TABLE.createTable());
+        db.execSQL(LANGUAGE_TABLE.createTable());
+        db.execSQL(LANGUAGE_TYPE_TABLE.createTable());
+        db.execSQL(ROLE_TABLE.createTable());
+        db.execSQL(FIELD_TRIP_TABLE.createTable());
+        db.execSQL(FILE_TABLE.createTable());
+        db.execSQL(SESSION_TABLE.createTable());
+        db.execSQL(SESSION_ANSWER_TABLE.createTable());
+        db.execSQL(SESSION_PERSON_TABLE.createTable());
+        db.execSQL(ANSWER_TABLE.createTable());
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        Log.d(TAG, String.format("SQLiteDatabase.onUpgrade(%d -> %d)", oldVersion, newVersion));
+
+        // on upgrade drop older tables
+        db.execSQL("DROP TABLE IF EXISTS " + PersonTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionOptionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionPropertyDefTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionLangVersionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireTypeTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QuestionnaireContentTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LanguageTypeTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LanguageTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + RoleTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FieldTripTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FileTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionAnswerTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SessionPersonTable.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + AnswerTable.TABLE);
+
+        // create new tables
+        onCreate(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
     }
 }
