@@ -22,5 +22,18 @@ public class QuestionPropertyDef extends Model {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof QuestionPropertyDef) {
+            QuestionPropertyDef quesPropDef = (QuestionPropertyDef) obj;
+            return quesPropDef.getId().equals(getId());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 
 }

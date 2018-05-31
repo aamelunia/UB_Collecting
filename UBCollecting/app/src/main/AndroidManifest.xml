@@ -24,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.CreateQuestionActivity" />
+        <activity android:name=".ui.UpdateQuestionActivity" />
         <activity android:name=".PersonActivity" />
         <activity android:name=".FieldTripActivity" />
         <activity android:name=".FileActivity" />

@@ -60,4 +60,9 @@ public class Language extends Model {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
 }

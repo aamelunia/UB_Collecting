@@ -4,7 +4,12 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import edu.buffalo.cse.ubcollecting.QuestionLangVersionActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
 public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
@@ -39,6 +44,27 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
         return TABLE;
     }
 
+
+    public HashMap<Language,QuestionLangVersion> getQuestionTexts(String quesId){
+
+        String selection = KEY_QUESTION_ID + " = ?";
+
+        String[] selectionArgs = {quesId};
+
+        ArrayList<QuestionLangVersion> questionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getAll(selection, selectionArgs);
+
+        HashMap<Language,QuestionLangVersion > questions = new HashMap<>();
+
+        for (QuestionLangVersion question: questionTexts){
+
+            Language lang = DatabaseHelper.LANGUAGE_TABLE.findById(question.getQuestionLanguageId());
+
+            questions.put(lang,question);
+        }
+
+        return questions;
+
+    }
 
 
     /* Function that returns the english text of the question represented by the passed in quesId*/

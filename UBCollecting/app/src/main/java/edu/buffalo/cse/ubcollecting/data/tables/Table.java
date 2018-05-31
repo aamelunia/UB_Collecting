@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -22,6 +23,8 @@ import java.util.Collections;
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
+import edu.buffalo.cse.ubcollecting.ui.UpdateQuestionActivity;
 
 public abstract class Table <E extends Model> implements Serializable {
 
@@ -83,6 +86,10 @@ public abstract class Table <E extends Model> implements Serializable {
 
     @SuppressLint("WrongConstant")
     public Intent editActivityIntent(Context packageContext, Model entry) {
+        if (entry instanceof Question){
+            activityClass = UpdateQuestionActivity.class;
+            Log.i("Question instance","Called");
+        }
         Intent i = new Intent(packageContext, activityClass);
         i.putExtra(EXTRA_MODEL, entry);
         i.setFlags(FLAG_EDIT_ENTRY);

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import edu.buffalo.cse.ubcollecting.R;
 import edu.buffalo.cse.ubcollecting.UIUtils;
@@ -28,22 +29,28 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
+import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
+
+
 /**
  * Created by aamel786 on 4/14/18.
  */
 
-public class CreateQuestionActivity extends AppCompatActivity {
+public class UpdateQuestionActivity extends AppCompatActivity {
 
     private ListView questionPropertiesListView;
     private QuestionPropertyAdapter questionPropertyAdapter;
     private ListView questionLanguagesListView;
     private QuestionLanguageAdapter questionLanguageAdapter;
-    private ArrayList<QuestionPropertyDef> questionProperites;
-    private HashMap<Language,EditText> questionTexts;
-    private Button submit;
+    private HashSet<QuestionPropertyDef> originalQuestionProperties;
+    private HashSet<QuestionPropertyDef> newQuestionProperties;
+    private HashMap<Language,QuestionLangVersion> originalQuestionTexts;
+    private HashMap<Language,EditText> newQuestionTexts;
+    private Button update;
     private Question question;
     private TextView selectQuestionProperties;
     private TextView selectQuestionLanguages;
+
 
 
     @Override
@@ -51,17 +58,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_create_questions);
+        setContentView(R.layout.activity_update_questions);
 
-        question = new Question();
+        question = (Question) getIntent().getSerializableExtra(EXTRA_MODEL);
+
+        originalQuestionProperties =  DatabaseHelper.QUESTION_PROPERTY_TABLE.getQuestionProperties(question.getId());
+
+        newQuestionProperties = new HashSet<>();
+
+        originalQuestionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getQuestionTexts(question.getId());
+
+        newQuestionTexts = new HashMap<>();
 
         questionPropertiesListView = findViewById(R.id.question_properties_list_view);
 
         questionLanguagesListView = findViewById(R.id.question_languages_list_view);
-
-        selectQuestionProperties = findViewById(R.id.select_question_properties);
-
-        selectQuestionLanguages = findViewById(R.id.select_question_languages);
 
         ArrayList<QuestionPropertyDef> quesPropDefs = DatabaseHelper.QUESTION_PROPERTY_DEF_TABLE.getAll();
 
@@ -75,48 +86,70 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         questionLanguagesListView.setAdapter(questionLanguageAdapter);
 
+        selectQuestionProperties = findViewById(R.id.select_question_properties);
+
+        selectQuestionLanguages = findViewById(R.id.select_question_languages);
+
         UIUtils.setListViewHeightBasedOnItems(questionPropertiesListView);
 
         UIUtils.setListViewHeightBasedOnItems(questionLanguagesListView);
 
-        questionProperites = new ArrayList<>();
+        update = findViewById(R.id.update_question_button);
 
-        questionTexts = new HashMap<>();
-
-        submit = findViewById(R.id.create_question_submit_button);
-
-        submit.setOnClickListener(new View.OnClickListener() {
-
+        update.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 if (validateEntry()) {
 
-                    DatabaseHelper.QUESTION_TABLE.insert(question);
-
-                    for (QuestionPropertyDef quesPropDef : questionProperites) {
-                        QuestionProperty quesProp = new QuestionProperty();
-                        quesProp.setQuestionId(question.getId());
-                        quesProp.setPropertyId(quesPropDef.getId());
-                        DatabaseHelper.QUESTION_PROPERTY_TABLE.insert(quesProp);
+                    for (QuestionPropertyDef quesPropDef : newQuestionProperties) {
+                        if (!originalQuestionProperties.contains(quesPropDef)){
+                            QuestionProperty quesProp = new QuestionProperty();
+                            quesProp.setQuestionId(question.getId());
+                            quesProp.setPropertyId(quesPropDef.getId());
+                            DatabaseHelper.QUESTION_PROPERTY_TABLE.insert(quesProp);
+                        }
                     }
 
-                    for (Language lang : questionTexts.keySet()) {
+                    originalQuestionProperties.removeAll(newQuestionProperties);
+
+                    for (QuestionPropertyDef quesPropDef : originalQuestionProperties) {
+
+                        DatabaseHelper.QUESTION_PROPERTY_TABLE.deleteByPropertyId(quesPropDef.getId());
+
+                    }
+
+
+                    for (Language lang : newQuestionTexts.keySet()) {
                         if (lang.getName().equals("English")) {
-                            question.setDisplayText(questionTexts.get(lang).getText().toString());
+                            question.setDisplayText(newQuestionTexts.get(lang).getText().toString());
                             DatabaseHelper.QUESTION_TABLE.update(question);
                         }
-                        QuestionLangVersion quesLang = new QuestionLangVersion();
-                        quesLang.setQuestionId(question.getId());
-                        quesLang.setQuestionLanguageId(lang.getId());
-                        quesLang.setQuestionText(questionTexts.get(lang).getText().toString());
-                        DatabaseHelper.QUESTION_LANG_VERSION_TABLE.insert(quesLang);
+                        if(originalQuestionTexts.containsKey(lang)){
+                            QuestionLangVersion quesLang = originalQuestionTexts.get(lang);
+                            quesLang.setQuestionText(newQuestionTexts.get(lang).getText().toString());
+                            DatabaseHelper.QUESTION_LANG_VERSION_TABLE.update(quesLang);
+                        }
+                        else{
+                            QuestionLangVersion quesLang = new QuestionLangVersion();
+                            quesLang.setQuestionId(question.getId());
+                            quesLang.setQuestionLanguageId(lang.getId());
+                            quesLang.setQuestionText(newQuestionTexts.get(lang).getText().toString());
+                            DatabaseHelper.QUESTION_LANG_VERSION_TABLE.insert(quesLang);
+                        }
                     }
 
+                    for (Language lang : originalQuestionTexts.keySet()) {
+                        if(!newQuestionTexts.containsKey(lang)){
+                            DatabaseHelper.QUESTION_LANG_VERSION_TABLE.delete(originalQuestionTexts.get(lang).getId());
+                        }
+                    }
+
+
                     finish();
-                }
             }
+        }
         });
 
     }
@@ -135,14 +168,20 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
             final CheckBox propertySelect = (CheckBox) convertView.findViewById(R.id.entry_list_select_box);
 
+            if (originalQuestionProperties.contains(quesPropDef)){
+                propertySelect.setChecked(true);
+                newQuestionProperties.add(quesPropDef);
+            }
+
+
             propertySelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     if (isChecked){
-                        questionProperites.add(quesPropDef);
+                        newQuestionProperties.add(quesPropDef);
                     }
                     else {
-                        questionProperites.remove(quesPropDef);
+                        newQuestionProperties.remove(quesPropDef);
                     }
                 }
             });
@@ -170,28 +209,30 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.entry_list_item_select, parent, false);
             }
 
-            final LinearLayout.LayoutParams listViewParams = (LinearLayout.LayoutParams) questionLanguagesListView.getLayoutParams();
-
             final EditText questionText = new EditText(getApplicationContext());
             final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final LinearLayout linearView = convertView.findViewById(R.id.entry_list_outer_linear_layout);
 
             final CheckBox languageSelect = (CheckBox) convertView.findViewById(R.id.entry_list_select_box);
 
+
+            if (originalQuestionTexts.containsKey(language)){
+                languageSelect.setChecked(true);
+                questionText.setText(originalQuestionTexts.get(language).getQuestionText());
+                linearView.addView(questionText,params);
+                newQuestionTexts.put(language,questionText);
+            }
+
             languageSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     if (isChecked){
                         linearView.addView(questionText,params);
-//                        listViewParams.height+=100;
-//                        questionLanguagesListView.setLayoutParams(listViewParams);
-                        questionTexts.put(language,questionText);
+                        newQuestionTexts.put(language,questionText);
                     }
                     else{
                         linearView.removeView(questionText);
-//                        listViewParams.height-=100;
-//                        questionLanguagesListView.setLayoutParams(listViewParams);
-                        questionTexts.remove(language);
+                        newQuestionTexts.remove(language);
                     }
                 }
             });
@@ -201,7 +242,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
             languageName.setText(language.getName());
 
             return convertView;
-
         }
     }
 
@@ -209,22 +249,23 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         boolean valid = true;
 
-        if (questionProperites.isEmpty()) {
-            selectQuestionProperties.setError("You must select a question property");
+        if (newQuestionProperties.isEmpty()) {
+            selectQuestionProperties.setError("A question property must be selected");
             valid = false;
         }
 
-        if (questionTexts.isEmpty()) {
+        if (newQuestionTexts.isEmpty()) {
             selectQuestionLanguages.setError("You must select at least one language for the question text");
             valid = false;
         }
 
         if (!valid){
-            Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "At least one question property and one language must be selected", Toast.LENGTH_SHORT).show();
         }
 
         return valid;
 
     }
+
 
 }

@@ -11,7 +11,6 @@ public class QuestionPropertyDefTable extends Table<QuestionPropertyDef> {
 
     public static final String TABLE = "QuestionPropertyDef";
 
-
     // QuestionPropertyDef Table - column names
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "Name";
@@ -31,4 +30,5 @@ public class QuestionPropertyDefTable extends Table<QuestionPropertyDef> {
     public String getTableName() {
         return TABLE;
     }
+
 }

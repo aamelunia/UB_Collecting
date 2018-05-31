@@ -4,8 +4,16 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import edu.buffalo.cse.ubcollecting.QuestionPropertyActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
 public class QuestionPropertyTable extends Table<QuestionProperty> {
 
@@ -37,4 +45,41 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
     public String getTableName() {
         return TABLE;
     }
+
+
+    public HashSet<QuestionPropertyDef> getQuestionProperties(String quesId){
+
+        String selection = KEY_QUESTION_ID + " = ?";
+
+        String[] selectionArgs = {quesId};
+
+        ArrayList<QuestionProperty> questionProperties = DatabaseHelper.QUESTION_PROPERTY_TABLE.getAll(selection, selectionArgs);
+
+        HashSet<QuestionPropertyDef> quesPropertyDefs = new HashSet<>();
+
+        for (QuestionProperty quesProperty: questionProperties){
+
+            QuestionPropertyDef quesPropDef = DatabaseHelper.QUESTION_PROPERTY_DEF_TABLE.findById(quesProperty.getPropertyId());
+
+            quesPropertyDefs.add(quesPropDef);
+        }
+
+        return quesPropertyDefs;
+
+    }
+
+    public void deleteByPropertyId(String id) {
+
+        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+
+        String selection = KEY_PROPERTY_ID + " = ?";
+
+        String[] selectionArgs = {id};
+
+        db.delete(this.getTableName(), selection, selectionArgs);
+
+        DatabaseManager.getInstance().closeDatabase();
+
+    }
+
 }
