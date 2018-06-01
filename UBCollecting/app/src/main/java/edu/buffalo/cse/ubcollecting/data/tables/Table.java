@@ -1,9 +1,5 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
-/**
- * Created by aamel786 on 3/24/18.
- */
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseManager;
 import edu.buffalo.cse.ubcollecting.data.models.MethodComparator;
@@ -26,6 +23,11 @@ import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.ui.UpdateQuestionActivity;
 
+/**
+ * Abstraction of an SQLite table of {@link Model}s.
+ *
+ * @param <E> {@link Model} implementation that the will be stored in Table rows
+ */
 public abstract class Table<E extends Model> implements Serializable {
 
     public static final int FLAG_EDIT_ENTRY = 1;
@@ -41,18 +43,34 @@ public abstract class Table<E extends Model> implements Serializable {
         Collections.sort(tableColumns, new ColumnComparator());
     }
 
+    /**
+     * Return an SQLite command to create the table.
+     *
+     * @return {@link String} of SQlite CREATE command
+     */
     public abstract String createTable();
 
+    /**
+     * Return the name of the table.
+     *
+     * @return table name
+     */
     public abstract String getTableName();
 
-    public long insert(Model model) {
+    /**
+     * Insert a {@link Model} into the {@link Table}
+     *
+     * @param model {@link} Model instance to insert into the table
+     * @return SQLite ID number
+     */
+    public long insert(E model) {
 
         long rowId;
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
 
-        ArrayList<Method> getters = model.getGetters();
+        List<Method> getters = model.getGetters();
 
         Collections.sort(getters, new MethodComparator());
 
@@ -79,11 +97,25 @@ public abstract class Table<E extends Model> implements Serializable {
         return rowId;
     }
 
+    /**
+     * Return an intent for starting the corresponding {@link edu.buffalo.cse.ubcollecting.EntryActivity EntryActivity}
+     * for inserting.
+     *
+     * @param packageContext Context in which the activity is being started
+     * @return Intent to the corresponding {@link edu.buffalo.cse.ubcollecting.EntryActivity EntryActivity}
+     */
     public Intent insertActivityIntent(Context packageContext) {
         Intent i = new Intent(packageContext, activityClass);
         return i;
     }
 
+    /**
+     * Return an intent for starting the corresponding {@link edu.buffalo.cse.ubcollecting.EntryActivity EntryActivity}
+     * for editing.
+     *
+     * @param packageContext Context in which the activity is being started
+     * @return Intent to the corresponding {@link edu.buffalo.cse.ubcollecting.EntryActivity EntryActivity}
+     */
     @SuppressLint("WrongConstant")
     public Intent editActivityIntent(Context packageContext, Model entry) {
         if (entry instanceof Question){
@@ -96,7 +128,14 @@ public abstract class Table<E extends Model> implements Serializable {
         return i;
     }
 
-    protected void insertContent(ContentValues values, String key, Object value) {
+    /**
+     * Insert key and value pair into {@link ContentValues}
+     *
+     * @param values ContentValues where key-value pair is to be added
+     * @param key    key value
+     * @param value  pair value
+     */
+    private void insertContent(ContentValues values, String key, Object value) {
 
         if (value instanceof Integer) {
             values.put(key, (Integer) value);
@@ -105,9 +144,13 @@ public abstract class Table<E extends Model> implements Serializable {
         } else if (value instanceof byte[]) {
             values.put(key, (byte[]) value);
         }
-
     }
 
+    /**
+     * Return a {@link List} of all {@link Model} entries in the SQlite table.
+     *
+     * @return {@link List} of {@link Model} entries
+     */
     public ArrayList<E> getAll() {
 
         ArrayList<E> tuples = new ArrayList<>();
@@ -255,7 +298,7 @@ public abstract class Table<E extends Model> implements Serializable {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues updatedValues = new ContentValues();
 
-        ArrayList<Method> getters = model.getGetters();
+        List<Method> getters = model.getGetters();
 
         Collections.sort(getters, new MethodComparator());
 

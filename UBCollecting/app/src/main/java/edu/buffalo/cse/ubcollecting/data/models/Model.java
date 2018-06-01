@@ -3,11 +3,11 @@ package edu.buffalo.cse.ubcollecting.data.models;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by aamel786 on 3/24/18.
+ * Abstraction of an SQLite database entry.
  */
-
 public abstract class Model implements Serializable {
 
     public String id;
@@ -16,17 +16,37 @@ public abstract class Model implements Serializable {
         id = generateID();
     }
 
+    /**
+     * Returns an ID unique to the Model instance.
+     *
+     * @return Unique ID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Set model's ID.
+     *
+     * @param id String to set ID to.
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Return human-readable model identifier.
+     *
+     * @return human-readable identification
+     */
     public abstract String getIdentifier();
 
-    public ArrayList<Method> getGetters() {
+    /**
+     * Return a {@link List} of the Model instance's get {@link Method}s.
+     *
+     * @return {@link List} of get methods
+     */
+    public List<Method> getGetters() {
 
         Method[] m = this.getClass().getDeclaredMethods();
         ArrayList<Method> getters = new ArrayList<>();
@@ -49,6 +69,11 @@ public abstract class Model implements Serializable {
         return getters;
     }
 
+    /**
+     * Return a {@link List} of the Model instance's set {@link Method}s.
+     *
+     * @return {@link List} of set methods
+     */
     public ArrayList<Method> getSetters() {
 
         Method[] m = this.getClass().getDeclaredMethods();
@@ -72,7 +97,13 @@ public abstract class Model implements Serializable {
         return setters;
     }
 
-    public String generateID() {
+    /**
+     * Return the String-value of the current timestamp in milliseconds to be used as the
+     * {@link Model} instance's ID
+     *
+     * @return {@link String} ID
+     */
+    private String generateID() {
         String s = "";
         while (s.length() < 5) {
             s = "0" + s;
@@ -80,8 +111,6 @@ public abstract class Model implements Serializable {
         return "1" + s + String.valueOf(System.currentTimeMillis());
     }
 
-
-    //TODO
     @Override
     public String toString() {
         return getIdentifier();
