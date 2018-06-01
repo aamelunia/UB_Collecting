@@ -61,6 +61,11 @@
             android:layout_height="wrap_content"
             android:text="@string/questionnaire_add_questions"/>
 
+        <ListView
+            android:id="@+id/questionnaire_question_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/questionnaire_update_button"
             android:layout_width="match_parent"

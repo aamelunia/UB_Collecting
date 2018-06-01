@@ -1,37 +1,52 @@
 package edu.buffalo.cse.ubcollecting;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
+import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 
 public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
     private static final String TAG = QuestionnaireActivity.class.getSimpleName().toString();
+    public static final int RESULT_ADD_QUESTIONS = 1;
+    public static final String EXTRA_QUESTIONNAIRE_CONTENT = "edu.buffalo.cse.ubcollecting.questionnaire_content";
 
     private EditText nameField;
     private EditText descriptionField;
     private Spinner typeSpinner;
     private ArrayAdapter<QuestionnaireType> typeAdapter;
+    private ListView questionnaireListView;
+    private QuestionnaireContentAdapter questionnaireContentAdapter;
     private Button addQuestionsButton;
     private Button updateButton;
     private Button submitButton;
+    private ArrayList<QuestionnaireContent> questionnaireContent;
 
 
     void setUI(Questionnaire entry) {
@@ -48,10 +63,19 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         typeSpinner.setSelection(0); //TODO
     }
 
+    @Override
     void handleResultGet(int requestCode, Intent data) {
-        //TODO
+        Log.i(TAG, "Req code: " + Integer.toString(requestCode));
+        Serializable serializableObject = data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
+        Log.i(TAG, "Serializable obj: " + serializableObject.getClass().toString());
+        if (requestCode == RESULT_ADD_QUESTIONS) {
+            questionnaireContent = (ArrayList<QuestionnaireContent>) serializableObject;
+            Log.i(TAG, Integer.toString(questionnaireContent.size()));
+            questionnaireContentAdapter.notifyDataSetChanged();
+        }
     }
 
+    @Override
     void setEntryByUI() {
         QuestionnaireType type = (QuestionnaireType) typeSpinner.getSelectedItem();
 
@@ -65,6 +89,8 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
+
+        questionnaireContent = new ArrayList<>();
 
         nameField = this.findViewById(R.id.questionnaire_name_field);
         descriptionField = this.findViewById(R.id.questionnaire_description_field);
@@ -83,7 +109,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             @Override
             public void onClick(View view) {
                 Intent i = AddQuestionsActivity.newIntent(QuestionnaireActivity.this, entry);
-                startActivity(i);
+                startActivityForResult(i, RESULT_ADD_QUESTIONS);
             }
         });
 
@@ -91,7 +117,12 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         updateButton.setOnClickListener(new UpdateButtonOnClickListener(QUESTIONNAIRE_TABLE));
 
         submitButton = this.findViewById(R.id.questionnaire_submit_button);
-        submitButton.setOnClickListener(new SubmitButtonOnClickListener(QUESTIONNAIRE_TABLE));
+        submitButton.setOnClickListener(new QuestionnaireSubmitOnClickListener());
+
+        questionnaireListView = this.findViewById(R.id.questionnaire_question_list_view);
+        questionnaireContentAdapter =
+                new QuestionnaireContentAdapter(QuestionnaireActivity.this, questionnaireContent);
+        questionnaireListView.setAdapter(questionnaireContentAdapter);
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
             entry = getEntry(getIntent());
@@ -122,5 +153,47 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             return false;
         }
         return true;
+    }
+
+    private class QuestionnaireSubmitOnClickListener extends SubmitButtonOnClickListener {
+        public QuestionnaireSubmitOnClickListener() {
+            super(QUESTIONNAIRE_TABLE);
+        }
+
+        @Override
+        public void onClick(View view) {
+            setEntryByUI();
+            if (validateEntry()) {
+                table.insert(entry);
+                setEntryCreatedResult(entry);
+                for (QuestionnaireContent content : questionnaireContent) {
+                    QUESTIONNAIRE_CONTENT_TABLE.insert(content);
+                }
+                finish();
+            }
+        }
+    }
+
+    private class QuestionnaireContentAdapter extends ArrayAdapter<QuestionnaireContent> {
+        public QuestionnaireContentAdapter(Context context, ArrayList<QuestionnaireContent> questionnaireContent) {
+            super(context, 0, questionnaireContent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            QuestionnaireContent content = questionnaireContent.get(position);
+
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbered_list_item_view, parent, false);
+            }
+
+            TextView numberView = parent.findViewById(R.id.numbered_list_item_number_view);
+            numberView.setText(content.getQuestionOrder());
+            TextView textView = parent.findViewById(R.id.numbered_list_item_number_view);
+            textView.setText(content.getIdentifier());
+
+            return convertView;
+        }
     }
 }

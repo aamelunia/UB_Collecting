@@ -1,6 +1,7 @@
 package edu.buffalo.cse.ubcollecting.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -172,6 +173,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             final LinearLayout.LayoutParams listViewParams = (LinearLayout.LayoutParams) questionLanguagesListView.getLayoutParams();
 
             final EditText questionText = new EditText(getApplicationContext());
+            questionText.setTextColor(Color.BLACK);
             final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final LinearLayout linearView = convertView.findViewById(R.id.entry_list_outer_linear_layout);
 

@@ -32,7 +32,6 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
-import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
 public class AddQuestionsActivity extends AppCompatActivity {
@@ -45,7 +44,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
     private String questionnaireId;
 
     private RecyclerView entryRecyclerView;
-    private AddQuestionsActivity.EntryAdapter entryAdapter;
+    private QuestionLangAdapter entryAdapter;
     private ListView filterList;
     private EditText searchText;
     private ImageButton clearSearchButton;
@@ -118,15 +117,20 @@ public class AddQuestionsActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSelectionDone(selections);
-                finish();
+//                List<QuestionnaireContent> contentList = onSelectionDone(selections);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("obj", contentList);
+//                Intent data = new Intent();
+//                data.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, contentList);
+//                setResult(RESULT_ADD_QUESTIONS, data);
+//                finish();
             }
         });
 
         entryRecyclerView = findViewById(R.id.table_select_recycler);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        entryAdapter = new AddQuestionsActivity.EntryAdapter(QUESTION_LANG_VERSION_TABLE.getAll());
+        entryAdapter = new QuestionLangAdapter(QUESTION_LANG_VERSION_TABLE.getAll());
         entryRecyclerView.setAdapter(entryAdapter);
 
         filterList = findViewById(R.id.table_select_filter_list);
@@ -138,7 +142,8 @@ public class AddQuestionsActivity extends AppCompatActivity {
         return null;
     }
 
-    public void onSelectionDone(ArrayList<QuestionLangVersion> selections) {
+    public List<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
+        List<QuestionnaireContent> contentList = new ArrayList<>();
         for (int i = 0; i < selections.size(); i++) {
             QuestionLangVersion questionLang = selections.get(i);
             QuestionnaireContent content = new QuestionnaireContent();
@@ -146,18 +151,19 @@ public class AddQuestionsActivity extends AppCompatActivity {
             content.setQuestionId(questionLang.getQuestionId());
             content.setQuestionnaireId(questionnaireId);
 
-            QUESTIONNAIRE_CONTENT_TABLE.insert(content);
+            contentList.add(content);
         }
+        return contentList;
     }
 
-    private class EntryHolder extends RecyclerView.ViewHolder {
+    private class QuestionLangHolder extends RecyclerView.ViewHolder {
 
         private QuestionLangVersion question;
         private CheckBox selectBox;
         private TextView entryNameView;
 
 
-        public EntryHolder(View view) {
+        public QuestionLangHolder(View view) {
             super(view);
 
             selectBox = view.findViewById(R.id.entry_list_select_box);
@@ -190,11 +196,11 @@ public class AddQuestionsActivity extends AppCompatActivity {
         }
     }
 
-    private class EntryAdapter extends RecyclerView.Adapter<AddQuestionsActivity.EntryHolder> {
+    private class QuestionLangAdapter extends RecyclerView.Adapter<QuestionLangHolder> {
 
         private List<QuestionLangVersion> entryList;
 
-        public EntryAdapter(List<QuestionLangVersion> entryList) {
+        public QuestionLangAdapter(List<QuestionLangVersion> entryList) {
             this.entryList = entryList;
         }
 
@@ -207,15 +213,15 @@ public class AddQuestionsActivity extends AppCompatActivity {
         }
 
         @Override
-        public AddQuestionsActivity.EntryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public QuestionLangHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
                     .inflate(R.layout.entry_list_item_select, parent, false);
-            return new AddQuestionsActivity.EntryHolder(view);
+            return new QuestionLangHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(AddQuestionsActivity.EntryHolder holder, int position) {
+        public void onBindViewHolder(QuestionLangHolder holder, int position) {
             QuestionLangVersion entry = entryList.get(position);
             holder.bindEntry(entry);
         }
@@ -246,8 +252,8 @@ public class AddQuestionsActivity extends AppCompatActivity {
             checkBox.setChecked(selectedLanguages.contains(lang));
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
+                    if (selected) {
                         selectedLanguages.add(lang);
                         String selection = QuestionLangVersionTable.KEY_QUESTION_LANG_ID + " = ?";
                         String[] value = new String[]{lang.getId()};
