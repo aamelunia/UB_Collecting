@@ -195,6 +195,13 @@ public abstract class Table<E extends Model> implements Serializable {
 
     }
 
+    /**
+     * Return a {@link List} of all {@link Model} entries in the SQlite table that satisfy
+     * the passed in selection predicate(s)
+     * @param selection The fields of the respective table by which you want to filter the result
+     * @param selectionArgs The corresponding values/condition those fields should satisfy
+     * @return {@link List} of {@link Model} entries
+     */
 
     public ArrayList<E> getAll(String selection, String[] selectionArgs) {
 
@@ -247,6 +254,12 @@ public abstract class Table<E extends Model> implements Serializable {
     }
 
 
+    /**
+     * Return a {@link Model} of the entry in the SQlite table that has the passed in id
+     * @param id The id of the row you want to find
+     * @return a {@link Model} entry
+     */
+
     public E findById(String id) {
 
         E model = null;
@@ -293,6 +306,11 @@ public abstract class Table<E extends Model> implements Serializable {
 
     }
 
+    /**
+     * Updates a row in the SQlite table based on passed in {@link Model}
+     * @param model {@link Model} representing how the row it represents in table should be updated
+     */
+
     public void update(Model model) {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -333,6 +351,11 @@ public abstract class Table<E extends Model> implements Serializable {
 
     }
 
+    /**
+     * Deletes a row in the SQlite table based on passed in id
+     * @param id The id of the row you want to delete
+     */
+
     public void delete(String id) {
 
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
@@ -346,6 +369,14 @@ public abstract class Table<E extends Model> implements Serializable {
         DatabaseManager.getInstance().closeDatabase();
 
     }
+
+    /**
+     * Helper method that appropriately updates a {@link Model} representing a row from the SQlite table
+     * @param cursor The {@link Cursor} returned by SQlite query that contains the result of the query
+     * @param model The {@link Model} that is to be updated
+     * @param key The {@link String} key representing the field of the {@link Model} that is to be updated
+     * @param method The corresponding setter method of the {@link Model} that can be invoked
+     */
 
     protected void insertIntoObject(Cursor cursor, E model, String key, Method method) {
 
@@ -371,6 +402,11 @@ public abstract class Table<E extends Model> implements Serializable {
         }
 
     }
+
+    /**
+     * Return a {@link List} of {@link String} containing all the columns/fields of a SQlite table
+     * @return a {@link List} of {@link String}
+     */
 
     private ArrayList<String> getAllColumnNames() {
 
