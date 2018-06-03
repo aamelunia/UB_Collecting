@@ -23,14 +23,33 @@ public class LanguageTable extends Table<Language> {
     public static final String KEY_TYPE_ID = "TypeId";
 
 
-    //Store id of English language in table so only has to be queried for once
-//    public String EnglishId = null;
-
-
     public LanguageTable() {
         super();
         activityClass = LanguageActivity.class;
     }
+
+    @Override
+    public String createTable() {
+        return "CREATE TABLE "
+                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
+                + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
+                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
+                + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
+                + ")";
+    }
+
+
+    @Override
+    public String getTableName() {
+        return TABLE;
+    }
+
+
+    /**
+     * Returns the research languages stored in the database (i.e. the languages that
+     questions can be written in )
+     * @return {@link ArrayList} of {@link Language}
+     */
 
     public static ArrayList<Language> getResearchLanguages() {
 
@@ -50,43 +69,6 @@ public class LanguageTable extends Table<Language> {
 
     }
 
-    @Override
-    public String createTable() {
-        return "CREATE TABLE "
-                + TABLE + "(" + KEY_ID + " TEXT PRIMARY KEY," + KEY_NAME
-                + " VARCHAR," + KEY_DESCRIPTION + " VARCHAR," + KEY_OTHER_NAMES
-                + " VARCHAR," + KEY_TYPE_ID + " TEXT," + " FOREIGN KEY(" + KEY_TYPE_ID
-                + ") REFERENCES " + LanguageTypeTable.TABLE + " (" + LanguageTypeTable.KEY_ID + ")"
-                + ")";
-    }
-
-
-    /* Function that returns the research languages stored in the databse (i.e. the languages that
-       questions can be written )*/
-
-    @Override
-    public String getTableName() {
-        return TABLE;
-    }
-
-
-    /* Function that returns the id of English as stored in the Language Table */
-
-//    public String getEnglishId(){
-//
-//        if(EnglishId == null){
-//            String selection = LanguageTable.KEY_NAME + " = ?";
-//
-//            String[] selectionArgs = {"English"};
-//
-//            ArrayList<Language> English = DatabaseHelper.LANGUAGE_TABLE.getAll(selection, selectionArgs);
-//
-//            EnglishId = English.get(0).getId();
-//        }
-//
-//        return EnglishId;
-//
-//    }
 
 
 }

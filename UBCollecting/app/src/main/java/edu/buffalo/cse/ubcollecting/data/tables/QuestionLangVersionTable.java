@@ -45,6 +45,14 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     }
 
 
+    /**
+     * Function that returns a HashMap based on the passed in questionId where  keys are
+     * of type {@link Language} and the values are of type {@link QuestionLangVersion}. Essentially
+     * a way to get all the different languages and their corresponding question text for the passed
+     * in questionId
+     * @param quesId The questionId you want to search the SQlite table for all matching entries
+     * @return {@link HashMap} where keys are {@link Language} and values are {@link QuestionLangVersion}
+     */
     public HashMap<Language,QuestionLangVersion> getQuestionTexts(String quesId){
 
         String selection = KEY_QUESTION_ID + " = ?";
@@ -66,32 +74,4 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
     }
 
-
-    /* Function that returns the english text of the question represented by the passed in quesId*/
-
-//    public String getEnglishQuestion(String quesId) {
-//
-//        String englishId = DatabaseHelper.LANGUAGE_TABLE.getEnglishId();
-//
-//        String englishQuestion = null;
-//
-//        String selectQuery = "SELECT QuestionText FROM " + this.getTableName() + " WHERE QuestionId = " + quesId + " and QuestionLanguageId = " + englishId;
-//
-//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-//
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()) {
-//
-//            englishQuestion = cursor.getString(0);
-//
-//        }
-//
-//        cursor.close();
-//
-//        DatabaseManager.getInstance().closeDatabase();
-//
-//        return englishQuestion;
-//
-//    }
 }

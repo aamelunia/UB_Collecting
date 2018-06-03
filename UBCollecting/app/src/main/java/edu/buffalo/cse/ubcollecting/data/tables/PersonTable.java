@@ -53,8 +53,14 @@ public class PersonTable extends Table<Person> {
     }
 
 
-    /* Function that validates email and password of user and returns user's person id and role name
-       upon validation  */
+
+    /**
+     * Function that validates email and password of user and returns user's person id and role name
+       upon validation
+     * @param email User's inputted email
+     * @param password User's inputted password
+     * @return  a {@link Array} of size 2
+     */
 
     public String[] validateUser(String email, String password) {
 

@@ -78,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SESSION_PERSON_TABLE,
             QUESTION_PROPERTY_DEF_TABLE
     );
+
     private static final String TAG = DatabaseHelper.class.getSimpleName().toString();
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -88,6 +89,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper() {
         super(App.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+    /**
+     * Method that pre-populates local SQlite database on phone with necessary content
+     */
 
     public static void populateData() {
         Role admin = new Role();

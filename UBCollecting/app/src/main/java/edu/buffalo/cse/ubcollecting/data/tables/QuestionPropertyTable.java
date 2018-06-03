@@ -47,6 +47,12 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
     }
 
 
+    /**
+     * Function that returns all properties associated with a given question
+     * @param quesId The questionId you want to search the SQlite table for all matching entries
+     * @return a {@link HashSet} of {@link QuestionPropertyDef}
+     */
+
     public HashSet<QuestionPropertyDef> getQuestionProperties(String quesId){
 
         String selection = KEY_QUESTION_ID + " = ?";
@@ -67,6 +73,12 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
         return quesPropertyDefs;
 
     }
+
+
+    /**
+     * Helper function that deletes a property associated with a question
+     * @param id The id of the entry in the table you wish to delete
+     */
 
     public void deleteByPropertyId(String id) {
 
