@@ -31,6 +31,7 @@ import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
 
+import static edu.buffalo.cse.ubcollecting.QuestionnaireActivity.EXTRA_QUESTIONNAIRE_CONTENT;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
@@ -71,24 +72,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
         Log.i(TAG, "Num selected langs: " + selectedLanguages.size());
 
         searchText = findViewById(R.id.table_select_search_view);
-        searchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() != 0) {
-                    clearSearchButton.setVisibility(View.VISIBLE);
-                } else {
-                    clearSearchButton.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
+        searchText.addTextChangedListener(new SearchTextWatcher());
 
 
         clearSearchButton = findViewById(R.id.table_select_clear_button);
@@ -117,13 +101,11 @@ public class AddQuestionsActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                List<QuestionnaireContent> contentList = onSelectionDone(selections);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("obj", contentList);
-//                Intent data = new Intent();
-//                data.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, contentList);
-//                setResult(RESULT_ADD_QUESTIONS, data);
-//                finish();
+                ArrayList<QuestionnaireContent> contentList = onSelectionDone(selections);
+                Intent data = new Intent();
+                data.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, contentList);
+                setResult(RESULT_OK, data);
+                finish();
             }
         });
 
@@ -137,17 +119,17 @@ public class AddQuestionsActivity extends AppCompatActivity {
         filterList.setAdapter(new LanguageListAdapter(AddQuestionsActivity.this, LANGUAGE_TABLE.getAll()));
     }
 
-    public ArrayList<QuestionLangVersion> search(String query, ArrayList<QuestionLangVersion> selections) {
+    private ArrayList<QuestionLangVersion> search(String query, ArrayList<QuestionLangVersion> selections) {
 
         return null;
     }
 
-    public List<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
-        List<QuestionnaireContent> contentList = new ArrayList<>();
+    private ArrayList<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
+        ArrayList<QuestionnaireContent> contentList = new ArrayList<>();
         for (int i = 0; i < selections.size(); i++) {
             QuestionLangVersion questionLang = selections.get(i);
             QuestionnaireContent content = new QuestionnaireContent();
-            content.setQuestionOrder(Integer.toString(i));
+            content.setQuestionOrder(Integer.toString(i+1));
             content.setQuestionId(questionLang.getQuestionId());
             content.setQuestionnaireId(questionnaireId);
 
@@ -273,6 +255,24 @@ public class AddQuestionsActivity extends AppCompatActivity {
 
             return convertView;
         }
+    }
 
+    private class SearchTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if (charSequence.length() != 0) {
+                clearSearchButton.setVisibility(View.VISIBLE);
+            } else {
+                clearSearchButton.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
     }
 }

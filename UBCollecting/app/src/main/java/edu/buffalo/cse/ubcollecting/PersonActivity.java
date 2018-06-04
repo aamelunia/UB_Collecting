@@ -21,7 +21,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Serializable;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
@@ -31,7 +30,6 @@ import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
-import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 import static edu.buffalo.cse.ubcollecting.ui.LoginActivity.genHash;
 
 public class PersonActivity extends EntryActivity<Person> {
@@ -91,17 +89,6 @@ public class PersonActivity extends EntryActivity<Person> {
         entry.setEmail(emailField.getText().toString());
         entry.setPassword(genHash(passwordField.getText().toString()));
     }
-
-    @Override
-    public void handleResultGet(int requestCode, Intent data) {
-        Serializable serializableObject = data.getSerializableExtra(EXTRA_MODEL);
-        if (serializableObject instanceof Role) {
-            Role role = (Role) serializableObject;
-            roleAdapter.insert(role, 0);
-            roleSpinner.setAdapter(roleAdapter);
-        }
-    }
-
 
     @SuppressLint("WrongConstant")
     @Override

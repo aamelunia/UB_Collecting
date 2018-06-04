@@ -1,7 +1,6 @@
 package edu.buffalo.cse.ubcollecting;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,11 +29,6 @@ public class LanguageActivity extends EntryActivity<Language> {
         otherNamesField.setText(language.getOtherNames());
         descriptionField.setText(language.getDescription());
 
-    }
-
-    @Override
-    public void handleResultGet(int requestCode, Intent data) {
-        return;
     }
 
     @Override

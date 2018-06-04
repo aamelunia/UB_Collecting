@@ -32,11 +32,6 @@ public class RoleActivity extends EntryActivity<Role> {
     }
 
     @Override
-    public void handleResultGet(int requestCode, Intent data) {
-        return;
-    }
-
-    @Override
     public void setUI(Role role) {
         nameField.setText(role.getName());
         introRequiredBox.setChecked(role.getIntroRequired() == 1);

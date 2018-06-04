@@ -25,11 +25,6 @@ public class QuestionnaireTypeActivity extends EntryActivity<QuestionnaireType> 
     }
 
     @Override
-    void handleResultGet(int requestCode, Intent data) {
-
-    }
-
-    @Override
     void setEntryByUI() {
         entry.setName(nameField.getText().toString());
     }

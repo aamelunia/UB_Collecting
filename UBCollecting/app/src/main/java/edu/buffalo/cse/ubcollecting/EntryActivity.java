@@ -1,6 +1,5 @@
 package edu.buffalo.cse.ubcollecting;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +19,6 @@ import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
-    public final static int REQUEST_CODE_GET_ENTRY = 1;
     protected E entry;
     private Button updateButton;
     private Button submitButton;
@@ -31,8 +29,6 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
      * @param entry The entry from the database by which to update the view's fields
      */
     abstract void setUI(E entry);
-
-    abstract void handleResultGet(int requestCode, Intent data);
 
     /**
      * Function that sets the entry/model based on user submission in a view so that database
@@ -75,19 +71,6 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         Serializable serializableObject = data.getSerializableExtra(EXTRA_MODEL);
 
         return (E) serializableObject;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-
-        if (requestCode == REQUEST_CODE_GET_ENTRY) {
-            handleResultGet(requestCode, data);
-        }
     }
 
     class UpdateButtonOnClickListener implements View.OnClickListener {

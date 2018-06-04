@@ -1,6 +1,7 @@
 package edu.buffalo.cse.ubcollecting;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +31,9 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CON
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 
+/**
+ * Activity for creating a questionnaire.
+ */
 public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
     private static final String TAG = QuestionnaireActivity.class.getSimpleName().toString();
@@ -61,18 +64,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             }
         }
         typeSpinner.setSelection(0); //TODO
-    }
-
-    @Override
-    void handleResultGet(int requestCode, Intent data) {
-        Log.i(TAG, "Req code: " + Integer.toString(requestCode));
-        Serializable serializableObject = data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
-        Log.i(TAG, "Serializable obj: " + serializableObject.getClass().toString());
-        if (requestCode == RESULT_ADD_QUESTIONS) {
-            questionnaireContent = (ArrayList<QuestionnaireContent>) serializableObject;
-            Log.i(TAG, Integer.toString(questionnaireContent.size()));
-            questionnaireContentAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override
@@ -136,6 +127,30 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        Log.i(TAG, "Req code: " + Integer.toString(requestCode));
+
+        if (requestCode == RESULT_ADD_QUESTIONS) {
+            ArrayList<QuestionnaireContent> serializableObject =
+                    (ArrayList<QuestionnaireContent>) data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
+            Log.i(TAG, "Serializable obj: " + serializableObject.getClass().toString());
+            questionnaireContent =  serializableObject;
+            Log.i(TAG, Integer.toString(questionnaireContent.size()));
+            questionnaireContentAdapter.clear();
+            for (int i = 0; i < questionnaireContent.size(); i++) {
+                questionnaireContentAdapter.insert(questionnaireContent.get(i),i);
+            }
+            questionnaireContentAdapter.notifyDataSetChanged();
+        }
+    }
+
     protected boolean validateEntry() {
         boolean valid = true;
 
@@ -187,11 +202,11 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbered_list_item_view, parent, false);
             }
-
-            TextView numberView = parent.findViewById(R.id.numbered_list_item_number_view);
+            TextView numberView = convertView.findViewById(R.id.numbered_list_item_number_view);
             numberView.setText(content.getQuestionOrder());
-            TextView textView = parent.findViewById(R.id.numbered_list_item_number_view);
+            TextView textView = convertView.findViewById(R.id.numbered_list_item_text_view);
             textView.setText(content.getIdentifier());
+
 
             return convertView;
         }
