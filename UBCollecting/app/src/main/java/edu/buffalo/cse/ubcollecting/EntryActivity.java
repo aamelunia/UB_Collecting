@@ -25,26 +25,52 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
     private Button updateButton;
     private Button submitButton;
 
+    /**
+     * Function that updates the view's fields/UI based on the entry from the SQlite Table.
+     * Used for updating entries in the database.
+     * @param entry The entry from the database by which to update the view's fields
+     */
     abstract void setUI(E entry);
 
     abstract void handleResultGet(int requestCode, Intent data);
 
+    /**
+     * Function that sets the entry/model based on user submission in a view so that database
+     * can be populated appropriately
+     */
     abstract void setEntryByUI();
 
+    /**
+     * Helper function that validates user submission
+     * @return {@link Boolean}
+     */
     abstract boolean validateEntry();
 
+    /**
+     * TODO
+     * @param entry
+     */
     public void setEntryUpdatedResult(E entry) {
         Intent data = new Intent();
         data.putExtra(EXTRA_MODEL, entry);
         setResult(RESULT_OK, data);
     }
 
+    /**
+     * TODO
+     * @param entry
+     */
     public void setEntryCreatedResult(E entry) {
         Intent data = new Intent();
         data.putExtra(EXTRA_MODEL, entry);
         setResult(RESULT_OK, data);
     }
 
+    /**
+     * TODO
+     * @param data
+     * @return
+     */
     public E getEntry(Intent data) {
         Serializable serializableObject = data.getSerializableExtra(EXTRA_MODEL);
 

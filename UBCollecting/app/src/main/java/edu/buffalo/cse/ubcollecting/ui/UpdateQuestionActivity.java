@@ -245,6 +245,12 @@ public class UpdateQuestionActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Helper function that validates user submission
+     * @return {@link Boolean}
+     */
+
     private boolean validateEntry() {
 
         boolean valid = true;
