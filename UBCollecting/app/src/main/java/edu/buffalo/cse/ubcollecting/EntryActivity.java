@@ -12,10 +12,13 @@ import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
 import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
-/**
- * Created by kevinrathbun on 4/2/18.
- */
 
+/**
+ * Activity that displays {@link Model} entries in the database and allows for insertion and updating
+ * database entries
+ *
+ * @param <E> The {@link Model} this Activity corresponds to
+ */
 public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
 
     public final static int REQUEST_CODE_EDIT_ENTRY = 0;
@@ -43,29 +46,20 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
     abstract boolean validateEntry();
 
     /**
-     * TODO
-     * @param entry
+     * Sets a {@link Model} as result to return to parent activity
+     *
+     * @param entry {@link Model} to be set as result
      */
-    public void setEntryUpdatedResult(E entry) {
+    public void setEntryResult(E entry) {
         Intent data = new Intent();
         data.putExtra(EXTRA_MODEL, entry);
         setResult(RESULT_OK, data);
     }
 
     /**
-     * TODO
-     * @param entry
-     */
-    public void setEntryCreatedResult(E entry) {
-        Intent data = new Intent();
-        data.putExtra(EXTRA_MODEL, entry);
-        setResult(RESULT_OK, data);
-    }
-
-    /**
-     * TODO
-     * @param data
-     * @return
+     * Helper function to extract a {@link Model} extra from and {@link Intent}
+     * @param data {@link Intent} holding the extra
+     * @return {@link Model} extra from {@link Intent}
      */
     public E getEntry(Intent data) {
         Serializable serializableObject = data.getSerializableExtra(EXTRA_MODEL);
@@ -73,6 +67,9 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         return (E) serializableObject;
     }
 
+    /**
+     * {@link View.OnClickListener} for button to update a table entry
+     */
     class UpdateButtonOnClickListener implements View.OnClickListener {
 
         Table<E> table;
@@ -86,12 +83,15 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
             setEntryByUI();
             if (validateEntry()) {
                 table.update(entry);
-                setEntryUpdatedResult(entry);
+                setEntryResult(entry);
                 finish();
             }
         }
     }
 
+    /**
+     * {@link View.OnClickListener} for button to insert a table entry
+     */
     class SubmitButtonOnClickListener implements View.OnClickListener {
 
         Table<E> table;
@@ -105,7 +105,7 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
             setEntryByUI();
             if (validateEntry()) {
                 table.insert(entry);
-                setEntryCreatedResult(entry);
+                setEntryResult(entry);
                 finish();
             }
         }

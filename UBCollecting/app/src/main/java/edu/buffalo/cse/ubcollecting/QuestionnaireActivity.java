@@ -32,7 +32,7 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TAB
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 
 /**
- * Activity for creating a questionnaire.
+ * Activity for creating a questionnaire
  */
 public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
@@ -180,7 +180,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             setEntryByUI();
             if (validateEntry()) {
                 table.insert(entry);
-                setEntryCreatedResult(entry);
+                setEntryResult(entry);
                 for (QuestionnaireContent content : questionnaireContent) {
                     QUESTIONNAIRE_CONTENT_TABLE.insert(content);
                 }
