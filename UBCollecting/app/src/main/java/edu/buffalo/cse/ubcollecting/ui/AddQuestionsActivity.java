@@ -35,6 +35,9 @@ import static edu.buffalo.cse.ubcollecting.QuestionnaireActivity.EXTRA_QUESTIONN
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
+/**
+ * Activity for adding questions to a Questionnaire
+ */
 public class AddQuestionsActivity extends AppCompatActivity {
 
     private static final String TAG = AddQuestionsActivity.class.getSimpleName().toString();
@@ -53,6 +56,12 @@ public class AddQuestionsActivity extends AppCompatActivity {
     private Button doneButton;
 
 
+    /**
+     * Returns {@link Intent} to start this Activity from a {@link edu.buffalo.cse.ubcollecting.QuestionnaireActivity}
+     * @param packageContext Context to start this Intent from
+     * @param questionnaire {@link Questionnaire} to add Questions to
+     * @return {@link Intent} to add questions to a {@link Questionnaire}
+     */
     public static Intent newIntent(Context packageContext, Questionnaire questionnaire) {
         Intent i = new Intent(packageContext, AddQuestionsActivity.class);
         i.putExtra(EXTRA_QUESTIONNAIRE_ID, questionnaire.getId());
@@ -62,7 +71,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_select);
+        setContentView(R.layout.activity_add_questions);
 
         questionnaireId = getIntent().getExtras().getString(EXTRA_QUESTIONNAIRE_ID);
 
@@ -98,16 +107,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
         });
 
         doneButton = findViewById(R.id.table_select_done_button);
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<QuestionnaireContent> contentList = onSelectionDone(selections);
-                Intent data = new Intent();
-                data.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, contentList);
-                setResult(RESULT_OK, data);
-                finish();
-            }
-        });
+        doneButton.setOnClickListener(new DoneOnClickListener());
 
         entryRecyclerView = findViewById(R.id.table_select_recycler);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -119,25 +119,51 @@ public class AddQuestionsActivity extends AppCompatActivity {
         filterList.setAdapter(new LanguageListAdapter(AddQuestionsActivity.this, LANGUAGE_TABLE.getAll()));
     }
 
+    /**
+     * Returns an {@link ArrayList} of {@link QuestionLangVersion} whose content matches the query
+     *
+     * @param query Term(s) to be queried for
+     * @param selections Currently selected questions
+     * @return {@link ArrayList} of queried questions
+     */
     private ArrayList<QuestionLangVersion> search(String query, ArrayList<QuestionLangVersion> selections) {
 
         return null;
     }
 
-    private ArrayList<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
-        ArrayList<QuestionnaireContent> contentList = new ArrayList<>();
-        for (int i = 0; i < selections.size(); i++) {
-            QuestionLangVersion questionLang = selections.get(i);
-            QuestionnaireContent content = new QuestionnaireContent();
-            content.setQuestionOrder(Integer.toString(i+1));
-            content.setQuestionId(questionLang.getQuestionId());
-            content.setQuestionnaireId(questionnaireId);
 
-            contentList.add(content);
+    /**
+     * {@link android.view.View.OnClickListener} to pass an {@link ArrayList} of
+     * the selected questions back to the parent Activity.
+     */
+    private class DoneOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            ArrayList<QuestionnaireContent> contentList = onSelectionDone(selections);
+            Intent data = new Intent();
+            data.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, contentList);
+            setResult(RESULT_OK, data);
+            finish();
         }
-        return contentList;
+
+        private ArrayList<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
+            ArrayList<QuestionnaireContent> contentList = new ArrayList<>();
+            for (int i = 0; i < selections.size(); i++) {
+                QuestionLangVersion questionLang = selections.get(i);
+                QuestionnaireContent content = new QuestionnaireContent();
+                content.setQuestionOrder(Integer.toString(i+1));
+                content.setQuestionId(questionLang.getQuestionId());
+                content.setQuestionnaireId(questionnaireId);
+
+                contentList.add(content);
+            }
+            return contentList;
+        }
     }
 
+    /**
+     * Holds objects relating to individual question views
+     */
     private class QuestionLangHolder extends RecyclerView.ViewHolder {
 
         private QuestionLangVersion question;
@@ -178,6 +204,10 @@ public class AddQuestionsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@link RecyclerView.Adapter} to hold list of all questions and corresponding
+     * {@link QuestionLangHolder}
+     */
     private class QuestionLangAdapter extends RecyclerView.Adapter<QuestionLangHolder> {
 
         private List<QuestionLangVersion> entryList;
@@ -214,6 +244,9 @@ public class AddQuestionsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@link ArrayAdapter} for list of available question languages
+     */
     private class LanguageListAdapter extends ArrayAdapter<Language> {
 
         private LanguageListAdapter(Context context, ArrayList<Language> languages) {
@@ -257,6 +290,9 @@ public class AddQuestionsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@link TextWatcher} to make clear button visible only when the search box has text in it
+     */
     private class SearchTextWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

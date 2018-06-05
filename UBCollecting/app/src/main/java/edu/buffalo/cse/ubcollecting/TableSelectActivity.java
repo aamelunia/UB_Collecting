@@ -57,7 +57,7 @@ public abstract class TableSelectActivity<E> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_select);
+        setContentView(R.layout.activity_add_questions);
 
         Serializable serializableExtra = getIntent().getSerializableExtra(EXTRA_TABLE);
 

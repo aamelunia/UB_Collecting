@@ -17,6 +17,9 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TAB
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ROLE_TABLE;
 
+/**
+ * Activity for main menu of an admin account
+ */
 public class AdminActivity extends TableListActivity {
 
     public static Intent newIntent(Context packageContext) {
