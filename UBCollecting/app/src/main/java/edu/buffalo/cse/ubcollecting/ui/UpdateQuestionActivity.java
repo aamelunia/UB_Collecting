@@ -33,9 +33,8 @@ import static edu.buffalo.cse.ubcollecting.data.tables.Table.EXTRA_MODEL;
 
 
 /**
- * Created by aamel786 on 4/14/18.
+ * Activity for updating existing Questions
  */
-
 public class UpdateQuestionActivity extends AppCompatActivity {
 
     private ListView questionPropertiesListView;

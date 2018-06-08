@@ -21,27 +21,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <Button
+            android:id="@+id/fieldtrip_choose_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/fieldtrip_start_date_label" />
-
-        <EditText
-            android:id="@+id/fieldtrip_start_date_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="@string/fieldtrip_start_date_label"/>
 
         <TextView
+            android:id="@+id/fieldtrip_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
-            android:text="@string/fieldtrip_end_date_label" />
+            android:textSize="18dp"
+            android:layout_margin="10px" />
 
-        <EditText
-            android:id="@+id/fieldtrip_end_date_field"
+
+        <Button
+            android:id="@+id/fieldtrip_choose_end_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/fieldtrip_end_date_label"/>
+
+        <TextView
+            android:id="@+id/fieldtrip_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_margin="10px" />
+
+        <Button
+            android:id="@+id/fieldtrip_update_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_button_label"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/fieldtrip_submit_button"

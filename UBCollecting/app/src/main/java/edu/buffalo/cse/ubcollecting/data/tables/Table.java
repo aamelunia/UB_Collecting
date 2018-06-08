@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -120,7 +119,6 @@ public abstract class Table<E extends Model> implements Serializable {
     public Intent editActivityIntent(Context packageContext, Model entry) {
         if (entry instanceof Question){
             activityClass = UpdateQuestionActivity.class;
-            Log.i("Question instance","Called");
         }
         Intent i = new Intent(packageContext, activityClass);
         i.putExtra(EXTRA_MODEL, entry);

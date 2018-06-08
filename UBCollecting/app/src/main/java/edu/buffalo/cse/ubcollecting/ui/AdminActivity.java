@@ -11,6 +11,7 @@ import edu.buffalo.cse.ubcollecting.TableListActivity;
 import edu.buffalo.cse.ubcollecting.data.models.Model;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FIELD_TRIP_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
@@ -35,6 +36,7 @@ public class AdminActivity extends TableListActivity {
         tables.add(QUESTIONNAIRE_TABLE);
         tables.add(LANGUAGE_TABLE);
         tables.add(QUESTION_TABLE);
+        tables.add(FIELD_TRIP_TABLE);
         return tables;
     }
 

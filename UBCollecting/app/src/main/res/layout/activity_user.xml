@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+    <Button
+    android:text="Create New Field Trip"
+    android:id="@+id/create_new_fieldtrip"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10px"
+    android:layout_marginTop="20dp"
+    android:textAlignment="center"
+    android:textSize="16dp"
+    android:textColor="#000000"
+    android:text="@string/active_fieldtrips"/>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fieldtrip_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="edu.buffalo.cse.ubcollecting.ui.UserActivity">
+    </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose Questionnaire"/>
 
 </LinearLayout>
