@@ -1,4 +1,4 @@
-package edu.buffalo.cse.ubcollecting;
+package edu.buffalo.cse.ubcollecting.ui;
 
 import android.view.View;
 import android.view.ViewGroup;

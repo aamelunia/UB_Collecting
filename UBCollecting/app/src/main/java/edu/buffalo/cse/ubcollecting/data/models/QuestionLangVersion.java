@@ -13,8 +13,12 @@ public class QuestionLangVersion extends Model {
     public String questionText;
 
     public String getIdentifier() {
-        //TODO
-        return "QUESTION LANG VERSION";
+        String identifier = questionText;
+        if (identifier.length() <= 15) {
+            return identifier;
+        } else {
+            return identifier.substring(0,15) + "...";
+        }
     }
 
     public String getQuestionId() {

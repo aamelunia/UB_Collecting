@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:dslv="http://schemas.android.com/apk/res-auto"
     tools:context="edu.buffalo.cse.ubcollecting.QuestionnaireActivity">
 
     <LinearLayout
@@ -61,11 +62,13 @@
             android:layout_height="wrap_content"
             android:text="@string/questionnaire_add_questions" />
 
-        <ListView
+        <com.mobeta.android.dslv.DragSortListView
             android:id="@+id/questionnaire_question_list_view"
             android:layout_width="match_parent"
-            android:layout_height="266dp" />
-
+            android:layout_height="266dp"
+            android:visibility="gone"
+            dslv:float_background_color="@color/white"
+            dslv:drag_handle_id="@id/numbered_list_item_drag_handle"/>
         <Button
             android:id="@+id/questionnaire_update_button"
             android:layout_width="match_parent"

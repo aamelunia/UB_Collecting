@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import edu.buffalo.cse.ubcollecting.R;
-import edu.buffalo.cse.ubcollecting.UIUtils;
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.Question;

@@ -37,7 +37,7 @@ public class QuestionnaireContentActivity extends AppCompatActivity {
                 QuestionnaireContent content = new QuestionnaireContent();
                 content.setQuestionnaireId(""); // TODO
                 content.setQuestionId(""); // TODO
-                content.setQuestionOrder(orderField.getText().toString());
+                content.setQuestionOrder(Integer.valueOf(orderField.getText().toString()));
 
                 QUESTIONNAIRE_CONTENT_TABLE.insert(content);
             }

@@ -151,7 +151,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
             for (int i = 0; i < selections.size(); i++) {
                 QuestionLangVersion questionLang = selections.get(i);
                 QuestionnaireContent content = new QuestionnaireContent();
-                content.setQuestionOrder(Integer.toString(i+1));
+                content.setQuestionOrder(i+1);
                 content.setQuestionId(questionLang.getQuestionId());
                 content.setQuestionnaireId(questionnaireId);
 

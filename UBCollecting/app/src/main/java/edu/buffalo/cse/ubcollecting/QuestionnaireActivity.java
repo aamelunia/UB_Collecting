@@ -5,21 +5,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mobeta.android.dslv.DragSortListView;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
@@ -30,6 +32,7 @@ import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
 /**
  * Activity for creating a questionnaire
@@ -44,7 +47,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
     private EditText descriptionField;
     private Spinner typeSpinner;
     private ArrayAdapter<QuestionnaireType> typeAdapter;
-    private ListView questionnaireListView;
+    private DragSortListView questionnaireDragView;
     private QuestionnaireContentAdapter questionnaireContentAdapter;
     private Button addQuestionsButton;
     private Button updateButton;
@@ -63,7 +66,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
                 break;
             }
         }
-        typeSpinner.setSelection(0); //TODO
+        typeSpinner.setSelection(0);
     }
 
     @Override
@@ -110,10 +113,28 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         submitButton = this.findViewById(R.id.questionnaire_submit_button);
         submitButton.setOnClickListener(new QuestionnaireSubmitOnClickListener());
 
-        questionnaireListView = this.findViewById(R.id.questionnaire_question_list_view);
+        questionnaireDragView = this.findViewById(R.id.questionnaire_question_list_view);
         questionnaireContentAdapter =
                 new QuestionnaireContentAdapter(QuestionnaireActivity.this, questionnaireContent);
-        questionnaireListView.setAdapter(questionnaireContentAdapter);
+        questionnaireDragView.setAdapter(questionnaireContentAdapter);
+        questionnaireDragView.setDropListener(new DragSortListView.DropListener() {
+            @Override
+            public void drop(int from, int to) {
+                if (from > to) {
+                    int temp = from;
+                    from = to;
+                    to = temp;
+                }
+                QuestionnaireContent fromContent = questionnaireContent.get(from);
+                QuestionnaireContent toContent = questionnaireContent.get(to);
+
+                toContent.setQuestionOrder(from + 1);
+                fromContent.setQuestionOrder(to + 1);
+                Collections.sort(questionnaireContent);
+
+                questionnaireContentAdapter.notifyDataSetChanged();
+            }
+        });
 
         if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
             entry = getEntry(getIntent());
@@ -135,19 +156,21 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             return;
         }
 
-        Log.i(TAG, "Req code: " + Integer.toString(requestCode));
-
         if (requestCode == RESULT_ADD_QUESTIONS) {
             ArrayList<QuestionnaireContent> serializableObject =
                     (ArrayList<QuestionnaireContent>) data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
-            Log.i(TAG, "Serializable obj: " + serializableObject.getClass().toString());
+
             questionnaireContent =  serializableObject;
-            Log.i(TAG, Integer.toString(questionnaireContent.size()));
             questionnaireContentAdapter.clear();
             for (int i = 0; i < questionnaireContent.size(); i++) {
                 questionnaireContentAdapter.insert(questionnaireContent.get(i),i);
             }
             questionnaireContentAdapter.notifyDataSetChanged();
+            if (questionnaireContent.size() > 0) {
+                questionnaireDragView.setVisibility(View.VISIBLE);
+            } else {
+                questionnaireDragView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -198,14 +221,14 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         public View getView(int position, View convertView, ViewGroup parent) {
             QuestionnaireContent content = questionnaireContent.get(position);
 
-            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbered_list_item_view, parent, false);
             }
             TextView numberView = convertView.findViewById(R.id.numbered_list_item_number_view);
-            numberView.setText(content.getQuestionOrder());
+            numberView.setText(Integer.toString(content.getQuestionOrder()));
             TextView textView = convertView.findViewById(R.id.numbered_list_item_text_view);
-            textView.setText(content.getIdentifier());
+            QuestionLangVersion question = QUESTION_LANG_VERSION_TABLE.getQuestionTextInEnglish(content.getQuestionId());
+            textView.setText(question.getIdentifier());
 
 
             return convertView;
