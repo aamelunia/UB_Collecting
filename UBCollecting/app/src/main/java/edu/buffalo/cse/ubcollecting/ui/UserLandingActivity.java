@@ -20,11 +20,13 @@ import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
 
-public class UserActivity extends AppCompatActivity {
 
-    private static final String TAG = AppCompatActivity.class.getSimpleName();
+public class UserLandingActivity extends AppCompatActivity {
 
-    private final static int REQUEST_CODE_ADD_ENTRY = 3;
+    private static final String TAG = UserLandingActivity.class.getSimpleName();
+
+    public final static int REQUEST_CODE_ADD_ENTRY = 3;
+    public final static String SELECTED_FIELD_TRIP = "SelectedFieldTrip";
 
     private Button createFieldTrip;
     private RecyclerView entryRecyclerView;
@@ -34,12 +36,12 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_user_landing);
 
         entryRecyclerView = findViewById(R.id.fieldtrip_recycler_view);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        entryAdapter = new UserActivity.EntryAdapter(DatabaseHelper.FIELD_TRIP_TABLE.getActiveFieldTrips());
+        entryAdapter = new UserLandingActivity.EntryAdapter(DatabaseHelper.FIELD_TRIP_TABLE.getActiveFieldTrips());
         entryRecyclerView.setAdapter(entryAdapter);
 
         createFieldTrip = findViewById(R.id.create_new_fieldtrip);
@@ -47,7 +49,7 @@ public class UserActivity extends AppCompatActivity {
         createFieldTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DatabaseHelper.FIELD_TRIP_TABLE.insertActivityIntent(UserActivity.this);
+                Intent i = DatabaseHelper.FIELD_TRIP_TABLE.insertActivityIntent(UserLandingActivity.this);
                 startActivityForResult(i,REQUEST_CODE_ADD_ENTRY);
             }
         });
@@ -82,14 +84,23 @@ public class UserActivity extends AppCompatActivity {
             deleteButton = view.findViewById(R.id.entry_list_delete_button);
         }
 
-        public void bindEntry(FieldTrip fieldTrip) {
+        public void bindEntry(final FieldTrip fieldTrip) {
             this.fieldTrip = fieldTrip;
             selectButton.setText(this.fieldTrip.getIdentifier());
+
+            selectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = UserSelectSessionActivity.newIntent(UserLandingActivity.this);
+                    i.putExtra(SELECTED_FIELD_TRIP, fieldTrip);
+                    startActivity(i);
+                }
+            });
 
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = DatabaseHelper.FIELD_TRIP_TABLE.editActivityIntent(UserActivity.this, EntryHolder.this.fieldTrip);
+                    Intent i = DatabaseHelper.FIELD_TRIP_TABLE.editActivityIntent(UserLandingActivity.this, EntryHolder.this.fieldTrip);
                     startActivityForResult(i, REQUEST_CODE_EDIT_ENTRY);
                 }
             });
@@ -105,7 +116,7 @@ public class UserActivity extends AppCompatActivity {
         }
     }
 
-    private class EntryAdapter extends RecyclerView.Adapter<UserActivity.EntryHolder> {
+    private class EntryAdapter extends RecyclerView.Adapter<UserLandingActivity.EntryHolder> {
 
         private List<FieldTrip> entryList;
 
@@ -118,15 +129,15 @@ public class UserActivity extends AppCompatActivity {
         }
 
         @Override
-        public UserActivity.EntryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public UserLandingActivity.EntryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
                     .inflate(R.layout.field_trip_item_view, parent, false);
-            return new UserActivity.EntryHolder(view);
+            return new UserLandingActivity.EntryHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(UserActivity.EntryHolder holder, int position) {
+        public void onBindViewHolder(UserLandingActivity.EntryHolder holder, int position) {
             FieldTrip entry = entryList.get(position);
             holder.bindEntry(entry);
         }
@@ -138,7 +149,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public static Intent newIntent(Context packageContext) {
-        Intent i = new Intent(packageContext, UserActivity.class);
+        Intent i = new Intent(packageContext, UserLandingActivity.class);
         return i;
     }
 

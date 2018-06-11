@@ -6,7 +6,7 @@ android:layout_width="match_parent"
 android:layout_height="wrap_content">
 
     <Button
-    android:text="Create New Field Trip"
+    android:text="@string/create_fieldtrip"
     android:id="@+id/create_new_fieldtrip"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@ android:layout_height="wrap_content">
     android:id="@+id/fieldtrip_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.buffalo.cse.ubcollecting.ui.UserActivity">
+    tools:context="edu.buffalo.cse.ubcollecting.ui.UserLandingActivity">
     </android.support.v7.widget.RecyclerView>
 
 

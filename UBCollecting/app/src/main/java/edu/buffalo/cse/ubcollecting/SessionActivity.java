@@ -1,14 +1,19 @@
 package edu.buffalo.cse.ubcollecting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.Serializable;
+
+import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.SESSION_TABLE;
+import static edu.buffalo.cse.ubcollecting.ui.UserLandingActivity.SELECTED_FIELD_TRIP;
 
 public class SessionActivity extends AppCompatActivity {
 
@@ -46,5 +51,18 @@ public class SessionActivity extends AppCompatActivity {
                 SESSION_TABLE.insert(session);
             }
         });
+    }
+
+
+
+    /**
+     * Helper function to extract a {@link edu.buffalo.cse.ubcollecting.data.models.FieldTrip} extra from and {@link Intent}
+     * @param data {@link Intent} holding the extra
+     * @return {@link edu.buffalo.cse.ubcollecting.data.models.FieldTrip} extra from {@link Intent}
+     */
+    public static FieldTrip getFieldTrip(Intent data) {
+        Serializable serializableObject = data.getSerializableExtra(SELECTED_FIELD_TRIP);
+
+        return (FieldTrip) serializableObject;
     }
 }

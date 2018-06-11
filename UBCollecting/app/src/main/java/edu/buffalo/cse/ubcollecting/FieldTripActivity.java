@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Calendar;
 
 import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
@@ -145,7 +147,30 @@ public class FieldTripActivity extends EntryActivity<FieldTrip> {
 
     @Override
     boolean validateEntry() {
-        return true;
+
+        boolean valid = true;
+
+        if (nameField.getText().toString().trim().isEmpty()) {
+            nameField.setError("This field is required");
+            valid = false;
+        }
+
+        if (startDateField.getText().toString().trim().isEmpty()) {
+            startDateField.setError("This field is required");
+            valid = false;
+        }
+
+        if (endDateField.getText().toString().trim().isEmpty()) {
+            endDateField.setError("This field is required");
+            valid = false;
+        }
+
+        if (!valid) {
+            Toast.makeText(this, "Please Complete All Required Fields", Toast.LENGTH_SHORT).show();
+        }
+
+        return valid;
+
     }
 
 }

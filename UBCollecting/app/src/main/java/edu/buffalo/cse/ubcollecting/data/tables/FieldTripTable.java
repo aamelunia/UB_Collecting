@@ -40,6 +40,11 @@ public class FieldTripTable extends Table<FieldTrip> {
     }
 
 
+    /**
+     * TODO
+     * @return
+     */
+
     public ArrayList<FieldTrip> getActiveFieldTrips(){
 
         String selection = FieldTripTable.KEY_END_DATE + " <= ?";

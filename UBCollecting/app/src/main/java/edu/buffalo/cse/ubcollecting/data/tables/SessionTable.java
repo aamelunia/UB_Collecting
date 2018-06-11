@@ -4,7 +4,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import java.util.ArrayList;
+
 import edu.buffalo.cse.ubcollecting.SessionActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 public class SessionTable extends Table<Session> {
@@ -38,5 +42,20 @@ public class SessionTable extends Table<Session> {
     @Override
     public String getTableName() {
         return TABLE;
+    }
+
+    /**
+     * TODO
+     * @param fieldTrip
+     * @return
+     */
+
+    public ArrayList<Session> getFieldTripSessions(FieldTrip fieldTrip){
+
+        String selection = KEY_FIELD_TRIP_ID + " = ?";
+
+        String[] selectionArgs = {fieldTrip.getId()};
+
+        return DatabaseHelper.SESSION_TABLE.getAll(selection,selectionArgs);
     }
 }
