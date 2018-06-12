@@ -37,6 +37,8 @@ import edu.buffalo.cse.ubcollecting.data.tables.SessionPersonTable;
 import edu.buffalo.cse.ubcollecting.data.tables.SessionTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 
+import static edu.buffalo.cse.ubcollecting.data.tables.LanguageTable.ENGLISH_LANG_NAME;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -199,7 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         LANGUAGE_TYPE_TABLE.insert(reg);
 
         Language english = new Language();
-        english.setName("English");
+        english.setName(ENGLISH_LANG_NAME);
         english.setTypeId(researchLang.getId());
         LANGUAGE_TABLE.insert(english);
 

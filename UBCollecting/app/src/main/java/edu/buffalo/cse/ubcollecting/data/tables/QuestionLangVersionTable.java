@@ -14,6 +14,8 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
+import static edu.buffalo.cse.ubcollecting.data.tables.LanguageTable.ENGLISH_LANG_NAME;
+
 public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
     public static final String TABLE = "QuestionLangVersion";
@@ -95,7 +97,7 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
             Language lang = DatabaseHelper.LANGUAGE_TABLE.findById(question.getQuestionLanguageId());
 
-            if (lang.getIdentifier().equals("English")) {
+            if (lang.getIdentifier().equals(ENGLISH_LANG_NAME)) {
                 return question;
             }
         }

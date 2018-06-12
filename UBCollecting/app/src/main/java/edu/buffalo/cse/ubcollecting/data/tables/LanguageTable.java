@@ -22,6 +22,8 @@ public class LanguageTable extends Table<Language> {
     public static final String KEY_OTHER_NAMES = "OtherNames";
     public static final String KEY_TYPE_ID = "TypeId";
 
+    public static final String ENGLISH_LANG_NAME = "English";
+
 
     public LanguageTable() {
         super();
@@ -66,9 +68,5 @@ public class LanguageTable extends Table<Language> {
         String[] selectionArgs1 = {researchLanguageId};
 
         return DatabaseHelper.LANGUAGE_TABLE.getAll(selection1, selectionArgs1);
-
     }
-
-
-
 }

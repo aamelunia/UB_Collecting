@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import edu.buffalo.cse.ubcollecting.R;
@@ -29,11 +30,11 @@ import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
-import edu.buffalo.cse.ubcollecting.data.tables.QuestionLangVersionTable;
 
 import static edu.buffalo.cse.ubcollecting.QuestionnaireActivity.EXTRA_QUESTIONNAIRE_CONTENT;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
+import static edu.buffalo.cse.ubcollecting.data.tables.LanguageTable.ENGLISH_LANG_NAME;
 
 /**
  * Activity for adding questions to a Questionnaire
@@ -112,7 +113,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
         entryRecyclerView = findViewById(R.id.table_select_recycler);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        entryAdapter = new QuestionLangAdapter(QUESTION_LANG_VERSION_TABLE.getAll());
+        entryAdapter = new QuestionLangAdapter();
         entryRecyclerView.setAdapter(entryAdapter);
 
         filterList = findViewById(R.id.table_select_filter_list);
@@ -212,8 +213,15 @@ public class AddQuestionsActivity extends AppCompatActivity {
 
         private List<QuestionLangVersion> entryList;
 
-        public QuestionLangAdapter(List<QuestionLangVersion> entryList) {
-            this.entryList = entryList;
+        public QuestionLangAdapter() {
+            List<QuestionLangVersion> entryList = QUESTION_LANG_VERSION_TABLE.getAll();
+            this.entryList = new ArrayList<>();
+            for (QuestionLangVersion questionLangVersion : entryList) {
+                Language lang = LANGUAGE_TABLE.findById(questionLangVersion.getQuestionLanguageId());
+                if (lang.getName().equals(ENGLISH_LANG_NAME)) {
+                    this.entryList.add(questionLangVersion);
+                }
+            }
         }
 
         public List<QuestionLangVersion> getEntryList() {
@@ -268,25 +276,44 @@ public class AddQuestionsActivity extends AppCompatActivity {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
+                    searchText.setText("");
                     if (selected) {
                         selectedLanguages.add(lang);
-                        String selection = QuestionLangVersionTable.KEY_QUESTION_LANG_ID + " = ?";
-                        String[] value = new String[]{lang.getId()};
-                        ArrayList<QuestionLangVersion> langQuestions = QUESTION_LANG_VERSION_TABLE.getAll(selection, value);
+                        ArrayList<QuestionLangVersion> langQuestions = queryQuestionsForLanguages(selectedLanguages);
+                        entryAdapter.getEntryList().clear();
                         entryAdapter.getEntryList().addAll(langQuestions);
                         entryAdapter.notifyDataSetChanged();
                     } else {
                         selectedLanguages.remove(lang);
-                        String selection = QuestionLangVersionTable.KEY_QUESTION_LANG_ID + " = ?";
-                        String[] value = new String[]{lang.getId()};
-                        ArrayList<QuestionLangVersion> langQuestions = QUESTION_LANG_VERSION_TABLE.getAll(selection, value);
-                        entryAdapter.getEntryList().removeAll(langQuestions);
+                        ArrayList<QuestionLangVersion> langQuestions = queryQuestionsForLanguages(selectedLanguages);
+                        entryAdapter.getEntryList().clear();
+                        entryAdapter.getEntryList().addAll(langQuestions);
                         entryAdapter.notifyDataSetChanged();
                     }
                 }
             });
 
             return convertView;
+        }
+
+        private ArrayList<QuestionLangVersion> queryQuestionsForLanguages(ArrayList<Language> languages) {
+            ArrayList<QuestionLangVersion> queryResult = new ArrayList<>();
+            HashSet<String> addedQuestionId = new HashSet<>();
+
+            for (QuestionLangVersion questionLangVersion : QUESTION_LANG_VERSION_TABLE.getAll()) {
+                if (addedQuestionId.contains(questionLangVersion.getQuestionId())) {
+                    continue;
+                }
+                for (Language lang : languages) {
+                    if (questionLangVersion.getQuestionLanguageId().equals(lang.getId())) {
+                        queryResult.add(questionLangVersion);
+                        addedQuestionId.add(questionLangVersion.getQuestionId());
+                        break;
+                    }
+                }
+            }
+
+            return queryResult;
         }
     }
 
