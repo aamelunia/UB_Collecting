@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,9 +76,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
         questionnaireId = getIntent().getExtras().getString(EXTRA_QUESTIONNAIRE_ID);
 
         selections = new ArrayList<>();
-        Log.i(TAG, "Num selections: " + selections.size());
         selectedLanguages = LANGUAGE_TABLE.getAll();
-        Log.i(TAG, "Num selected langs: " + selectedLanguages.size());
 
         searchText = findViewById(R.id.table_select_search_view);
         searchText.addTextChangedListener(new SearchTextWatcher());
@@ -90,9 +87,8 @@ public class AddQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchText.setText("");
-                ArrayList<QuestionLangVersion> results = QUESTION_LANG_VERSION_TABLE.getAll();
-                entryAdapter.setEntryList(results);
-                entryAdapter.notifyDataSetChanged();
+                resetQueriedEntries();
+                clearSearchButton.setVisibility(View.GONE);
             }
         });
 
@@ -101,8 +97,9 @@ public class AddQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String query = searchText.getText().toString();
-                selections = search(query, QUESTION_LANG_VERSION_TABLE.getAll());
-                entryAdapter.setEntryList(selections);
+                ArrayList<QuestionLangVersion> queriedQuestions = queryQuestionsForLanguages(selectedLanguages);
+                queriedQuestions = search(query,queriedQuestions);
+                entryAdapter.setEntryList(queriedQuestions);
                 entryAdapter.notifyDataSetChanged();
             }
         });
@@ -127,11 +124,43 @@ public class AddQuestionsActivity extends AppCompatActivity {
      * @param selections Currently selected questions
      * @return {@link ArrayList} of queried questions
      */
-    private ArrayList<QuestionLangVersion> search(String query, ArrayList<QuestionLangVersion> selections) {
+    private ArrayList<QuestionLangVersion> search(String query, List<QuestionLangVersion> selections) {
+        ArrayList<QuestionLangVersion> queryResult = new ArrayList<>();
 
-        return null;
+        for (QuestionLangVersion questionLangVersion : selections) {
+            if (questionLangVersion.getQuestionText().matches(".*" + query + ".*")) {
+                queryResult.add(questionLangVersion);
+            }
+        }
+        return queryResult;
     }
 
+    private ArrayList<QuestionLangVersion> queryQuestionsForLanguages(ArrayList<Language> languages) {
+        ArrayList<QuestionLangVersion> queryResult = new ArrayList<>();
+        HashSet<String> addedQuestionId = new HashSet<>();
+
+        for (QuestionLangVersion questionLangVersion : QUESTION_LANG_VERSION_TABLE.getAll()) {
+            if (addedQuestionId.contains(questionLangVersion.getQuestionId())) {
+                continue;
+            }
+            for (Language lang : languages) {
+                if (questionLangVersion.getQuestionLanguageId().equals(lang.getId())) {
+                    queryResult.add(questionLangVersion);
+                    addedQuestionId.add(questionLangVersion.getQuestionId());
+                    break;
+                }
+            }
+        }
+
+        return queryResult;
+    }
+
+    private void resetQueriedEntries() {
+        ArrayList<QuestionLangVersion> langQuestions = queryQuestionsForLanguages(selectedLanguages);
+        entryAdapter.getEntryList().clear();
+        entryAdapter.getEntryList().addAll(langQuestions);
+        entryAdapter.notifyDataSetChanged();
+    }
 
     /**
      * {@link android.view.View.OnClickListener} to pass an {@link ArrayList} of
@@ -279,41 +308,16 @@ public class AddQuestionsActivity extends AppCompatActivity {
                     searchText.setText("");
                     if (selected) {
                         selectedLanguages.add(lang);
-                        ArrayList<QuestionLangVersion> langQuestions = queryQuestionsForLanguages(selectedLanguages);
-                        entryAdapter.getEntryList().clear();
-                        entryAdapter.getEntryList().addAll(langQuestions);
-                        entryAdapter.notifyDataSetChanged();
+                        resetQueriedEntries();
                     } else {
                         selectedLanguages.remove(lang);
                         ArrayList<QuestionLangVersion> langQuestions = queryQuestionsForLanguages(selectedLanguages);
-                        entryAdapter.getEntryList().clear();
-                        entryAdapter.getEntryList().addAll(langQuestions);
-                        entryAdapter.notifyDataSetChanged();
+                        resetQueriedEntries();
                     }
                 }
             });
 
             return convertView;
-        }
-
-        private ArrayList<QuestionLangVersion> queryQuestionsForLanguages(ArrayList<Language> languages) {
-            ArrayList<QuestionLangVersion> queryResult = new ArrayList<>();
-            HashSet<String> addedQuestionId = new HashSet<>();
-
-            for (QuestionLangVersion questionLangVersion : QUESTION_LANG_VERSION_TABLE.getAll()) {
-                if (addedQuestionId.contains(questionLangVersion.getQuestionId())) {
-                    continue;
-                }
-                for (Language lang : languages) {
-                    if (questionLangVersion.getQuestionLanguageId().equals(lang.getId())) {
-                        queryResult.add(questionLangVersion);
-                        addedQuestionId.add(questionLangVersion.getQuestionId());
-                        break;
-                    }
-                }
-            }
-
-            return queryResult;
         }
     }
 
@@ -329,8 +333,6 @@ public class AddQuestionsActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             if (charSequence.length() != 0) {
                 clearSearchButton.setVisibility(View.VISIBLE);
-            } else {
-                clearSearchButton.setVisibility(View.GONE);
             }
         }
 
