@@ -1,4 +1,4 @@
-package edu.buffalo.cse.ubcollecting.ui;
+package edu.buffalo.cse.ubcollecting.ui.interviewer;
 
 import android.content.Context;
 import android.content.Intent;

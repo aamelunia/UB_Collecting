@@ -1,4 +1,4 @@
-package edu.buffalo.cse.ubcollecting.ui;
+package edu.buffalo.cse.ubcollecting.ui.interviewer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +20,8 @@ import edu.buffalo.cse.ubcollecting.data.models.Session;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
 import static edu.buffalo.cse.ubcollecting.SessionActivity.getFieldTrip;
-import static edu.buffalo.cse.ubcollecting.ui.UserLandingActivity.REQUEST_CODE_ADD_ENTRY;
-import static edu.buffalo.cse.ubcollecting.ui.UserLandingActivity.SELECTED_FIELD_TRIP;
+import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.REQUEST_CODE_ADD_ENTRY;
+import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.SELECTED_FIELD_TRIP;
 
 
 
@@ -29,6 +29,8 @@ public class UserSelectSessionActivity extends AppCompatActivity {
 
     private static final String TAG = UserSelectSessionActivity.class.getSimpleName();
 
+
+    public final static String SELECTED_SESSION = "SelectedSession";
 
     private Button createSession;
     private RecyclerView entryRecyclerView;
@@ -40,7 +42,7 @@ public class UserSelectSessionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select_session);
 
-        entryRecyclerView = findViewById(R.id.fieldtrip_recycler_view);
+        entryRecyclerView = findViewById(R.id.session_recycler_view);
         entryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         entryAdapter = new UserSelectSessionActivity.EntryAdapter(DatabaseHelper.SESSION_TABLE.getFieldTripSessions(getFieldTrip(getIntent())));
@@ -87,15 +89,26 @@ public class UserSelectSessionActivity extends AppCompatActivity {
             deleteButton = view.findViewById(R.id.entry_list_delete_button);
         }
 
-        public void bindEntry(Session session) {
+        public void bindEntry(final Session session) {
             this.session = session;
             selectButton.setText(this.session.getIdentifier());
+
+            selectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = AddSessionRolesActivity.newIntent(UserSelectSessionActivity.this);
+                    i.putExtra(SELECTED_FIELD_TRIP,getFieldTrip(getIntent()));
+                    i.putExtra(SELECTED_SESSION, session);
+                    startActivity(i);
+                }
+            });
 
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = DatabaseHelper.SESSION_TABLE.editActivityIntent(UserSelectSessionActivity.this, EntryHolder.this.session);
                     i.putExtra(SELECTED_FIELD_TRIP,getFieldTrip(getIntent()));
+                    i.putExtra(SELECTED_SESSION, session);
                     startActivityForResult(i, REQUEST_CODE_EDIT_ENTRY);
                 }
             });

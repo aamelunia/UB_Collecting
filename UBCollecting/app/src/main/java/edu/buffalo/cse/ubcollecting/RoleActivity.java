@@ -85,9 +85,9 @@ public class RoleActivity extends EntryActivity<Role> {
 
         if (!valid) {
             Toast.makeText(this, "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
-            return false;
         }
-        return true;
+
+        return valid;
     }
 
 

@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 
 import edu.buffalo.cse.ubcollecting.R;
+import edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 
