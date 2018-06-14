@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/numbered_list_item_number_view"
         android:layout_margin="5pt"
+        android:paddingLeft="20dp"
         android:text="test"/>
 
     <ImageView

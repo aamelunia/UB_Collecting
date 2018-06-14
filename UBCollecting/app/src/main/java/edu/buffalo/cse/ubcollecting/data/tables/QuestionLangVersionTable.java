@@ -78,12 +78,9 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     }
 
     /**
-     * Function that returns a HashMap based on the passed in questionId where  keys are
-     * of type {@link Language} and the values are of type {@link QuestionLangVersion}. Essentially
-     * a way to get all the different languages and their corresponding question text for the passed
-     * in questionId
+     * TODO
      * @param quesId The questionId you want to search the SQlite table for all matching entries
-     * @return {@link HashMap} where keys are {@link Language} and values are {@link QuestionLangVersion}
+     * @return
      */
     public QuestionLangVersion getQuestionTextInEnglish(String quesId){
 

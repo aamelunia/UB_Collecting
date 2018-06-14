@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CON
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
-
+import static edu.buffalo.cse.ubcollecting.ui.UIUtils.setDynamicHeight;
 /**
  * Activity for creating a questionnaire
  */
@@ -160,12 +161,18 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             ArrayList<QuestionnaireContent> serializableObject =
                     (ArrayList<QuestionnaireContent>) data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
 
-            questionnaireContent =  serializableObject;
-            questionnaireContentAdapter.clear();
-            for (int i = 0; i < questionnaireContent.size(); i++) {
-                questionnaireContentAdapter.insert(questionnaireContent.get(i),i);
-            }
+            questionnaireContent.addAll(serializableObject);
+
+//            questionnaireContent =  serializableObject;
+//            questionnaireContentAdapter.clear();
+//            for (int i = 0; i < questionnaireContent.size(); i++) {
+//                questionnaireContentAdapter.insert(questionnaireContent.get(i),i);
+//            }
             questionnaireContentAdapter.notifyDataSetChanged();
+
+            // Added to increase size of the list since it doesn't seem to be scrollable.
+            setDynamicHeight(questionnaireDragView);
+
             if (questionnaireContent.size() > 0) {
                 questionnaireDragView.setVisibility(View.VISIBLE);
             } else {
@@ -225,7 +232,11 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbered_list_item_view, parent, false);
             }
             TextView numberView = convertView.findViewById(R.id.numbered_list_item_number_view);
-            numberView.setText(Integer.toString(content.getQuestionOrder()));
+
+//            numberView.setText(Integer.toString(content.getQuestionOrder()));
+            numberView.setText(Integer.toString(position+1));
+            content.setQuestionOrder(position+1);
+
             TextView textView = convertView.findViewById(R.id.numbered_list_item_text_view);
             QuestionLangVersion question = QUESTION_LANG_VERSION_TABLE.getQuestionTextInEnglish(content.getQuestionId());
             textView.setText(question.getIdentifier());
