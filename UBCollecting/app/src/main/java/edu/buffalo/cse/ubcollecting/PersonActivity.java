@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -30,6 +31,7 @@ import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
+import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.FLAG_INTERVIEWER_EDIT;
 import static edu.buffalo.cse.ubcollecting.ui.LoginActivity.genHash;
 
 public class PersonActivity extends EntryActivity<Person> {
@@ -103,7 +105,16 @@ public class PersonActivity extends EntryActivity<Person> {
         dobField = this.findViewById(R.id.person_dob_field);
 
         roleSpinner = this.findViewById(R.id.person_role_spinner);
-        List<Role> roles = DatabaseHelper.ROLE_TABLE.getAll();
+
+        List<Role> roles;
+
+        if (getIntent().getFlags() == FLAG_INTERVIEWER_EDIT) {
+            roles = DatabaseHelper.ROLE_TABLE.getOnClientRoles();
+
+        }
+        else {
+            roles = DatabaseHelper.ROLE_TABLE.getAll();
+        }
 
         roleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roles);
         roleSpinner.setAdapter(roleAdapter);

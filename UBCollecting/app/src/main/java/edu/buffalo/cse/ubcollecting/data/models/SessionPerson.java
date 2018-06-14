@@ -17,6 +17,7 @@ public class SessionPerson extends Model {
         return "SESSION PERSON";
     }
 
+
     public String getSessionId() {
         return sessionId;
     }
@@ -41,5 +42,24 @@ public class SessionPerson extends Model {
         this.roleId = roleId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SessionPerson that = (SessionPerson) o;
+
+        if (!sessionId.equals(that.sessionId)) return false;
+        if (!personId.equals(that.personId)) return false;
+        return roleId.equals(that.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = sessionId.hashCode();
+        result = 31 * result + personId.hashCode();
+        result = 31 * result + roleId.hashCode();
+        return result;
+    }
 
 }

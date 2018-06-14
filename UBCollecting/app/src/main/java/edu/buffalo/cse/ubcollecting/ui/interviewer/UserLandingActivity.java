@@ -27,6 +27,7 @@ public class UserLandingActivity extends AppCompatActivity {
 
     public final static int REQUEST_CODE_ADD_ENTRY = 3;
     public final static String SELECTED_FIELD_TRIP = "SelectedFieldTrip";
+    public final static int FLAG_INTERVIEWER_EDIT = 4;
 
     private Button createFieldTrip;
     private RecyclerView entryRecyclerView;
@@ -94,6 +95,7 @@ public class UserLandingActivity extends AppCompatActivity {
                     Intent i = UserSelectSessionActivity.newIntent(UserLandingActivity.this);
                     i.putExtra(SELECTED_FIELD_TRIP, fieldTrip);
                     startActivity(i);
+                    finish();
                 }
             });
 

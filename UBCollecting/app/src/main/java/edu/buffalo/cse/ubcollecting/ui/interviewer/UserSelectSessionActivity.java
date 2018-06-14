@@ -100,6 +100,7 @@ public class UserSelectSessionActivity extends AppCompatActivity {
                     i.putExtra(SELECTED_FIELD_TRIP,getFieldTrip(getIntent()));
                     i.putExtra(SELECTED_SESSION, session);
                     startActivity(i);
+                    finish();
                 }
             });
 

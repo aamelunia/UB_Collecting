@@ -6,7 +6,12 @@ package edu.buffalo.cse.ubcollecting.data.tables;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.buffalo.cse.ubcollecting.RoleActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Language;
+import edu.buffalo.cse.ubcollecting.data.models.LanguageType;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
 
 public class RoleTable extends Table<Role> {
@@ -37,5 +42,21 @@ public class RoleTable extends Table<Role> {
     @Override
     public String getTableName() {
         return TABLE;
+    }
+
+
+    /**
+     * Returns the on client roles that can be assigned for purposes of session roles
+     * @return {@link ArrayList} of {@link Role}
+     */
+
+    public static ArrayList<Role> getOnClientRoles() {
+
+        String selection = KEY_ON_CLIENT + " = ?";
+
+        String[] selectionArgs = {"1"};
+
+        return DatabaseHelper.ROLE_TABLE.getAll(selection, selectionArgs);
+
     }
 }

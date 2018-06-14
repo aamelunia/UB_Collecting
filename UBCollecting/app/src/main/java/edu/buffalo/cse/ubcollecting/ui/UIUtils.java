@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.view.View.MeasureSpec;
 
 /**
  * Created by aamel786 on 4/17/18.
@@ -49,4 +50,35 @@ public class UIUtils {
         }
 
     }
+
+    /**
+     * Set listview height based on listview children
+     * Source: http://www.devexchanges.info/2015/05/android-tip-combining-multiple.html
+     * @param listView
+     */
+    public static void setDynamicHeight(ListView listView) {
+
+        ListAdapter adapter = listView.getAdapter();
+        //check adapter if null
+        if (adapter == null) {
+            return;
+        }
+        int height = 0;
+        int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.UNSPECIFIED);
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
+            height += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
+        layoutParams.height = height + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        listView.setLayoutParams(layoutParams);
+        listView.requestLayout();
+    }
+
+
+
+
 }
