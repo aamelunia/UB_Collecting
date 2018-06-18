@@ -198,10 +198,11 @@ public abstract class Table<E extends Model> implements Serializable {
      * the passed in selection predicate(s)
      * @param selection The fields of the respective table by which you want to filter the result
      * @param selectionArgs The corresponding values/condition those fields should satisfy
+     * @param sortByColumn The column to sort the entries by
      * @return {@link List} of {@link Model} entries
      */
 
-    public ArrayList<E> getAll(String selection, String[] selectionArgs) {
+    public ArrayList<E> getAll(String selection, String[] selectionArgs, String sortByColumn) {
 
         ArrayList<E> tuples = new ArrayList<>();
 
@@ -217,7 +218,7 @@ public abstract class Table<E extends Model> implements Serializable {
                     selectionArgs,
                     null,
                     null,
-                    null);
+                    sortByColumn);
 
             ArrayList<Method> setters = ((E) theClass.newInstance()).getSetters();
 

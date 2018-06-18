@@ -63,7 +63,7 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
         String[] selectionArgs = {quesId};
 
-        ArrayList<QuestionLangVersion> questionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getAll(selection, selectionArgs);
+        ArrayList<QuestionLangVersion> questionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getAll(selection, selectionArgs,null);
 
         HashMap<Language,QuestionLangVersion > questions = new HashMap<>();
 
@@ -88,7 +88,7 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
 
         String[] selectionArgs = {quesId};
 
-        ArrayList<QuestionLangVersion> questionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getAll(selection, selectionArgs);
+        ArrayList<QuestionLangVersion> questionTexts = DatabaseHelper.QUESTION_LANG_VERSION_TABLE.getAll(selection, selectionArgs,null);
 
         for (QuestionLangVersion question: questionTexts){
 

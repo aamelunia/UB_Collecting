@@ -56,6 +56,6 @@ public class SessionTable extends Table<Session> {
 
         String[] selectionArgs = {fieldTrip.getId()};
 
-        return DatabaseHelper.SESSION_TABLE.getAll(selection,selectionArgs);
+        return DatabaseHelper.SESSION_TABLE.getAll(selection,selectionArgs,null);
     }
 }

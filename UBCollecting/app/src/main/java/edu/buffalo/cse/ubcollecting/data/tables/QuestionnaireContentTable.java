@@ -4,7 +4,11 @@ package edu.buffalo.cse.ubcollecting.data.tables;
  * Created by aamel786 on 2/17/18.
  */
 
+import java.util.ArrayList;
+
 import edu.buffalo.cse.ubcollecting.QuestionnaireContentActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
@@ -38,5 +42,18 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
     @Override
     public String getTableName() {
         return TABLE;
+    }
+
+
+    /**
+     * Returns all the questions of a questionnaire in the correct order
+     * @return {@link ArrayList} of {@link QuestionnaireContent}
+     */
+    public static ArrayList<QuestionnaireContent> getAllQuestions(String questionnaireId){
+        String selection = KEY_QUESTIONNAIRE_ID + " = ?";
+
+        String[] selectionArgs = {questionnaireId};
+
+        return DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE.getAll(selection, selectionArgs,KEY_QUESTION_ORDER);
     }
 }

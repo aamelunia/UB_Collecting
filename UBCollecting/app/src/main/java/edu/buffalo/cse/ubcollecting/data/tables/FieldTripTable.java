@@ -55,7 +55,7 @@ public class FieldTripTable extends Table<FieldTrip> {
 
         String[] selectionArgs = {formatDate};
 
-        return DatabaseHelper.FIELD_TRIP_TABLE.getAll(selection,selectionArgs);
+        return DatabaseHelper.FIELD_TRIP_TABLE.getAll(selection,selectionArgs,null);
 
     }
 }

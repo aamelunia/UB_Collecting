@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,7 @@ public class UserSelectSessionActivity extends AppCompatActivity {
                     Intent i = AddSessionRolesActivity.newIntent(UserSelectSessionActivity.this);
                     i.putExtra(SELECTED_FIELD_TRIP,getFieldTrip(getIntent()));
                     i.putExtra(SELECTED_SESSION, session);
+                    Log.i(session.getId(), "SESSION ID SELECTED");
                     startActivity(i);
                     finish();
                 }

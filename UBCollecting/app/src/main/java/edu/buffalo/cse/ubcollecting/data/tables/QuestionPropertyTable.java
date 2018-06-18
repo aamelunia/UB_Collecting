@@ -59,7 +59,7 @@ public class QuestionPropertyTable extends Table<QuestionProperty> {
 
         String[] selectionArgs = {quesId};
 
-        ArrayList<QuestionProperty> questionProperties = DatabaseHelper.QUESTION_PROPERTY_TABLE.getAll(selection, selectionArgs);
+        ArrayList<QuestionProperty> questionProperties = DatabaseHelper.QUESTION_PROPERTY_TABLE.getAll(selection, selectionArgs,null);
 
         HashSet<QuestionPropertyDef> quesPropertyDefs = new HashSet<>();
 

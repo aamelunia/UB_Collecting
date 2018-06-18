@@ -56,8 +56,8 @@
         <activity android:name=".ui.interviewer.UserLandingActivity"/>
         <activity android:name=".ui.interviewer.UserSelectSessionActivity"/>
         <activity android:name=".ui.interviewer.AddSessionRolesActivity"/>
-
-
+        <activity android:name=".ui.interviewer.UserSelectQuestionnaireActivity"/>
+        <activity android:name=".ui.interviewer.TakeQuestionnaireActivity"/>
     </application>
 
 </manifest>

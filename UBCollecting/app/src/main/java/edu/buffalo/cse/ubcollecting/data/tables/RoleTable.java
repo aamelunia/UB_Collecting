@@ -56,7 +56,7 @@ public class RoleTable extends Table<Role> {
 
         String[] selectionArgs = {"1"};
 
-        return DatabaseHelper.ROLE_TABLE.getAll(selection, selectionArgs);
+        return DatabaseHelper.ROLE_TABLE.getAll(selection, selectionArgs,null);
 
     }
 }

@@ -59,7 +59,7 @@ public class LanguageTable extends Table<Language> {
 
         String[] selectionArgs = {"Research Language"};
 
-        ArrayList<LanguageType> languageTypes = DatabaseHelper.LANGUAGE_TYPE_TABLE.getAll(selection, selectionArgs);
+        ArrayList<LanguageType> languageTypes = DatabaseHelper.LANGUAGE_TYPE_TABLE.getAll(selection, selectionArgs,null);
 
         String researchLanguageId = languageTypes.get(0).getId();
 
@@ -67,6 +67,6 @@ public class LanguageTable extends Table<Language> {
 
         String[] selectionArgs1 = {researchLanguageId};
 
-        return DatabaseHelper.LANGUAGE_TABLE.getAll(selection1, selectionArgs1);
+        return DatabaseHelper.LANGUAGE_TABLE.getAll(selection1, selectionArgs1,null);
     }
 }

@@ -31,6 +31,7 @@ import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.REQUEST_CODE_ADD_ENTRY;
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.FLAG_INTERVIEWER_EDIT;
 import static edu.buffalo.cse.ubcollecting.SessionActivity.getSession;
+import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserSelectSessionActivity.SELECTED_SESSION;
 
 
 
@@ -160,6 +161,10 @@ public class AddSessionRolesActivity extends AppCompatActivity {
                     for (SessionPerson sp: assignedRoles){
                         DatabaseHelper.SESSION_PERSON_TABLE.insert(sp);
                     }
+
+                    Intent i = UserSelectQuestionnaireActivity.newIntent(AddSessionRolesActivity.this);
+                    i.putExtra(SELECTED_SESSION, getSession(getIntent()));
+                    startActivity(i);
                     finish();
                 }
             }
