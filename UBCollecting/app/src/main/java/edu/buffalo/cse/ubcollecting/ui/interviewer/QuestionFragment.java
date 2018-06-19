@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +23,8 @@ import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Answer;
 import edu.buffalo.cse.ubcollecting.data.models.Language;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
-import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.models.Session;
-import edu.buffalo.cse.ubcollecting.data.models.SessionAnswer;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
 import edu.buffalo.cse.ubcollecting.ui.QuestionManager;
 
@@ -50,14 +47,12 @@ public class QuestionFragment extends Fragment{
     private ArrayAdapter<Language> questionLanguagesAdapter;
     private QuestionManager questionManager;
     private Answer answer;
-    private SessionAnswer sessionAnswer;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         answer = new Answer();
-        sessionAnswer = new SessionAnswer();
         questionText = view.findViewById(R.id.question_text);
         answerText = view.findViewById(R.id.answer_text);
         questionContent = (QuestionnaireContent) getArguments().getSerializable(QUESTIONNAIRE_CONTENT);
@@ -92,11 +87,9 @@ public class QuestionFragment extends Fragment{
     private int getEnglishQuestionIndex(){
         for (int i = 0; i<questionLanguages.size(); i++){
             if (questionLanguages.get(i).getName().toLowerCase().equals("english")){
-                Log.i("found","english");
                 return i;
             }
         }
-        Log.i("not found","english");
         return 0;
     }
 
@@ -113,7 +106,6 @@ public class QuestionFragment extends Fragment{
         @Override
         public void onClick(View view) {
             submitTextAnswer();
-            submitSessionAnswer();
             questionManager.getNextQuestion();
         }
     }
@@ -122,16 +114,10 @@ public class QuestionFragment extends Fragment{
         answer.setQuestionId(questionContent.getQuestionId());
         answer.setQuestionnaireId(questionContent.getQuestionnaireId());
         answer.setText(answerText.getText().toString());
+        answer.setSessionId(((Session) getArguments().getSerializable(SELECTED_SESSION)).getId());
         DatabaseHelper.ANSWER_TABLE.insert(answer);
     }
 
-    private void submitSessionAnswer(){
-        sessionAnswer.setAnswerId(answer.getId());
-        sessionAnswer.setSessionId(((Session) getArguments().getSerializable(SELECTED_SESSION)).getId());
-        sessionAnswer.setQuestionId(questionContent.getQuestionId());
-        sessionAnswer.setQuestionnaireId(questionContent.getQuestionnaireId());
-        DatabaseHelper.SESSION_ANSWER_TABLE.insert(sessionAnswer);
-    }
 
 
 

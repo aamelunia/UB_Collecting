@@ -12,6 +12,7 @@ public class Answer extends Model {
     public String questionId;
     public String label;
     public String text;
+    public String sessionId;
 
     public String getIdentifier() {
         return label;
@@ -47,6 +48,14 @@ public class Answer extends Model {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
 
