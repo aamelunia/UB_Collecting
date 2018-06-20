@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import edu.buffalo.cse.ubcollecting.R;
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.Person;
 import edu.buffalo.cse.ubcollecting.data.models.Role;
+import edu.buffalo.cse.ubcollecting.data.models.Session;
 import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.REQUEST_CODE_ADD_ENTRY;
@@ -55,11 +57,13 @@ public class AddSessionRolesActivity extends AppCompatActivity {
 
     private int personSelectedIndex = -1;
     private HashSet<SessionPerson> assignedRoles;
+    private ArrayList<String> allRolesAssigned;
     private ArrayList<String> assignedRolesUI;
     private HashMap<String, SessionPerson> uiMapping;
-    private ArrayList<String> allRolesAssigned;
     private AssignedRolesAdapter assignedRolesAdapter;
 
+
+    private HashMap<SessionPerson, Role> rolesAlreadyAssigned;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -68,9 +72,10 @@ public class AddSessionRolesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_session_roles);
 
         allRolesAssigned = new ArrayList<>();
-        assignedRoles = new HashSet<>();
         assignedRolesUI = new ArrayList<>();
+        assignedRoles = new HashSet<>();
         uiMapping = new HashMap<>();
+
 
         assignedRolesListView = findViewById(R.id.assigned_roles_list_view);
         assignedRolesAdapter = new AssignedRolesAdapter(this,assignedRolesUI);
@@ -110,6 +115,12 @@ public class AddSessionRolesActivity extends AppCompatActivity {
         roleSpinner.setAdapter(roleAdapter);
         roleSpinner.setSelected(false);
 
+
+        rolesAlreadyAssigned = DatabaseHelper.SESSION_PERSON_TABLE.getSessionPersonRoles(getSession(getIntent()).getId());
+
+        if (!rolesAlreadyAssigned.isEmpty()){
+            setActivityState();
+        }
 
         assignButton = findViewById(R.id.assign_role);
         assignButton.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +170,18 @@ public class AddSessionRolesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validateContinue()){
                     for (SessionPerson sp: assignedRoles){
-                        DatabaseHelper.SESSION_PERSON_TABLE.insert(sp);
+                        if(!rolesAlreadyAssigned.containsKey(sp)){
+                            DatabaseHelper.SESSION_PERSON_TABLE.insert(sp);
+                        }
+                        else {
+                            DatabaseHelper.SESSION_PERSON_TABLE.update(sp);
+                        }
+                    }
+
+                    for (SessionPerson sp :rolesAlreadyAssigned.keySet()){
+                        if(!assignedRoles.contains(sp)){
+                            DatabaseHelper.SESSION_PERSON_TABLE.delete(sp.getId());
+                        }
                     }
 
                     Intent i = UserSelectQuestionnaireActivity.newIntent(AddSessionRolesActivity.this);
@@ -293,6 +315,22 @@ public class AddSessionRolesActivity extends AppCompatActivity {
         personLayoutParams.height = 400;
         personListView.setLayoutParams(personLayoutParams);
         personListView.requestLayout();
+    }
+
+    private void setActivityState(){
+        for (SessionPerson sp: rolesAlreadyAssigned.keySet()){
+            assignedRoles.add(sp);
+            allRolesAssigned.add(rolesAlreadyAssigned.get(sp).getName().toLowerCase());
+            Person person = DatabaseHelper.PERSON_TABLE.findById(sp.getPersonId());
+            Log.i(person.getName(),"PERSON");
+            StringBuilder sb = new StringBuilder();
+            sb.append(person.getName());
+            sb.append(" : ");
+            sb.append(rolesAlreadyAssigned.get(sp).getName());
+            assignedRolesUI.add(sb.toString());
+            uiMapping.put(sb.toString(),sp);
+        }
+        assignedRolesAdapter.notifyDataSetChanged();
     }
 
 }

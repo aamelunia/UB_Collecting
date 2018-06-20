@@ -1,6 +1,13 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import edu.buffalo.cse.ubcollecting.SessionPersonActivity;
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
+import edu.buffalo.cse.ubcollecting.data.models.Role;
 import edu.buffalo.cse.ubcollecting.data.models.SessionPerson;
 
 /**
@@ -26,7 +33,7 @@ public class SessionPersonTable extends Table<SessionPerson> {
         return "CREATE TABLE "
                 + TABLE + "(" + KEY_ID + " TEXT, " + KEY_SESSION_ID + " TEXT, "
                 + KEY_PERSON_ID + " TEXT," + KEY_ROLE_ID + " TEXT,"
-                + "PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_PERSON_ID + "),"
+                + "PRIMARY KEY(" + KEY_SESSION_ID + ", " + KEY_ROLE_ID + ", " + KEY_PERSON_ID + "),"
                 + " FOREIGN KEY(" + KEY_SESSION_ID + ") REFERENCES " + SessionTable.TABLE
                 + " (" + SessionTable.KEY_ID + "),"
                 + " FOREIGN KEY(" + KEY_PERSON_ID + ") REFERENCES " + PersonTable.TABLE
@@ -38,5 +45,25 @@ public class SessionPersonTable extends Table<SessionPerson> {
     @Override
     public String getTableName() {
         return TABLE;
+    }
+
+
+
+    public HashMap<SessionPerson,Role> getSessionPersonRoles(String sessionId){
+        String selection = KEY_SESSION_ID + " = ?";
+
+        String[] selectionArgs = {sessionId};
+
+        ArrayList<SessionPerson> peopleAssigned = DatabaseHelper.SESSION_PERSON_TABLE.getAll(selection, selectionArgs,null);
+
+        HashMap<SessionPerson,Role> allRolesAssigned = new HashMap<>();
+
+        for (SessionPerson sp: peopleAssigned){
+            String roleId = sp.getRoleId();
+            Role role = DatabaseHelper.ROLE_TABLE.findById(roleId);
+            allRolesAssigned.put(sp,role);
+        }
+
+        return allRolesAssigned;
     }
 }

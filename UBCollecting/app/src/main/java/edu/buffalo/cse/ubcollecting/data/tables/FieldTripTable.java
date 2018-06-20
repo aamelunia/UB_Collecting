@@ -47,7 +47,7 @@ public class FieldTripTable extends Table<FieldTrip> {
 
     public ArrayList<FieldTrip> getActiveFieldTrips(){
 
-        String selection = FieldTripTable.KEY_END_DATE + " <= ?";
+        String selection = FieldTripTable.KEY_END_DATE + " >= ?";
 
         Date currentDate = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

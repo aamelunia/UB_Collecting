@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class UserLandingActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_CODE_EDIT_ENTRY || requestCode == REQUEST_CODE_ADD_ENTRY) {
             entryAdapter.setEntryList(DatabaseHelper.FIELD_TRIP_TABLE.getActiveFieldTrips());
+            Log.i(DatabaseHelper.FIELD_TRIP_TABLE.getActiveFieldTrips().toString(), "HELLOOO");
             entryAdapter.notifyDataSetChanged();
         }
 
