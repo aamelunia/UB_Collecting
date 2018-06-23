@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,8 +106,10 @@ public class QuestionFragment extends Fragment{
     private class NextQuestionOnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            submitTextAnswer();
-            questionManager.getNextQuestion();
+            if(validateEntry()){
+                submitTextAnswer();
+                questionManager.getNextQuestion();
+            }
         }
     }
 
@@ -118,6 +121,22 @@ public class QuestionFragment extends Fragment{
         DatabaseHelper.ANSWER_TABLE.insert(answer);
     }
 
+    protected boolean validateEntry() {
+
+        boolean valid = true;
+
+        if (answerText.getText().toString().isEmpty()){
+            valid = false;
+            answerText.setError("A Text Answer is Required");
+        }
+
+        if (!valid){
+            Toast.makeText(this.getActivity(), "Please Fill in All Required Fields", Toast.LENGTH_SHORT).show();
+        }
+
+        return valid;
+        
+    }
 
 
 

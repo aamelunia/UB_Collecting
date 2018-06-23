@@ -170,7 +170,7 @@ public class AddSessionRolesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validateContinue()){
                     Log.i(assignedRoles.toString(), "INSERTING INTO DATABASE");
-                    
+
                     for (SessionPerson sp :rolesAlreadyAssigned.keySet()){
                         if(!assignedRoles.contains(sp)){
                             DatabaseHelper.SESSION_PERSON_TABLE.delete(sp.getId());
