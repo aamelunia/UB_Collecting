@@ -63,7 +63,7 @@ public class AddSessionRolesActivity extends AppCompatActivity {
     private AssignedRolesAdapter assignedRolesAdapter;
 
 
-    private HashMap<SessionPerson, Role> rolesAlreadyAssigned;
+    private HashMap<SessionPerson,ArrayList<Role>> rolesAlreadyAssigned;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -169,18 +169,25 @@ public class AddSessionRolesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validateContinue()){
-                    for (SessionPerson sp: assignedRoles){
-                        if(!rolesAlreadyAssigned.containsKey(sp)){
-                            DatabaseHelper.SESSION_PERSON_TABLE.insert(sp);
-                        }
-                        else {
-                            DatabaseHelper.SESSION_PERSON_TABLE.update(sp);
-                        }
-                    }
-
+                    Log.i(assignedRoles.toString(), "INSERTING INTO DATABASE");
+                    
                     for (SessionPerson sp :rolesAlreadyAssigned.keySet()){
                         if(!assignedRoles.contains(sp)){
                             DatabaseHelper.SESSION_PERSON_TABLE.delete(sp.getId());
+                            Log.i(sp.getPersonId(),"DELETING PERSON");
+                        }
+                    }
+
+                    for (SessionPerson sp: assignedRoles){
+                        if(!rolesAlreadyAssigned.containsKey(sp)){
+                            DatabaseHelper.SESSION_PERSON_TABLE.insert(sp);
+                            Log.i(sp.getPersonId(),"ADDING PERSON");
+
+                        }
+                        else {
+                            DatabaseHelper.SESSION_PERSON_TABLE.update(sp);
+                            Log.i(sp.getPersonId(),"UPDATING PERSON");
+
                         }
                     }
 
@@ -320,15 +327,18 @@ public class AddSessionRolesActivity extends AppCompatActivity {
     private void setActivityState(){
         for (SessionPerson sp: rolesAlreadyAssigned.keySet()){
             assignedRoles.add(sp);
-            allRolesAssigned.add(rolesAlreadyAssigned.get(sp).getName().toLowerCase());
-            Person person = DatabaseHelper.PERSON_TABLE.findById(sp.getPersonId());
-            Log.i(person.getName(),"PERSON");
-            StringBuilder sb = new StringBuilder();
-            sb.append(person.getName());
-            sb.append(" : ");
-            sb.append(rolesAlreadyAssigned.get(sp).getName());
-            assignedRolesUI.add(sb.toString());
-            uiMapping.put(sb.toString(),sp);
+
+            for (int i = 0; i<rolesAlreadyAssigned.get(sp).size(); i++){
+                allRolesAssigned.add(rolesAlreadyAssigned.get(sp).get(i).getName().toLowerCase());
+                Person person = DatabaseHelper.PERSON_TABLE.findById(sp.getPersonId());
+                StringBuilder sb = new StringBuilder();
+                sb.append(person.getName());
+                sb.append(" : ");
+                sb.append(rolesAlreadyAssigned.get(sp).get(i).getName());
+                assignedRolesUI.add(sb.toString());
+                uiMapping.put(sb.toString(),sp);
+            }
+
         }
         assignedRolesAdapter.notifyDataSetChanged();
     }

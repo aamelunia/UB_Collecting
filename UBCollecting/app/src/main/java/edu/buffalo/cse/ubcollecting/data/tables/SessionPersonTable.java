@@ -1,5 +1,7 @@
 package edu.buffalo.cse.ubcollecting.data.tables;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,21 +50,34 @@ public class SessionPersonTable extends Table<SessionPerson> {
     }
 
 
+    /**
+     * TODO
+     * @param sessionId
+     * @return
+     */
 
-    public HashMap<SessionPerson,Role> getSessionPersonRoles(String sessionId){
+    public HashMap<SessionPerson,ArrayList<Role>> getSessionPersonRoles(String sessionId){
         String selection = KEY_SESSION_ID + " = ?";
 
         String[] selectionArgs = {sessionId};
 
         ArrayList<SessionPerson> peopleAssigned = DatabaseHelper.SESSION_PERSON_TABLE.getAll(selection, selectionArgs,null);
 
-        HashMap<SessionPerson,Role> allRolesAssigned = new HashMap<>();
+        HashMap<SessionPerson,ArrayList<Role>> allRolesAssigned = new HashMap<>();
 
         for (SessionPerson sp: peopleAssigned){
             String roleId = sp.getRoleId();
             Role role = DatabaseHelper.ROLE_TABLE.findById(roleId);
-            allRolesAssigned.put(sp,role);
+            if(allRolesAssigned.containsKey(sp)){
+                allRolesAssigned.get(sp).add(role);
+            }
+            else{
+                ArrayList<Role> roles = new ArrayList<>();
+                roles.add(role);
+                allRolesAssigned.put(sp,roles);
+            }
         }
+        Log.i(allRolesAssigned.toString(), "ROLES THAT ARE ALREADY ASSIGNED");
 
         return allRolesAssigned;
     }
