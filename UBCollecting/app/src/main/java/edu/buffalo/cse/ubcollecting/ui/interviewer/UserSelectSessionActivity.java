@@ -1,8 +1,10 @@
 package edu.buffalo.cse.ubcollecting.ui.interviewer;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -119,9 +122,21 @@ public class UserSelectSessionActivity extends AppCompatActivity {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DatabaseHelper.SESSION_TABLE.delete(EntryHolder.this.session.id);
-                    entryAdapter.setEntryList(DatabaseHelper.SESSION_TABLE.getFieldTripSessions(getFieldTrip(getIntent())));
-                    entryAdapter.notifyDataSetChanged();
+                    AlertDialog.Builder confirmDelete = new AlertDialog.Builder(UserSelectSessionActivity.this);
+                    confirmDelete.setMessage("Do you want to delete this entry?")
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    DatabaseHelper.SESSION_TABLE.delete(EntryHolder.this.session.id);
+                                    entryAdapter.setEntryList(DatabaseHelper.SESSION_TABLE.getFieldTripSessions(getFieldTrip(getIntent())));
+                                    entryAdapter.notifyDataSetChanged();
+                                    Toast.makeText(getApplicationContext(), "Entry Deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton("Cancel",null);
+                    AlertDialog alert = confirmDelete.create();
+                    alert.setTitle("Confirm Selection");
+                    alert.show();
                 }
             });
         }
