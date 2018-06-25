@@ -107,7 +107,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         });
 
         updateButton = this.findViewById(R.id.questionnaire_update_button);
-        updateButton.setOnClickListener(new UpdateButtonOnClickListener(QUESTIONNAIRE_TABLE));
+        updateButton.setOnClickListener(new QuestionnaireUpdateOnClickListener());
 
         submitButton = this.findViewById(R.id.questionnaire_submit_button);
         submitButton.setOnClickListener(new QuestionnaireSubmitOnClickListener());
@@ -213,6 +213,25 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
                 setEntryResult(entry);
                 for (QuestionnaireContent content : questionnaireContent) {
                     QUESTIONNAIRE_CONTENT_TABLE.insert(content);
+                }
+                finish();
+            }
+        }
+    }
+
+    private class QuestionnaireUpdateOnClickListener extends UpdateButtonOnClickListener {
+        public QuestionnaireUpdateOnClickListener() {
+            super(QUESTIONNAIRE_TABLE);
+        }
+
+        @Override
+        public void onClick(View view) {
+            setEntryByUI();
+            if (validateEntry()) {
+                table.update(entry);
+                setEntryResult(entry);
+                for (QuestionnaireContent content : questionnaireContent) {
+                    QUESTIONNAIRE_CONTENT_TABLE.update(content);
                 }
                 finish();
             }
