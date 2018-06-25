@@ -71,7 +71,7 @@ public class LanguageActivity extends EntryActivity<Language> {
     }
 
     @Override
-    protected boolean validateEntry() {
+    protected boolean isValidEntry() {
 
         boolean valid = true;
 

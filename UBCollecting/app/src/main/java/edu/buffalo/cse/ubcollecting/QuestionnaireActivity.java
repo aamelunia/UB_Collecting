@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,16 @@ import android.widget.Toast;
 import com.mobeta.android.dslv.DragSortListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
+import edu.buffalo.cse.ubcollecting.data.tables.QuestionnaireContentTable;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
@@ -107,7 +111,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         });
 
         updateButton = this.findViewById(R.id.questionnaire_update_button);
-        updateButton.setOnClickListener(new UpdateButtonOnClickListener(QUESTIONNAIRE_TABLE));
+        updateButton.setOnClickListener(new QuestionnaireUpdateOnClickListener());
 
         submitButton = this.findViewById(R.id.questionnaire_submit_button);
         submitButton.setOnClickListener(new QuestionnaireSubmitOnClickListener());
@@ -143,6 +147,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
                 toContent.setQuestionOrder(from + 1);
                 fromContent.setQuestionOrder(to + 1);
                 Collections.sort(questionnaireContent);
+                Log.i(TAG, Arrays.toString(questionnaireContent.toArray()));
 
                 questionnaireContentAdapter.notifyDataSetChanged();
             }
@@ -174,6 +179,8 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         if (requestCode == RESULT_ADD_QUESTIONS) {
             ArrayList<QuestionnaireContent> serializableObject =
                     (ArrayList<QuestionnaireContent>) data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
+
+            Log.i(TAG, "REC: " + Integer.toString(serializableObject.size()));
             questionnaireContent.clear();
             questionnaireContent.addAll(serializableObject);
 
@@ -181,7 +188,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         }
     }
 
-    protected boolean validateEntry() {
+    protected boolean isValidEntry() {
         boolean valid = true;
 
         if (nameField.getText().toString().trim().isEmpty()) {
@@ -208,8 +215,35 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            if (validateEntry()) {
+            if (isValidEntry()) {
                 table.insert(entry);
+                setEntryResult(entry);
+                for (QuestionnaireContent content : questionnaireContent) {
+                    QUESTIONNAIRE_CONTENT_TABLE.insert(content);
+                }
+                finish();
+            }
+        }
+    }
+
+    private class QuestionnaireUpdateOnClickListener extends UpdateButtonOnClickListener {
+        public QuestionnaireUpdateOnClickListener() {
+            super(QUESTIONNAIRE_TABLE);
+        }
+
+        @Override
+        public void onClick(View view) {
+            String selection = QuestionnaireContentTable.KEY_QUESTIONNAIRE_ID+ " = ?";
+            String[] selectionArgs = {entry.getId()};
+            ArrayList<QuestionnaireContent> prevQuestionnaireContent = DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE.getAll(selection, selectionArgs,null);
+
+            for (QuestionnaireContent content : prevQuestionnaireContent g) {
+                QUESTIONNAIRE_CONTENT_TABLE.delete(content.getId());
+            }
+
+            setEntryByUI();
+            if (isValidEntry()) {
+                table.update(entry);
                 setEntryResult(entry);
                 for (QuestionnaireContent content : questionnaireContent) {
                     QUESTIONNAIRE_CONTENT_TABLE.insert(content);

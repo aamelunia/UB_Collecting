@@ -146,7 +146,7 @@ public class FieldTripActivity extends EntryActivity<FieldTrip> {
 
 
     @Override
-    boolean validateEntry() {
+    boolean isValidEntry() {
 
         boolean valid = true;
 

@@ -13,8 +13,7 @@ public class QuestionnaireContent extends Model implements Comparable<Questionna
     public int questionOrder;
 
     public String getIdentifier() {
-        //TODO
-        return "QUESTIONNAIRE CONTENT";
+        return "Questionnaire: " + questionnaireId + "  Question: " + questionId + "  Order: " + Integer.toString(questionOrder);
     }
 
     public String getQuestionnaireId() {
@@ -44,5 +43,15 @@ public class QuestionnaireContent extends Model implements Comparable<Questionna
     @Override
     public int compareTo(QuestionnaireContent other) {
         return Integer.compare(questionOrder, other.getQuestionOrder());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof QuestionnaireContent)) {
+            return false;
+        }
+        QuestionnaireContent content = (QuestionnaireContent) other;
+        return content.getQuestionId().equals(questionId) &&
+                content.getQuestionnaireId().equals(questionnaireId);
     }
 }

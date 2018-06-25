@@ -74,7 +74,7 @@ public class RoleActivity extends EntryActivity<Role> {
         }
     }
 
-    protected boolean validateEntry() {
+    protected boolean isValidEntry() {
 
         boolean valid = true;
 

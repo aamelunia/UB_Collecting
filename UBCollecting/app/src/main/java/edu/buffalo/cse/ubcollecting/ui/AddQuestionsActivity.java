@@ -40,11 +40,12 @@ import static edu.buffalo.cse.ubcollecting.data.tables.LanguageTable.ENGLISH_LAN
  */
 public class AddQuestionsActivity extends AppCompatActivity {
 
-    private static final String TAG = AddQuestionsActivity.class.getSimpleName().toString();
+    private static final String TAG = AddQuestionsActivity.class.getSimpleName();
     private static final String EXTRA_QUESTIONNAIRE_ID = "edu.buffalo.cse.ubcollecting.ui.questionnaire_id";
     public static final String EXTRA_QUESTIONNAIRE_CONTENT = "edu.buffalo.cse.ubcollecting.ui.questionnaire_content";
 
-    private ArrayList<QuestionLangVersion> selections;
+    private ArrayList<QuestionnaireContent> selections;
+    private HashSet<QuestionnaireContent> selectionsSet;
     private ArrayList<Language> selectedLanguages;
     private String questionnaireId;
 
@@ -68,14 +69,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
                                    ArrayList<QuestionnaireContent> selectedContent) {
         Intent i = new Intent(packageContext, AddQuestionsActivity.class);
         i.putExtra(EXTRA_QUESTIONNAIRE_ID, questionnaire.getId());
-
-        ArrayList<QuestionLangVersion> selectedContentLangVersion = new ArrayList<>();
-        for (QuestionnaireContent content: selectedContent) {
-            String questionId = content.getQuestionId();
-            selectedContentLangVersion.add(QUESTION_LANG_VERSION_TABLE.getQuestionTextInEnglish(questionId));
-        }
-
-        i.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, selectedContentLangVersion);
+        i.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, selectedContent);
         return i;
     }
 
@@ -86,7 +80,10 @@ public class AddQuestionsActivity extends AppCompatActivity {
 
         questionnaireId = getIntent().getExtras().getString(EXTRA_QUESTIONNAIRE_ID);
 
-        selections = (ArrayList<QuestionLangVersion>) getIntent().getExtras().getSerializable(EXTRA_QUESTIONNAIRE_CONTENT);
+        selections = (ArrayList<QuestionnaireContent>) getIntent().getExtras().getSerializable(EXTRA_QUESTIONNAIRE_CONTENT);
+        selectionsSet = new HashSet<>();
+        selectionsSet.addAll(selections);
+        Log.i(TAG, "Set size: " + Integer.toString(selectionsSet.size()));
         selectedLanguages = LANGUAGE_TABLE.getAll();
 
         searchText = findViewById(R.id.table_select_search_view);
@@ -162,7 +159,6 @@ public class AddQuestionsActivity extends AppCompatActivity {
                 }
             }
         }
-
         return queryResult;
     }
 
@@ -187,18 +183,12 @@ public class AddQuestionsActivity extends AppCompatActivity {
             finish();
         }
 
-        private ArrayList<QuestionnaireContent> onSelectionDone(ArrayList<QuestionLangVersion> selections) {
-            ArrayList<QuestionnaireContent> contentList = new ArrayList<>();
+        private ArrayList<QuestionnaireContent> onSelectionDone(ArrayList<QuestionnaireContent> selections) {
             for (int i = 0; i < selections.size(); i++) {
-                QuestionLangVersion questionLang = selections.get(i);
-                QuestionnaireContent content = new QuestionnaireContent();
-                content.setQuestionOrder(i+1);
-                content.setQuestionId(questionLang.getQuestionId());
-                content.setQuestionnaireId(questionnaireId);
-
-                contentList.add(content);
+                selections.get(i).setQuestionOrder(i + 1);
             }
-            return contentList;
+            Log.i(TAG, "SELECTIONS: " + Integer.toString(selections.size()));
+            return selections;
         }
     }
 
@@ -207,9 +197,10 @@ public class AddQuestionsActivity extends AppCompatActivity {
      */
     private class QuestionLangHolder extends RecyclerView.ViewHolder {
 
-        private QuestionLangVersion question;
+        private QuestionnaireContent question;
         private CheckBox selectBox;
         private TextView entryNameView;
+        private CompoundButton.OnCheckedChangeListener selectBoxListener;
 
 
         public QuestionLangHolder(View view) {
@@ -218,30 +209,32 @@ public class AddQuestionsActivity extends AppCompatActivity {
             selectBox = view.findViewById(R.id.entry_list_select_box);
             entryNameView = view.findViewById(R.id.entry_list_select_text_view);
 
-            selectBox.setChecked(selections.contains(question));
-            selectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            selectBoxListener = new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) {
+                    if (b && !selectionsSet.contains(question)) {
                         selections.add(question);
+                        selectionsSet.add(question);
                     } else {
                         selections.remove(question);
+                        selectionsSet.remove(question);
                     }
                 }
-            });
+            };
         }
 
         public void bindEntry(QuestionLangVersion question1) {
-            question = question1;
-            String summary;
-            if (question1.getQuestionText().length() < 20) {
-                summary = question1.getQuestionText();
-            } else {
-                summary = question1.getQuestionText().substring(0, 20);
-            }
+            selectBox.setOnCheckedChangeListener(null);
 
-            entryNameView.setText(summary);
+            QuestionnaireContent content = new QuestionnaireContent();
+            content.setQuestionId(question1.getQuestionId());
+            content.setQuestionnaireId(questionnaireId);
+            question = content;
+
+            entryNameView.setText(question1.getTextSummary());
+
             selectBox.setChecked(selections.contains(question));
+            selectBox.setOnCheckedChangeListener(selectBoxListener);
         }
     }
 

@@ -196,7 +196,7 @@ public class PersonActivity extends EntryActivity<Person> {
     }
 
 
-    protected boolean validateEntry() {
+    protected boolean isValidEntry() {
         boolean valid = true;
 
         if (nameField.getText().toString().trim().isEmpty()) {

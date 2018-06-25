@@ -30,7 +30,7 @@ public class QuestionnaireTypeActivity extends EntryActivity<QuestionnaireType> 
     }
 
     @Override
-    boolean validateEntry() {
+    boolean isValidEntry() {
         return true;
     }
 

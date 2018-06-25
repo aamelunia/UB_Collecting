@@ -43,7 +43,7 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
      * Helper function that validates user submission
      * @return {@link Boolean}
      */
-    abstract boolean validateEntry();
+    abstract boolean isValidEntry();
 
     /**
      * Sets a {@link Model} as result to return to parent activity
@@ -81,7 +81,7 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            if (validateEntry()) {
+            if (isValidEntry()) {
                 table.update(entry);
                 setEntryResult(entry);
                 finish();
@@ -103,7 +103,7 @@ public abstract class EntryActivity<E extends Model> extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             setEntryByUI();
-            if (validateEntry()) {
+            if (isValidEntry()) {
                 table.insert(entry);
                 setEntryResult(entry);
                 finish();

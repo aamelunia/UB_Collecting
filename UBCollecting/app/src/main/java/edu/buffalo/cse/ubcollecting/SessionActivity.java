@@ -91,7 +91,7 @@ public class SessionActivity extends EntryActivity<Session> {
     }
 
     @Override
-    boolean validateEntry() {
+    boolean isValidEntry() {
         boolean valid = true;
 
         if (nameField.getText().toString().trim().isEmpty()) {

@@ -41,6 +41,16 @@ public class QuestionLangVersion extends Model {
         return questionText;
     }
 
+    public String getTextSummary() {
+        String summary;
+        if (getQuestionText().length() < 20) {
+            summary = getQuestionText();
+        } else {
+            summary = getQuestionText().substring(0, 20);
+        }
+        return summary;
+    }
+
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
