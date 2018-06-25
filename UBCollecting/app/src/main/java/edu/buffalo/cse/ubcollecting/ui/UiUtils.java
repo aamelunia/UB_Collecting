@@ -12,7 +12,7 @@ import com.mobeta.android.dslv.DragSortListView;
  * Created by aamel786 on 4/17/18.
  */
 
-public class UIUtils {
+public class UiUtils {
 
     /**
      * Sets ListView height dynamically based on the height of the items.
@@ -80,6 +80,11 @@ public class UIUtils {
         listView.requestLayout();
     }
 
+    /**
+     * Set the input DragSortListView's height manually according to the entries in the view.
+     *
+     * @param listView
+     */
     public static void setDynamicHeight(DragSortListView listView) {
 
         ListAdapter adapter = listView.getAdapter();

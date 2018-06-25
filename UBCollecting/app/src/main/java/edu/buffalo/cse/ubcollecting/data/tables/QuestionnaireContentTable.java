@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import edu.buffalo.cse.ubcollecting.QuestionnaireContentActivity;
 import edu.buffalo.cse.ubcollecting.data.DatabaseHelper;
-import edu.buffalo.cse.ubcollecting.data.models.Question;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
@@ -49,11 +48,12 @@ public class QuestionnaireContentTable extends Table<QuestionnaireContent> {
      * Returns all the questions of a questionnaire in the correct order
      * @return {@link ArrayList} of {@link QuestionnaireContent}
      */
-    public static ArrayList<QuestionnaireContent> getAllQuestions(String questionnaireId){
+    public ArrayList<QuestionnaireContent> getAllQuestions(String questionnaireId){
         String selection = KEY_QUESTIONNAIRE_ID + " = ?";
 
         String[] selectionArgs = {questionnaireId};
 
         return DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE.getAll(selection, selectionArgs,KEY_QUESTION_ORDER);
     }
+
 }

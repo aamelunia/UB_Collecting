@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
-import static edu.buffalo.cse.ubcollecting.QuestionnaireActivity.EXTRA_QUESTIONNAIRE_CONTENT;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.LANGUAGE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.tables.LanguageTable.ENGLISH_LANG_NAME;
@@ -42,6 +42,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
 
     private static final String TAG = AddQuestionsActivity.class.getSimpleName().toString();
     private static final String EXTRA_QUESTIONNAIRE_ID = "edu.buffalo.cse.ubcollecting.ui.questionnaire_id";
+    public static final String EXTRA_QUESTIONNAIRE_CONTENT = "edu.buffalo.cse.ubcollecting.ui.questionnaire_content";
 
     private ArrayList<QuestionLangVersion> selections;
     private ArrayList<Language> selectedLanguages;
@@ -62,9 +63,19 @@ public class AddQuestionsActivity extends AppCompatActivity {
      * @param questionnaire {@link Questionnaire} to add Questions to
      * @return {@link Intent} to add questions to a {@link Questionnaire}
      */
-    public static Intent newIntent(Context packageContext, Questionnaire questionnaire) {
+    public static Intent newIntent(Context packageContext,
+                                   Questionnaire questionnaire,
+                                   ArrayList<QuestionnaireContent> selectedContent) {
         Intent i = new Intent(packageContext, AddQuestionsActivity.class);
         i.putExtra(EXTRA_QUESTIONNAIRE_ID, questionnaire.getId());
+
+        ArrayList<QuestionLangVersion> selectedContentLangVersion = new ArrayList<>();
+        for (QuestionnaireContent content: selectedContent) {
+            String questionId = content.getQuestionId();
+            selectedContentLangVersion.add(QUESTION_LANG_VERSION_TABLE.getQuestionTextInEnglish(questionId));
+        }
+
+        i.putExtra(EXTRA_QUESTIONNAIRE_CONTENT, selectedContentLangVersion);
         return i;
     }
 
@@ -75,7 +86,7 @@ public class AddQuestionsActivity extends AppCompatActivity {
 
         questionnaireId = getIntent().getExtras().getString(EXTRA_QUESTIONNAIRE_ID);
 
-        selections = new ArrayList<>();
+        selections = (ArrayList<QuestionLangVersion>) getIntent().getExtras().getSerializable(EXTRA_QUESTIONNAIRE_CONTENT);
         selectedLanguages = LANGUAGE_TABLE.getAll();
 
         searchText = findViewById(R.id.table_select_search_view);

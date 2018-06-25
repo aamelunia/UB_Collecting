@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,20 +28,21 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireType;
 import edu.buffalo.cse.ubcollecting.data.tables.Table;
 import edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity;
 import edu.buffalo.cse.ubcollecting.ui.EntryOnItemSelectedListener;
+import edu.buffalo.cse.ubcollecting.ui.UiUtils;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_TYPE_TABLE;
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
-import static edu.buffalo.cse.ubcollecting.ui.UIUtils.setDynamicHeight;
+import static edu.buffalo.cse.ubcollecting.ui.AddQuestionsActivity.EXTRA_QUESTIONNAIRE_CONTENT;
+
 /**
  * Activity for creating a questionnaire
  */
 public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
-    private static final String TAG = QuestionnaireActivity.class.getSimpleName().toString();
+    private static final String TAG = QuestionnaireActivity.class.getSimpleName();
     public static final int RESULT_ADD_QUESTIONS = 1;
-    public static final String EXTRA_QUESTIONNAIRE_CONTENT = "edu.buffalo.cse.ubcollecting.questionnaire_content";
 
     private EditText nameField;
     private EditText descriptionField;
@@ -85,8 +85,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
 
-        questionnaireContent = new ArrayList<>();
-
         nameField = this.findViewById(R.id.questionnaire_name_field);
         descriptionField = this.findViewById(R.id.questionnaire_description_field);
         typeSpinner = this.findViewById(R.id.questionnaire_type_spinner);
@@ -103,7 +101,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         addQuestionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = AddQuestionsActivity.newIntent(QuestionnaireActivity.this, entry);
+                Intent i = AddQuestionsActivity.newIntent(QuestionnaireActivity.this, entry, questionnaireContent);
                 startActivityForResult(i, RESULT_ADD_QUESTIONS);
             }
         });
@@ -115,6 +113,19 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         submitButton.setOnClickListener(new QuestionnaireSubmitOnClickListener());
 
         questionnaireDragView = this.findViewById(R.id.questionnaire_question_list_view);
+
+        if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
+            entry = getEntry(getIntent());
+            setUI(entry);
+            updateButton.setVisibility(View.VISIBLE);
+            submitButton.setVisibility(View.GONE);
+        } else {
+            entry = new Questionnaire();
+            updateButton.setVisibility(View.GONE);
+            submitButton.setVisibility(View.VISIBLE);
+        }
+
+        questionnaireContent = QUESTIONNAIRE_CONTENT_TABLE.getAllQuestions(entry.getId());
         questionnaireContentAdapter =
                 new QuestionnaireContentAdapter(QuestionnaireActivity.this, questionnaireContent);
         questionnaireDragView.setAdapter(questionnaireContentAdapter);
@@ -136,16 +147,19 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
                 questionnaireContentAdapter.notifyDataSetChanged();
             }
         });
+        handleQuestionnaireContentUi();
+    }
 
-        if (getIntent().getFlags() == Table.FLAG_EDIT_ENTRY) {
-            entry = getEntry(getIntent());
-            setUI(entry);
-            updateButton.setVisibility(View.VISIBLE);
-            submitButton.setVisibility(View.GONE);
+    private void handleQuestionnaireContentUi() {
+        questionnaireContentAdapter.notifyDataSetChanged();
+
+        UiUtils.setDynamicHeight(questionnaireDragView);
+
+        if (questionnaireContent.size() > 0) {
+            questionnaireDragView.setVisibility(View.VISIBLE);
+            addQuestionsButton.setText("Edit Questions");
         } else {
-            entry = new Questionnaire();
-            updateButton.setVisibility(View.GONE);
-            submitButton.setVisibility(View.VISIBLE);
+            questionnaireDragView.setVisibility(View.GONE);
         }
     }
 
@@ -160,24 +174,10 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         if (requestCode == RESULT_ADD_QUESTIONS) {
             ArrayList<QuestionnaireContent> serializableObject =
                     (ArrayList<QuestionnaireContent>) data.getSerializableExtra(EXTRA_QUESTIONNAIRE_CONTENT);
-
+            questionnaireContent.clear();
             questionnaireContent.addAll(serializableObject);
 
-//            questionnaireContent =  serializableObject;
-//            questionnaireContentAdapter.clear();
-//            for (int i = 0; i < questionnaireContent.size(); i++) {
-//                questionnaireContentAdapter.insert(questionnaireContent.get(i),i);
-//            }
-            questionnaireContentAdapter.notifyDataSetChanged();
-
-            // Added to increase size of the list since it doesn't seem to be scrollable.
-            setDynamicHeight(questionnaireDragView);
-
-            if (questionnaireContent.size() > 0) {
-                questionnaireDragView.setVisibility(View.VISIBLE);
-            } else {
-                questionnaireDragView.setVisibility(View.GONE);
-            }
+            handleQuestionnaireContentUi();
         }
     }
 
@@ -233,7 +233,6 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             }
             TextView numberView = convertView.findViewById(R.id.numbered_list_item_number_view);
 
-//            numberView.setText(Integer.toString(content.getQuestionOrder()));
             numberView.setText(Integer.toString(position+1));
             content.setQuestionOrder(position+1);
 

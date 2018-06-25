@@ -88,9 +88,9 @@ public class UpdateQuestionActivity extends AppCompatActivity {
 
         selectQuestionLanguages = findViewById(R.id.select_question_languages);
 
-        UIUtils.setListViewHeightBasedOnItems(questionPropertiesListView);
+        UiUtils.setListViewHeightBasedOnItems(questionPropertiesListView);
 
-        UIUtils.setListViewHeightBasedOnItems(questionLanguagesListView);
+        UiUtils.setListViewHeightBasedOnItems(questionLanguagesListView);
 
         update = findViewById(R.id.update_question_button);
 

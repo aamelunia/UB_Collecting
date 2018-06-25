@@ -75,9 +75,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         questionLanguagesListView.setAdapter(questionLanguageAdapter);
 
-        UIUtils.setListViewHeightBasedOnItems(questionPropertiesListView);
+        UiUtils.setListViewHeightBasedOnItems(questionPropertiesListView);
 
-        UIUtils.setListViewHeightBasedOnItems(questionLanguagesListView);
+        UiUtils.setListViewHeightBasedOnItems(questionLanguagesListView);
 
         questionProperites = new ArrayList<>();
 
