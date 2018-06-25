@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,6 +127,14 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         }
 
         questionnaireContent = QUESTIONNAIRE_CONTENT_TABLE.getAllQuestions(entry.getId());
+
+        for (QuestionnaireContent qc: questionnaireContent){
+            Log.i(qc.getQuestionId(),"QUESTION ID");
+            Log.i(qc.getQuestionnaireId(),"QUESTIONNAIRE ID");
+            Log.i(Integer.toString(qc.getQuestionOrder()),"QUESTIONNAIRE ID");
+            Log.i("--","--");
+        }
+
         questionnaireContentAdapter =
                 new QuestionnaireContentAdapter(QuestionnaireActivity.this, questionnaireContent);
         questionnaireDragView.setAdapter(questionnaireContentAdapter);
@@ -226,6 +235,14 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
 
         @Override
         public void onClick(View view) {
+            Log.i("UPDATE","!!");
+
+            for (QuestionnaireContent qc: questionnaireContent){
+                Log.i(qc.getQuestionId(),"QUESTION ID");
+                Log.i(qc.getQuestionnaireId(),"QUESTIONNAIRE ID");
+                Log.i(Integer.toString(qc.getQuestionOrder()),"QUESTIONNAIRE ID");
+                Log.i("--","--");
+            }
             setEntryByUI();
             if (validateEntry()) {
                 table.update(entry);
