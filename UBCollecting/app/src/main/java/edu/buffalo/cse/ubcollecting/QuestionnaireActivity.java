@@ -130,6 +130,14 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
         }
 
         questionnaireContent = QUESTIONNAIRE_CONTENT_TABLE.getAllQuestions(entry.getId());
+
+        for (QuestionnaireContent qc: questionnaireContent){
+            Log.i(qc.getQuestionId(),"QUESTION ID");
+            Log.i(qc.getQuestionnaireId(),"QUESTIONNAIRE ID");
+            Log.i(Integer.toString(qc.getQuestionOrder()),"QUESTIONNAIRE ID");
+            Log.i("--","--");
+        }
+
         questionnaireContentAdapter =
                 new QuestionnaireContentAdapter(QuestionnaireActivity.this, questionnaireContent);
         questionnaireDragView.setAdapter(questionnaireContentAdapter);
@@ -231,13 +239,13 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             super(QUESTIONNAIRE_TABLE);
         }
 
-        @Override
+        @Overrideg
         public void onClick(View view) {
             String selection = QuestionnaireContentTable.KEY_QUESTIONNAIRE_ID+ " = ?";
             String[] selectionArgs = {entry.getId()};
             ArrayList<QuestionnaireContent> prevQuestionnaireContent = DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE.getAll(selection, selectionArgs,null);
 
-            for (QuestionnaireContent content : prevQuestionnaireContent g) {
+            for (QuestionnaireContent content : prevQuestionnaireContent) {
                 QUESTIONNAIRE_CONTENT_TABLE.delete(content.getId());
             }
 

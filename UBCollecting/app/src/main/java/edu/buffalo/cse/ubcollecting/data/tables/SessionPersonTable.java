@@ -63,6 +63,8 @@ public class SessionPersonTable extends Table<SessionPerson> {
 
         ArrayList<SessionPerson> peopleAssigned = DatabaseHelper.SESSION_PERSON_TABLE.getAll(selection, selectionArgs,null);
 
+        Log.i(peopleAssigned.toString(),"PEOPLE ASSIGED");
+
         HashMap<SessionPerson,ArrayList<Role>> allRolesAssigned = new HashMap<>();
 
         for (SessionPerson sp: peopleAssigned){

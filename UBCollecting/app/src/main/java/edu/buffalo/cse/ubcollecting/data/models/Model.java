@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Abstraction of an SQLite database entry.
@@ -105,8 +106,10 @@ public abstract class Model implements Serializable {
      */
     private String generateID() {
         String s = "";
+        s = s + "0";
         while (s.length() < 5) {
-            s = "0" + s;
+            Random r = new Random();
+            s = Integer.toString(r.nextInt(10)) + s;
         }
         return "1" + s + String.valueOf(System.currentTimeMillis());
     }
