@@ -239,7 +239,7 @@ public class QuestionnaireActivity extends EntryActivity<Questionnaire> {
             super(QUESTIONNAIRE_TABLE);
         }
 
-        @Overrideg
+        @Override
         public void onClick(View view) {
             String selection = QuestionnaireContentTable.KEY_QUESTIONNAIRE_ID+ " = ?";
             String[] selectionArgs = {entry.getId()};

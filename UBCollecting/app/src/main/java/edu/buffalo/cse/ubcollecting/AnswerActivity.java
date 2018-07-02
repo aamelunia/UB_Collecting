@@ -11,6 +11,9 @@ import edu.buffalo.cse.ubcollecting.data.models.Answer;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.ANSWER_TABLE;
 
+/**
+ * UNUSED THUS FAR
+ */
 public class AnswerActivity extends AppCompatActivity {
 
     private static final String TAG = AnswerActivity.class.getSimpleName().toString();

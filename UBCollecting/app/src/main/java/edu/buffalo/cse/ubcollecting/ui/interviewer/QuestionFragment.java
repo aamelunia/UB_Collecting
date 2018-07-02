@@ -33,7 +33,7 @@ import static edu.buffalo.cse.ubcollecting.ui.interviewer.TakeQuestionnaireActiv
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserSelectSessionActivity.SELECTED_SESSION;
 
 /**
- * Created by aamel786 on 6/17/18.
+ * A fragment to represent a question to be taken in a questionnaire.
  */
 
 public class QuestionFragment extends Fragment{

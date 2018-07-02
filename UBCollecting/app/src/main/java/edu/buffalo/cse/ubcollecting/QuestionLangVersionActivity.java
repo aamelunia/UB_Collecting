@@ -11,6 +11,10 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionLangVersion;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_LANG_VERSION_TABLE;
 
+/**
+ * UNUSEDT THUS FAR
+ */
+
 public class QuestionLangVersionActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionLangVersionActivity.class.getSimpleName().toString();

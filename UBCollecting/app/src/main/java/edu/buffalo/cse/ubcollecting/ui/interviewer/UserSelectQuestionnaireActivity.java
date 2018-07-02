@@ -21,7 +21,9 @@ import edu.buffalo.cse.ubcollecting.data.models.Questionnaire;
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserSelectSessionActivity.SELECTED_SESSION;
 import static edu.buffalo.cse.ubcollecting.SessionActivity.getSession;
 
-
+/**
+ * Activity that allows interviewer to select which questionnaire to take
+ */
 public class UserSelectQuestionnaireActivity extends AppCompatActivity {
 
     private static final String TAG = UserSelectQuestionnaireActivity.class.getSimpleName();

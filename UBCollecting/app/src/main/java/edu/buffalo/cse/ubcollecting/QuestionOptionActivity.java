@@ -11,6 +11,10 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionOption;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_OPTION_TABLE;
 
+/**
+ * UNUSED THUS FAR
+ */
+
 public class QuestionOptionActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionOptionActivity.class.getSimpleName().toString();

@@ -11,6 +11,10 @@ import edu.buffalo.cse.ubcollecting.data.models.File;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.FILE_TABLE;
 
+/**
+ * UNUSED THUS FAR
+ */
+
 public class FileActivity extends AppCompatActivity {
 
     private static final String TAG = FileActivity.class.getSimpleName().toString();

@@ -51,9 +51,10 @@ public class SessionPersonTable extends Table<SessionPerson> {
 
 
     /**
-     * TODO
-     * @param sessionId
-     * @return
+     * Returns the roles that are already assigned for a session
+     * @param sessionId The id for the session for which you want to obtain the assigned roles for
+     * @return a {@link HashMap} where {@link SessionPerson} is the key and {@link ArrayList of {@link Role}} is the value
+
      */
 
     public HashMap<SessionPerson,ArrayList<Role>> getSessionPersonRoles(String sessionId){

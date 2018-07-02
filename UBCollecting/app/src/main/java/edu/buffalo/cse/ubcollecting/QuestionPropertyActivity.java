@@ -11,6 +11,10 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTION_PROPERTY_TABLE;
 
+/**
+ * UNUSED THUS FAR
+ */
+
 public class QuestionPropertyActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionProperty.class.getSimpleName().toString();

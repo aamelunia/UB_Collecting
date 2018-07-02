@@ -24,7 +24,7 @@ import static edu.buffalo.cse.ubcollecting.SessionActivity.getSession;
 
 
 /**
- * Created by aamel786 on 6/17/18.
+ * Landing activity that sets up the taking of a questionnaire
  */
 
 public class TakeQuestionnaireActivity extends AppCompatActivity implements QuestionManager {

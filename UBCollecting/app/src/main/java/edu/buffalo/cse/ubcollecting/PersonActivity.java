@@ -34,6 +34,10 @@ import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.PERSON_TABLE;
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.FLAG_INTERVIEWER_EDIT;
 import static edu.buffalo.cse.ubcollecting.ui.LoginActivity.genHash;
 
+/**
+ * Activity for creating a Person
+ */
+
 public class PersonActivity extends EntryActivity<Person> {
 
     private static final String TAG = PersonActivity.class.getSimpleName().toString();

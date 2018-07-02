@@ -28,7 +28,9 @@ import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.RE
 import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserLandingActivity.SELECTED_FIELD_TRIP;
 
 
-
+/**
+ * Activity that allows interviewer to select/create a session
+ */
 public class UserSelectSessionActivity extends AppCompatActivity {
 
     private static final String TAG = UserSelectSessionActivity.class.getSimpleName();

@@ -78,9 +78,9 @@ public class QuestionLangVersionTable extends Table<QuestionLangVersion> {
     }
 
     /**
-     * TODO
+     * Returns the text of a question in English
      * @param quesId The questionId you want to search the SQlite table for all matching entries
-     * @return
+     * @return a {@link QuestionLangVersion}
      */
     public QuestionLangVersion getQuestionTextInEnglish(String quesId){
 

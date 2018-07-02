@@ -41,8 +41,8 @@ public class FieldTripTable extends Table<FieldTrip> {
 
 
     /**
-     * TODO
-     * @return
+     * Returns the active field trips present in the database
+     * @return {@link ArrayList} of {@link FieldTrip}
      */
 
     public ArrayList<FieldTrip> getActiveFieldTrips(){

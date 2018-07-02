@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by aamel786 on 6/17/18.
+ * An adapter that manages all the question fragments for a questionnaire.
  */
 
 public class QuestionStatePagerAdapter extends FragmentStatePagerAdapter {

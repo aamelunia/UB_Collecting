@@ -38,7 +38,7 @@ import static edu.buffalo.cse.ubcollecting.ui.interviewer.UserSelectSessionActiv
 
 
 /**
- * Created by aamel786 on 6/13/18.
+ * Activity for assigning roles to a session.
  */
 
 public class AddSessionRolesActivity extends AppCompatActivity {

@@ -24,7 +24,9 @@ import edu.buffalo.cse.ubcollecting.data.models.FieldTrip;
 
 import static edu.buffalo.cse.ubcollecting.EntryActivity.REQUEST_CODE_EDIT_ENTRY;
 
-
+/**
+ * Landing activity that interviewer sees upon login that allows them to select/create a field trip.
+ */
 public class UserLandingActivity extends AppCompatActivity {
 
     private static final String TAG = UserLandingActivity.class.getSimpleName();

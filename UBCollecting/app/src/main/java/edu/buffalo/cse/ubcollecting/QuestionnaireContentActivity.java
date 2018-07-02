@@ -11,6 +11,10 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionnaireContent;
 
 import static edu.buffalo.cse.ubcollecting.data.DatabaseHelper.QUESTIONNAIRE_CONTENT_TABLE;
 
+/**
+ * UNUSED THUS FAR
+ */
+
 public class QuestionnaireContentActivity extends AppCompatActivity {
 
     private static final String TAG = QuestionnaireContentActivity.class.getSimpleName().toString();

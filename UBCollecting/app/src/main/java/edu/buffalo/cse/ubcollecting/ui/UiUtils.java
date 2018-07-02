@@ -9,7 +9,7 @@ import android.view.View.MeasureSpec;
 import com.mobeta.android.dslv.DragSortListView;
 
 /**
- * Created by aamel786 on 4/17/18.
+ * Class containing utility functions for programtically changing the UI
  */
 
 public class UiUtils {

@@ -29,7 +29,7 @@ import edu.buffalo.cse.ubcollecting.data.models.QuestionProperty;
 import edu.buffalo.cse.ubcollecting.data.models.QuestionPropertyDef;
 
 /**
- * Created by aamel786 on 4/14/18.
+ * Activity for creating a Question.
  */
 
 public class CreateQuestionActivity extends AppCompatActivity {

@@ -45,9 +45,9 @@ public class SessionTable extends Table<Session> {
     }
 
     /**
-     * TODO
-     * @param fieldTrip
-     * @return
+     * Returns the sessions corresponding to a Field Trip.
+     * @param fieldTrip The {@link FieldTrip} for which you want to obtain existing sessions
+     * @return {@link ArrayList} of {@link Session}
      */
 
     public ArrayList<Session> getFieldTripSessions(FieldTrip fieldTrip){
